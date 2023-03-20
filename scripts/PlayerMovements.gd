@@ -9,6 +9,8 @@ signal player_fired_bullet(bullet, position, direction)
 
 @onready var fire_position = $FirePosition
 @onready var fire_direction = $FireDirection
+@onready var attack_cooldown = $AttackCoolDown
+@onready var animation_player = $AnimationPlayer
 #@onready var animation_tree = $AnimationTree
 #@onready var state_machine = animation_tree.get("paramter/playback")
 
@@ -31,6 +33,9 @@ func _unhandled_input(event: InputEvent):
 		shoot()
 		
 func shoot():
-	var bullet_instance = Bullet.instantiate()
-	var direction = fire_direction.global_position - fire_position.global_position
-	emit_signal("player_fired_bullet", bullet_instance, fire_position.global_position, direction)
+	if attack_cooldown.is_stopped():
+		var bullet_instance = Bullet.instantiate()
+		var direction = fire_direction.global_position - fire_position.global_position
+		emit_signal("player_fired_bullet", bullet_instance, fire_position.global_position, direction)
+		attack_cooldown.start()
+		animation_player.play("muzzle_flash")

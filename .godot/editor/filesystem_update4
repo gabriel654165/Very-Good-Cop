@@ -1,0 +1,6 @@
+res://player.tscn
+res://Test-1.tscn
+res://bullet.tscn
+res://BulletManager.gd
+res://scripts/PlayerMovements.gd
+res://bullet.gd
