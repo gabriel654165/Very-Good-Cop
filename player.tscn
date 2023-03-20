@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdsdms4e8u2d"]
+
+[ext_resource type="Script" path="res://scripts/PlayerMovements.gd" id="1_54lvr"]
+[ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
+size = Vector2(37, 43)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(-165, 31)
+script = ExtResource("1_54lvr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cmhid")
+region_enabled = true
+region_rect = Rect2(0, 0, 56, 44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, 0)
+shape = SubResource("RectangleShape2D_dfd5l")
+
+[node name="FirePosition" type="Marker2D" parent="."]
+position = Vector2(32, 9)
+
+[node name="FireDirection" type="Marker2D" parent="."]
+position = Vector2(34, 9)
