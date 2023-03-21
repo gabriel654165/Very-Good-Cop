@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdsdms4e8u2d"]
+
+[ext_resource type="Script" path="res://scripts/PlayerMovements.gd" id="1_54lvr"]
+[ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
+[ext_resource type="PackedScene" uid="uid://31u4570g3q17" path="res://scenes/weapons/weapon.tscn" id="4_4dtyr"]
+[ext_resource type="PackedScene" uid="uid://dwnp4f05d5ccd" path="res://scenes/stats/health.tscn" id="4_yibkt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
+size = Vector2(37, 43)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(-165, 31)
+script = ExtResource("1_54lvr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cmhid")
+region_enabled = true
+region_rect = Rect2(0, 0, 56, 44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, 0)
+shape = SubResource("RectangleShape2D_dfd5l")
+
+[node name="Health" parent="." instance=ExtResource("4_yibkt")]
+
+[node name="Weapon" parent="." instance=ExtResource("4_4dtyr")]
+position = Vector2(16, 9)
