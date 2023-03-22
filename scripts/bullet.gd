@@ -38,8 +38,8 @@ func _on_body_entered(body):
 		current_piercing_force -= 1
 		body.handle_hit(damages)
 
-	if body.has_method("give_recul"):
-		body.give_recul(body, self.direction, impact_force)
+	if body.has_method("apply_force"):
+		body.apply_force(body, self.direction, impact_force)
 
 	if current_piercing_force <= 0:
 		queue_free()
