@@ -13,6 +13,7 @@ func _process(delta):
 		velocity += self.force
 		self.force = Vector2.ZERO
 	global_position += velocity
+	move_and_slide()
 	velocity = Vector2.ZERO
 
 func handle_hit(damages):

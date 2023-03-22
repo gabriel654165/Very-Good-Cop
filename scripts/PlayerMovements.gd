@@ -1,7 +1,7 @@
 extends Character
 class_name Player
 
-@export var player_speed : float = 3
+@export var player_speed : float = 6
 
 @onready var weapon = $Weapon
 @onready var health: Health = $Health
@@ -23,8 +23,8 @@ func _physics_process(delta):
 		
 	if move_direction != Vector2.ZERO:
 		velocity += move_direction * GlobalFunctions.get_speed(delta, player_speed) + self.force
-		global_position += velocity
 	global_position += velocity
+	move_and_slide()
 	velocity = Vector2.ZERO
 	look_at(get_global_mouse_position())
 
