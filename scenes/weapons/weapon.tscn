@@ -80,7 +80,7 @@ texture = ExtResource("3_7mh7o")
 region_enabled = true
 region_rect = Rect2(324, 334, 20, 25)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")

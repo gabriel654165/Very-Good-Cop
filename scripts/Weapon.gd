@@ -9,9 +9,9 @@ signal weapon_fired(bullet, location, direction)
 @export var number_of_balls_by_burt : int = 1
 @export var frequence_of_burt : float = 0.1 #time between balls of burts
 @export var precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
-@export var precision : float = 0.5 # worst:0 best : 1
+@export var precision : float = 0 # the more it's close 0 the more it's precise
+@export var recoil_force : float = 2 # the more it's close 0 the more it's precise
 
-#weapon : recul de l'enemy
 #armes : grapin
 #arme : ~granade
 
@@ -22,7 +22,7 @@ signal weapon_fired(bullet, location, direction)
 @onready var fire_position = $FirePosition
 @onready var fire_direction = $FireDirection
 @onready var attack_cooldown = $AttackCoolDown
-@onready var animation_player = $AnimationPlayer
+@onready var animation = $Animation
 
 func _ready():
 	randomize()
@@ -38,9 +38,9 @@ func shoot():
 			var direction = fire_direction.global_position - fire_position.global_position
 			
 			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
-			
-			GlobalSignals.emit_signal("bullet_fired", bullet_instance, fire_position.global_position, direction)
-			animation_player.play("muzzle_flash")
+			GlobalSignals.emit_signal("bullet_fired_spawn", bullet_instance, fire_position.global_position, direction)
+			GlobalSignals.emit_signal("bullet_fired_force", get_parent(), -direction, recoil_force)
+			animation.play("muzzle_flash")
 
 #return a random float between x and y
 func _random_range(angle: Vector2) -> float:

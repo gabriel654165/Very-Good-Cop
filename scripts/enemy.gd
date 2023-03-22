@@ -8,6 +8,13 @@ class_name Enemy
 func _ready():
 	ai.init(self, weapon)
 
+func _process(delta):
+	if self.force != Vector2.ZERO:
+		velocity += self.force
+		self.force = Vector2.ZERO
+	global_position += velocity
+	velocity = Vector2.ZERO
+
 func handle_hit(damages):
 	health.hit(damages)
 	if health.is_dead():
