@@ -1,16 +1,15 @@
-extends Area2D
+extends Projectile
 class_name Bullet
 
-@export var speed : int = 4
-@export var damages : int = 20
-@export var size : int = 1
+#bullet : distance de free & pas timer
+#bullet : ricochet 1 fois sur les murs
+#bullet ; saignement
+
 @export var piercing_force : int = 2
-@export var impact_force : int = 2
 
 @onready var life_cycle_timer = $LifeCycleTimer
 
 var current_piercing_force : int = 0
-var direction := Vector2.ZERO
 
 func _ready():
 	life_cycle_timer.start()
@@ -21,10 +20,6 @@ func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		var velocity = direction * GlobalFunctions.get_speed(speed, delta)
 		global_position += velocity
-
-func set_direction(direction: Vector2):
-	self.direction = direction
-	rotation += direction.angle()
 
 #signals
 func _on_life_cycle_timer_timeout():

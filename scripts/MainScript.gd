@@ -1,6 +1,8 @@
 extends Node2D
 
-@onready var bullet_manager = $BulletManager
+@onready var projectile_manager = $ProjectileManager
 
 func _ready():
-	GlobalSignals.connect("bullet_fired_spawn", Callable(bullet_manager, "handle_bullet_spawned"))
+	GlobalSignals.connect("projectile_fired_spawn", Callable(projectile_manager, "handle_fired_projectile_spawned"))
+	GlobalSignals.connect("projectile_launched_spawn", Callable(projectile_manager, "handle_launched_projectile_spawned"))
+	

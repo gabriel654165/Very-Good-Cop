@@ -8,3 +8,4 @@ func _ready():
 
 func apply_force(character: Character, direction: Vector2, force: float):
 	character.force = direction * force
+
