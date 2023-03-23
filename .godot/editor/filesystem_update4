@@ -7,3 +7,4 @@ res://scenes/weapons/grenade.tscn
 res://scenes/weapons/weapon.tscn
 res://scripts/ProjectileManager.gd
 res://scripts/Projectile.gd
+res://scripts/PlayerMovements.gd

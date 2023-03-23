@@ -28,8 +28,10 @@ func _physics_process(delta):
 	velocity = Vector2.ZERO
 	look_at(get_global_mouse_position())
 
-func _unhandled_input(event: InputEvent):
-	if event.is_action_pressed("shoot"):
+var test : int = 1
+
+func _process(delta):
+	if Input.is_action_pressed("shoot"):
 		weapon.shoot()
 
 func handle_hit(damages):

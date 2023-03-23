@@ -99,7 +99,6 @@ position = Vector2(18, 4.48227e-05)
 position = Vector2(20, 4.48227e-05)
 
 [node name="AttackCoolDown" type="Timer" parent="."]
-wait_time = 0.4
 one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]
