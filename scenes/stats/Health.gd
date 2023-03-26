@@ -16,7 +16,6 @@ func _set_max_health(new_max_health):
 func _get_max_health():
 	return max_health
 
-
 func hit(damages):
 	health -= damages
 

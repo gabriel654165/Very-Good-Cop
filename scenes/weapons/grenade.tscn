@@ -141,12 +141,11 @@ _data = {
 "muzzle_flash": SubResource("Animation_3sddm")
 }
 
-[node name="Grenade" type="Area2D"]
+[node name="Grenade" type="CharacterBody2D"]
 script = ExtResource("1_w2pxv")
 speed = 7
-damages = 90
 size = 0.7
-impact_force = 5
+impact_force = 0.2
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
@@ -180,8 +179,6 @@ libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
 [connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]
 [connection signal="body_exited" from="ExplosionArea" to="." method="_on_explosion_area_body_exited"]
 [connection signal="timeout" from="ExplosionTimer" to="." method="_on_explosion_timer_timeout"]

@@ -1,11 +1,11 @@
+Area2D
+CharacterBody2D
 RigidBody2D
 AnimatedSprite2D
 CollisionShape2D
-Area2D
 Bullet
 Node2D
 Player
-CharacterBody2D
 Sprite2D
 AnimationPlayer
 Timer
