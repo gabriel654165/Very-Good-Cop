@@ -142,8 +142,10 @@ _data = {
 }
 
 [node name="Grenade" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_w2pxv")
 speed = 7
+damages = 1
 size = 0.7
 impact_force = 0.2
 

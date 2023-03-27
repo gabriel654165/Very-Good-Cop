@@ -44,11 +44,17 @@ func should_it_bounce(collision: KinematicCollision2D) -> bool:
 	if !collision:
 		return false
 	var object = collision.get_collider()
-	#if object is Projectile or Character:
-	#	print("object name : ", object.name)
-	#	print("class name : ", object.get_class())
-	#	#stop()
-	#	return false
+	
+	if object is Grenade:
+		#should ignore the collision ?
+		stop()
+		return false
+	
+	if object is Character:
+		stop()
+		explode()
+		return false
+	
 	return true
 
 func stop():
@@ -72,6 +78,8 @@ func calulate_distance():
 	distance += range
 
 func explode():
+	animation.play("explosion")
+	bodies = explosion_area.get_overlapping_bodies()
 	for body in bodies:
 		if body == null:
 			continue
@@ -86,6 +94,4 @@ func explode():
 	bodies = []
 
 func _on_explosion_timer_timeout():
-	animation.play("explosion")
-	bodies = explosion_area.get_overlapping_bodies()
 	explode()

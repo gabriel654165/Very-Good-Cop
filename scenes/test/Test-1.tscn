@@ -22455,7 +22455,8 @@ texture = ExtResource("2_rygxq")
 99:79/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_fty0s"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 7
+physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_78u0y")
 
 [node name="Test-1" type="Node2D"]
@@ -22514,4 +22515,5 @@ position = Vector2(124, -398)
 rotation = -0.375185
 
 [node name="ProjectileManager" type="Node2D" parent="."]
+z_index = -1
 script = ExtResource("5_5vhg5")
