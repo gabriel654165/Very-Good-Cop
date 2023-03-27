@@ -81,20 +81,11 @@ func explode():
 			var impact_direction = body.global_position - self.global_position
 			body.apply_force(body, impact_direction, impact_force)
 		#si c une grenade explose
-		#if body is Grenade and body.get_owner() != self:
-			#body.explode()
-		#if body.get_owner() != self:
-		#	print("it's not the same owner", body.get_owner())
-		#	print("it's not the same self", self)
+		if body is Grenade and body != self:
+			body.explode()
 	bodies = []
 
 func _on_explosion_timer_timeout():
 	animation.play("explosion")
+	bodies = explosion_area.get_overlapping_bodies()
 	explode()
-
-func _on_explosion_area_body_entered(body):
-	bodies.append(body)
-
-func _on_explosion_area_body_exited(body):
-	#bodies.remove(body)
-	pass

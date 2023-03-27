@@ -179,6 +179,4 @@ libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
 
-[connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]
-[connection signal="body_exited" from="ExplosionArea" to="." method="_on_explosion_area_body_exited"]
 [connection signal="timeout" from="ExplosionTimer" to="." method="_on_explosion_timer_timeout"]

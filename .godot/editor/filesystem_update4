@@ -5,6 +5,3 @@ res://scenes/characters/enemy.tscn
 res://scenes/weapons/bullet.tscn
 res://scenes/weapons/grenade.tscn
 res://scenes/weapons/weapon.tscn
-res://scripts/Projectile.gd
-res://scripts/ProjectileManager.gd
-res://scenes/stats/Health.gd
