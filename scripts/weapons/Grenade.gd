@@ -1,13 +1,14 @@
 extends Projectile
 class_name Grenade
 
-#not used
-@export var impact_area : Vector2 = Vector2(2, 2)
+@export var radius_pixels_impact_area : float = 100
 @export var max_launch_distance : float = 400
 @export var landing_precision : int = 1
 
 @onready var explosion_timer = $ExplosionTimer
 @onready var explosion_area = $ExplosionArea
+@onready var explosion_area_shape = get_node("ExplosionArea/ExplosionCollisionShape2D")
+
 @onready var animation = $Animation
 
 var bodies = []
@@ -18,6 +19,7 @@ var landing_position := Vector2.ZERO
 func _ready():
 	randomize()
 	scale = scale * size
+	explosion_area_shape.get_shape().set_radius(radius_pixels_impact_area)
 
 func _physics_process(delta):
 	if direction != Vector2.ZERO:

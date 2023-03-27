@@ -8,7 +8,7 @@
 size = Vector2(15, 35)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6quda"]
-radius = 135.015
+radius = 136.004
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.1
@@ -145,7 +145,7 @@ _data = {
 collision_layer = 2
 script = ExtResource("1_w2pxv")
 speed = 7
-damages = 1
+damages = 100
 size = 0.7
 impact_force = 0.2
 
@@ -155,8 +155,9 @@ shape = SubResource("RectangleShape2D_b75nu")
 
 [node name="ExplosionArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+[node name="ExplosionCollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
 shape = SubResource("CircleShape2D_6quda")
+debug_color = Color(0, 0.592157, 0.745098, 0.419608)
 
 [node name="Grenade" type="Sprite2D" parent="."]
 texture = ExtResource("2_ilsa6")
