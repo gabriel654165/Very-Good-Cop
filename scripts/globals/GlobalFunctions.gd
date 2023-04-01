@@ -2,6 +2,7 @@ extends Node
 
 func _ready():
 	init_global_variables()
+	randomize()
 	LevelGenerator.load_all_rooms_from("res://scripts/level/rooms") # TODO: Going to change to res://scenes/...
 
 func init_global_variables():
