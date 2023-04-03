@@ -22498,7 +22498,6 @@ position_smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_oup5r")]
 position = Vector2(-316, -287)
-passive_effect_list = {}
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
