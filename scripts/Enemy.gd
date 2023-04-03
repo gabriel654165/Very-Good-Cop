@@ -2,11 +2,11 @@ extends Character
 class_name Enemy
 
 @onready var ai = $AI
-@onready var weapon : Weapon = $Weapon
-@onready var health: Health = $Health
 
 func _ready():
-	ai.init(self, weapon)
+	weapon_manager = get_node("WeaponManager")
+	weapon_manager.weapon.global_position = weapon_position.global_position
+	ai.init(self, weapon_manager.weapon)
 
 func _process(delta):
 	if self.force != Vector2.ZERO:

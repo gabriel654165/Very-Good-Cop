@@ -1,16 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdsdms4e8u2d"]
+[gd_scene load_steps=12 format=3 uid="uid://d0x250onoqdno"]
 
-[ext_resource type="Script" path="res://scripts/PlayerMovements.gd" id="1_54lvr"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
-[ext_resource type="PackedScene" uid="uid://31u4570g3q17" path="res://scenes/weapons/weapon.tscn" id="4_4dtyr"]
+[ext_resource type="PackedScene" uid="uid://0b5rq2ocotju" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
+[ext_resource type="PackedScene" uid="uid://5uet6a4q2iyu" path="res://scenes/weapons/Shotgun.tscn" id="3_wskll"]
+[ext_resource type="PackedScene" uid="uid://ig6b3oh5xaqo" path="res://scenes/weapons/MiniUzi.tscn" id="4_3eyvm"]
 [ext_resource type="PackedScene" uid="uid://dwnp4f05d5ccd" path="res://scenes/stats/health.tscn" id="4_yibkt"]
+[ext_resource type="PackedScene" uid="uid://bfwe2ycml5m6w" path="res://scenes/weapons/Riffle.tscn" id="5_vojg5"]
+[ext_resource type="PackedScene" uid="uid://dg4pklkbc0kst" path="res://scenes/weapons/MachineGun.tscn" id="6_haa34"]
+[ext_resource type="PackedScene" uid="uid://bwiy7e8lvrq0j" path="res://scenes/weapons/GrenadeLauncher.tscn" id="7_8dk35"]
+[ext_resource type="PackedScene" uid="uid://db4g6wcsryjf6" path="res://scenes/weapons/Sniper.tscn" id="8_j3gfr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(37, 43)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-position = Vector2(-165, 31)
-script = ExtResource("1_54lvr")
+position = Vector2(346, 154)
+script = ExtResource("1_vctbk")
+weapon_list = {
+"glock": ExtResource("2_xaulr"),
+"grenade_launcher": ExtResource("7_8dk35"),
+"machine_gun": ExtResource("6_haa34"),
+"mini_uzi": ExtResource("4_3eyvm"),
+"riffle": ExtResource("5_vojg5"),
+"shotgun": ExtResource("3_wskll"),
+"sniper": ExtResource("8_j3gfr")
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_cmhid")
@@ -23,5 +38,9 @@ shape = SubResource("RectangleShape2D_dfd5l")
 
 [node name="Health" parent="." instance=ExtResource("4_yibkt")]
 
-[node name="Weapon" parent="." instance=ExtResource("4_4dtyr")]
+[node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(16, 9)
+
+[node name="BulletproofVest" type="Node2D" parent="."]
+
+[node name="GrapplingHook" type="Node2D" parent="."]

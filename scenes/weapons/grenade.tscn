@@ -8,7 +8,7 @@
 size = Vector2(15, 35)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6quda"]
-radius = 136.004
+radius = 142.004
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.1
@@ -142,10 +142,10 @@ _data = {
 }
 
 [node name="Grenade" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 0
 script = ExtResource("1_w2pxv")
 speed = 7
-damages = 100
+damages = 10
 size = 0.7
 impact_force = 0.2
 

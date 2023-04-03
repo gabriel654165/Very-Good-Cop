@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://vbqf7nbs0nll"]
+[gd_scene load_steps=10 format=3 uid="uid://5uet6a4q2iyu"]
 
-[ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_1tgdp"]
-[ext_resource type="Script" path="res://scripts/Weapon.gd" id="1_d1yyx"]
-[ext_resource type="PackedScene" uid="uid://dcqn0damwmtgh" path="res://scenes/weapons/bullet.tscn" id="2_0xsim"]
-[ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="3_7mh7o"]
-[ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_joxjn"]
+[ext_resource type="Script" path="res://scripts/Weapon.gd" id="1_rd0x7"]
+[ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_x7pkl"]
+[ext_resource type="PackedScene" uid="uid://dcqn0damwmtgh" path="res://scenes/weapons/bullet.tscn" id="2_yubjh"]
+[ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_yn37x"]
+[ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_lhyuc"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -85,52 +85,54 @@ _data = {
 }
 
 [node name="WeaponManager" type="Node2D"]
-script = ExtResource("1_1tgdp")
-bullet/Projectile = ExtResource("2_0xsim")
-loader/loader_capacity = 6
+script = ExtResource("1_x7pkl")
+bullet/Projectile = ExtResource("2_yubjh")
+loader/loader_capacity = 10
 bullet/bullet_speed = 4.0
 bullet/bullet_damages = 6
 bullet/bullet_size = 0
 bullet/bullet_impact_force = 2
-weapon/number_of_balls_by_burt = 1
-weapon/frequence_of_burt = 0.1
+weapon/number_of_balls_by_burt = 5
+weapon/frequence_of_burt = 0.0
 weapon/precision_angle = Vector2(-1, 1)
-weapon/precision = 0.0
-weapon/recoil_force = 2.0
-objects/fire_position = NodePath("Weapon/FirePosition")
-objects/fire_direction = NodePath("Weapon/FireDirection")
-objects/attack_cooldown = NodePath("Weapon/AttackCoolDown")
-objects/reload_cooldown = NodePath("Weapon/ReloadCoolDown")
-objects/animation = NodePath("Weapon/Animation")
+weapon/precision = 1.0
+weapon/recoil_force = 1.5
+objects/fire_position = NodePath("FirePosition")
+objects/fire_direction = NodePath("FireDirection")
+objects/attack_cooldown = NodePath("AttackCoolDown")
+objects/reload_cooldown = NodePath("ReloadCoolDown")
+objects/animation = NodePath("Animation")
 
-[node name="Weapon" type="Node2D" parent="."]
-script = ExtResource("1_d1yyx")
+[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("1_rd0x7")
+parent = NodePath("..")
 
-[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
-texture = ExtResource("3_joxjn")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_yn37x")
 
-[node name="FirePosition" type="Marker2D" parent="Weapon"]
+[node name="FirePosition" type="Marker2D" parent="."]
 position = Vector2(18, 4.48227e-05)
 
-[node name="FireDirection" type="Marker2D" parent="Weapon"]
+[node name="FireDirection" type="Marker2D" parent="."]
 position = Vector2(20, 4.48227e-05)
 
-[node name="AttackCoolDown" type="Timer" parent="Weapon"]
-wait_time = 3.0
+[node name="AttackCoolDown" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
-[node name="ReloadCoolDown" type="Timer" parent="Weapon"]
+[node name="ReloadCoolDown" type="Timer" parent="."]
+wait_time = 1.2
 one_shot = true
 
-[node name="MuzzleFlash" type="Sprite2D" parent="Weapon"]
+[node name="MuzzleFlash" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(28, 4.48227e-05)
 rotation = -1.5708
-texture = ExtResource("3_7mh7o")
+texture = ExtResource("4_lhyuc")
 region_enabled = true
 region_rect = Rect2(324, 334, 20, 25)
 
-[node name="Animation" type="AnimationPlayer" parent="Weapon"]
+[node name="Animation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")

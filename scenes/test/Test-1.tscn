@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_ssaqb"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_rygxq"]
-[ext_resource type="PackedScene" uid="uid://bdsdms4e8u2d" path="res://scenes/characters/player.tscn" id="3_oup5r"]
+[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_oup5r"]
 [ext_resource type="Script" path="res://scripts/ProjectileManager.gd" id="5_5vhg5"]
-[ext_resource type="PackedScene" uid="uid://cydftr7471nc3" path="res://scenes/characters/enemy.tscn" id="5_daqio"]
+[ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="5_daqio"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
 texture = ExtResource("2_rygxq")
@@ -22498,6 +22498,7 @@ position_smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_oup5r")]
 position = Vector2(-316, -287)
+passive_effect_list = {}
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -22507,12 +22508,20 @@ position = Vector2(25.1981, 9.85895)
 rotation = -0.375185
 
 [node name="Enemy2" parent="." instance=ExtResource("5_daqio")]
-position = Vector2(13, -325)
+position = Vector2(29, -332)
 rotation = -0.44999
 
 [node name="Enemy3" parent="." instance=ExtResource("5_daqio")]
 position = Vector2(124, -398)
 rotation = -0.375185
+
+[node name="Enemy4" parent="." instance=ExtResource("5_daqio")]
+position = Vector2(46, -414)
+rotation = -0.75037
+
+[node name="Enemy5" parent="." instance=ExtResource("5_daqio")]
+position = Vector2(112, -320)
+rotation = -1.50074
 
 [node name="ProjectileManager" type="Node2D" parent="."]
 z_index = -1

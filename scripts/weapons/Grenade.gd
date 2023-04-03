@@ -29,11 +29,8 @@ func _physics_process(delta):
 		global_position += velocity
 		var collision = move_and_collide(velocity * delta + velocity.normalized())
 		
-		if should_it_bounce(collision):
-			#print("bounce")
-			direction = velocity.normalized().bounce(collision.get_normal())
-			#velocity = direction.bounce(collision.get_normal()) * speed
-	
+		handle_colision(collision)
+		
 	if speed == 0 or direction == Vector2.ZERO:
 		return
 	
@@ -42,22 +39,24 @@ func _physics_process(delta):
 	if distance - range_safe <= distance_traveled and distance_traveled <= distance + range_safe:
 		stop()
 
-func should_it_bounce(collision: KinematicCollision2D) -> bool:
+func handle_colision(collision: KinematicCollision2D):
 	if !collision:
-		return false
+		return
 	var object = collision.get_collider()
 	
-	if object is Grenade:
-		#should ignore the collision ?
-		stop()
-		return false
+	#if object is Grenade:
+	#	stop()
+	#	return
 	
 	if object is Character:
 		stop()
 		explode()
-		return false
+		return
 	
-	return true
+	if object.name == "Walls":
+		direction = velocity.normalized().bounce(collision.get_normal())
+	
+	return
 
 func stop():
 	speed = 0
@@ -82,6 +81,7 @@ func calulate_distance():
 func explode():
 	animation.play("explosion")
 	bodies = explosion_area.get_overlapping_bodies()
+	#print("Explosion on : ", bodies, "\n")
 	for body in bodies:
 		if body == null:
 			continue
@@ -91,8 +91,8 @@ func explode():
 			var impact_direction = body.global_position - self.global_position
 			body.apply_force(body, impact_direction, impact_force)
 		#si c une grenade explose
-		if body is Grenade and body != self:
-			body.explode()
+		#if body is Grenade and body != self:
+		#	body.explode()
 	bodies = []
 
 func _on_explosion_timer_timeout():

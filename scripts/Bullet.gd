@@ -2,7 +2,6 @@ extends Projectile
 class_name Bullet
 
 #bullet : distance de free & pas timer
-#bullet : ricochet 1 fois sur les murs
 #bullet ; saignement
 
 @export var piercing_force : int = 2
@@ -20,21 +19,29 @@ func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		var velocity = direction * GlobalFunctions.get_speed(speed, delta)
 		global_position += velocity
+		var collision = move_and_collide(velocity * delta + velocity.normalized())
+		
+		handle_collision(collision)
+
+func handle_collision(collision: KinematicCollision2D):
+	if !collision:
+		return
+	var object = collision.get_collider()
+	
+	if object.get_name() == "Walls":
+		queue_free()
+	
+	if object.has_method("handle_hit"):
+		current_piercing_force -= 1
+		object.handle_hit(damages)
+
+	if object.has_method("apply_force"):
+		object.apply_force(object, self.direction, impact_force)
+
+	if current_piercing_force <= 0:
+		queue_free()
 
 #signals
 func _on_life_cycle_timer_timeout():
 	queue_free()
 
-func _on_body_entered(body):
-	if body.get_name() == "Walls":
-		queue_free()
-	
-	if body.has_method("handle_hit"):
-		current_piercing_force -= 1
-		body.handle_hit(damages)
-
-	if body.has_method("apply_force"):
-		body.apply_force(body, self.direction, impact_force)
-
-	if current_piercing_force <= 0:
-		queue_free()

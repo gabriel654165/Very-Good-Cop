@@ -1,11 +1,13 @@
+Node2D
+Sprite2D
+CollisionShape2D
 Area2D
+Marker2D
+Weapon
+Timer
 CharacterBody2D
 RigidBody2D
 AnimatedSprite2D
-CollisionShape2D
 Bullet
-Node2D
 Player
-Sprite2D
 AnimationPlayer
-Timer
