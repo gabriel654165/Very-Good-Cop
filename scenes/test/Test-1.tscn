@@ -1,10 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://f0bqfroqcvke"]
+[gd_scene load_steps=16 format=3 uid="uid://f0bqfroqcvke"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_ssaqb"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_rygxq"]
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_oup5r"]
 [ext_resource type="Script" path="res://scripts/ProjectileManager.gd" id="5_5vhg5"]
 [ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="5_daqio"]
+[ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="6_bgfn6"]
+[ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="6_pdnum"]
+[ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="7_dfw51"]
+[ext_resource type="Script" path="res://scripts/Interactions/ActiveProcessorInteraction.gd" id="8_8myhk"]
+[ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="9_p8fgl"]
+[ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="9_wm0g8"]
+[ext_resource type="Script" path="res://scripts/Interactions/SpamClickInteraction.gd" id="11_11iim"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
 texture = ExtResource("2_rygxq")
@@ -22459,6 +22466,9 @@ physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_78u0y")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
+radius = 28.2312
+
 [node name="Test-1" type="Node2D"]
 position = Vector2(564, 170)
 script = ExtResource("1_ssaqb")
@@ -22506,22 +22516,73 @@ remote_path = NodePath("../../Camera2D")
 position = Vector2(25.1981, 9.85895)
 rotation = -0.375185
 
-[node name="Enemy2" parent="." instance=ExtResource("5_daqio")]
-position = Vector2(29, -332)
-rotation = -0.44999
-
-[node name="Enemy3" parent="." instance=ExtResource("5_daqio")]
-position = Vector2(124, -398)
-rotation = -0.375185
-
-[node name="Enemy4" parent="." instance=ExtResource("5_daqio")]
-position = Vector2(46, -414)
-rotation = -0.75037
-
-[node name="Enemy5" parent="." instance=ExtResource("5_daqio")]
-position = Vector2(112, -320)
-rotation = -1.50074
-
 [node name="ProjectileManager" type="Node2D" parent="."]
 z_index = -1
 script = ExtResource("5_5vhg5")
+
+[node name="PassiveEffect" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction")]
+script = ExtResource("6_bgfn6")
+effect_name = "heal"
+is_active = false
+collision_interaction = NodePath("CharacterCollisionInteraction")
+
+[node name="CharacterCollisionInteraction" type="Node2D" parent="PassiveEffect"]
+script = ExtResource("9_wm0g8")
+for_who = 3
+is_active = true
+
+[node name="Area2D" type="Area2D" parent="PassiveEffect/CharacterCollisionInteraction"]
+position = Vector2(-307, -449)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PassiveEffect/CharacterCollisionInteraction/Area2D"]
+shape = SubResource("CircleShape2D_tdnqi")
+
+[node name="ActivateProcessorInteraction" type="Node2D" parent="PassiveEffect"]
+position = Vector2(-307, -449)
+rotation = -0.375185
+script = ExtResource("8_8myhk")
+
+[node name="PressKeyAndCollide" type="Node2D" parent="PassiveEffect" node_paths=PackedStringArray("collision_interaction", "next_interaction_manager")]
+position = Vector2(-307, -449)
+rotation = -0.375185
+script = ExtResource("6_pdnum")
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction_manager = NodePath("../SpamClickAndCollide")
+
+[node name="Sprite2D" type="Sprite2D" parent="PassiveEffect/PressKeyAndCollide"]
+texture = ExtResource("7_dfw51")
+
+[node name="KeyPressedInteraction" type="Node2D" parent="PassiveEffect/PressKeyAndCollide"]
+script = ExtResource("9_p8fgl")
+keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="SpamClickAndCollide" type="Node2D" parent="PassiveEffect" node_paths=PackedStringArray("collision_interaction", "next_interaction_manager")]
+position = Vector2(-307, -449)
+rotation = -0.375185
+script = ExtResource("6_pdnum")
+is_active = false
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction_manager = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="PassiveEffect/SpamClickAndCollide"]
+texture = ExtResource("7_dfw51")
+
+[node name="SpamClickInteraction" type="Node2D" parent="PassiveEffect/SpamClickAndCollide"]
+script = ExtResource("11_11iim")
+for_who = 1
+
+[node name="Timer" type="Timer" parent="PassiveEffect/SpamClickAndCollide/SpamClickInteraction"]
+wait_time = 10.0
+one_shot = true
+
+[node name="AddPassiveEffect" type="Node2D" parent="PassiveEffect"]
+position = Vector2(-307, -449)
+rotation = -0.375185
+
+[connection signal="body_entered" from="PassiveEffect/CharacterCollisionInteraction/Area2D" to="PassiveEffect/CharacterCollisionInteraction" method="_on_body_entered"]
+[connection signal="body_exited" from="PassiveEffect/CharacterCollisionInteraction/Area2D" to="PassiveEffect/CharacterCollisionInteraction" method="_on_body_exited"]
+[connection signal="timeout" from="PassiveEffect/SpamClickAndCollide/SpamClickInteraction/Timer" to="PassiveEffect/SpamClickAndCollide/SpamClickInteraction" method="_on_timer_timeout"]

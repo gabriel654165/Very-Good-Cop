@@ -1,10 +1,10 @@
+Timer
 Node2D
+Area2D
 Sprite2D
 CollisionShape2D
-Area2D
 Marker2D
 Weapon
-Timer
 CharacterBody2D
 RigidBody2D
 AnimatedSprite2D

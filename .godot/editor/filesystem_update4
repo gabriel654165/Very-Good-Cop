@@ -1,4 +1,5 @@
 res://scenes/test/Test-1.tscn
+res://scripts/Interactions/InteractionManager.gd
 res://scenes/characters/player.tscn
 res://scenes/characters/enemy.tscn
 res://scenes/weapons/Knife.tscn
@@ -6,3 +7,10 @@ res://scenes/weapons/weapon.tscn
 res://scenes/weapons/bullet.tscn
 res://scenes/weapons/grenade.tscn
 res://scripts/PassiveEffects/PassiveEffect.gd
+res://scripts/Interactions/ClickInteraction.gd
+res://scripts/Interactions/CollisionInteraction.gd
+res://scripts/Interactions/Interaction.gd
+res://scripts/Interactions/PressKeyInteraction.gd
+res://scripts/Interactions/SpamClickInteraction.gd
+res://scripts/Interactions/InteractionProcessors/InteractionManager.gd
+res://scripts/Interactions/ActiveProcessorInteraction.gd
