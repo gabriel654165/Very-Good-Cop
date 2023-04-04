@@ -6,6 +6,8 @@ class_name PassiveEffect
 @export var effect_name : String
 @export var Type : TYPE
 
+@export var value_effect : float = 10
+
 @export var infinite_effect : bool = false
 @export var effect_duration : float = 0
 
@@ -24,7 +26,9 @@ func _process(delta):
 
 func add_passive_effect(character: Character):
 	if Type == TYPE.HEALTH:
-		character.health
+		character.health.heal(value_effect)
+	if Type == TYPE.SPEED:
+		character.speed.
 	await get_tree().create_timer(effect_duration).timeout
 	remove_passive_effect(character)
 	pass
