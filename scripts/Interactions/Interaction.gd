@@ -12,6 +12,9 @@ enum TRIGGER_ACTOR {
 	EVERYBODY
 }
 
+func trigger(body: Node):
+	pass
+
 func set_active(new_state: bool):
 	is_active = new_state
 	is_triggered = false

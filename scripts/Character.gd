@@ -16,7 +16,7 @@ var has_knife : bool = true
 var has_grappling_hook : bool = true
 @export var grappling_hook : Node2D = null
 
-@export var passive_effect_list : Dictionary
+#@export var passive_effect_list : Dictionary
 
 #var has_bulletproof_vest : bool = true
 #var bulletproof_vest : Node2D = null

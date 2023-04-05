@@ -8,19 +8,27 @@ class_name InteractionManager
 
 @export var collision_interaction : CollisionInteraction = null
 
-@export var next_interaction_manager : InteractionManager = null
+@export var next_interaction : Interaction = null
+
+func set_active(new_state: bool):
+	is_active = new_state
+	#for child which are in interactions
+	for child in self.get_children():
+		if child is Interaction and interactions.has(child as Interaction):
+			child.set_active(new_state)
 
 func _process(delta):
 	if !is_active:
 		return
 		
 	var all_interactions_finished = true
-	var body_touching : Character = null
+	var body_touching : Node = null
 	
 	if collision_interaction != null:
 		body_touching = collision_interaction.get_body_touching()
 	
 	for interaction in interactions:
+		#por avoir des events differents si tu est enemy, player, bullet, etc
 		var should_check_trigger = collision_interaction == null or interaction.for_who == Interaction.TRIGGER_ACTOR.EVERYBODY or character_to_trigger_actor(body_touching) == interaction.for_who
 		
 		if should_check_trigger and !interaction.is_triggered:
@@ -31,20 +39,13 @@ func _process(delta):
 		action(body_touching)
 		set_active(false)
 
-func set_active(new_state: bool):
-	is_active = new_state
-	
-	#for child which are interaction
-	for child in self.get_children():
-		if child is Interaction and interactions.has(child as Interaction):
-			child.set_active(new_state)
-
 func action(actor: Character = null):
 	print("---Do action : ", self.name)
-	if next_interaction_manager != null:
-		next_interaction_manager.set_active(true)
+	if next_interaction != null:
+		next_interaction.set_active(true)
+		next_interaction.trigger(actor)
 
-func character_to_trigger_actor(body: Character) -> Interaction.TRIGGER_ACTOR :
+func character_to_trigger_actor(body: Node) -> Interaction.TRIGGER_ACTOR :
 	var actor_type = Interaction.TRIGGER_ACTOR.NONE
 	
 	if body is Player:

@@ -29,6 +29,10 @@ func _ready():
 		return
 	set_variables(weapon)
 
+func _process(delta):
+	if not Engine.is_editor_hint():
+		set_variables(weapon)
+
 func set_pos(position):
 	weapon.global_position = position
 
