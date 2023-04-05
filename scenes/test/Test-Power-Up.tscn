@@ -22706,7 +22706,7 @@ position = Vector2(204, -425)
 script = ExtResource("6_14pnd")
 effect_name = "damages"
 type = 3
-value_effect = 100.0
+value_effect = 120.0
 infinite_effect = false
 effect_duration = 7.5
 

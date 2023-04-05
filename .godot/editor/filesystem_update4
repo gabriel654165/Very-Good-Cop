@@ -1,11 +1,8 @@
 res://scenes/test/Test-1.tscn
-res://scripts/PassiveEffects/PassiveEffectEditor.gd
-res://scripts/PassiveEffects/PassiveEffect.gd
+res://scenes/test/Test-Power-Up.tscn
 res://scenes/characters/player.tscn
 res://scenes/characters/enemy.tscn
 res://scenes/weapons/Knife.tscn
 res://scenes/weapons/weapon.tscn
 res://scenes/weapons/bullet.tscn
 res://scenes/weapons/grenade.tscn
-res://scripts/Editor/WeaponEditor.gd
-res://scenes/test/Test-Power-Up.tscn
