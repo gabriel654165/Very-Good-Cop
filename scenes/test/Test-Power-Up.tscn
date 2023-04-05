@@ -1,13 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://f0bqfroqcvke"]
+[gd_scene load_steps=17 format=3 uid="uid://fbqvv530f2pd"]
 
-[ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_ssaqb"]
-[ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_rygxq"]
-[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_oup5r"]
-[ext_resource type="Script" path="res://scripts/ProjectileManager.gd" id="5_5vhg5"]
-[ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="5_daqio"]
+[ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_2q6o2"]
+[ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_pgev3"]
+[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_v2c66"]
+[ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="4_8kvlm"]
+[ext_resource type="Script" path="res://scripts/ProjectileManager.gd" id="5_dbkei"]
+[ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffectEditor.gd" id="6_14pnd"]
+[ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="7_k4gsf"]
+[ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="8_3akns"]
+[ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="9_poufy"]
+[ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="10_3xvsf"]
+[ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="11_53i51"]
+[ext_resource type="Script" path="res://scripts/Interactions/ActiveProcessorInteraction.gd" id="12_3f04b"]
+[ext_resource type="Script" path="res://scripts/Interactions/SpamClickInteraction.gd" id="13_sk8oi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
-texture = ExtResource("2_rygxq")
+texture = ExtResource("2_pgev3")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -22459,9 +22467,12 @@ physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_78u0y")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
+radius = 28.2312
+
 [node name="Test-1" type="Node2D"]
 position = Vector2(564, 170)
-script = ExtResource("1_ssaqb")
+script = ExtResource("1_2q6o2")
 
 [node name="Ground" type="TileMap" parent="."]
 position = Vector2(-28, 36)
@@ -22496,16 +22507,269 @@ layer_0/tile_data = PackedInt32Array(-196625, 2359298, 22, -327697, 2359298, 20,
 position = Vector2(-316, -287)
 position_smoothing_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("3_oup5r")]
+[node name="Player" parent="." instance=ExtResource("3_v2c66")]
 position = Vector2(-316, -287)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Enemy" parent="." instance=ExtResource("5_daqio")]
+[node name="Enemy" parent="." instance=ExtResource("4_8kvlm")]
 position = Vector2(25.1981, 9.85895)
 rotation = -0.375185
 
 [node name="ProjectileManager" type="Node2D" parent="."]
 z_index = -1
-script = ExtResource("5_5vhg5")
+script = ExtResource("5_dbkei")
+
+[node name="HealPowerUp" type="Node2D" parent="."]
+position = Vector2(-275, -429)
+script = ExtResource("6_14pnd")
+effect_name = "heal"
+type = 0
+value_effect = 10.0
+infinite_effect = false
+effect_duration = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="HealPowerUp"]
+rotation = -0.375185
+texture = ExtResource("7_k4gsf")
+
+[node name="CharacterCollisionInteraction" type="Node2D" parent="HealPowerUp"]
+script = ExtResource("8_3akns")
+for_who = 3
+is_active = true
+
+[node name="Area2D" type="Area2D" parent="HealPowerUp/CharacterCollisionInteraction"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealPowerUp/CharacterCollisionInteraction/Area2D"]
+shape = SubResource("CircleShape2D_tdnqi")
+
+[node name="AddPassiveEffectInteraction" type="Node2D" parent="HealPowerUp"]
+rotation = -0.375185
+script = ExtResource("9_poufy")
+
+[node name="PressKeyAndCollide" type="Node2D" parent="HealPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("10_3xvsf")
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("ActivateProcessorInteraction")
+
+[node name="KeyPressedInteraction" type="Node2D" parent="HealPowerUp/PressKeyAndCollide"]
+script = ExtResource("11_53i51")
+keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="ActivateProcessorInteraction" type="Node2D" parent="HealPowerUp/PressKeyAndCollide" node_paths=PackedStringArray("interaction_processor")]
+script = ExtResource("12_3f04b")
+interaction_processor = NodePath("../../SpamClickAndCollide")
+
+[node name="SpamClickAndCollide" type="Node2D" parent="HealPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("10_3xvsf")
+is_active = false
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("../AddPassiveEffectInteraction")
+
+[node name="SpamClickInteraction" type="Node2D" parent="HealPowerUp/SpamClickAndCollide"]
+script = ExtResource("13_sk8oi")
+for_who = 1
+
+[node name="Timer" type="Timer" parent="HealPowerUp/SpamClickAndCollide/SpamClickInteraction"]
+wait_time = 10.0
+one_shot = true
+
+[node name="SpeedPowerUp" type="Node2D" parent="."]
+position = Vector2(-119, -427)
+script = ExtResource("6_14pnd")
+effect_name = "speed"
+type = 1
+value_effect = 30.0
+infinite_effect = false
+effect_duration = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="SpeedPowerUp"]
+rotation = -0.375185
+texture = ExtResource("7_k4gsf")
+
+[node name="CharacterCollisionInteraction" type="Node2D" parent="SpeedPowerUp"]
+script = ExtResource("8_3akns")
+for_who = 3
+is_active = true
+
+[node name="Area2D" type="Area2D" parent="SpeedPowerUp/CharacterCollisionInteraction"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpeedPowerUp/CharacterCollisionInteraction/Area2D"]
+shape = SubResource("CircleShape2D_tdnqi")
+
+[node name="AddPassiveEffectInteraction" type="Node2D" parent="SpeedPowerUp"]
+rotation = -0.375185
+script = ExtResource("9_poufy")
+
+[node name="PressKeyAndCollide" type="Node2D" parent="SpeedPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("10_3xvsf")
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("ActivateProcessorInteraction")
+
+[node name="KeyPressedInteraction" type="Node2D" parent="SpeedPowerUp/PressKeyAndCollide"]
+script = ExtResource("11_53i51")
+keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="ActivateProcessorInteraction" type="Node2D" parent="SpeedPowerUp/PressKeyAndCollide" node_paths=PackedStringArray("interaction_processor")]
+script = ExtResource("12_3f04b")
+interaction_processor = NodePath("../../SpamClickAndCollide")
+
+[node name="SpamClickAndCollide" type="Node2D" parent="SpeedPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("10_3xvsf")
+is_active = false
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("../AddPassiveEffectInteraction")
+
+[node name="SpamClickInteraction" type="Node2D" parent="SpeedPowerUp/SpamClickAndCollide"]
+script = ExtResource("13_sk8oi")
+for_who = 1
+
+[node name="Timer" type="Timer" parent="SpeedPowerUp/SpamClickAndCollide/SpamClickInteraction"]
+wait_time = 10.0
+one_shot = true
+
+[node name="SlowMotionPowerUp" type="Node2D" parent="."]
+position = Vector2(40, -424)
+script = ExtResource("6_14pnd")
+effect_name = "slowmotion"
+type = 2
+value_effect = 10.0
+infinite_effect = false
+effect_duration = 7.5
+
+[node name="Sprite2D" type="Sprite2D" parent="SlowMotionPowerUp"]
+rotation = -0.375185
+texture = ExtResource("7_k4gsf")
+
+[node name="CharacterCollisionInteraction" type="Node2D" parent="SlowMotionPowerUp"]
+script = ExtResource("8_3akns")
+for_who = 3
+is_active = true
+
+[node name="Area2D" type="Area2D" parent="SlowMotionPowerUp/CharacterCollisionInteraction"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlowMotionPowerUp/CharacterCollisionInteraction/Area2D"]
+shape = SubResource("CircleShape2D_tdnqi")
+
+[node name="AddPassiveEffectInteraction" type="Node2D" parent="SlowMotionPowerUp"]
+rotation = -0.375185
+script = ExtResource("9_poufy")
+
+[node name="PressKeyAndCollide" type="Node2D" parent="SlowMotionPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("10_3xvsf")
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("ActivateProcessorInteraction")
+
+[node name="KeyPressedInteraction" type="Node2D" parent="SlowMotionPowerUp/PressKeyAndCollide"]
+script = ExtResource("11_53i51")
+keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="ActivateProcessorInteraction" type="Node2D" parent="SlowMotionPowerUp/PressKeyAndCollide" node_paths=PackedStringArray("interaction_processor")]
+script = ExtResource("12_3f04b")
+interaction_processor = NodePath("../../SpamClickAndCollide")
+
+[node name="SpamClickAndCollide" type="Node2D" parent="SlowMotionPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("10_3xvsf")
+is_active = false
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("../AddPassiveEffectInteraction")
+
+[node name="SpamClickInteraction" type="Node2D" parent="SlowMotionPowerUp/SpamClickAndCollide"]
+script = ExtResource("13_sk8oi")
+for_who = 1
+
+[node name="Timer" type="Timer" parent="SlowMotionPowerUp/SpamClickAndCollide/SpamClickInteraction"]
+wait_time = 10.0
+one_shot = true
+
+[node name="DamagePowerUp" type="Node2D" parent="."]
+position = Vector2(204, -425)
+script = ExtResource("6_14pnd")
+effect_name = "damages"
+type = 3
+value_effect = 120.0
+infinite_effect = false
+effect_duration = 7.5
+
+[node name="Sprite2D" type="Sprite2D" parent="DamagePowerUp"]
+rotation = -0.375185
+texture = ExtResource("7_k4gsf")
+
+[node name="CharacterCollisionInteraction" type="Node2D" parent="DamagePowerUp"]
+script = ExtResource("8_3akns")
+for_who = 3
+is_active = true
+
+[node name="Area2D" type="Area2D" parent="DamagePowerUp/CharacterCollisionInteraction"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamagePowerUp/CharacterCollisionInteraction/Area2D"]
+shape = SubResource("CircleShape2D_tdnqi")
+
+[node name="AddPassiveEffectInteraction" type="Node2D" parent="DamagePowerUp"]
+rotation = -0.375185
+script = ExtResource("9_poufy")
+
+[node name="PressKeyAndCollide" type="Node2D" parent="DamagePowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("10_3xvsf")
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("ActivateProcessorInteraction")
+
+[node name="KeyPressedInteraction" type="Node2D" parent="DamagePowerUp/PressKeyAndCollide"]
+script = ExtResource("11_53i51")
+keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="ActivateProcessorInteraction" type="Node2D" parent="DamagePowerUp/PressKeyAndCollide" node_paths=PackedStringArray("interaction_processor")]
+script = ExtResource("12_3f04b")
+interaction_processor = NodePath("../../SpamClickAndCollide")
+
+[node name="SpamClickAndCollide" type="Node2D" parent="DamagePowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("10_3xvsf")
+is_active = false
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("../AddPassiveEffectInteraction")
+
+[node name="SpamClickInteraction" type="Node2D" parent="DamagePowerUp/SpamClickAndCollide"]
+script = ExtResource("13_sk8oi")
+for_who = 1
+
+[node name="Timer" type="Timer" parent="DamagePowerUp/SpamClickAndCollide/SpamClickInteraction"]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="HealPowerUp/CharacterCollisionInteraction/Area2D" to="HealPowerUp/CharacterCollisionInteraction" method="_on_body_entered"]
+[connection signal="body_exited" from="HealPowerUp/CharacterCollisionInteraction/Area2D" to="HealPowerUp/CharacterCollisionInteraction" method="_on_body_exited"]
+[connection signal="timeout" from="HealPowerUp/SpamClickAndCollide/SpamClickInteraction/Timer" to="HealPowerUp/SpamClickAndCollide/SpamClickInteraction" method="_on_timer_timeout"]
+[connection signal="body_entered" from="SpeedPowerUp/CharacterCollisionInteraction/Area2D" to="SpeedPowerUp/CharacterCollisionInteraction" method="_on_body_entered"]
+[connection signal="body_exited" from="SpeedPowerUp/CharacterCollisionInteraction/Area2D" to="SpeedPowerUp/CharacterCollisionInteraction" method="_on_body_exited"]
+[connection signal="timeout" from="SpeedPowerUp/SpamClickAndCollide/SpamClickInteraction/Timer" to="SpeedPowerUp/SpamClickAndCollide/SpamClickInteraction" method="_on_timer_timeout"]
+[connection signal="body_entered" from="SlowMotionPowerUp/CharacterCollisionInteraction/Area2D" to="SlowMotionPowerUp/CharacterCollisionInteraction" method="_on_body_entered"]
+[connection signal="body_exited" from="SlowMotionPowerUp/CharacterCollisionInteraction/Area2D" to="SlowMotionPowerUp/CharacterCollisionInteraction" method="_on_body_exited"]
+[connection signal="timeout" from="SlowMotionPowerUp/SpamClickAndCollide/SpamClickInteraction/Timer" to="SlowMotionPowerUp/SpamClickAndCollide/SpamClickInteraction" method="_on_timer_timeout"]
+[connection signal="body_entered" from="DamagePowerUp/CharacterCollisionInteraction/Area2D" to="DamagePowerUp/CharacterCollisionInteraction" method="_on_body_entered"]
+[connection signal="body_exited" from="DamagePowerUp/CharacterCollisionInteraction/Area2D" to="DamagePowerUp/CharacterCollisionInteraction" method="_on_body_exited"]
+[connection signal="timeout" from="DamagePowerUp/SpamClickAndCollide/SpamClickInteraction/Timer" to="DamagePowerUp/SpamClickAndCollide/SpamClickInteraction" method="_on_timer_timeout"]

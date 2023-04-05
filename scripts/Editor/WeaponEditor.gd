@@ -29,14 +29,23 @@ func _ready():
 		return
 	set_variables(weapon)
 
+func _process(delta):
+	if not Engine.is_editor_hint():
+		set_variables(weapon)
+
 func set_pos(position):
 	weapon.global_position = position
 
-func set_variables(new_weapon: Weapon):
+func set_projectile(new_projectile: PackedScene):
+	self.Projectile = new_projectile
+	weapon.Projectile = new_projectile
+
+func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_nodes: bool = true):
 	if weapon == null:
 		weapon = new_weapon
 	
-	weapon.Projectile = self.Projectile
+	if upadte_projectile:
+		weapon.Projectile = self.Projectile
 	
 	weapon.loader_capacity = self.loader_capacity
 	weapon.bullet_speed = self.bullet_speed
@@ -50,11 +59,12 @@ func set_variables(new_weapon: Weapon):
 	weapon.precision = self.precision
 	weapon.recoil_force = self.recoil_force
 	
-	weapon.fire_position = self.get_node(self.fire_position) as Marker2D
-	weapon.fire_direction = self.get_node(self.fire_direction) as Marker2D
-	weapon.attack_cooldown = self.get_node(self.attack_cooldown) as Timer
-	weapon.reload_cooldown = self.get_node(self.reload_cooldown) as Timer
-	weapon.animation = self.get_node(self.animation) as AnimationPlayer
+	if update_nodes:
+		weapon.fire_position = self.get_node(self.fire_position) as Marker2D
+		weapon.fire_direction = self.get_node(self.fire_direction) as Marker2D
+		weapon.attack_cooldown = self.get_node(self.attack_cooldown) as Timer
+		weapon.reload_cooldown = self.get_node(self.reload_cooldown) as Timer
+		weapon.animation = self.get_node(self.animation) as AnimationPlayer
 
 func _get(property):
 	if property == 'bullet/Projectile':

@@ -1,4 +1,5 @@
 res://scenes/test/Test-1.tscn
+res://scenes/test/Test-Power-Up.tscn
 res://scenes/characters/player.tscn
 res://scenes/characters/enemy.tscn
 res://scenes/weapons/Knife.tscn

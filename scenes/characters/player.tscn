@@ -14,7 +14,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(37, 43)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["character", "player"]]
 position = Vector2(346, 154)
 script = ExtResource("1_vctbk")
 weapon_list = {
