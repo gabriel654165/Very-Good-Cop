@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bajon4wl502d1"]
+[gd_scene load_steps=10 format=3 uid="uid://cvdae5oociat5"]
 
-[ext_resource type="Script" path="res://scripts/weapons/Grenade.gd" id="1_w2pxv"]
+[ext_resource type="Script" path="res://scripts/projectiles/Grenade.gd" id="1_hylyk"]
+[ext_resource type="Texture2D" uid="uid://dqnt55tmn2gec" path="res://assets/Spritesheet/allSprites_retina.png" id="2_ilsa6"]
+[ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="3_cexts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b75nu"]
 size = Vector2(15, 35)
@@ -141,7 +143,7 @@ _data = {
 
 [node name="Grenade" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_w2pxv")
+script = ExtResource("1_hylyk")
 speed = 7
 damages = 10
 size = 0.7
@@ -158,6 +160,7 @@ shape = SubResource("CircleShape2D_6quda")
 debug_color = Color(0, 0.592157, 0.745098, 0.419608)
 
 [node name="Grenade" type="Sprite2D" parent="."]
+texture = ExtResource("2_ilsa6")
 region_enabled = true
 region_rect = Rect2(1106, 492, 17, 37)
 
@@ -168,6 +171,7 @@ one_shot = true
 position = Vector2(0, 7.27596e-12)
 rotation = -1.5708
 scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_cexts")
 vframes = 2
 region_enabled = true
 region_rect = Rect2(66, 70, 51, 104)

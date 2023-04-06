@@ -29,6 +29,10 @@ func _process(delta):
 	
 	for interaction in interactions:
 		#por avoir des events differents si tu est enemy, player, bullet, etc
+		
+		#instead of &= : 
+		#boolean1 = boolean1 && boolean2
+		
 		var should_check_trigger = collision_interaction == null or interaction.for_who == Interaction.TRIGGER_ACTOR.EVERYBODY or character_to_trigger_actor(body_touching) == interaction.for_who
 		
 		if should_check_trigger and !interaction.is_triggered:

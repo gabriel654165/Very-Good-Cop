@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwiy7e8lvrq0j"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_0rwaq"]
-[ext_resource type="Script" path="res://scripts/Weapon.gd" id="1_ieyus"]
-[ext_resource type="PackedScene" uid="uid://bajon4wl502d1" path="res://scenes/weapons/grenade.tscn" id="2_g75ee"]
+[ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_ieyus"]
+[ext_resource type="PackedScene" uid="uid://cvdae5oociat5" path="res://scenes/weapons/grenade.tscn" id="2_g75ee"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_2d1ed"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_ut61c"]
 

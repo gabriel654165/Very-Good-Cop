@@ -2,10 +2,16 @@ extends Character
 class_name Player
 
 @export var index_weapon_selected : int = 1
+#mettre que les weapons qu'il a 
+# ps : faire un playerEditor / EnemyEditor
 @export var weapon_list : Dictionary
 
-var weapon_throwed : bool = false
+@export var projectile_weapon : PackedScene
+
 var move_direction : Vector2 = Vector2.ZERO
+var weapon_throwed : bool = false
+
+@onready var launch_weapon_position = $LaunchWeaponPosition
 
 func _ready():
 	await assign_weapon(index_weapon_selected)
@@ -38,9 +44,12 @@ func _unhandled_input(event):
 		if knife != null:
 			knife.stab()
 	
-	if event.is_action_pressed("throw_weapon"):
-		if weapon_manager != null:
-			pass
+	if event.is_action_pressed("throw_weapon") && !weapon_throwed:
+		#if weapon_manager != null:
+		#if weapon.state == true:
+		throwProjectile(projectile_weapon, launch_weapon_position.global_position)
+		weapon_throwed = true
+		#désactiver/retirer son weapon dans l'array
 	
 	if event.is_action_pressed("test"):
 		index_weapon_selected += 1

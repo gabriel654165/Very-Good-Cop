@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-var passive_effect : Node
+var passive_effect : PassiveEffect
 
 var effect_name : String
 var type : PassiveEffect.TYPE
@@ -12,6 +12,7 @@ var infinite_effect : bool = false
 var effect_duration : float = 0
 
 func _ready():
+	#todo : get child of type PassiveEffect instead
 	passive_effect = get_child(2) as PassiveEffect
 	if passive_effect == null:
 		return

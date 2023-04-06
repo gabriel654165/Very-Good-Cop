@@ -44,10 +44,6 @@ func handle_colision(collision: KinematicCollision2D):
 		return
 	var object = collision.get_collider()
 	
-	#if object is Grenade:
-	#	stop()
-	#	return
-	
 	if object is Character:
 		stop()
 		explode()

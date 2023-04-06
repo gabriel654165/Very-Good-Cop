@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://fbqvv530f2pd"]
+[gd_scene load_steps=17 format=3 uid="uid://dbvft6kp0wtny"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_2q6o2"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_pgev3"]
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_v2c66"]
 [ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="4_8kvlm"]
-[ext_resource type="Script" path="res://scripts/ProjectileManager.gd" id="5_dbkei"]
+[ext_resource type="Script" path="res://scripts/projectiles/ProjectileManager.gd" id="5_35kb2"]
 [ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffectEditor.gd" id="6_14pnd"]
 [ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="7_k4gsf"]
 [ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="8_3akns"]
@@ -22519,7 +22519,7 @@ rotation = -0.375185
 
 [node name="ProjectileManager" type="Node2D" parent="."]
 z_index = -1
-script = ExtResource("5_dbkei")
+script = ExtResource("5_35kb2")
 
 [node name="HealPowerUp" type="Node2D" parent="."]
 position = Vector2(-275, -429)
