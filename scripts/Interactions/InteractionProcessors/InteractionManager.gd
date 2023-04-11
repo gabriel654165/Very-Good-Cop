@@ -29,31 +29,40 @@ func _process(delta):
 	
 	for interaction in interactions:
 		print("interaction : ", interaction.name, " / is triggered : ", interaction.is_triggered)
-		#por avoir des events differents si tu est enemy, player, bullet, etc
 		
 		#instead of &= : 
 		#boolean1 = boolean1 && boolean2
 		
-		#caca, ntm chatgpt
-		var should_check_trigger = collision_interaction == null or interaction.for_who == Interaction.TRIGGER_ACTOR.EVERYBODY or character_to_trigger_actor(body_touching) == interaction.for_who
+		if collision_interaction == null:
+			all_interactions_finished = all_interactions_finished && interaction.is_triggered
 		
-		if should_check_trigger and !interaction.is_triggered:
-			all_interactions_finished = false
-			break
-		print("all interaction tiggered = ", all_interactions_finished)
+		if collision_interaction != null and body_touching == null:
+			all_interactions_finished = all_interactions_finished && interaction.is_triggered
+		
+		if interaction.for_who == Interaction.TRIGGER_ACTOR.EVERYBODY or character_to_trigger_actor(body_touching) == interaction.for_who:
+			all_interactions_finished = all_interactions_finished && interaction.is_triggered
+		
+		#var should_check_trigger = collision_interaction == null or interaction.for_who == Interaction.TRIGGER_ACTOR.EVERYBODY or character_to_trigger_actor(body_touching) == interaction.for_who
+		#if should_check_trigger and !interaction.is_triggered:
+		#	all_interactions_finished = false
+		#	break
+	
+	print("\nall_interactions_finished = ", all_interactions_finished, "\n")
 
 	if all_interactions_finished:
 		action(body_touching)
 		set_active(false)
 
 func action(actor: Character = null):
-	print("---Do action : ", self.name)
+	print("\n---Do action : ", self.name)
 	if next_interaction != null:
 		next_interaction.set_active(true)
 		next_interaction.trigger(actor)
 
 func character_to_trigger_actor(body: Node) -> Interaction.TRIGGER_ACTOR :
 	var actor_type = Interaction.TRIGGER_ACTOR.NONE
+	if body != null:
+		print("actor colliding name : ", body.name)
 	
 	if body is Player:
 		actor_type = Interaction.TRIGGER_ACTOR.PLAYER

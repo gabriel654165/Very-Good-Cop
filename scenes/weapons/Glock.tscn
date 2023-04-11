@@ -112,6 +112,7 @@ script = ExtResource("1_e6w1w")
 texture = ExtResource("3_ucb1l")
 
 [node name="SideSprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("5_kavxp")
 
 [node name="FirePosition" type="Marker2D" parent="."]

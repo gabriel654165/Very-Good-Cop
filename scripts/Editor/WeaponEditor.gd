@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-var weapon : Node2D
+var weapon : Node
 
 var Projectile : PackedScene
 
@@ -26,7 +26,7 @@ var sprite : NodePath
 var side_sprite : NodePath
 
 func _ready():
-	weapon = self.get_child(0)
+	weapon = self.get_child(0) as Weapon
 	if weapon == null:
 		return
 	set_variables(weapon)

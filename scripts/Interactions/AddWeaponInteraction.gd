@@ -4,6 +4,7 @@ func trigger(actor: Node):
 	if !(actor is Player):
 		return
 	actor.set_active_assigned_weapon()
-	print("trigger")
+	print("trigger add weapon")
+	
 	#free the object
-	get_tree().root.queue_free()
+	get_owner().queue_free()
