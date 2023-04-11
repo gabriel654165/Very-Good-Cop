@@ -25,6 +25,8 @@ var fire_direction : Marker2D
 var attack_cooldown : Timer
 var reload_cooldown : Timer
 var animation : AnimationPlayer
+var sprite : Sprite2D
+var side_sprite : Sprite2D
 
 func _ready():
 	randomize()

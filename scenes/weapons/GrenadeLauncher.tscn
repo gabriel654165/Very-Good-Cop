@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3 uid="uid://b6i5jh7uk237l"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_0rwaq"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_ieyus"]
 [ext_resource type="PackedScene" uid="uid://cvdae5oociat5" path="res://scenes/weapons/grenade.tscn" id="2_g75ee"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_2d1ed"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_ut61c"]
+[ext_resource type="Texture2D" uid="uid://dk0jpus34dk5a" path="res://assets/PNG/weapon_silencer.png" id="5_uxh7u"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -102,6 +103,8 @@ objects/fire_direction = NodePath("FireDirection")
 objects/attack_cooldown = NodePath("AttackCoolDown")
 objects/reload_cooldown = NodePath("ReloadCoolDown")
 objects/animation = NodePath("Animation")
+objects/sprite = NodePath("Sprite2D")
+objects/side_sprite = NodePath("SideSprite2D")
 
 [node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
 script = ExtResource("1_ieyus")
@@ -109,6 +112,10 @@ parent = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_2d1ed")
+
+[node name="SideSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_uxh7u")
 
 [node name="FirePosition" type="Marker2D" parent="."]
 position = Vector2(18, 4.48227e-05)

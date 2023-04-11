@@ -22496,6 +22496,7 @@ layer_0/tile_data = PackedInt32Array(-196625, 2359298, 22, -327697, 2359298, 20,
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-316, -287)
 position_smoothing_enabled = true
+position_smoothing_speed = 20.0
 
 [node name="Player" parent="." instance=ExtResource("3_oup5r")]
 position = Vector2(-316, -287)

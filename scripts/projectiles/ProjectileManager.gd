@@ -13,3 +13,11 @@ func handle_launched_projectile_spawned(grenade: Grenade, position: Vector2, dir
 	grenade.set_landing_position(landing_position)
 	grenade.set_lauching_position(position)
 	grenade.calulate_distance()
+
+# Weapon -> ThrowableWeapon
+
+# ThrowableWeapon
+#      Projectile ThrownWeapon
+#	func throw()
+#		ThrownWeapon.instantiate()
+		

@@ -22,6 +22,8 @@ var fire_direction : NodePath
 var attack_cooldown : NodePath
 var reload_cooldown : NodePath
 var animation : NodePath
+var sprite : NodePath
+var side_sprite : NodePath
 
 func _ready():
 	weapon = self.get_child(0)
@@ -65,6 +67,8 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 		weapon.attack_cooldown = self.get_node(self.attack_cooldown) as Timer
 		weapon.reload_cooldown = self.get_node(self.reload_cooldown) as Timer
 		weapon.animation = self.get_node(self.animation) as AnimationPlayer
+		weapon.sprite = self.get_node(self.sprite) as Sprite2D
+		weapon.side_sprite = self.get_node(self.side_sprite) as Sprite2D
 
 func _get(property):
 	if property == 'bullet/Projectile':
@@ -103,6 +107,10 @@ func _get(property):
 		return reload_cooldown
 	if property == 'objects/animation':
 		return animation
+	if property == 'objects/sprite':
+		return sprite
+	if property == 'objects/side_sprite':
+		return side_sprite
 
 func _set(property, value) -> bool :
 	if property == 'bullet/Projectile':
@@ -141,6 +149,10 @@ func _set(property, value) -> bool :
 		reload_cooldown = value
 	if property == 'objects/animation':
 		animation = value
+	if property == 'objects/sprite':
+		sprite = value
+	if property == 'objects/side_sprite':
+		side_sprite = value
 	return true
 
 func _get_property_list() -> Array:
@@ -205,6 +217,18 @@ func _get_property_list() -> Array:
 		hint_string="Node",
 	},{
 		name= "objects/animation",
+		type=TYPE_NODE_PATH,
+		usage=PROPERTY_USAGE_DEFAULT,
+		hint=35,
+		hint_string="Node",
+	},{
+		name= "objects/sprite",
+		type=TYPE_NODE_PATH,
+		usage=PROPERTY_USAGE_DEFAULT,
+		hint=35,
+		hint_string="Node",
+	},{
+		name= "objects/side_sprite",
 		type=TYPE_NODE_PATH,
 		usage=PROPERTY_USAGE_DEFAULT,
 		hint=35,

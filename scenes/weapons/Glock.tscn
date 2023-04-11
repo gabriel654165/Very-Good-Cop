@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://r7n15xjnkw6m"]
 
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_e6w1w"]
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_yujf1"]
-[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_ljpjp"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_ucb1l"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_n0wdy"]
+[ext_resource type="Texture2D" uid="uid://dk0jpus34dk5a" path="res://assets/PNG/weapon_silencer.png" id="5_kavxp"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -86,28 +86,33 @@ _data = {
 
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_yujf1")
-bullet/Projectile = ExtResource("2_ljpjp")
+bullet/Projectile = null
 loader/loader_capacity = 6
 bullet/bullet_speed = 4.0
 bullet/bullet_damages = 6
 bullet/bullet_size = 0
-bullet/bullet_impact_force = 1
+bullet/bullet_impact_force = 2
 weapon/number_of_balls_by_burt = 1
-weapon/frequence_of_burt = 0.0
+weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.0
-weapon/recoil_force = 1.0
+weapon/recoil_force = 2.0
 objects/fire_position = NodePath("FirePosition")
 objects/fire_direction = NodePath("FireDirection")
 objects/attack_cooldown = NodePath("AttackCoolDown")
 objects/reload_cooldown = NodePath("ReloadCoolDown")
 objects/animation = NodePath("Animation")
+objects/sprite = NodePath("Sprite2D")
+objects/side_sprite = NodePath("SideSprite2D")
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_e6w1w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_ucb1l")
+
+[node name="SideSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("5_kavxp")
 
 [node name="FirePosition" type="Marker2D" parent="."]
 position = Vector2(18, 4.48227e-05)

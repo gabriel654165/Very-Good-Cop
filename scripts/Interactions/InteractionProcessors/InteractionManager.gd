@@ -28,16 +28,19 @@ func _process(delta):
 		body_touching = collision_interaction.get_body_touching()
 	
 	for interaction in interactions:
+		print("interaction : ", interaction.name, " / is triggered : ", interaction.is_triggered)
 		#por avoir des events differents si tu est enemy, player, bullet, etc
 		
 		#instead of &= : 
 		#boolean1 = boolean1 && boolean2
 		
+		#caca, ntm chatgpt
 		var should_check_trigger = collision_interaction == null or interaction.for_who == Interaction.TRIGGER_ACTOR.EVERYBODY or character_to_trigger_actor(body_touching) == interaction.for_who
 		
 		if should_check_trigger and !interaction.is_triggered:
 			all_interactions_finished = false
 			break
+		print("all interaction tiggered = ", all_interactions_finished)
 
 	if all_interactions_finished:
 		action(body_touching)

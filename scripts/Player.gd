@@ -47,7 +47,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("throw_weapon") && !weapon_throwed:
 		#if weapon_manager != null:
 		#if weapon.state == true:
-		throwProjectile(projectile_weapon, launch_weapon_position.global_position)
+		throwProjectile(projectile_weapon, launch_weapon_position.global_position, weapon_manager.weapon.side_sprite)
 		weapon_throwed = true
 		#désactiver/retirer son weapon dans l'array
 	
@@ -66,6 +66,9 @@ func assign_knife():
 	knife = GlobalVariables.knife_scene.instantiate()
 	add_child(knife)
 	knife.global_position = global_position
+
+func set_active_assigned_weapon():
+	weapon_throwed = false
 
 func assign_weapon(index: int):
 	weapon_manager = await find_weapon(index_weapon_selected)

@@ -20,12 +20,12 @@ enum TYPE {
 func trigger(actor: Node):
 	if actor == null || !(actor is Character):
 		return
-	print("---Do passive effect action : ", self.name, " on : ", actor.name)
-	print("Values_effect updated ? : ", value_effect, " and type : ", type)
+	#print("---Do passive effect action : ", self.name, " on : ", actor.name)
+	#print("Values_effect updated ? : ", value_effect, " and type : ", type)
 	add_passive_effect(actor)
 	await get_tree().create_timer(effect_duration).timeout
 	remove_passive_effect(actor)
-	print("effect removed")
+	#print("effect removed")
 	set_active(false)
 
 func add_passive_effect(character: Character):

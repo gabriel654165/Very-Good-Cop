@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://buqra8rqadwu8"]
+[gd_scene load_steps=11 format=3 uid="uid://buqra8rqadwu8"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_1tgdp"]
 [ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_0xsim"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="3_7mh7o"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_joxjn"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="3_x5fg1"]
+[ext_resource type="Texture2D" uid="uid://dk0jpus34dk5a" path="res://assets/PNG/weapon_silencer.png" id="5_0lxj0"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -102,12 +103,18 @@ objects/fire_direction = NodePath("Weapon/FireDirection")
 objects/attack_cooldown = NodePath("Weapon/AttackCoolDown")
 objects/reload_cooldown = NodePath("Weapon/ReloadCoolDown")
 objects/animation = NodePath("Weapon/Animation")
+objects/sprite = NodePath("Weapon/Sprite2D")
+objects/side_sprite = NodePath("Weapon/SideSprite2D")
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("3_x5fg1")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("3_joxjn")
+
+[node name="SideSprite2D" type="Sprite2D" parent="Weapon"]
+visible = false
+texture = ExtResource("5_0lxj0")
 
 [node name="FirePosition" type="Marker2D" parent="Weapon"]
 position = Vector2(18, 4.48227e-05)

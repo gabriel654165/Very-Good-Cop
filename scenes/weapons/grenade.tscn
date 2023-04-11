@@ -95,7 +95,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Grenade:visible")
+tracks/4/path = NodePath("../Sprite2D:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -159,7 +159,7 @@ shape = SubResource("RectangleShape2D_b75nu")
 shape = SubResource("CircleShape2D_6quda")
 debug_color = Color(0, 0.592157, 0.745098, 0.419608)
 
-[node name="Grenade" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ilsa6")
 region_enabled = true
 region_rect = Rect2(1106, 492, 17, 37)

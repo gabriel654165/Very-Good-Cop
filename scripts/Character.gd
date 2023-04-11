@@ -24,9 +24,11 @@ var has_grappling_hook : bool = true
 #func _ready():
 #	GlobalSignals.connect("bullet_fired_force", Callable(self, "apply_force"))
 
-func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2):
+func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2, sprite: Sprite2D = null):
 	var projectile_instance = projectile_weapon.instantiate()
 	var direction = throw_position - global_position
+	if projectile_instance.has_method("set_sprite") && sprite != null:
+		projectile_instance.set_sprite(sprite)
 	GlobalSignals.emit_signal("projectile_fired_spawn", projectile_instance, throw_position, direction)
 
 func stunned(time_to_sleep: float):
