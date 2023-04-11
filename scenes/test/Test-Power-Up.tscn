@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=19 format=3 uid="uid://c4y6r77j5osaj"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_2q6o2"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_pgev3"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="11_53i51"]
 [ext_resource type="Script" path="res://scripts/Interactions/ActiveProcessorInteraction.gd" id="12_3f04b"]
 [ext_resource type="Script" path="res://scripts/Interactions/SpamClickInteraction.gd" id="13_sk8oi"]
+[ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="14_mr5vd"]
+[ext_resource type="PackedScene" uid="uid://bb7av66d8pynv" path="res://scenes/ui/HealthBar.tscn" id="15_tclka"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
 texture = ExtResource("2_pgev3")
@@ -22470,9 +22472,10 @@ sources/2 = SubResource("TileSetAtlasSource_78u0y")
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
 radius = 28.2312
 
-[node name="Test-1" type="Node2D"]
+[node name="Test-1" type="Node2D" node_paths=PackedStringArray("health_ui_manager")]
 position = Vector2(564, 170)
 script = ExtResource("1_2q6o2")
+health_ui_manager = NodePath("UiManager/CanvasLayer/HealthUiManager")
 
 [node name="Ground" type="TileMap" parent="."]
 position = Vector2(-28, 36)
@@ -22526,7 +22529,7 @@ position = Vector2(-275, -429)
 script = ExtResource("6_14pnd")
 effect_name = "heal"
 type = 0
-value_effect = 10.0
+value_effect = 50.0
 infinite_effect = false
 effect_duration = 0.0
 
@@ -22760,6 +22763,14 @@ for_who = 1
 [node name="Timer" type="Timer" parent="DamagePowerUp/SpamClickAndCollide/SpamClickInteraction"]
 wait_time = 10.0
 one_shot = true
+
+[node name="UiManager" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UiManager"]
+
+[node name="HealthUiManager" type="Node2D" parent="UiManager/CanvasLayer"]
+script = ExtResource("14_mr5vd")
+health_ui = ExtResource("15_tclka")
 
 [connection signal="body_entered" from="HealPowerUp/CharacterCollisionInteraction/Area2D" to="HealPowerUp/CharacterCollisionInteraction" method="_on_body_entered"]
 [connection signal="body_exited" from="HealPowerUp/CharacterCollisionInteraction/Area2D" to="HealPowerUp/CharacterCollisionInteraction" method="_on_body_exited"]

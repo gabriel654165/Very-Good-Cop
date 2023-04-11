@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://f0bqfroqcvke"]
+[gd_scene load_steps=11 format=3 uid="uid://f0bqfroqcvke"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_ssaqb"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_rygxq"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/projectiles/ProjectileManager.gd" id="5_c5vxw"]
 [ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="5_daqio"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_y8uir"]
+[ext_resource type="PackedScene" uid="uid://bb7av66d8pynv" path="res://scenes/ui/HealthBar.tscn" id="7_ge508"]
+[ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="7_k2rka"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
 texture = ExtResource("2_rygxq")
@@ -22460,9 +22462,10 @@ physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_78u0y")
 
-[node name="Test-2" type="Node2D"]
+[node name="Test-2" type="Node2D" node_paths=PackedStringArray("health_ui_manager")]
 position = Vector2(564, 170)
 script = ExtResource("1_ssaqb")
+health_ui_manager = NodePath("UiManager/CanvasLayer/HealthUiManager")
 
 [node name="Ground" type="TileMap" parent="."]
 position = Vector2(-28, 36)
@@ -22514,3 +22517,11 @@ script = ExtResource("5_c5vxw")
 
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("6_y8uir")
+
+[node name="UiManager" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UiManager"]
+
+[node name="HealthUiManager" type="Node2D" parent="UiManager/CanvasLayer"]
+script = ExtResource("7_k2rka")
+health_ui = ExtResource("7_ge508")
