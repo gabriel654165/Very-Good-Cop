@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name RoomConfig
 
 @export var patrol_points: Array[Node2D]

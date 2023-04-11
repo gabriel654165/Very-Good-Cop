@@ -10,10 +10,5 @@ func update(_delta: float) -> void:
 		if state_machine._enemy.global_transform.origin.distance_to(_player.global_transform.origin) <= distance + 40:
 			state_machine.transition_to(state_machine.SHOOT, { target = _player })
 
-func physics_update(_delta: float) -> void:
-	if state_machine.navigation_agent.is_navigation_finished():
-		return
-	move()
-
 func enter(_msg := {}) -> void:
 	_player = _msg["target"]

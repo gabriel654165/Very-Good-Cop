@@ -1,7 +1,7 @@
 # Generic state machine. Initializes states and delegates engine callbacks
 # (_physics_process, _unhandled_input) to the active state.
-class_name StateMachine
 extends Node
+class_name StateMachine
 
 # Emitted when transitioning to a new state.
 signal transitioned(state_name: String)
@@ -18,9 +18,6 @@ func _ready() -> void:
 	initial_state = get_child(0).get_path()
 	state = get_node(initial_state)
 	
-	# The state machine assigns itself to the State objects' state_machine property.
-	for child in get_children():
-		child.state_machine = self
 	state.enter()
 
 # The state machine subscribes to node callbacks and delegates them to the state objects.
