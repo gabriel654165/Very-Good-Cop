@@ -22475,7 +22475,7 @@ radius = 28.2312
 [node name="Test-1" type="Node2D" node_paths=PackedStringArray("health_ui_manager")]
 position = Vector2(564, 170)
 script = ExtResource("1_2q6o2")
-health_ui_manager = NodePath("UiManager/CanvasLayer/HealthUiManager")
+health_ui_manager = NodePath("CanvasLayer/HealthUiManager")
 
 [node name="Ground" type="TileMap" parent="."]
 position = Vector2(-28, 36)
@@ -22764,11 +22764,9 @@ for_who = 1
 wait_time = 10.0
 one_shot = true
 
-[node name="UiManager" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="UiManager"]
-
-[node name="HealthUiManager" type="Node2D" parent="UiManager/CanvasLayer"]
+[node name="HealthUiManager" type="Node2D" parent="CanvasLayer"]
 script = ExtResource("14_mr5vd")
 health_ui = ExtResource("15_tclka")
 
