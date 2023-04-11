@@ -1,23 +1,29 @@
 extends Node2D
 
+@export var cursor_ui : PackedScene
 @export var canvas_enemy_offset := Vector2(30, 25)
 @export var cursor_offset := Vector2(6, 6)
 @export var scale_sprite := Vector2(1, 1)
-
-#var cursor : Sprite2D = $BasicCursorSprite
-@onready var cursor_animator = $AnimationPlayer
-@onready var cursor_sprite = $Sprite2D
 
 var is_attack_gui : bool = false
 var is_idle_gui : bool = true
 var is_menu_ui : bool = false
 
 var enemy_list : Array[Enemy] = []
+var cursor_animator : AnimationPlayer = null
+var cursor_sprite : Sprite2D = null
+#var cursor : Sprite2D = $BasicCursorSprite
 var cursor = load("res://assets/UI/Cursors/sprCursor.png")
 
 func _ready():
-	#si la souris existe faire spawn le cursor
+	if cursor_ui == null:
+		return
+	var cursor_ui_instance = cursor_ui.instantiate()
+	add_child(cursor_ui_instance)
+	
 	scale = scale_sprite
+	cursor_animator = cursor_ui_instance.get_node("AnimationPlayer") as AnimationPlayer
+	cursor_sprite = cursor_ui_instance.get_node("Sprite2D") as Sprite2D
 	if cursor != null:
 		Input.set_custom_mouse_cursor(cursor)
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
