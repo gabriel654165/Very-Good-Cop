@@ -1,11 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbvft6kp0wtny"]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_2q6o2"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_pgev3"]
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_v2c66"]
 [ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="4_8kvlm"]
 [ext_resource type="Script" path="res://scripts/projectiles/ProjectileManager.gd" id="5_35kb2"]
-[ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffectEditor.gd" id="6_14pnd"]
+[ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="6_14pnd"]
 [ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="7_k4gsf"]
 [ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="8_3akns"]
 [ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="9_poufy"]

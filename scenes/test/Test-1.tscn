@@ -22460,7 +22460,7 @@ physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_78u0y")
 
-[node name="Test-1" type="Node2D"]
+[node name="Test-2" type="Node2D"]
 position = Vector2(564, 170)
 script = ExtResource("1_ssaqb")
 
