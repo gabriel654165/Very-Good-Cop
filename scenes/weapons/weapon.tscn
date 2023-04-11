@@ -93,6 +93,7 @@ bullet/bullet_speed = 4.0
 bullet/bullet_damages = 6
 bullet/bullet_size = 0
 bullet/bullet_impact_force = 2
+weapon/enable = true
 weapon/number_of_balls_by_burt = 1
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)

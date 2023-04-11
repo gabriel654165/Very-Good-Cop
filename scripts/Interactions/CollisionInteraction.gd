@@ -17,7 +17,7 @@ func get_body_touching() -> Character:
 			body_first_priority = body
 	
 	if body_first_priority != null:
-		print("interaction : collision = TRUE by : ", body_first_priority.name)
+		#print("interaction : collision = TRUE by : ", body_first_priority.name)
 		body_touching = body_first_priority
 		is_triggered = true
 	
@@ -33,7 +33,7 @@ func _on_body_entered(body):
 	pass
 
 func _on_body_exited(body):
-	print("interaction : collision = FALSE")
+	#print("interaction : collision = FALSE")
 	if body_touching == body:
 		body_touching = null
 		is_triggered = false

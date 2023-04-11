@@ -15,12 +15,8 @@ func _init():
 	scale = scale * size
 
 func _ready():
+#	print("PROJECTILE\n")
 	scale = scale * size
-	print("PROJECTILE\n")
-#	print("name child = ", get_child(0).name)
-#	print("name sprite = ", get_node("Sprite2D").name)
-#	print("name child sprite = ", get_child(0).get_node("Sprite2D").name, "\n")
-#	sprite = get_node("Sprite2D")
 
 func destroy_instance():
 	queue_free()
@@ -28,14 +24,7 @@ func destroy_instance():
 func set_sprite(sprite: Sprite2D):
 	if self.sprite == null:
 		self.sprite = get_node("Sprite2D")
-		print("sprite == null\n")
-		
 	self.sprite.texture = sprite.texture
-	print("self.sprite assigned to sprite sent\n")
-	#self.sprite.sprite = load("res://assets/PNG/weapon_silencer.png")
-	
-	if self.sprite == null:
-		print("sprite tjr == null\n")
 
 func set_direction(direction: Vector2):
 	self.direction = direction

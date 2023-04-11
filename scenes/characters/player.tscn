@@ -1,41 +1,30 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0x250onoqdno"]
+[gd_scene load_steps=7 format=3 uid="uid://d0x250onoqdno"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
-[ext_resource type="PackedScene" uid="uid://cekv24mq8jxv" path="res://scenes/weapons/Shotgun.tscn" id="3_wskll"]
-[ext_resource type="PackedScene" uid="uid://x0amqpcim4nu" path="res://scenes/weapons/MiniUzi.tscn" id="4_3eyvm"]
 [ext_resource type="PackedScene" uid="uid://dwnp4f05d5ccd" path="res://scenes/stats/health.tscn" id="4_yibkt"]
-[ext_resource type="PackedScene" uid="uid://cu5xhrk3gung2" path="res://scenes/weapons/Riffle.tscn" id="5_vojg5"]
-[ext_resource type="PackedScene" uid="uid://dpscp32lejm1n" path="res://scenes/weapons/MachineGun.tscn" id="6_haa34"]
-[ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="7_8dk35"]
-[ext_resource type="PackedScene" uid="uid://ty2w1el7t7x1" path="res://scenes/weapons/Sniper.tscn" id="8_j3gfr"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
-size = Vector2(37, 43)
+size = Vector2(28, 43)
 
 [node name="Player" type="CharacterBody2D" groups=["character", "player"]]
 position = Vector2(346, 154)
 script = ExtResource("1_vctbk")
 weapon_list = {
-"glock": ExtResource("2_xaulr"),
-"grenade_launcher": ExtResource("7_8dk35"),
-"machine_gun": ExtResource("6_haa34"),
-"mini_uzi": ExtResource("4_3eyvm"),
-"riffle": ExtResource("5_vojg5"),
-"shotgun": ExtResource("3_wskll"),
-"sniper": ExtResource("8_j3gfr")
+"glock": ExtResource("2_xaulr")
 }
 projectile_weapon = ExtResource("9_8nmes")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, 0)
 texture = ExtResource("2_cmhid")
 region_enabled = true
-region_rect = Rect2(0, 0, 56, 44)
+region_rect = Rect2(388, 88, 34, 44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-9, 0)
+position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_dfd5l")
 
 [node name="Health" parent="." instance=ExtResource("4_yibkt")]

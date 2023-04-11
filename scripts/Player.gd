@@ -45,11 +45,11 @@ func _unhandled_input(event):
 			knife.stab()
 	
 	if event.is_action_pressed("throw_weapon") && !weapon_throwed:
-		#if weapon_manager != null:
-		#if weapon.state == true:
-		throwProjectile(projectile_weapon, launch_weapon_position.global_position, weapon_manager.weapon.side_sprite)
-		weapon_throwed = true
-		#désactiver/retirer son weapon dans l'array
+		if weapon_manager.weapon != null:
+			throwProjectile(projectile_weapon, launch_weapon_position.global_position, weapon_manager.weapon.side_sprite)
+			weapon_manager.enable = false
+			weapon_manager.weapon.sprite.visible = false
+			weapon_throwed = true
 	
 	if event.is_action_pressed("test"):
 		index_weapon_selected += 1
@@ -69,6 +69,8 @@ func assign_knife():
 
 func set_active_assigned_weapon():
 	weapon_throwed = false
+	weapon_manager.enable = true
+	weapon_manager.weapon.sprite.visible = true
 
 func assign_weapon(index: int):
 	weapon_manager = await find_weapon(index_weapon_selected)

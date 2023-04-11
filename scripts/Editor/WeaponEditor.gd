@@ -11,6 +11,7 @@ var bullet_damages : int = 6
 var bullet_size : int = 0.5
 var bullet_impact_force : int = 2
 
+var enable : bool = true
 var number_of_balls_by_burt : int = 1
 var frequence_of_burt : float = 0.1
 var precision_angle : Vector2 = Vector2(-1, 1)
@@ -55,6 +56,7 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.bullet_size = self.bullet_size
 	weapon.bullet_impact_force = self.bullet_impact_force
 	
+	weapon.enable = self.enable
 	weapon.number_of_balls_by_burt = self.number_of_balls_by_burt
 	weapon.frequence_of_burt = self.frequence_of_burt
 	weapon.precision_angle = self.precision_angle
@@ -86,6 +88,8 @@ func _get(property):
 	if property == 'bullet/bullet_impact_force':
 		return bullet_impact_force
 	
+	if property == 'weapon/enable':
+		return enable
 	if property == 'weapon/number_of_balls_by_burt':
 		return number_of_balls_by_burt
 	if property == 'weapon/frequence_of_burt':
@@ -128,6 +132,8 @@ func _set(property, value) -> bool :
 	if property == 'bullet/bullet_impact_force':
 		bullet_impact_force = value
 	
+	if property == 'weapon/enable':
+		enable = value
 	if property == 'weapon/number_of_balls_by_burt':
 		number_of_balls_by_burt = value
 	if property == 'weapon/frequence_of_burt':
@@ -176,6 +182,9 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'bullet/bullet_impact_force',
 		'type': TYPE_INT,
+	},{
+		'name': 'weapon/enable',
+		'type': TYPE_BOOL,
 	},{
 		'name': 'weapon/number_of_balls_by_burt',
 		'type': TYPE_INT,

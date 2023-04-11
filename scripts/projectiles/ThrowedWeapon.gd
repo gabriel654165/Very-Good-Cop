@@ -3,10 +3,8 @@ class_name ThrowedWeapon
 
 var time_stunning : float = 3
 
-func _ready():
-	print("THROWED WEAPON\n")
-	#print("name sprite = ", get_node("Sprite2D").name, "\n")
-	#sprite = get_node("Sprite2D")
+#func _ready():
+#	print("THROWED WEAPON\n")
 
 func _physics_process(delta):
 	if direction != Vector2.ZERO:

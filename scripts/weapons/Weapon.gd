@@ -13,6 +13,7 @@ var bullet_damages : int = 6
 var bullet_size : int = 0.5
 var bullet_impact_force : int = 2
 
+var enable : bool = true
 #changer ces deux pareamètre par fréquence & amplitude (3 balles (fréqeunce) en 1s(amplitude))
 var number_of_balls_by_burt : int = 1
 var frequence_of_burt : float = 0.1 #time between balls of burts
@@ -32,6 +33,8 @@ func _ready():
 	randomize()
 
 func shoot():
+	if !enable:
+		return
 	if attack_cooldown.is_stopped() and Projectile != null:
 		attack_cooldown.start()
 		
