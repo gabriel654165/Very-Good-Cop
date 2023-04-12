@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0x250onoqdno"]
+[gd_scene load_steps=9 format=3 uid="uid://d0x250onoqdno"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
 [ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_uemap"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
+[ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
@@ -18,6 +19,7 @@ weapon_list = {
 "grenade_launcher": ExtResource("3_uemap")
 }
 projectile_weapon = ExtResource("9_8nmes")
+grappling_hook = ExtResource("5_wxswb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3, 0)
@@ -34,9 +36,7 @@ shape = SubResource("RectangleShape2D_dfd5l")
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(16, 9)
 
-[node name="LaunchWeaponPosition" type="Marker2D" parent="."]
+[node name="ThrowObjectPosition" type="Marker2D" parent="."]
 position = Vector2(20, 0)
 
 [node name="BulletproofVest" type="Node2D" parent="."]
-
-[node name="GrapplingHook" type="Node2D" parent="."]

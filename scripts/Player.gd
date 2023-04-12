@@ -7,11 +7,13 @@ class_name Player
 @export var weapon_list : Dictionary
 
 @export var projectile_weapon : PackedScene
+@export var grappling_hook : PackedScene
 
 var move_direction : Vector2 = Vector2.ZERO
 var weapon_throwed : bool = false
+var grapling_deployed : bool = false
 
-@onready var launch_weapon_position = $LaunchWeaponPosition
+@onready var throw_object_position = $ThrowObjectPosition
 
 func _ready():
 	await assign_weapon(index_weapon_selected)
@@ -44,13 +46,18 @@ func _unhandled_input(event):
 		if knife != null:
 			knife.stab()
 	
-	if event.is_action_pressed("throw_weapon") && !weapon_throwed:
+	if event.is_action_pressed("throw_weapon") and !weapon_throwed:
 		if weapon_manager.weapon != null:
-			throwProjectile(projectile_weapon, launch_weapon_position.global_position, weapon_manager.weapon.side_sprite)
+			throwProjectile(projectile_weapon, throw_object_position.global_position, weapon_manager.weapon.side_sprite)
 			weapon_manager.enable = false
 			weapon_manager.weapon.sprite.visible = false
 			weapon_throwed = true
 	
+	if event.is_action_pressed("throw_grappling") and !grapling_deployed:
+		grapling_deployed = true
+		throwProjectile(grappling_hook, throw_object_position.global_position)
+	
+	#switch weapon
 	if event.is_action_pressed("test"):
 		index_weapon_selected += 1
 		if index_weapon_selected > weapon_list.size():

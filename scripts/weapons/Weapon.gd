@@ -71,8 +71,8 @@ func emit_projectile_signal(projectile_instance: Projectile, direction: Vector2)
 	
 	if projectile_instance is Grenade:
 		var landing_position : Vector2 = get_global_mouse_position()
-		GlobalSignals.emit_signal("projectile_launched_spawn", projectile_instance, fire_position.global_position, direction, landing_position)
+		GlobalSignals.emit_signal("projectile_launched_spawn", null, projectile_instance, fire_position.global_position, direction, landing_position)
 
 	if projectile_instance is Bullet:
-		GlobalSignals.emit_signal("projectile_fired_spawn", projectile_instance, fire_position.global_position, direction)
+		GlobalSignals.emit_signal("projectile_fired_spawn", null, projectile_instance, fire_position.global_position, direction)
 	
