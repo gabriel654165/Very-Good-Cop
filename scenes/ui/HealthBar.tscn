@@ -14,6 +14,7 @@ offset_bottom = 6.0
 script = ExtResource("3_thb20")
 
 [node name="HealUnder" type="TextureProgressBar" parent="."]
+layout_mode = 0
 offset_right = 47.0
 offset_bottom = 8.0
 value = 100.0
@@ -26,6 +27,7 @@ tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0.996078, 0, 0, 1)
 
 [node name="HealOver" type="TextureProgressBar" parent="."]
+layout_mode = 0
 offset_right = 47.0
 offset_bottom = 8.0
 value = 100.0
