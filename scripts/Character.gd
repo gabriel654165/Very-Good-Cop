@@ -24,9 +24,6 @@ var has_knife : bool = true
 #func _ready():
 #	GlobalSignals.connect("bullet_fired_force", Callable(self, "apply_force"))
 
-
-
-#mettre un object_owner
 func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2, sprite: Sprite2D = null):
 	var projectile_instance = projectile_weapon.instantiate()
 	var direction = throw_position - global_position
