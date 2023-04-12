@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/EnemyController.gd" id="1_64wkd"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
-[ext_resource type="PackedScene" uid="uid://dwnp4f05d5ccd" path="res://scenes/stats/health.tscn" id="3_onhbj"]
-[ext_resource type="PackedScene" uid="uid://31u4570g3q17" path="res://scenes/weapons/weapon.tscn" id="4_7rejy"]
+[ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
+[ext_resource type="PackedScene" uid="uid://buqra8rqadwu8" path="res://scenes/weapons/weapon.tscn" id="4_7rejy"]
 [ext_resource type="Script" path="res://scripts/ai states/ai_state_machine.gd" id="6_byvh6"]
 [ext_resource type="Script" path="res://scripts/ai states/patrol.gd" id="7_5fjqa"]
 [ext_resource type="Script" path="res://scripts/ai states/follow_player.gd" id="8_losig"]

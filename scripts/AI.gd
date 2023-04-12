@@ -46,4 +46,3 @@ func _on_detection_zone_body_entered(body):
 	if body.is_in_group("player"):
 		_set_state(ENEMY_STATE.SPOTED)
 		_player = body
-	pass

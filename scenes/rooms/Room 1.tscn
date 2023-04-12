@@ -22514,7 +22514,7 @@ position = Vector2(8, 104)
 [node name="Node2D7" type="Node2D" parent="RoomConfig"]
 position = Vector2(-40, -88)
 
-[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="."]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 scale = Vector2(1.01903, 1)
 navigation_polygon = SubResource("NavigationPolygon_ejre0")
 

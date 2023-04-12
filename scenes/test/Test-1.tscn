@@ -22530,6 +22530,3 @@ health_ui = ExtResource("7_ge508")
 script = ExtResource("9_cygx6")
 cursor_ui = ExtResource("10_ypmhh")
 scale_sprite = Vector2(2, 2)
-
-[node name="Room 1" parent="." instance=ExtResource("6_btg5k")]
-position = Vector2(806, -32)
