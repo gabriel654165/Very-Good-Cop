@@ -1,8 +1,7 @@
 extends AIState
+class_name Shoot
 
 var _player: Node2D = null;
-
-@export var distance: float = 70
 
 func update(_delta: float) -> void:
 	if _player != null:
@@ -10,7 +9,7 @@ func update(_delta: float) -> void:
 		var new_velocity: Vector2 = (_player.global_position - current_position).normalized()
 		state_machine._enemy.global_rotation = new_velocity.angle()
 
-		if state_machine.get_parent().global_transform.origin.distance_to(_player.global_transform.origin) > distance + 40:
+		if state_machine.get_parent().global_transform.origin.distance_to(_player.global_transform.origin) > state_machine._enemy.distance_to_shoot + 40:
 			state_machine.transition_to(state_machine.FOLLOW_PLAYER, { target = _player })
 	
 	if state_machine._weapon != null && _player != null:

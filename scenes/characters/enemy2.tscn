@@ -47,11 +47,9 @@ script = ExtResource("5_hf2va")
 
 [node name="Follow Player" type="Node" parent="StateMachine"]
 script = ExtResource("6_xa1nf")
-distance = 150.0
 
 [node name="Shoot" type="Node" parent="StateMachine"]
 script = ExtResource("7_ar7hp")
-distance = 150.0
 
 [node name="DetectionZone" type="Area2D" parent="."]
 

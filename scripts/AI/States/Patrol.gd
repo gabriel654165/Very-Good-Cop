@@ -1,4 +1,5 @@
 extends AIState
+class_name Patrol
 
 var current_point: Vector2
 var wait_timer = Timer.new()
