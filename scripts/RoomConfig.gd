@@ -1,10 +1,11 @@
 extends Node2D
 class_name RoomConfig
 
-@export var patrol_points: Array[Node2D]
+var patrol_points: Array[Vector2]
 
 func _ready():
 	patrol_points = []
-	for child in get_children():
+	var children = find_child("PatrolPoints").get_children()
+	for child in children:
 		if child is Node2D:
-			patrol_points.push_back(child)
+			patrol_points.push_back(child.global_position)
