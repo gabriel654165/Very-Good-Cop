@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_gyb4h"]
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="7_ihkik"]
 [ext_resource type="PackedScene" uid="uid://bb7av66d8pynv" path="res://scenes/ui/HealthBar.tscn" id="8_3yvu0"]
-[ext_resource type="PackedScene" uid="uid://bgde1ovth7lb2" path="res://scenes/rooms/Room 1.tscn" id="9_1bcuv"]
+[ext_resource type="PackedScene" uid="uid://dvdfosa8s7qft" path="res://scenes/rooms/Room 1.tscn" id="9_1bcuv"]
 [ext_resource type="Script" path="res://scripts/ui/CursorManager.gd" id="9_wj4ry"]
 [ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="10_sp4mb"]
 
