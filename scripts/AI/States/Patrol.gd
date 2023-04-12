@@ -35,7 +35,7 @@ func exit() -> void:
 #signals 
 func _on_detection_zone_body_entered(body: Node2D):
 	if body.is_in_group("player"):
-		state_machine.transition_to(state_machine.FOLLOW_PLAYER, { target = body })
+		state_machine.transition_to(state_machine.FOLLOW_TARGET, { target = body })
 
 func _on_wait_point_timeout():
 	get_random_target()

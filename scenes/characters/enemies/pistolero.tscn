@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://4rm7j6fyh366"]
+[gd_scene load_steps=11 format=3 uid="uid://d3t73dmbtiw31"]
 
-[ext_resource type="Script" path="res://scripts/EnemyController.gd" id="1_64wkd"]
+[ext_resource type="Script" path="res://scripts/Character/EnemyController.gd" id="1_ykq41"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
 [ext_resource type="PackedScene" uid="uid://buqra8rqadwu8" path="res://scenes/weapons/weapon.tscn" id="4_7rejy"]
@@ -16,7 +16,7 @@ size = Vector2(20, 36)
 radius = 152.161
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_64wkd")
+script = ExtResource("1_ykq41")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_oj8g8")
@@ -45,10 +45,10 @@ movement_speed = 100.0
 [node name="Patrol" type="Node" parent="StateMachine"]
 script = ExtResource("5_hf2va")
 
-[node name="Follow Player" type="Node" parent="StateMachine"]
+[node name="Follow Target" type="Node" parent="StateMachine"]
 script = ExtResource("6_xa1nf")
 
-[node name="Shoot" type="Node" parent="StateMachine"]
+[node name="Shoot To Target" type="Node" parent="StateMachine"]
 script = ExtResource("7_ar7hp")
 
 [node name="DetectionZone" type="Area2D" parent="."]

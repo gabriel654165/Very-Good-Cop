@@ -9,8 +9,8 @@ var _weapon : Weapon = null
 var _enemy : EnemyController = null
 
 const PATROL = "Patrol"
-const FOLLOW_PLAYER = "Follow Player"
-const SHOOT = "Shoot"
+const FOLLOW_TARGET = "Follow Target"
+const SHOOT = "Shoot To Target"
 
 signal state_changed(new_state: AIState)
 
