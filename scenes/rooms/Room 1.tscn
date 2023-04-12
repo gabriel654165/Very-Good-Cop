@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx1ovgqkd3anx"]
+
+[ext_resource type="Script" path="res://scripts/room.gd" id="1_5f441"]
+[ext_resource type="PackedScene" uid="uid://t8il3ncn4cm6" path="res://scenes/characters/enemy2.tscn" id="2_47iy8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_316sj"]
+vertices = PackedVector2Array(405, -165, 408, 335, -320, 322, -317, -165)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(405, -165, 408, 335, -320, 322, -317, -165)])
+
+[node name="Room 1" type="Node2D"]
+
+[node name="RoomConfig" type="Node" parent="."]
+script = ExtResource("1_5f441")
+
+[node name="Node2D" type="Node2D" parent="RoomConfig"]
+position = Vector2(-259, -96)
+
+[node name="Node2D2" type="Node2D" parent="RoomConfig"]
+position = Vector2(356, 280)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_316sj")
+
+[node name="Enemy" parent="." instance=ExtResource("2_47iy8")]
+position = Vector2(130, 110)

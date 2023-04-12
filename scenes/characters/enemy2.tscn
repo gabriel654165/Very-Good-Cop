@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3 uid="uid://t8il3ncn4cm6"]
+
+[ext_resource type="Script" path="res://scripts/enemy_controller.gd" id="1_sub00"]
+[ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
+[ext_resource type="PackedScene" uid="uid://dwnp4f05d5ccd" path="res://scenes/stats/health.tscn" id="3_onhbj"]
+[ext_resource type="PackedScene" uid="uid://31u4570g3q17" path="res://scenes/weapons/weapon.tscn" id="4_7rejy"]
+[ext_resource type="Script" path="res://scripts/ai states/ai_state_machine.gd" id="6_byvh6"]
+[ext_resource type="Script" path="res://scripts/ai states/patrol.gd" id="7_5fjqa"]
+[ext_resource type="Script" path="res://scripts/ai states/follow_player.gd" id="8_losig"]
+[ext_resource type="Script" path="res://scripts/ai states/shoot.gd" id="9_waxhm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
+size = Vector2(37, 43)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_etnqn"]
+radius = 152.161
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_sub00")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_oj8g8")
+region_enabled = true
+region_rect = Rect2(111.512, -1.1273, 53.145, 44.7663)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, 0)
+shape = SubResource("RectangleShape2D_dfd5l")
+
+[node name="Health" parent="." instance=ExtResource("3_onhbj")]
+max_health = 60
+health = 60
+
+[node name="Weapon" parent="." instance=ExtResource("4_7rejy")]
+position = Vector2(13, 9)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("6_byvh6")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("7_5fjqa")
+
+[node name="Follow Player" type="Node" parent="StateMachine"]
+script = ExtResource("8_losig")
+
+[node name="Shoot" type="Node" parent="StateMachine"]
+script = ExtResource("9_waxhm")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="DetectionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_etnqn")
