@@ -1,13 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://eryv1wojxkuy"]
+[gd_scene load_steps=11 format=3 uid="uid://4rm7j6fyh366"]
 
 [ext_resource type="Script" path="res://scripts/EnemyController.gd" id="1_64wkd"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
 [ext_resource type="PackedScene" uid="uid://buqra8rqadwu8" path="res://scenes/weapons/weapon.tscn" id="4_7rejy"]
-[ext_resource type="Script" path="res://scripts/ai states/ai_state_machine.gd" id="6_byvh6"]
-[ext_resource type="Script" path="res://scripts/ai states/patrol.gd" id="7_5fjqa"]
-[ext_resource type="Script" path="res://scripts/ai states/follow_player.gd" id="8_losig"]
-[ext_resource type="Script" path="res://scripts/ai states/shoot.gd" id="9_waxhm"]
+[ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_vv8m0"]
+[ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
+[ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_xa1nf"]
+[ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(20, 36)
@@ -39,18 +39,18 @@ max_health = 60
 health = 60
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("6_byvh6")
+script = ExtResource("4_vv8m0")
 movement_speed = 100.0
 
 [node name="Patrol" type="Node" parent="StateMachine"]
-script = ExtResource("7_5fjqa")
+script = ExtResource("5_hf2va")
 
 [node name="Follow Player" type="Node" parent="StateMachine"]
-script = ExtResource("8_losig")
+script = ExtResource("6_xa1nf")
 distance = 150.0
 
 [node name="Shoot" type="Node" parent="StateMachine"]
-script = ExtResource("9_waxhm")
+script = ExtResource("7_ar7hp")
 distance = 150.0
 
 [node name="DetectionZone" type="Area2D" parent="."]
