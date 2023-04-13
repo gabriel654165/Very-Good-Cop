@@ -3,7 +3,7 @@ extends Node
 func get_speed(delta: float, speed: float) -> float:
 	return speed * (delta * 60)
 
-#pythagore algorythm
+#pythagorean algorithm
 func get_distance(point1: Vector2, point2: Vector2) -> float:
 	return sqrt(pow((point2.x - point1.x), 2) + pow((point2.y - point1.y), 2))
 
