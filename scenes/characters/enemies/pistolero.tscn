@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://d3t73dmbtiw31"]
+
+[ext_resource type="Script" path="res://scripts/Character/EnemyController.gd" id="1_ykq41"]
+[ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
+[ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
+[ext_resource type="PackedScene" uid="uid://buqra8rqadwu8" path="res://scenes/weapons/weapon.tscn" id="4_7rejy"]
+[ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_vv8m0"]
+[ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
+[ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_xa1nf"]
+[ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
+size = Vector2(20, 36)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_etnqn"]
+radius = 152.161
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_ykq41")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_oj8g8")
+region_enabled = true
+region_rect = Rect2(111.512, -1.1273, 53.145, 44.7663)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_dfd5l")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 20.0
+avoidance_enabled = true
+max_neighbors = 1
+time_horizon = 40.0
+debug_enabled = true
+
+[node name="Health" parent="." instance=ExtResource("3_onhbj")]
+max_health = 60
+health = 60
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_vv8m0")
+movement_speed = 100.0
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("5_hf2va")
+
+[node name="Follow Target" type="Node" parent="StateMachine"]
+script = ExtResource("6_xa1nf")
+
+[node name="Shoot To Target" type="Node" parent="StateMachine"]
+script = ExtResource("7_ar7hp")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_etnqn")
+
+[node name="WeaponManager" parent="." instance=ExtResource("4_7rejy")]
+
+[node name="WeaponPosition" type="Marker2D" parent="."]
+position = Vector2(16, 9)
