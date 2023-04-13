@@ -4,7 +4,7 @@ class_name HealthUiManager
 @export var health_ui : PackedScene
 @export var offset_position : Vector2 = Vector2(-25, -40)
 
-var health_obj_list : Array[Health] = []
+var health_obj_list : Array = []
 var health_ui_list : Array[Control] = []
 
 func _ready():
@@ -12,7 +12,7 @@ func _ready():
 		return
 	
 	#aller chercher tout les Health
-	append_health_object_from_all_child_nodes(get_tree().root)
+	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Health, health_obj_list, get_tree().root)
 	
 	var index : int = 0
 	for health_obj in health_obj_list:
@@ -22,13 +22,6 @@ func _ready():
 		set_health_ui_position(health_obj.get_global_transform_with_canvas().origin, health_ui_list[index])
 		set_health_values(health_obj, health_ui_list[index])
 		index += 1
-
-func append_health_object_from_all_child_nodes(parent: Node):
-	for child in parent.get_children():
-		if child is Health:
-			health_obj_list.append(child)
-		if child.get_child_count() > 0:
-			append_health_object_from_all_child_nodes(child)
 
 func _process(delta):
 	var index : int = 0

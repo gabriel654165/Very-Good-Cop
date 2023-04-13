@@ -28,7 +28,7 @@ func _ready():
 		Input.set_custom_mouse_cursor(cursor)
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
 	cursor_animator.play("cursor_idle")
-	append_enemy_object_from_all_child_nodes(get_tree().root)
+	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Enemy, enemy_list, get_tree().root)
 
 func _process(delta):
 	cursor_sprite.global_position = get_viewport().get_mouse_position() + cursor_offset
@@ -56,13 +56,6 @@ func is_on_enemy() -> bool:
 			return true
 		index += 1
 	return false
-
-func append_enemy_object_from_all_child_nodes(parent: Node):
-	for child in parent.get_children():
-		if child is Enemy:
-			enemy_list.append(child)
-		if child.get_child_count() > 0:
-			append_enemy_object_from_all_child_nodes(child)
 
 #ui activation
 func active_mode_idle_gui():
