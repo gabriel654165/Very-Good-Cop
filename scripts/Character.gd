@@ -29,7 +29,7 @@ func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2, sp
 	var direction = throw_position - global_position
 	if projectile_instance.has_method("set_sprite") && sprite != null:
 		projectile_instance.set_sprite(sprite)
-	GlobalSignals.emit_signal("projectile_fired_spawn", self, projectile_instance, throw_position, direction)
+	GlobalSignals.projectile_fired_spawn.emit(self, projectile_instance, throw_position, direction)
 
 func stunned(time_to_sleep: float):
 	var save_speed = speed
