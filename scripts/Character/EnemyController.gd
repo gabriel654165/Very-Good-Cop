@@ -7,7 +7,10 @@ class_name EnemyController
 
 @export var distance_to_shoot: float = 70
 
+var patrol_points: Array[Vector2] = []
+
 func _ready():
+	patrol_points = room_config.patrol_points
 	weapon_manager = get_node("WeaponManager")
 	weapon_manager.weapon.global_position = weapon_position.global_position
 	fsm.init(self, weapon_manager.weapon)	
