@@ -17,10 +17,10 @@ func handle_launched_projectile_spawned(projectile_owner: Node2D, grenade: Grena
 	grenade.calulate_distance()
 
 func handle_grappling_cable_drag(projectile_owner: Node2D, hook: GrapplingHook, projectile_position: Vector2, drag_speed: int):
-	var distance : float = GlobalFunctions.get_distance(projectile_owner.global_position, projectile_position)
+	var distance = (projectile_owner.global_position - projectile_position).length()
 	var duration = distance / drag_speed
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
 	await tween.tween_property(projectile_owner, "global_position", projectile_position, duration).finished
 	hook.queue_free()
 	if projectile_owner is Player: #or Character
-		projectile_owner.grapling_deployed = false
+		projectile_owner.hook_deployed = false

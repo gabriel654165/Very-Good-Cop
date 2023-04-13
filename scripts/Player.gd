@@ -11,7 +11,7 @@ class_name Player
 
 var move_direction : Vector2 = Vector2.ZERO
 var weapon_throwed : bool = false
-var grapling_deployed : bool = false
+var hook_deployed : bool = false
 
 @onready var throw_object_position = $ThrowObjectPosition
 
@@ -53,8 +53,8 @@ func _unhandled_input(event):
 			weapon_manager.weapon.sprite.visible = false
 			weapon_throwed = true
 	
-	if event.is_action_pressed("throw_grappling") and !grapling_deployed:
-		grapling_deployed = true
+	if event.is_action_pressed("throw_grappling") and !hook_deployed:
+		hook_deployed = true
 		throwProjectile(grappling_hook, throw_object_position.global_position)
 	
 	#switch weapon
