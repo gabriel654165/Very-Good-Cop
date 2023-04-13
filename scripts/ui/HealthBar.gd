@@ -14,7 +14,7 @@ func set_max_health(value: float):
 	heal_under.max_value = value
 
 func update_health_value(amount: float):
-	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)	
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	
 	if amount < 0:
 		tween.tween_property(heal_under, "value", heal_over.value, 0.5)

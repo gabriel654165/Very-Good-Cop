@@ -11,18 +11,18 @@ func _get_health():
 	return health
 
 func _set_max_health(new_max_health):
-	GlobalSignals.emit_signal("character_max_health_changed", self, new_max_health)
+	GlobalSignals.character_max_health_changed.emit(self, new_max_health)
 	max_health = new_max_health
 	
 func _get_max_health():
 	return max_health
 
 func hit(damages):
-	GlobalSignals.emit_signal("character_health_changed", self, -damages)
+	GlobalSignals.character_health_changed.emit(self, -damages)
 	health -= damages
 
 func heal(heal_points):
-	GlobalSignals.emit_signal("character_health_changed", self, heal_points)
+	GlobalSignals.character_health_changed.emit(self, heal_points)
 	health = clamp(health + heal_points, 0, max_health)
 	#if (health + heal_points) > max_health:
 	#	health = max_health

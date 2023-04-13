@@ -13,8 +13,8 @@ var has_weapon : bool = true
 var has_knife : bool = true
 @export var knife : Knife = null
 
-var has_grappling_hook : bool = true
-@export var grappling_hook : Node2D = null
+#var has_grappling_hook : bool = true
+#@export var grappling_hook : Node2D = null
 
 #var has_bulletproof_vest : bool = true
 #var bulletproof_vest : Node2D = null
@@ -29,7 +29,7 @@ func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2, sp
 	var direction = throw_position - global_position
 	if projectile_instance.has_method("set_sprite") && sprite != null:
 		projectile_instance.set_sprite(sprite)
-	GlobalSignals.emit_signal("projectile_fired_spawn", projectile_instance, throw_position, direction)
+	GlobalSignals.projectile_fired_spawn.emit(self, projectile_instance, throw_position, direction)
 
 func stunned(time_to_sleep: float):
 	var save_speed = speed

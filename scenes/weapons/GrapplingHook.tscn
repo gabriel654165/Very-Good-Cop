@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://wjj4h3l7feef"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/GrapplingHook.gd" id="1_na4ob"]
+[ext_resource type="Texture2D" uid="uid://cb7dg5gc4lo4" path="res://assets/PNG/Default size/bulletRed1_outline.png" id="2_7x1e1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ilwy"]
+size = Vector2(14, 8)
+
+[node name="GrapplingHook" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_na4ob")
+drag_speed = 750
+speed = 10
+damages = 0
+impact_force = 0.0
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 8.0
+default_color = Color(0.129412, 0.113725, 0.113725, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_7x1e1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6ilwy")

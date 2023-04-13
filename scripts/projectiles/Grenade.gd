@@ -22,24 +22,15 @@ func _ready():
 	explosion_area_shape.get_shape().set_radius(radius_pixels_impact_area)
 
 func _physics_process(delta):
-	if direction != Vector2.ZERO:
-		#lerp de velocity : + for au debut et reduit avec le temps
-		
-		velocity = direction * GlobalFunctions.get_speed(speed, delta)
-		global_position += velocity
-		var collision = move_and_collide(velocity * delta + velocity.normalized())
-		
-		handle_colision(collision)
-		
+	_move_and_collide(delta)
 	if speed == 0 or direction == Vector2.ZERO:
 		return
-	
 	var range_safe := 5
 	var distance_traveled := lauching_position.distance_to(global_position)
 	if distance - range_safe <= distance_traveled and distance_traveled <= distance + range_safe:
 		stop()
 
-func handle_colision(collision: KinematicCollision2D):
+func handle_collision(collision: KinematicCollision2D):
 	if !collision:
 		return
 	var object = collision.get_collider()
@@ -51,8 +42,6 @@ func handle_colision(collision: KinematicCollision2D):
 	
 	if object.name == "Walls":
 		direction = velocity.normalized().bounce(collision.get_normal())
-	
-	return
 
 func stop():
 	speed = 0

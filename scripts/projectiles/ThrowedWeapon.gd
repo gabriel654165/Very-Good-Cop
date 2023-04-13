@@ -7,12 +7,7 @@ var time_stunning : float = 3
 #	print("THROWED WEAPON\n")
 
 func _physics_process(delta):
-	if direction != Vector2.ZERO:
-		var velocity = direction * GlobalFunctions.get_speed(speed, delta)
-		global_position += velocity
-		var collision = move_and_collide(velocity * delta + velocity.normalized())
-		
-		handle_collision(collision)
+	_move_and_collide(delta)
 
 func handle_collision(collision: KinematicCollision2D):
 	if !collision:
