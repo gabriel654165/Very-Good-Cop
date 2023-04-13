@@ -19,7 +19,6 @@ func get_random_target():
 	var random_pos = room_config.patrol_points.pick_random()
 	while current_point == random_pos:
 		random_pos = room_config.patrol_points.pick_random()
-		continue
 	current_point = random_pos
 	set_movement_target(current_point)
 
