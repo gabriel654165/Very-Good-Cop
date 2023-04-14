@@ -1,15 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://f0bqfroqcvke"]
+[gd_scene load_steps=10 format=3 uid="uid://f0bqfroqcvke"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_ssaqb"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_rygxq"]
+[ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_eh3m0"]
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_oup5r"]
-[ext_resource type="Script" path="res://scripts/projectiles/ProjectileManager.gd" id="5_c5vxw"]
 [ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="5_daqio"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_y8uir"]
-[ext_resource type="PackedScene" uid="uid://bb7av66d8pynv" path="res://scenes/ui/HealthBar.tscn" id="7_ge508"]
-[ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="7_k2rka"]
-[ext_resource type="Script" path="res://scripts/ui/CursorManager.gd" id="9_cygx6"]
-[ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="10_ypmhh"]
+[ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="7_urwtj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
 texture = ExtResource("2_rygxq")
@@ -22464,10 +22461,11 @@ physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_78u0y")
 
-[node name="Test-2" type="Node2D" node_paths=PackedStringArray("health_ui_manager")]
+[node name="Test-2" type="Node2D"]
 position = Vector2(564, 170)
 script = ExtResource("1_ssaqb")
-health_ui_manager = NodePath("GUI/HealthUiManager")
+gui_manager_scene = ExtResource("7_urwtj")
+projectile_manager_scene = ExtResource("3_eh3m0")
 
 [node name="Ground" type="TileMap" parent="."]
 position = Vector2(-28, 36)
@@ -22513,20 +22511,5 @@ remote_path = NodePath("../../Camera2D")
 position = Vector2(25.1981, 9.85895)
 rotation = -0.375185
 
-[node name="ProjectileManager" type="Node2D" parent="."]
-z_index = -1
-script = ExtResource("5_c5vxw")
-
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("6_y8uir")
-
-[node name="GUI" type="CanvasLayer" parent="."]
-
-[node name="HealthUiManager" type="Node2D" parent="GUI"]
-script = ExtResource("7_k2rka")
-health_ui = ExtResource("7_ge508")
-
-[node name="CursorManager" type="Node2D" parent="GUI"]
-script = ExtResource("9_cygx6")
-cursor_ui = ExtResource("10_ypmhh")
-scale_sprite = Vector2(2, 2)

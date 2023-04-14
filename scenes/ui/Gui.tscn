@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://byeald88viaao"]
+
+[ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
+[ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
+[ext_resource type="PackedScene" uid="uid://bb7av66d8pynv" path="res://scenes/ui/HealthBar.tscn" id="2_k8jrc"]
+[ext_resource type="Script" path="res://scripts/ui/CursorManager.gd" id="3_exgmc"]
+[ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="4_7jw85"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_cf1if")
+
+[node name="HealthUiManager" type="Node2D" parent="."]
+script = ExtResource("1_c8amb")
+health_ui = ExtResource("2_k8jrc")
+
+[node name="CursorManager" type="Node2D" parent="."]
+script = ExtResource("3_exgmc")
+cursor_ui = ExtResource("4_7jw85")
+scale_sprite = Vector2(2, 2)
