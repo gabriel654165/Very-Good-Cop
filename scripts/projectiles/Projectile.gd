@@ -36,6 +36,7 @@ func set_sprite(sprite: Sprite2D):
 	if self.sprite == null:
 		self.sprite = get_node("Sprite2D")
 	self.sprite.texture = sprite.texture
+	self.sprite.apply_scale(sprite.transform.get_scale())
 
 func set_direction(direction: Vector2):
 	self.direction = direction

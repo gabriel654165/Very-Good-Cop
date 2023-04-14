@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_akemc"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_gaw7k"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_favuq"]
-[ext_resource type="Texture2D" uid="uid://dk0jpus34dk5a" path="res://assets/PNG/weapon_silencer.png" id="5_j0a67"]
+[ext_resource type="Texture2D" uid="uid://40748egngkr8" path="res://assets/PNG/Weapons/MiniUzi.png" id="5_jrvft"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -93,6 +93,7 @@ bullet/bullet_speed = 4.0
 bullet/bullet_damages = 6
 bullet/bullet_size = 0
 bullet/bullet_impact_force = 2
+weapon/enable = true
 weapon/number_of_balls_by_burt = 15
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
@@ -115,7 +116,8 @@ texture = ExtResource("3_gaw7k")
 
 [node name="SideSprite2D" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("5_j0a67")
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("5_jrvft")
 
 [node name="FirePosition" type="Marker2D" parent="."]
 position = Vector2(18, 4.48227e-05)
