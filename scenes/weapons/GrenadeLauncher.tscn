@@ -87,53 +87,51 @@ _data = {
 
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_0rwaq")
+stats/special_power_unlocked = true
+stats/level = 0
+power/points_to_unlock_power = 100
+power/current_points_charge_power = 0
+power/can_use_power = false
 bullet/Projectile = ExtResource("2_g75ee")
-loader/loader_capacity = 6
 bullet/bullet_speed = 4.0
 bullet/bullet_damages = 6
 bullet/bullet_size = 0
 bullet/bullet_impact_force = 2
+loader/loader_capacity = 6
 weapon/enable = true
 weapon/number_of_balls_by_burt = 3
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.75
 weapon/recoil_force = 1.0
-objects/fire_position = NodePath("FirePosition")
-objects/fire_direction = NodePath("FireDirection")
-objects/attack_cooldown = NodePath("AttackCoolDown")
-objects/reload_cooldown = NodePath("ReloadCoolDown")
-objects/animation = NodePath("Animation")
-objects/sprite = NodePath("Sprite2D")
-objects/side_sprite = NodePath("SideSprite2D")
 
 [node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
 script = ExtResource("1_ieyus")
 parent = NodePath("..")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("3_2d1ed")
 
-[node name="SideSprite2D" type="Sprite2D" parent="."]
+[node name="SideSprite2D" type="Sprite2D" parent="Weapon"]
 visible = false
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("5_vuv2i")
 
-[node name="FirePosition" type="Marker2D" parent="."]
+[node name="FirePosition" type="Marker2D" parent="Weapon"]
 position = Vector2(18, 4.48227e-05)
 
-[node name="FireDirection" type="Marker2D" parent="."]
+[node name="FireDirection" type="Marker2D" parent="Weapon"]
 position = Vector2(20, 4.48227e-05)
 
-[node name="AttackCoolDown" type="Timer" parent="."]
+[node name="AttackCoolDown" type="Timer" parent="Weapon"]
 wait_time = 0.6
 one_shot = true
 
-[node name="ReloadCoolDown" type="Timer" parent="."]
+[node name="ReloadCoolDown" type="Timer" parent="Weapon"]
 wait_time = 1.5
 one_shot = true
 
-[node name="MuzzleFlash" type="Sprite2D" parent="."]
+[node name="MuzzleFlash" type="Sprite2D" parent="Weapon"]
 visible = false
 position = Vector2(28, 4.48227e-05)
 rotation = -1.5708
@@ -141,7 +139,7 @@ texture = ExtResource("4_ut61c")
 region_enabled = true
 region_rect = Rect2(324, 334, 20, 25)
 
-[node name="Animation" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="Weapon"]
 root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")

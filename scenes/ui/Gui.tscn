@@ -17,3 +17,9 @@ health_ui = ExtResource("2_k8jrc")
 script = ExtResource("3_exgmc")
 cursor_ui = ExtResource("4_7jw85")
 scale_sprite = Vector2(2, 2)
+
+[node name="PopUpPointsManager" type="Node2D" parent="."]
+
+[node name="TextPointsUiManager" type="Node2D" parent="."]
+
+[node name="PowerChargeBarManager" type="Node2D" parent="."]

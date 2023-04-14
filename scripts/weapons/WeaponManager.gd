@@ -1,4 +1,5 @@
 extends Node
+class_name WeaponManager
 
 #quand on unlock un new weapon
 func unlock_weapon(name: String, player: Player):

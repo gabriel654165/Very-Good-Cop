@@ -2,23 +2,13 @@ extends Character
 class_name Player
 
 @export var index_weapon_selected : int = 1
-#mettre que les weapons qu'il a 
-# ps : faire un playerEditor / EnemyEditor
 @export var weapon_list : Dictionary
 
-@export var projectile_weapon : PackedScene
-@export var grappling_hook : PackedScene
-
 var move_direction : Vector2 = Vector2.ZERO
-var weapon_throwed : bool = false
-var hook_deployed : bool = false
-
-@onready var throw_object_position = $ThrowObjectPosition
 
 func _ready():
 	await assign_weapon(index_weapon_selected)
 	assign_knife()
-	update_passive_effects()
 
 func _physics_process(delta):
 	var move_direction = Vector2(
@@ -43,19 +33,11 @@ func _process(delta):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("stab"):
-		if knife != null:
-			knife.stab()
-	
+		stab()
 	if event.is_action_pressed("throw_weapon") and !weapon_throwed:
-		if weapon_manager.weapon != null:
-			throwProjectile(projectile_weapon, throw_object_position.global_position, weapon_manager.weapon.side_sprite)
-			weapon_manager.enable = false
-			weapon_manager.weapon.sprite.visible = false
-			weapon_throwed = true
-	
-	if event.is_action_pressed("throw_grappling") and !hook_deployed:
-		hook_deployed = true
-		throwProjectile(grappling_hook, throw_object_position.global_position)
+		throw_weapon()
+	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
+		throw_grappling()
 	
 	#switch weapon
 	if event.is_action_pressed("test"):
@@ -66,11 +48,12 @@ func _unhandled_input(event):
 		unassign_weapon()
 		assign_weapon(index_weapon_selected)
 
-func update_passive_effects():
-	pass
+func handle_enemy_died(position: Vector2, points: int):
+	if weapon_manager.weapon.special_power_unlocked:
+		weapon_manager.weapon.add_charge_power_points(points)
 
 func assign_knife():
-	knife = GlobalVariables.knife_scene.instantiate()
+	knife = GlobalVariables.all_knife_scene_list[GlobalVariables.index_knife_selected].packed_scene.instantiate()
 	add_child(knife)
 	knife.global_position = global_position
 

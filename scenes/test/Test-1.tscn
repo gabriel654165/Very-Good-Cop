@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_rygxq"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_eh3m0"]
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_oup5r"]
-[ext_resource type="PackedScene" uid="uid://4sxcn44g4tum" path="res://scenes/characters/enemy.tscn" id="5_daqio"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_y8uir"]
+[ext_resource type="PackedScene" uid="uid://dvdfosa8s7qft" path="res://scenes/rooms/Room 1.tscn" id="7_fxqre"]
 [ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="7_urwtj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
@@ -22461,11 +22461,12 @@ physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_78u0y")
 
-[node name="Test-2" type="Node2D"]
+[node name="Test-2" type="Node2D" node_paths=PackedStringArray("player")]
 position = Vector2(564, 170)
 script = ExtResource("1_ssaqb")
 gui_manager_scene = ExtResource("7_urwtj")
 projectile_manager_scene = ExtResource("3_eh3m0")
+player = NodePath("Player")
 
 [node name="Ground" type="TileMap" parent="."]
 position = Vector2(-28, 36)
@@ -22499,7 +22500,6 @@ layer_0/tile_data = PackedInt32Array(-196625, 2359298, 22, -327697, 2359298, 20,
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-316, -287)
 position_smoothing_enabled = true
-position_smoothing_speed = 20.0
 
 [node name="Player" parent="." instance=ExtResource("3_oup5r")]
 position = Vector2(-316, -287)
@@ -22507,9 +22507,7 @@ position = Vector2(-316, -287)
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Enemy" parent="." instance=ExtResource("5_daqio")]
-position = Vector2(25.1981, 9.85895)
-rotation = -0.375185
-
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("6_y8uir")
+
+[node name="Room 1" parent="." instance=ExtResource("7_fxqre")]

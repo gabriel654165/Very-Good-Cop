@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3t73dmbtiw31"]
+[gd_scene load_steps=11 format=3 uid="uid://cewhfxsma7527"]
 
-[ext_resource type="Script" path="res://scripts/Character/EnemyController.gd" id="1_ykq41"]
+[ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
 [ext_resource type="PackedScene" uid="uid://buqra8rqadwu8" path="res://scenes/weapons/weapon.tscn" id="4_7rejy"]
@@ -16,7 +16,7 @@ size = Vector2(20, 36)
 radius = 152.161
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_ykq41")
+script = ExtResource("1_ef1gd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_oj8g8")
@@ -60,3 +60,6 @@ shape = SubResource("CircleShape2D_etnqn")
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(16, 9)
+
+[node name="ThrowObjectPosition" type="Marker2D" parent="."]
+position = Vector2(20, 0)

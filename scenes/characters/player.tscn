@@ -18,8 +18,8 @@ weapon_list = {
 "glock": ExtResource("2_xaulr"),
 "grenade_launcher": ExtResource("3_uemap")
 }
-projectile_weapon = ExtResource("9_8nmes")
-grappling_hook = ExtResource("5_wxswb")
+grappling_hook_scene = ExtResource("5_wxswb")
+projectile_weapon_scene = ExtResource("9_8nmes")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3, 0)

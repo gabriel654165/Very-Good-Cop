@@ -3,26 +3,40 @@ class_name Character
 
 @onready var health = $Health as Health
 @onready var weapon_position = $WeaponPosition
+@onready var throw_object_position = $ThrowObjectPosition
 
+#movement
 @export var speed : float = 6
 var force : Vector2 = Vector2.ZERO
 
-var has_weapon : bool = true
+#if player, don't show / private
 @export var weapon_manager : Node2D = null
-
-var has_knife : bool = true
 @export var knife : Knife = null
 
-#var has_grappling_hook : bool = true
-#@export var grappling_hook : Node2D = null
+#if enemy don't show
+@export var grappling_hook_scene : PackedScene
+@export var projectile_weapon_scene : PackedScene
 
 #var has_bulletproof_vest : bool = true
 #var bulletproof_vest : Node2D = null
 
-#@export var passive_effect_list : Dictionary
+var weapon_throwed : bool = false
+var hook_deployed : bool = false
 
-#func _ready():
-#	GlobalSignals.connect("bullet_fired_force", Callable(self, "apply_force"))
+func stab():
+	if knife != null:
+		knife.stab()
+
+func throw_grappling():
+	hook_deployed = true
+	throwProjectile(grappling_hook_scene, throw_object_position.global_position)
+
+func throw_weapon():
+	if weapon_manager.weapon != null:
+		throwProjectile(projectile_weapon_scene, throw_object_position.global_position, weapon_manager.weapon.side_sprite)
+		weapon_manager.enable = false
+		weapon_manager.weapon.sprite.visible = false
+		weapon_throwed = true
 
 func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2, sprite: Sprite2D = null):
 	var projectile_instance = projectile_weapon.instantiate()
