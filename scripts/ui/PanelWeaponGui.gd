@@ -17,5 +17,8 @@ func set_level_value(level: String):
 func set_weapon_sprite(sprite: Sprite2D):
 	weapon_texture.texture = sprite.texture
 
+func reset_current_power_charger():
+	current_power_charger = 0
+
 func add_charge_power_bar(value: float):
 	current_power_charger += value
