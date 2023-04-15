@@ -25,14 +25,6 @@ var precision_angle : Vector2 = Vector2(-1, 1)
 var precision : float = 0
 var recoil_force : float = 2
 
-#var fire_position : NodePath
-#var fire_direction : NodePath
-#var attack_cooldown : NodePath
-#var reload_cooldown : NodePath
-#var animation : NodePath
-#var sprite : NodePath
-#var side_sprite : NodePath
-
 func _ready():
 	weapon = self.get_child(0) as Weapon
 	if weapon == null:
@@ -76,15 +68,6 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.precision_angle = self.precision_angle
 	weapon.precision = self.precision
 	weapon.recoil_force = self.recoil_force
-	
-	#if update_nodes:
-	#	weapon.fire_position = self.get_node(self.fire_position) as Marker2D
-	#	weapon.fire_direction = self.get_node(self.fire_direction) as Marker2D
-	#	weapon.attack_cooldown = self.get_node(self.attack_cooldown) as Timer
-	#	weapon.reload_cooldown = self.get_node(self.reload_cooldown) as Timer
-	#	weapon.animation = self.get_node(self.animation) as AnimationPlayer
-	#	weapon.sprite = self.get_node(self.sprite) as Sprite2D
-	#	weapon.side_sprite = self.get_node(self.side_sprite) as Sprite2D
 
 func _get(property):
 	if property == 'stats/special_power_unlocked':
@@ -124,21 +107,6 @@ func _get(property):
 		return precision
 	if property == 'weapon/recoil_force':
 		return recoil_force
-	
-	#if property == 'objects/fire_position':
-	#	return fire_position
-	#if property == 'objects/fire_direction':
-	#	return fire_direction
-	#if property == 'objects/attack_cooldown':
-	#	return attack_cooldown
-	#if property == 'objects/reload_cooldown':
-	#	return reload_cooldown
-	#if property == 'objects/animation':
-	#	return animation
-	#if property == 'objects/sprite':
-	#	return sprite
-	#if property == 'objects/side_sprite':
-	#	return side_sprite
 
 func _set(property, value) -> bool :
 	if property == 'stats/special_power_unlocked':
@@ -179,21 +147,6 @@ func _set(property, value) -> bool :
 		precision = value
 	if property == 'weapon/recoil_force':
 		recoil_force = value
-	
-	#if property == 'objects/fire_position':
-	#	fire_position = value
-	#if property == 'objects/fire_direction':
-	#	fire_direction = value
-	#if property == 'objects/attack_cooldown':
-	#	attack_cooldown = value
-	#if property == 'objects/reload_cooldown':
-	#	reload_cooldown = value
-	#if property == 'objects/animation':
-	#	animation = value
-	#if property == 'objects/sprite':
-	#	sprite = value
-	#if property == 'objects/side_sprite':
-	#	side_sprite = value
 	return true
 
 func _get_property_list() -> Array:
@@ -251,48 +204,5 @@ func _get_property_list() -> Array:
 		'name': 'weapon/recoil_force',
 		'type': TYPE_FLOAT,
 	},
-	#,{
-	#	name="objects/fire_position",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/fire_direction",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/attack_cooldown",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/reload_cooldown",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/animation",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/sprite",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/side_sprite",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},
 	])
 	return props

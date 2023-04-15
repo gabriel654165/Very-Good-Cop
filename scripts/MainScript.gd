@@ -25,7 +25,6 @@ func _ready():
 	GlobalSignals.connect("enemy_died", Callable(gui_manager.panel_points_manager, "handle_enemy_died"))
 	GlobalSignals.connect("enemy_died", Callable(gui_manager.panel_kills_manager, "handle_enemy_died"))
 	
-	#jsp prcq c'est pas très rp...
 	GlobalSignals.connect("enemy_died", Callable(gui_manager.weapon_panel_manager, "handle_enemy_died"))
 
 func instanciate_objects_managers():

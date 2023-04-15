@@ -1,7 +1,5 @@
 extends Node
 
-#var current_weapon_index = 1
-
 #Levels : not unlocked = 0
 var glock_level : int = 1
 var shotgun_level : int = 0

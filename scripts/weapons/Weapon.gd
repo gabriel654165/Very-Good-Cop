@@ -34,14 +34,6 @@ var recoil_force : float = 2 # the more it's close 0 the more it's precise
 @onready var sprite = $Sprite2D
 @onready var side_sprite = $SideSprite2D
 
-#var fire_position : Marker2D
-#var fire_direction : Marker2D
-#var attack_cooldown : Timer
-#var reload_cooldown : Timer
-#var animation : AnimationPlayer
-#var sprite : Sprite2D
-#var side_sprite : Sprite2D
-
 func _ready():
 	if get_parent() != null:
 		shooter_actor = get_parent().get_parent()
@@ -64,11 +56,11 @@ func shoot():
 			
 			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
 			emit_signals(shooter_actor, projectile_instance, direction)
-			recoil_parent(direction)
+			recoil_shooter(direction)
 			
 			animation.play("muzzle_flash")
 
-func recoil_parent(direction: Vector2):
+func recoil_shooter(direction: Vector2):
 	if shooter_actor == null:
 		return
 	if shooter_actor is Character:

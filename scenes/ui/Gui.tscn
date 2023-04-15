@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://mxvebc64vjjb"]
+[gd_scene load_steps=15 format=3 uid="uid://0iftlr6s8oyc"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -8,11 +8,11 @@
 [ext_resource type="Script" path="res://scripts/ui/PopUpPointsManager.gd" id="6_dpwpx"]
 [ext_resource type="PackedScene" uid="uid://d0yi638vmgm81" path="res://scenes/ui/PopUpText.tscn" id="7_bnyiq"]
 [ext_resource type="Script" path="res://scripts/ui/PopUpHealthManager.gd" id="8_armf7"]
-[ext_resource type="Script" path="res://scripts/ui/PowerChargeBarManager.gd" id="8_v6id5"]
 [ext_resource type="Script" path="res://scripts/ui/TextPointsManager.gd" id="9_dkbyk"]
 [ext_resource type="PackedScene" uid="uid://c3enp3a1fg70f" path="res://scenes/ui/PanelGui.tscn" id="10_0fs0q"]
 [ext_resource type="Script" path="res://scripts/ui/PanelKillsManager.gd" id="11_f3jk1"]
 [ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
+[ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
 
 [node name="GUI" type="CanvasLayer"]
@@ -62,7 +62,7 @@ title_panel = "Time"
 panels_container = NodePath("../PanelsContainer/HBoxUpperContainer")
 
 [node name="WeaponPanelManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
-script = ExtResource("8_v6id5")
+script = ExtResource("13_xqfji")
 weapon_panel_gui = ExtResource("14_nrxer")
 panels_container = NodePath("../PanelsContainer/HBoxBottomContainer")
 
