@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://byeald88viaao"]
+[gd_scene load_steps=12 format=3 uid="uid://byeald88viaao"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/ui/TextPointsUiManager.gd" id="7_im6if"]
 [ext_resource type="Script" path="res://scripts/ui/PopUpHealthManager.gd" id="8_armf7"]
 [ext_resource type="Script" path="res://scripts/ui/PowerChargeBarManager.gd" id="8_v6id5"]
+[ext_resource type="PackedScene" uid="uid://tqnhccd6jneo" path="res://scenes/ui/PanelGui.tscn" id="10_0fs0q"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_cf1if")
@@ -19,15 +20,10 @@ script = ExtResource("1_c8amb")
 health_ui = ExtResource("2_k8jrc")
 
 [node name="CursorManager" type="Node2D" parent="."]
+position = Vector2(-540, 154)
 script = ExtResource("3_exgmc")
 cursor_ui = ExtResource("4_7jw85")
 scale_sprite = Vector2(2, 2)
-
-[node name="PopUpPointsManager" type="Node2D" parent="."]
-script = ExtResource("6_dpwpx")
-pop_up_text_scene = ExtResource("7_bnyiq")
-text_scale = Vector2(1.5, 1.3)
-velocity_scale = Vector2(1.5, 1.5)
 
 [node name="PopUpHealthManager" type="Node2D" parent="."]
 script = ExtResource("8_armf7")
@@ -38,8 +34,18 @@ text_scale = Vector2(1.5, 1.3)
 velocity_mov = Vector2(0, 20)
 velocity_scale = Vector2(-1.2, -1.2)
 
+[node name="PopUpPointsManager" type="Node2D" parent="."]
+script = ExtResource("6_dpwpx")
+pop_up_text_scene = ExtResource("7_bnyiq")
+text_scale = Vector2(1.5, 1.3)
+velocity_scale = Vector2(1.5, 1.5)
+
 [node name="TextPointsUiManager" type="Node2D" parent="."]
 script = ExtResource("7_im6if")
+panel_gui = ExtResource("10_0fs0q")
+title_panel = "points"
 
 [node name="PowerChargeBarManager" type="Node2D" parent="."]
 script = ExtResource("8_v6id5")
+
+[node name="ColorRect" parent="." instance=ExtResource("10_0fs0q")]

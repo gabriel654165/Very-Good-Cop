@@ -10,6 +10,8 @@ var projectile_manager : ProjectileManager
 func _ready():
 	instanciate_objects_managers()
 	
+	GlobalSignals.connect("player_fired", Callable(gui_manager.cursor_manager, "active_mode_hit_marker_gui"))
+	
 	GlobalSignals.connect("projectile_fired_spawn", Callable(projectile_manager, "handle_fired_projectile_spawned"))
 	GlobalSignals.connect("projectile_launched_spawn", Callable(projectile_manager, "handle_launched_projectile_spawned"))
 	GlobalSignals.connect("grappling_cable_drag", Callable(projectile_manager, "handle_grappling_cable_drag"))

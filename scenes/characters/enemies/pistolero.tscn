@@ -58,6 +58,9 @@ shape = SubResource("CircleShape2D_etnqn")
 
 [node name="WeaponManager" parent="." instance=ExtResource("4_7rejy")]
 stats/special_power_unlocked = false
+bullet/bullet_speed = 4
+bullet/bullet_size = 0.0
+bullet/bullet_impact_force = 2.0
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(16, 9)

@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://tqnhccd6jneo"]
+
+[ext_resource type="Script" path="res://scripts/ui/PanelGui.gd" id="1_cfi1b"]
+
+[node name="ColorRect" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_cfi1b")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="LabelTitle" type="Label" parent="PanelContainer/VSplitContainer"]
+layout_mode = 2
+text = "Points"
+horizontal_alignment = 1
+
+[node name="LabelValue" type="Label" parent="PanelContainer/VSplitContainer"]
+layout_mode = 2
+text = "1000 PTS"
+horizontal_alignment = 1

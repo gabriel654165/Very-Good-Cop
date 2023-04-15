@@ -1,8 +1,7 @@
 extends Node2D
 class_name Weapon
 
-@export var parent : Node
-
+@export var shooter_actor : Node
 
 var special_power_unlocked : bool = false
 var level : int = 0
@@ -44,6 +43,8 @@ var recoil_force : float = 2 # the more it's close 0 the more it's precise
 #var side_sprite : Sprite2D
 
 func _ready():
+	if get_parent() != null:
+		shooter_actor = get_parent().get_parent()
 	randomize()
 
 func shoot():
@@ -62,16 +63,16 @@ func shoot():
 			var direction = fire_direction.global_position - fire_position.global_position
 			
 			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
-			emit_projectile_signal(projectile_instance, direction)
+			emit_signals(shooter_actor, projectile_instance, direction)
 			recoil_parent(direction)
 			
 			animation.play("muzzle_flash")
 
 func recoil_parent(direction: Vector2):
-	if get_parent() == null:
+	if shooter_actor == null:
 		return
-	if get_parent() is Character:
-		get_parent().apply_force(get_parent(), -direction, recoil_force)
+	if shooter_actor is Character:
+		shooter_actor.apply_force(shooter_actor, -direction, recoil_force)
 
 #return a random float between x and y
 func _random_range(angle: Vector2) -> float:
@@ -83,7 +84,9 @@ func _random_range(angle: Vector2) -> float:
 	range *= precision
 	return range
 
-func emit_projectile_signal(projectile_instance: Projectile, direction: Vector2):
+func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vector2):
+	if actor is Player:
+		GlobalSignals.player_fired.emit()
 	if projectile_instance is Grenade:
 		var landing_position : Vector2 = get_global_mouse_position()
 		GlobalSignals.projectile_launched_spawn.emit(null, projectile_instance, fire_position.global_position, direction, landing_position)
