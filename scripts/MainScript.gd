@@ -19,12 +19,14 @@ func _ready():
 	GlobalSignals.connect("character_health_changed", Callable(gui_manager.health_ui_manager, "handle_character_health_changed"))
 	GlobalSignals.connect("character_health_changed", Callable(gui_manager.pop_up_health_manager, "handle_character_health_changed"))
 	GlobalSignals.connect("character_max_health_changed", Callable(gui_manager.health_ui_manager, "handle_character_max_health_changed"))
-	#GlobalSignals.connect("character_max_health_changed", Callable(gui_manager.pop_up_health_manager, "handle_character_max_health_changed"))
 	
 	GlobalSignals.connect("enemy_died", Callable(player, "handle_enemy_died"))
 	GlobalSignals.connect("enemy_died", Callable(gui_manager.pop_up_points_manager, "handle_enemy_died"))
-	#GlobalSignals.connect("enemy_died", Callable(gui_manager.text_points_ui_manager, "handle_enemy_died"))
-	#GlobalSignals.connect("enemy_died", Callable(gui_manager.power_charge_bar_ui_manager, "handle_enemy_died"))
+	GlobalSignals.connect("enemy_died", Callable(gui_manager.panel_points_manager, "handle_enemy_died"))
+	GlobalSignals.connect("enemy_died", Callable(gui_manager.panel_kills_manager, "handle_enemy_died"))
+	
+	#jsp prcq c'est pas très rp...
+	GlobalSignals.connect("enemy_died", Callable(gui_manager.power_charge_bar_manager, "handle_enemy_died"))
 
 func instanciate_objects_managers():
 	gui_manager = gui_manager_scene.instantiate()

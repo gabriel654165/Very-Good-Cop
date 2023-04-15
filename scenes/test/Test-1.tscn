@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_oup5r"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_y8uir"]
 [ext_resource type="PackedScene" uid="uid://dvdfosa8s7qft" path="res://scenes/rooms/Room 1.tscn" id="7_fxqre"]
-[ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="7_urwtj"]
+[ext_resource type="PackedScene" uid="uid://mxvebc64vjjb" path="res://scenes/ui/Gui.tscn" id="7_urwtj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
 texture = ExtResource("2_rygxq")

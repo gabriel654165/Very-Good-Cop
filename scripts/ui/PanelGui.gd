@@ -1,11 +1,11 @@
-extends ColorRect
+extends PanelContainer
 class_name PanelGui
 
-@onready var title_panel = $PanelContainer/VSplitContainer/LabelTitle
-@onready var value_panel = $PanelContainer/VSplitContainer/LabelValue
+@export var title_label : Label
+@export var value_label : Label
 
 func set_title(title: String):
-	title_panel.text = title
+	title_label.text = title
 
 func set_value(value: String):
-	value_panel.text = value
+	value_label.text = value
