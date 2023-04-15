@@ -13,7 +13,7 @@ var sniper_level : int = 0
 
 var knife_level : int = 1
 
-var grappling_hook_level : int = 0
+var grappling_hook_level : int = 1
 var bulletproof_vest_level : int = 0
 
 var index_weapon_selected : int = 0

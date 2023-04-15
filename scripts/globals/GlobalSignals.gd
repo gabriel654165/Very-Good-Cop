@@ -7,4 +7,4 @@ signal grappling_cable_drag(projectile_owner: Node2D, hook: GrapplingHook, proje
 signal character_health_changed(health: Health, value: float)
 signal character_max_health_changed(health: Health, value: float)
 
-signal enemy_died(position: Vector2, points: int)
+signal enemy_died(enemy: Enemy, points: int)

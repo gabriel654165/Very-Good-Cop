@@ -3,7 +3,6 @@ class_name Weapon
 
 @export var parent : Node
 
-var Projectile : PackedScene
 
 var special_power_unlocked : bool = false
 var level : int = 0
@@ -12,11 +11,13 @@ var points_to_unlock_power : int = 200
 var current_points_charge_power : int = 0
 var can_use_power : bool = false
 
-var loader_capacity : int = 6
-var bullet_speed : float = 4
+var projectile : PackedScene
+var bullet_speed : int = 4
 var bullet_damages : int = 6
-var bullet_size : int = 0.5
-var bullet_impact_force : int = 2
+var bullet_size : float = 0.5
+var bullet_impact_force : float = 2
+
+var loader_capacity : int = 6
 
 var enable : bool = true
 #changer ces deux pareamètre par fréquence & amplitude (3 balles (fréqeunce) en 1s(amplitude))
@@ -55,7 +56,9 @@ func shoot():
 			if n != 0:
 				await get_tree().create_timer(frequence_of_burt).timeout
 			
-			var projectile_instance : Projectile = Projectile.instantiate()
+			#right method ?
+			#set_projectile_scene_variables()
+			var projectile_instance : Projectile = projectile.instantiate()
 			var direction = fire_direction.global_position - fire_position.global_position
 			
 			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
@@ -81,17 +84,21 @@ func _random_range(angle: Vector2) -> float:
 	return range
 
 func emit_projectile_signal(projectile_instance: Projectile, direction: Vector2):
-	
 	if projectile_instance is Grenade:
 		var landing_position : Vector2 = get_global_mouse_position()
 		GlobalSignals.projectile_launched_spawn.emit(null, projectile_instance, fire_position.global_position, direction, landing_position)
-
 	if projectile_instance is Bullet:
 		GlobalSignals.projectile_fired_spawn.emit(null, projectile_instance, fire_position.global_position, direction)
+
+func set_projectile_scene_variables():
+	projectile.set("speed", bullet_speed)
+	projectile.set("damages", bullet_damages)
+	projectile.set("size", bullet_size)
+	projectile.set("impact_force", bullet_impact_force)
 
 func add_charge_power_points(points: int):
 	current_points_charge_power += points
 	if current_points_charge_power >= points_to_unlock_power:
 		can_use_power = true
-		print("oki")
+		#print("Can use special Power !")
 

@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0yi638vmgm81"]
+
+[ext_resource type="FontFile" uid="uid://jse8ofn8kqq3" path="res://assets/Fonts/HotlineMiami/FIGHTT3_.ttf" id="1_0lph8"]
+[ext_resource type="Script" path="res://scripts/ui/PopUpText.gd" id="1_jg0cx"]
+
+[node name="PopUpText" type="CanvasGroup"]
+script = ExtResource("1_jg0cx")
+
+[node name="TextUnder" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -10.0
+offset_right = 23.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0, 0, 0.521569, 1)
+theme_override_fonts/font = ExtResource("1_0lph8")
+text = "ZEBI3000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextUpper" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -12.0
+offset_right = 23.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0.827451, 0.0313726, 0.0980392, 1)
+theme_override_fonts/font = ExtResource("1_0lph8")
+text = "ZEBI3000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

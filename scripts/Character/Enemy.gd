@@ -16,6 +16,8 @@ func _ready():
 func handle_hit(damages):
 	health.hit(damages)
 	if health.is_dead():
-		GlobalSignals.enemy_died.emit(global_position, point_value)
+		GlobalSignals.enemy_died.emit(self, point_value)
 		#display le sprite au sol
-		queue_free()
+		#qu'il arête de bouger etc
+
+		#queue_free()

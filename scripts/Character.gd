@@ -6,6 +6,7 @@ class_name Character
 @onready var throw_object_position = $ThrowObjectPosition
 
 #movement
+@export var action_disabled : bool = false
 @export var speed : float = 6
 var force : Vector2 = Vector2.ZERO
 
@@ -54,3 +55,5 @@ func stunned(time_to_sleep: float):
 func apply_force(character: Character, direction: Vector2, force: float):
 	character.force = direction * force
 
+func set_able_actions(state: bool):
+	action_disabled = state

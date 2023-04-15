@@ -10,11 +10,11 @@ var points_to_unlock_power : int = 200
 var current_points_charge_power : int = 0
 var can_use_power : bool = false
 
-var Projectile : PackedScene
-var bullet_speed : float = 4
+var projectile : PackedScene
+var bullet_speed : int = 4
 var bullet_damages : int = 6
-var bullet_size : int = 0.5
-var bullet_impact_force : int = 2
+var bullet_size : float = 0.5
+var bullet_impact_force : float = 2
 
 var loader_capacity : int = 6
 
@@ -62,7 +62,7 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.can_use_power = self.can_use_power
 	
 	if upadte_projectile:
-		weapon.Projectile = self.Projectile
+		weapon.projectile = self.projectile
 	weapon.bullet_speed = self.bullet_speed
 	weapon.bullet_damages = self.bullet_damages
 	weapon.bullet_size = self.bullet_size
@@ -98,8 +98,8 @@ func _get(property):
 	if property == 'power/can_use_power':
 		return can_use_power
 	
-	if property == 'bullet/Projectile':
-		return Projectile
+	if property == 'bullet/projectile':
+		return projectile
 	if property == 'bullet/bullet_speed':
 		return bullet_speed
 	if property == 'bullet/bullet_damages':
@@ -153,8 +153,8 @@ func _set(property, value) -> bool :
 	if property == 'power/can_use_power':
 		can_use_power = value
 	
-	if property == 'bullet/Projectile':
-		Projectile = value
+	if property == 'bullet/projectile':
+		projectile = value
 	if property == 'bullet/bullet_speed':
 		bullet_speed = value
 	if property == 'bullet/bullet_damages':
@@ -215,20 +215,20 @@ func _get_property_list() -> Array:
 		'name': 'power/can_use_power',
 		'type': TYPE_BOOL,
 	},{
-		'name': 'bullet/Projectile',
+		'name': 'bullet/projectile',
 		'type': TYPE_OBJECT,
 	},{
 		'name': 'bullet/bullet_speed',
-		'type': TYPE_FLOAT,
+		'type': TYPE_INT,
 	},{
 		'name': 'bullet/bullet_damages',
 		'type': TYPE_INT,
 	},{
 		'name': 'bullet/bullet_size',
-		'type': TYPE_INT,
+		'type': TYPE_FLOAT,
 	},{
 		'name': 'bullet/bullet_impact_force',
-		'type': TYPE_INT,
+		'type': TYPE_FLOAT,
 	},{
 		'name': 'loader/loader_capacity',
 		'type': TYPE_INT,
