@@ -87,16 +87,17 @@ _data = {
 
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_aaa8n")
-stats/special_power_unlocked = false
-stats/level = 0
+properties/weapon_name = "mini_uzi"
+properties/special_power_unlocked = false
+properties/level = 0
 power/points_to_unlock_power = 200
 power/current_points_charge_power = 0
 power/can_use_power = false
 bullet/projectile = ExtResource("2_akemc")
-bullet/bullet_speed = 4.0
+bullet/bullet_speed = 4
 bullet/bullet_damages = 6
-bullet/bullet_size = 0
-bullet/bullet_impact_force = 2
+bullet/bullet_size = 0.0
+bullet/bullet_impact_force = 2.0
 loader/loader_capacity = 15
 weapon/enable = true
 weapon/number_of_balls_by_burt = 15
@@ -105,9 +106,8 @@ weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.35
 weapon/recoil_force = 0.5
 
-[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
+[node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_jqkmm")
-parent = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("3_gaw7k")

@@ -3,6 +3,7 @@ class_name Weapon
 
 @export var shooter_actor : Node
 
+var weapon_name : String = ""
 var special_power_unlocked : bool = false
 var level : int = 0
 

@@ -28,12 +28,8 @@ func _unhandled_input(event):
 
 #call when weapon is switched
 func set_weapon_panel_variables():
-	
-	#ne pas prendre de la save...
-	panel_weapon.set_weapon_name(GlobalVariables.all_weapon_scene_list[GlobalVariables.index_weapon_selected].name)
-	panel_weapon.set_level_value("lvl" + str(1))
-	#!ne pas prendre de la save...
-	
+	panel_weapon.set_weapon_name(player.weapon_manager.weapon.weapon_name)
+	panel_weapon.set_level_value("lvl-" + str(player.weapon_manager.weapon.level))
 	panel_weapon.set_weapon_sprite(player.weapon_manager.weapon.side_sprite)
 	panel_weapon.reset_current_power_charger()
 

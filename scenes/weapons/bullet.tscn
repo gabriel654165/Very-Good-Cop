@@ -13,7 +13,7 @@ scale = Vector2(0.359327, 0.360007)
 collision_layer = 2
 script = ExtResource("1_2jtls")
 speed = 10
-damages = 6
+damages = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_oxpfh")

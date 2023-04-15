@@ -3,6 +3,7 @@ extends Node2D
 
 var weapon : Node
 
+var weapon_name : String
 var special_power_unlocked : bool = false
 var level : int = 0
 
@@ -46,6 +47,7 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	if weapon == null:
 		weapon = new_weapon
 	
+	weapon.weapon_name = self.weapon_name
 	weapon.special_power_unlocked = self.special_power_unlocked
 	weapon.level = self.level
 	
@@ -70,9 +72,11 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.recoil_force = self.recoil_force
 
 func _get(property):
-	if property == 'stats/special_power_unlocked':
+	if property == 'properties/weapon_name':
+		return weapon_name
+	if property == 'properties/special_power_unlocked':
 		return special_power_unlocked
-	if property == 'stats/level':
+	if property == 'properties/level':
 		return level
 	if property == 'power/points_to_unlock_power':
 		return points_to_unlock_power
@@ -109,9 +113,11 @@ func _get(property):
 		return recoil_force
 
 func _set(property, value) -> bool :
-	if property == 'stats/special_power_unlocked':
+	if property == 'properties/weapon_name':
+		weapon_name = value
+	if property == 'properties/special_power_unlocked':
 		special_power_unlocked = value
-	if property == 'stats/level':
+	if property == 'properties/level':
 		level = value
 	
 	if property == 'power/points_to_unlock_power':
@@ -153,10 +159,13 @@ func _get_property_list() -> Array:
 	var props = []
 	props.append_array(
 	[{
-		'name': 'stats/special_power_unlocked',
+		'name': 'properties/weapon_name',
+		'type': TYPE_STRING,
+	},{
+		'name': 'properties/special_power_unlocked',
 		'type': TYPE_BOOL,
 	},{
-		'name': 'stats/level',
+		'name': 'properties/level',
 		'type': TYPE_INT,
 	},{
 		'name': 'power/points_to_unlock_power',
