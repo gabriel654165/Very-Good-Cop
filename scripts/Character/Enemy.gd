@@ -19,5 +19,4 @@ func handle_hit(damages):
 		GlobalSignals.enemy_died.emit(self, point_value)
 		#display le sprite au sol
 		#qu'il arête de bouger etc
-
 		#queue_free()

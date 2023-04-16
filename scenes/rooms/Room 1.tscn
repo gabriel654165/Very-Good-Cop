@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dvdfosa8s7qft"]
 
 [ext_resource type="Script" path="res://scripts/RoomConfig.gd" id="1_rsw7k"]
-[ext_resource type="PackedScene" uid="uid://d3t73dmbtiw31" path="res://scenes/characters/enemies/pistolero.tscn" id="2_47iy8"]
+[ext_resource type="PackedScene" uid="uid://cewhfxsma7527" path="res://scenes/characters/enemies/pistolero.tscn" id="2_47iy8"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="3_rtj40"]
 [ext_resource type="Texture2D" uid="uid://ceqe77yn5pg4a" path="res://assets/Tilesheet/tilesheet_complete_2X.png" id="4_3678i"]
 
