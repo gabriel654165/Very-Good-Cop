@@ -40,7 +40,9 @@ velocity_scale = Vector2(-1.2, -1.2)
 [node name="PopUpPointsManager" type="Node2D" parent="."]
 script = ExtResource("6_dpwpx")
 pop_up_text_scene = ExtResource("7_bnyiq")
+life_time = 0.5
 text_scale = Vector2(1.5, 1.3)
+velocity_mov = Vector2(0, -70)
 velocity_scale = Vector2(1.5, 1.5)
 
 [node name="PanelPointsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
