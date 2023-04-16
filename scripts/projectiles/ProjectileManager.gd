@@ -1,4 +1,5 @@
 extends Node2D
+class_name ProjectileManager
 
 #signal callback
 func handle_fired_projectile_spawned(projectile_owner: Node2D, projectile: Projectile, position: Vector2, direction: Vector2):

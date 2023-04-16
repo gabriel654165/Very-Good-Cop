@@ -6,7 +6,7 @@ class_name AIStateMachine
 @export var movement_speed: float = 50.0
 
 var _weapon : Weapon = null
-var _enemy : EnemyController = null
+var _enemy : Enemy = null
 
 const PATROL = "Patrol"
 const FOLLOW_TARGET = "Follow Target"
@@ -14,7 +14,7 @@ const SHOOT = "Shoot To Target"
 
 signal state_changed(new_state: AIState)
 
-func init(enemy: EnemyController, new_weapon: Weapon):
+func init(enemy: Enemy, new_weapon: Weapon):
 	_enemy = enemy
 	_weapon = new_weapon
 	

@@ -87,25 +87,23 @@ _data = {
 
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_1tgdp")
+stats/special_power_unlocked = true
+stats/level = 0
+power/points_to_unlock_power = 100
+power/current_points_charge_power = 0
+power/can_use_power = false
 bullet/Projectile = ExtResource("2_0xsim")
-loader/loader_capacity = 6
 bullet/bullet_speed = 4.0
 bullet/bullet_damages = 6
 bullet/bullet_size = 0
 bullet/bullet_impact_force = 2
+loader/loader_capacity = 6
 weapon/enable = true
 weapon/number_of_balls_by_burt = 1
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.0
 weapon/recoil_force = 2.0
-objects/fire_position = NodePath("Weapon/FirePosition")
-objects/fire_direction = NodePath("Weapon/FireDirection")
-objects/attack_cooldown = NodePath("Weapon/AttackCoolDown")
-objects/reload_cooldown = NodePath("Weapon/ReloadCoolDown")
-objects/animation = NodePath("Weapon/Animation")
-objects/sprite = NodePath("Weapon/Sprite2D")
-objects/side_sprite = NodePath("Weapon/SideSprite2D")
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("3_x5fg1")

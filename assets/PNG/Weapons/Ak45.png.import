@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ni2m5828a0s"
-path="res://.godot/imported/sample.png-e927139e96245ea5d425f1da42b62e4a.ctex"
+uid="uid://cu00y8e6ybisk"
+path="res://.godot/imported/Ak45.png-f6fcf0de4d54777219dd2ccaaf73a8fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sample.png"
-dest_files=["res://.godot/imported/sample.png-e927139e96245ea5d425f1da42b62e4a.ctex"]
+source_file="res://assets/PNG/Weapons/Ak45.png"
+dest_files=["res://.godot/imported/Ak45.png-f6fcf0de4d54777219dd2ccaaf73a8fa.ctex"]
 
 [params]
 

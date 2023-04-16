@@ -17,3 +17,11 @@ func is_inside_vector_2(aim_pos: Vector2, src_pos: Vector2, offset: Vector2):
 	if is_under_offset_y and is_upper_offset_y and is_under_offset_x and is_upper_offset_x:
 		return true
 	return false
+
+func append_in_array_on_condition(condition: Callable, array: Array, parent: Node):
+	for child in parent.get_children():
+		if condition.call(child):
+			array.append(child)
+		if child.get_child_count() > 0:
+			append_in_array_on_condition(condition, array, child)
+	return

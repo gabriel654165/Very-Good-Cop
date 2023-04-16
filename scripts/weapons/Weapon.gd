@@ -1,11 +1,16 @@
 extends Node2D
 class_name Weapon
 
-#armes : grapin
-
 @export var parent : Node
 
 var Projectile : PackedScene
+
+var special_power_unlocked : bool = false
+var level : int = 0
+
+var points_to_unlock_power : int = 200
+var current_points_charge_power : int = 0
+var can_use_power : bool = false
 
 var loader_capacity : int = 6
 var bullet_speed : float = 4
@@ -21,13 +26,21 @@ var precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
 var precision : float = 0 # the more it's close 0 the more it's precise
 var recoil_force : float = 2 # the more it's close 0 the more it's precise
 
-var fire_position : Marker2D
-var fire_direction : Marker2D
-var attack_cooldown : Timer
-var reload_cooldown : Timer
-var animation : AnimationPlayer
-var sprite : Sprite2D
-var side_sprite : Sprite2D
+@onready var fire_position = $FirePosition
+@onready var fire_direction = $FireDirection
+@onready var attack_cooldown = $AttackCoolDown
+@onready var reload_cooldown = $ReloadCoolDown
+@onready var animation = $Animation
+@onready var sprite = $Sprite2D
+@onready var side_sprite = $SideSprite2D
+
+#var fire_position : Marker2D
+#var fire_direction : Marker2D
+#var attack_cooldown : Timer
+#var reload_cooldown : Timer
+#var animation : AnimationPlayer
+#var sprite : Sprite2D
+#var side_sprite : Sprite2D
 
 func _ready():
 	randomize()
@@ -75,4 +88,10 @@ func emit_projectile_signal(projectile_instance: Projectile, direction: Vector2)
 
 	if projectile_instance is Bullet:
 		GlobalSignals.projectile_fired_spawn.emit(null, projectile_instance, fire_position.global_position, direction)
-	
+
+func add_charge_power_points(points: int):
+	current_points_charge_power += points
+	if current_points_charge_power >= points_to_unlock_power:
+		can_use_power = true
+		print("oki")
+

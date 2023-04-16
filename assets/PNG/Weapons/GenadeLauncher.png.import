@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkexik843fre4"
-path="res://.godot/imported/preview.png-a680f03a9d5180282694828f1a21451f.ctex"
+uid="uid://6vpkvo2gj1eb"
+path="res://.godot/imported/GenadeLauncher.png-6697332b726d6030aedb25f4e294ed2f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/preview.png"
-dest_files=["res://.godot/imported/preview.png-a680f03a9d5180282694828f1a21451f.ctex"]
+source_file="res://assets/PNG/Weapons/GenadeLauncher.png"
+dest_files=["res://.godot/imported/GenadeLauncher.png-6697332b726d6030aedb25f4e294ed2f.ctex"]
 
 [params]
 
