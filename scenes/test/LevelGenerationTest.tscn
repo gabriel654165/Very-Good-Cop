@@ -1,10 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyhsx4xf2b5l0"]
+[gd_scene load_steps=3 format=3 uid="uid://cyhsx4xf2b5l0"]
 
 [ext_resource type="Script" path="res://scripts/level/LevelGenerator.gd" id="1_qqxg7"]
+[ext_resource type="TileSet" uid="uid://cwkkwl12hr1bq" path="res://assets/full.tres" id="2_mj50k"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Level" type="Node2D"]
 script = ExtResource("1_qqxg7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-150, -234)
 position_smoothing_enabled = true
+
+[node name="Dungeon" type="TileMap" parent="."]
+tile_set = ExtResource("2_mj50k")
+format = 2
