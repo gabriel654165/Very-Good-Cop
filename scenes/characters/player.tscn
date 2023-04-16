@@ -1,27 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdsdms4e8u2d"]
+[gd_scene load_steps=9 format=3 uid="uid://d0x250onoqdno"]
 
-[ext_resource type="Script" path="res://scripts/PlayerMovements.gd" id="1_54lvr"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
-[ext_resource type="PackedScene" uid="uid://31u4570g3q17" path="res://scenes/weapons/weapon.tscn" id="4_4dtyr"]
-[ext_resource type="PackedScene" uid="uid://dwnp4f05d5ccd" path="res://scenes/stats/health.tscn" id="4_yibkt"]
+[ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
+[ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_uemap"]
+[ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
+[ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
+[ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
-size = Vector2(37, 43)
+size = Vector2(28, 43)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
-position = Vector2(-165, 31)
-script = ExtResource("1_54lvr")
+[node name="Player" type="CharacterBody2D" groups=["character", "player"]]
+position = Vector2(346, 154)
+script = ExtResource("1_vctbk")
+weapon_list = {
+"glock": ExtResource("2_xaulr"),
+"grenade_launcher": ExtResource("3_uemap")
+}
+grappling_hook_scene = ExtResource("5_wxswb")
+projectile_weapon_scene = ExtResource("9_8nmes")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, 0)
 texture = ExtResource("2_cmhid")
 region_enabled = true
-region_rect = Rect2(0, 0, 56, 44)
+region_rect = Rect2(388, 88, 34, 44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-9, 0)
+position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_dfd5l")
 
 [node name="Health" parent="." instance=ExtResource("4_yibkt")]
 
-[node name="Weapon" parent="." instance=ExtResource("4_4dtyr")]
+[node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(16, 9)
+
+[node name="ThrowObjectPosition" type="Marker2D" parent="."]
+position = Vector2(20, 0)
+
+[node name="BulletproofVest" type="Node2D" parent="."]

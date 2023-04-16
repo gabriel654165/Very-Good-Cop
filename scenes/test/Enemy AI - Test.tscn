@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgec7eap7qfkg"]
+
+[ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_5e57m"]
+[ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="2_knftv"]
+[ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_eolho"]
+[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_uv201"]
+[ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_gyb4h"]
+[ext_resource type="PackedScene" uid="uid://dvdfosa8s7qft" path="res://scenes/rooms/Room 1.tscn" id="9_1bcuv"]
+
+[node name="Test-2" type="Node2D" node_paths=PackedStringArray("player")]
+position = Vector2(564, 170)
+script = ExtResource("1_5e57m")
+gui_manager_scene = ExtResource("2_knftv")
+projectile_manager_scene = ExtResource("3_eolho")
+player = NodePath("Player")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-316, -287)
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+
+[node name="Player" parent="." instance=ExtResource("3_uv201")]
+position = Vector2(-316, -287)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="WeaponManager" type="Node2D" parent="."]
+script = ExtResource("6_gyb4h")
+
+[node name="Room 1" parent="." instance=ExtResource("9_1bcuv")]
+position = Vector2(-193, 51)
+
+[node name="Room 2" parent="." instance=ExtResource("9_1bcuv")]
+position = Vector2(358, 31)
+rotation = 3.14159
