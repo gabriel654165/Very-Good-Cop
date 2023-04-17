@@ -10,7 +10,7 @@ const NoRoom:int = -1
 const RoomPlaceholder:int = -2 
 const Entrance:int = -3
 const Exit:int = -4
-const RoomSidesSize:int = 16 * (16 - 1) # TODO: Better name
+const RoomSidesSize:int = 48 * (16 - 1) # TODO: Better name
 const PackedPlayer = preload("res://scenes/characters/player.tscn")
 
 
