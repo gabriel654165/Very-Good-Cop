@@ -2,20 +2,24 @@ extends Node
 
 class_name LevelGenerator
 
-# Width and Height size
+
 # NOTE: I can export some of those but then they are won't be const
-const LevelSideSize:int = 9
+const LevelCanvasSideSize:int = 9
+
 const BaseNbOfRoomss:int = 5
+
 const NoRoom:int = -1
 const RoomPlaceholder:int = -2 
 const Entrance:int = -3
 const Exit:int = -4
-const RoomSidesSize:int = 48 * (16 - 1) # TODO: Better name
+
+
+const TileSideSize:int = 16
+const RoomSideSize:int = 48
+const RoomCenterOffset:int = (RoomSideSize - 1)  * (TileSideSize) # TODO: Maybe better name
 const PackedPlayer = preload("res://scenes/characters/player.tscn")
 
-
-var StartPos = Vector2i(LevelSideSize/2, LevelSideSize/2)
-
+var StartPos:Vector2i = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
 
 const CardinalPoints:Array[Vector2i] = [
 	Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN
@@ -27,7 +31,6 @@ var every_room: Array[Vector2i] # 1D Array that represents every room in the dun
 var entrance_pos: Vector2i
 var exit_pos: Vector2i
 
-@onready var dungeon_tilemap = $Dungeon
 
 func _input(ev):
 	# debug lol
@@ -40,12 +43,15 @@ func _input(ev):
 	if Input.is_key_pressed(KEY_RIGHT):
 		$Camera2D.position.x += 10
 
+
 func _physics_process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
 
-func world_position(pos:Vector2i) -> Vector2i:
-	return (pos - StartPos) * RoomSidesSize
+
+func local_to_world_position(pos:Vector2i) -> Vector2i:
+	return (pos - StartPos) * RoomCenterOffset
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -59,40 +65,40 @@ func _ready():
 	generate_dungeon_layout(number_of_rooms)
 
 	if OS.is_debug_build():
+		print("Generated dungeon:")
 		for line in dungeon_layout:
 			print(line)
 
-	fill_door_identifiers()
-	spawn_dungeon_with_rooms()
+	fill_doors_identifier()
+
+	spawn_dungeon_rooms()
 
 	spawn_player()
 
-	$Camera2D.position = world_position(entrance_pos)
-	# spawn_power_ups()
-	# spawn_enemies()
+	$Camera2D.position = local_to_world_position(entrance_pos)
 
 
 func spawn_player():
 	var player = PackedPlayer.instantiate()
 	add_child(player)
-	player.position = world_position(entrance_pos)
+	player.position = local_to_world_position(entrance_pos)
 
 
 func reset_dungeon_layout():
 	entrance_pos = Vector2i.ZERO
 	exit_pos = Vector2i.ZERO
 	every_room = [StartPos]
-	dungeon_layout.resize(LevelSideSize)
+	dungeon_layout.resize(LevelCanvasSideSize)
 	for idx in dungeon_layout.size():
 		var abscissa: Array[int] = []
-		abscissa.resize(LevelSideSize)
+		abscissa.resize(LevelCanvasSideSize)
 		abscissa.fill(NoRoom)
 		dungeon_layout[idx] = abscissa 
 
 
 # Generate the level structure, finds entrance and exit and fills "every_room" array
 func generate_dungeon_layout(req_nb_rooms:int):
-	assert(LevelSideSize % 2 != 0, "Level sides size should be odd")
+	assert(LevelCanvasSideSize % 2 != 0, "Level sides size should be odd")
 	var to_visit: Array[Vector2i] = [StartPos]
 	var deadends : Array[Vector2i] = []
 
@@ -148,7 +154,7 @@ func number_of_empty_neighbors_at(pos:Vector2i) -> int:
 
 
 # For each room, gives an identifier that represents which doors are open
-func fill_door_identifiers():
+func fill_doors_identifier():
 	for room in every_room:
 		var door_id: int = 0
 		for way_idx in CardinalPoints.size():
@@ -157,11 +163,10 @@ func fill_door_identifiers():
 				continue
 			door_id |= (1 << way_idx)
 		dungeon_layout[room.y][room.x] = door_id
-		
 
 
 func out_of_bounds(pos:Vector2i) -> bool:
-	return (pos.x < 0 || pos.y < 0  || pos.x > (LevelSideSize - 1) || pos.y > (LevelSideSize - 1))
+	return (pos.x < 0 || pos.y < 0  || pos.x > (LevelCanvasSideSize - 1) || pos.y > (LevelCanvasSideSize - 1))
 
 
 func should_add_room_at(pos:Vector2i) -> bool:
@@ -175,22 +180,24 @@ func should_add_room_at(pos:Vector2i) -> bool:
 
 
 # Choose and spawn each room according to the dungeon shapes
-func spawn_dungeon_with_rooms():
+func spawn_dungeon_rooms():
 	for room in every_room:
-		var relative_pos = world_position(room)
+		var relative_pos = local_to_world_position(room)
 		var doors_id:int = dungeon_layout[room.y][room.x]
-		if GlobalVariables.rooms_repository[doors_id] != null:
-			var chosen_room:RoomData = GlobalVariables.rooms_repository[doors_id].pick_random()
-			var instantiated_room:Node2D = chosen_room.factory.instantiate()
 
-			add_child(instantiated_room)
+		assert(GlobalVariables.rooms_repository[doors_id] != null, "No rooms for door id " + str(doors_id) + " (convert back to binary to know the LRUD value)")
 
-			instantiated_room.position = relative_pos
+		var chosen_room:RoomData = GlobalVariables.rooms_repository[doors_id].pick_random()
+
+		var instantiated_room:Node2D = chosen_room.factory.instantiate()
+		add_child(instantiated_room)
+		instantiated_room.position = relative_pos
+			
+
 
 #
 # Find farthest cell from another cell
 #
-
 
 class CellVisitDistance:
 	var cell:Vector2i
@@ -287,7 +294,9 @@ static func load_room(room:PackedScene, file_name:String):
 	else:
 		room_data.number_of_use = 1
 	room_data.factory = room
-	assert(doors_bitflags > 0 && doors_bitflags < GlobalVariables.rooms_repository.size())
+
+	assert(doors_bitflags > 0 && doors_bitflags < GlobalVariables.rooms_repository.size(), "Your room has 0 door or more than 4")
+
 	if GlobalVariables.rooms_repository[doors_bitflags] == null:
 		var new_room_array : Array[RoomData] = [room_data]
 		GlobalVariables.rooms_repository[doors_bitflags] = new_room_array 
