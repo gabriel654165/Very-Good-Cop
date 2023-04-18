@@ -71,7 +71,7 @@ func explode():
 		if body == null:
 			continue
 		if body.has_method("handle_hit"):
-			body.handle_hit(damages)
+			body.handle_hit(self, damages)
 		if body.has_method("apply_force"):
 			var impact_direction = body.global_position - self.global_position
 			body.apply_force(body, impact_direction, impact_force)

@@ -93,5 +93,5 @@ func find_weapon(weapon_index: int) -> Object :
 	var weapon_manager : Node2D = await weapon_scene.instantiate()
 	return weapon_manager
 
-func handle_hit(damages):
+func handle_hit(damager: Node2D, damages):
 	health.hit(damages)

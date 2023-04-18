@@ -10,7 +10,6 @@ enum PatrolType {
 }
 
 @export var patrol_type: PatrolType = PatrolType.Sequence
-@onready var detection_zone: Area2D = $"../../DetectionZone"
 
 var current_point_index: int = 0
 
@@ -35,18 +34,19 @@ func get_target():
 	set_movement_target(current_point)
 
 func enter(_msg := {}) -> void:
-	detection_zone.body_entered.connect(_on_detection_zone_body_entered)
+	vision_sensor.set_process(true)
+	vision_sensor.can_see_target.connect(_on_see_target)
 	state_machine.navigation_agent.target_reached.connect(_on_target_reached)
 	get_target()
 
 func exit() -> void:
-	detection_zone.body_entered.disconnect(_on_detection_zone_body_entered)
+	vision_sensor.can_see_target.disconnect(_on_see_target)
+	vision_sensor.set_process(false)	
 	state_machine.navigation_agent.target_reached.disconnect(_on_target_reached)
 
 #signals 
-func _on_detection_zone_body_entered(body: Node2D):
-	if body.is_in_group("player"):
-		state_machine.transition_to(state_machine.FOLLOW_TARGET, { target = body })
+func _on_see_target(target: DetectableTarget):
+	state_machine.transition_to(state_machine.FOLLOW_TARGET, { target = target.get_parent() })
 
 func _on_wait_point_timeout():
 	get_target()
