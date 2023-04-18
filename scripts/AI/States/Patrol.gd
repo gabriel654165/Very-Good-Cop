@@ -23,7 +23,9 @@ func _ready():
 func get_target():
 	if state_machine._enemy.patrol_points.size() == 0:
 		return
-		
+	
+	
+	
 	if patrol_type == PatrolType.Sequence:
 		current_point_index = (current_point_index + 1) % state_machine._enemy.patrol_points.size()
 		current_point = state_machine._enemy.patrol_points[current_point_index]

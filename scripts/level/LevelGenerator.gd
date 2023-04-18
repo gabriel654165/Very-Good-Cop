@@ -35,13 +35,13 @@ var exit_pos: Vector2i
 func _input(ev):
 	# debug lol
 	if Input.is_key_pressed(KEY_UP):
-		$Camera2D.position.y -= 10
+		$Camera2D.position.y -= 50
 	if Input.is_key_pressed(KEY_DOWN):
-		$Camera2D.position.y += 10
+		$Camera2D.position.y += 50
 	if Input.is_key_pressed(KEY_LEFT):
-		$Camera2D.position.x -= 10
+		$Camera2D.position.x -= 50
 	if Input.is_key_pressed(KEY_RIGHT):
-		$Camera2D.position.x += 10
+		$Camera2D.position.x += 50
 
 
 func _physics_process(delta):
@@ -77,6 +77,7 @@ func _ready():
 
 	$Camera2D.position = local_to_world_position(entrance_pos)
 
+	GlobalSignals.level_generated.emit(local_to_world_position(entrance_pos))
 
 func spawn_player():
 	var player = PackedPlayer.instantiate()
@@ -190,9 +191,9 @@ func spawn_dungeon_rooms():
 		var chosen_room:RoomData = GlobalVariables.rooms_repository[doors_id].pick_random()
 
 		var instantiated_room:Node2D = chosen_room.factory.instantiate()
-		add_child(instantiated_room)
+
 		instantiated_room.position = relative_pos
-			
+		add_child(instantiated_room)
 
 
 #

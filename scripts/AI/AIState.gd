@@ -2,7 +2,7 @@ extends State
 class_name AIState
 
 var state_machine: AIStateMachine = null
-var room_config: RoomConfig = null
+#var room_config: RoomConfig = null
 
 func set_target(movement_target: Node2D):
 	state_machine.navigation_agent.target_position = movement_target.global_transform.origin

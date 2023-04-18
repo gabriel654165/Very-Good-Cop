@@ -19,6 +19,7 @@ radius = 152.161
 script = ExtResource("1_ef1gd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("2_oj8g8")
 region_enabled = true
 region_rect = Rect2(111.512, -1.1273, 53.145, 44.7663)

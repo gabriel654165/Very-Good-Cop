@@ -23,6 +23,38 @@ layer_0/tile_data = PackedInt32Array(-262149, 4980736, 54, -196613, 4980736, 54,
 
 [node name="Patrols" type="Node" parent="RoomConfig"]
 
+[node name="A" type="Node2D" parent="RoomConfig/Patrols"]
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(-213, 103)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(-149, 184)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(-77, 277)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(-38, 192)
+
+[node name="5" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(13, 148)
+
+[node name="6" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(73, 101)
+
+[node name="7" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(140, 53)
+
+[node name="8" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(214, -3)
+
+[node name="9" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(249, -70)
+
+[node name="10" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(270, -168)
+
 [node name="PowerUpPoints" type="Node" parent="RoomConfig"]
 
 [node name="Walls" type="TileMap" parent="."]

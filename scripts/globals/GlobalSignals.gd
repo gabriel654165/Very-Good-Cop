@@ -8,3 +8,5 @@ signal character_health_changed(health: Health, value: float)
 signal character_max_health_changed(health: Health, value: float)
 
 signal enemy_died(position: Vector2, points: int)
+
+signal level_generated(player_position: Vector2)

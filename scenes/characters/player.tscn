@@ -12,7 +12,7 @@
 size = Vector2(28, 43)
 
 [node name="Player" type="CharacterBody2D" groups=["character", "player"]]
-position = Vector2(346, 154)
+position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
 weapon_list = {
 "glock": ExtResource("2_xaulr"),

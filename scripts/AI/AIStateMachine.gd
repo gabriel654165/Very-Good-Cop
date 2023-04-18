@@ -22,7 +22,7 @@ func init(enemy: Enemy, new_weapon: Weapon):
 	
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():
-		child.room_config = _enemy.room_config
+		#child.room_config = _enemy.room_config
 		child.state_machine = self
 	super._ready()
 	
