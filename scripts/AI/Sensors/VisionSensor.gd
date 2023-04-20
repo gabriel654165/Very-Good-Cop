@@ -4,7 +4,6 @@ class_name VisionSensor
 
 @export var vision_cone_angle: float = 60
 @export var vision_cone_range: float = 200
-@export var _enemy: Enemy
 @export_flags_2d_physics var layers_2d_physics
 
 signal can_see_target(target: DetectableTarget)
@@ -17,9 +16,9 @@ var space: PhysicsDirectSpaceState2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	CosVisionConeAngle = cos(deg_to_rad(vision_cone_angle));
-	space = _enemy.get_world_2d().direct_space_state
+	space = get_parent().get_world_2d().direct_space_state
 
-func _physics_process(delta):
+func _process(delta):
 	EyeLocation = global_position
 	EyeDirection = global_transform.x
 
@@ -27,27 +26,25 @@ func _physics_process(delta):
 		queue_redraw()
 		
 	if not Engine.is_editor_hint():
-		for candidateTarget in DetectableTargetManager.targets:
-			var vectorToTarget: Vector2 = candidateTarget.get_parent().global_position - EyeLocation;
+		for candidate_target in DetectableTargetManager.targets:
+			var vector_to_target: Vector2 = candidate_target.get_parent().global_position - EyeLocation;
 
 			# if out of range - cannot see
-			if vectorToTarget.length_squared() > vision_cone_range * vision_cone_range:
+			if vector_to_target.length_squared() > vision_cone_range * vision_cone_range:
 				continue
 
-			var normalized = vectorToTarget.normalized();
+			var normalized_vector = vector_to_target.normalized();
 
 			# if out of vision cone - cannot see
-			if normalized.dot(EyeDirection) < CosVisionConeAngle:
+			if normalized_vector.dot(EyeDirection) < CosVisionConeAngle:
 				continue
 				
 			# raycast to target passes?
-			var param = PhysicsRayQueryParameters2D.create(EyeLocation, candidateTarget.global_position, 1, [self, _enemy])
+			var param = PhysicsRayQueryParameters2D.create(EyeLocation, candidate_target.global_position, 1, [self, get_parent()])
 			var hit_info = space.intersect_ray(param)
 			if !hit_info.is_empty():
-				print("Collider " + hit_info.collider.name)
-				print("Candidate " + candidateTarget.get_parent().name)
-				if hit_info.collider.name == candidateTarget.get_parent().name:
-					can_see_target.emit(candidateTarget)
+				if hit_info.collider.name == candidate_target.get_parent().name:
+					can_see_target.emit(candidate_target)
 
 func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color):
 	var nb_points = 32

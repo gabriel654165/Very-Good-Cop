@@ -8,7 +8,7 @@ func stab():
 	#animation stab played
 	if close_fight_bodies.size() <= 0:
 		return
-		
+
 	#le plus proche ?
 	#celui dans ta direction
 	# -> réduire la range (un quart de cercle) en face du player
