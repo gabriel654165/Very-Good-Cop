@@ -22,6 +22,7 @@ grappling_hook_scene = ExtResource("5_wxswb")
 projectile_weapon_scene = ExtResource("9_8nmes")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(-3, 0)
 texture = ExtResource("2_cmhid")
 region_enabled = true

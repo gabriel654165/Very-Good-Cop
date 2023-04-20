@@ -22470,12 +22470,11 @@ sources/2 = SubResource("TileSetAtlasSource_78u0y")
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
 radius = 28.2312
 
-[node name="Test-1" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="Test-1" type="Node2D"]
 position = Vector2(564, 170)
 script = ExtResource("1_2q6o2")
 gui_manager_scene = ExtResource("2_2gdt8")
 projectile_manager_scene = ExtResource("3_ylgbd")
-player = NodePath("Player")
 
 [node name="Ground" type="TileMap" parent="."]
 position = Vector2(-28, 36)

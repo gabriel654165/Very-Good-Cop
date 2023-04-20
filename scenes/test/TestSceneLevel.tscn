@@ -1,13 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://djsd576ac8w0q"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_cprlw"]
-[ext_resource type="PackedScene" uid="uid://cyhsx4xf2b5l0" path="res://scenes/test/LevelGenerationTest.tscn" id="2_e5aw5"]
 [ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="2_plfkm"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_u5xh8"]
+[ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_hawec"]
 
 [node name="TopNode" type="Node2D"]
 script = ExtResource("1_cprlw")
 gui_manager_scene = ExtResource("2_plfkm")
 projectile_manager_scene = ExtResource("3_u5xh8")
+level_generator_scene = ExtResource("4_hawec")
 
-[node name="Level" parent="." instance=ExtResource("2_e5aw5")]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)

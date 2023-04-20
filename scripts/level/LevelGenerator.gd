@@ -32,29 +32,12 @@ var entrance_pos: Vector2i
 var exit_pos: Vector2i
 
 
-func _input(ev):
-	# debug lol
-	if Input.is_key_pressed(KEY_UP):
-		$Camera2D.position.y -= 50
-	if Input.is_key_pressed(KEY_DOWN):
-		$Camera2D.position.y += 50
-	if Input.is_key_pressed(KEY_LEFT):
-		$Camera2D.position.x -= 50
-	if Input.is_key_pressed(KEY_RIGHT):
-		$Camera2D.position.x += 50
-
-
-func _physics_process(delta):
-	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().quit()
-
-
 func local_to_world_position(pos:Vector2i) -> Vector2i:
 	return (pos - StartPos) * RoomCenterOffset
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func generate():
 
 	# NOTE: Find a better rng
 	var number_of_rooms:int = BaseNbOfRoomss + (GlobalVariables.level + randi_range(0, 3))
@@ -72,17 +55,6 @@ func _ready():
 	fill_doors_identifier()
 
 	spawn_dungeon_rooms()
-
-	spawn_player()
-
-	$Camera2D.position = local_to_world_position(entrance_pos)
-
-	GlobalSignals.level_generated.emit(local_to_world_position(entrance_pos))
-
-func spawn_player():
-	var player = PackedPlayer.instantiate()
-	add_child(player)
-	player.position = local_to_world_position(entrance_pos)
 
 
 func reset_dungeon_layout():
@@ -261,7 +233,6 @@ static func load_all_rooms_from(path :String):
 	if !path.ends_with("/"):
 		path += "/"
 	
-	var t = Time.get_unix_time_from_system()
 	
 	assert(dir != null, "Cannot open " + path)
 	dir.list_dir_begin()
@@ -278,7 +249,6 @@ static func load_all_rooms_from(path :String):
 			var room:PackedScene = load(path + file_name)
 			load_room(room, full_path)
 		file_name = dir.get_next()
-	print("Loaded every room in " + str(Time.get_unix_time_from_system() - t))
 
 
 static func load_room(room:PackedScene, file_name:String):
