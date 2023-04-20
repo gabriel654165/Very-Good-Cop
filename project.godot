@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Game-project-2"
-run/main_scene="res://scenes/test/LevelGenerationTest.tscn"
+config/name="Very Good Cop"
+run/main_scene="res://scenes/test/TestSceneLevel.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
