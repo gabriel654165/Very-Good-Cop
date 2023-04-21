@@ -10,7 +10,7 @@ class_name PopUpPointsManager
 @export var velocity_mov : Vector2 = Vector2(0, -10)
 @export var velocity_scale : Vector2 = Vector2(60, 60)
 
-func handle_enemy_died(enemy: Enemy, points: int):
+func handle_enemy_died(enemy: Node2D, points: int):
 	var pop_up_text_instance = pop_up_text_scene.instantiate()
 	add_child(pop_up_text_instance)
 	

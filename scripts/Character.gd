@@ -58,3 +58,13 @@ func apply_force(character: Character, direction: Vector2, force: float):
 
 func set_able_actions(state: bool):
 	action_disabled = state
+
+func spawnSprite(position: Vector2, sprite: Sprite2D) -> Node2D:
+	var spriteDeadEnemy = Sprite2D.new()
+	spriteDeadEnemy.set_name("SpriteDead")
+	spriteDeadEnemy.texture = sprite.texture
+	spriteDeadEnemy.visible = true
+	get_tree().current_scene.add_child(spriteDeadEnemy)
+	spriteDeadEnemy.global_position = position
+	return spriteDeadEnemy as Node2D
+

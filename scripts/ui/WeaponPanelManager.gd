@@ -33,6 +33,6 @@ func set_weapon_panel_variables():
 	panel_weapon.set_weapon_sprite(player.weapon_manager.weapon.side_sprite)
 	panel_weapon.reset_current_power_charger()
 
-func handle_enemy_died(enemy: Enemy, points: int):
+func handle_enemy_died(enemy: Node2D, points: int):
 	panel_weapon.add_charge_power_bar(points)
 	print("power charger = ", panel_weapon.current_power_charger)

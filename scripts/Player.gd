@@ -95,7 +95,7 @@ func find_weapon(weapon_index: int) -> Object :
 	var weapon_manager : Node2D = await weapon_scene.instantiate()
 	return weapon_manager
 
-func handle_enemy_died(enemy: Enemy, points: int):
+func handle_enemy_died(enemy: Node2D, points: int):
 	if weapon_manager.weapon.special_power_unlocked:
 		weapon_manager.weapon.add_charge_power_points(points)
 
