@@ -10,7 +10,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.2.1
+      image: docker://barichello/godot-ci
     steps:
       - name: Checkout
         uses: actions/checkout@v1
