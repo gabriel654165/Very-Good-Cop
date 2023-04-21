@@ -21,6 +21,7 @@ func _ready():
 	GlobalSignals.connect("character_max_health_changed", Callable(gui_manager.health_ui_manager, "handle_character_max_health_changed"))
 	
 	GlobalSignals.connect("enemy_died", Callable(player, "handle_enemy_died"))
+	
 	GlobalSignals.connect("enemy_died", Callable(gui_manager.pop_up_points_manager, "handle_enemy_died"))
 	GlobalSignals.connect("enemy_died", Callable(gui_manager.panel_points_manager, "handle_enemy_died"))
 	GlobalSignals.connect("enemy_died", Callable(gui_manager.panel_kills_manager, "handle_enemy_died"))
