@@ -108,7 +108,6 @@ weapon/recoil_force = 1.5
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_kmqwp")
-weapon_name = "sniper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("4_gsi0a")

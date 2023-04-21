@@ -28,8 +28,8 @@ func handle_hit(damager: Node2D, damages):
 		blood_inst.global_position = global_position
 		#blood_inst.rotation = global_position.angle_to_point(damager.global_position)
 		if damager is Projectile:
-#			var new_velocity: Vector2 = global_position - damager.global_position
+			#var new_velocity: Vector2 = global_position - damager.global_position
 			var new_velocity: Vector2 = (damager as Projectile).direction
 			new_velocity = new_velocity.normalized()
 			blood_inst.global_rotation = new_velocity.angle()
-		queue_free()
+		#queue_free()

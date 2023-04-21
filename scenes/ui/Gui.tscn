@@ -63,9 +63,10 @@ panel_gui = ExtResource("10_0fs0q")
 title_panel = "Time"
 panels_container = NodePath("../PanelsContainer/HBoxUpperContainer")
 
-[node name="WeaponPanelManager" type="Node2D" parent="."]
+[node name="WeaponPanelManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
 script = ExtResource("13_xqfji")
 weapon_panel_gui = ExtResource("14_nrxer")
+panels_container = NodePath("../PanelsContainer/HBoxBottomContainer")
 
 [node name="PanelsContainer" type="Control" parent="."]
 layout_mode = 3
