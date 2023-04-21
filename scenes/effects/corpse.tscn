@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d10hkbv6285me"]
+
+[ext_resource type="Texture2D" uid="uid://oegy871nxf7y" path="res://assets/PNG/dead_body.png" id="1_ugcvw"]
+[ext_resource type="PackedScene" uid="uid://dw2q1tptf7tp4" path="res://scenes/effects/blood.tscn" id="2_xgxk0"]
+
+[node name="Corpse" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(30, 0)
+rotation = 1.5708
+scale = Vector2(0.0916667, 0.0916667)
+texture = ExtResource("1_ugcvw")
+
+[node name="CPUParticles2D" parent="." instance=ExtResource("2_xgxk0")]
+amount = 20
+spread = 80.0

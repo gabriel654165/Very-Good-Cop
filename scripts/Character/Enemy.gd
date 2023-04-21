@@ -8,7 +8,8 @@ class_name Enemy
 
 @export var distance_to_shoot: float = 70
 @export var point_value: float = 100
-@onready var blood_effect_prefab = preload("res://scenes/effects/blood.tscn")
+@onready var blood_effect_prefab = preload("res://scenes/effects/small_blood.tscn")
+@onready var corpse_prefab = preload("res://scenes/effects/corpse.tscn")
 
 var patrol_points: Array[Vector2] = []
 
@@ -22,14 +23,20 @@ func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
 	if health.is_dead():
 		GlobalSignals.enemy_died.emit(global_position, point_value)
-		#display le sprite au sol
-		var blood_inst = blood_effect_prefab.instantiate()
-		get_tree().current_scene.add_child(blood_inst)
-		blood_inst.global_position = global_position
 		#blood_inst.rotation = global_position.angle_to_point(damager.global_position)
 		if damager is Projectile:
+			var corpse = spawn(corpse_prefab, global_position)
 #			var new_velocity: Vector2 = global_position - damager.global_position
 			var new_velocity: Vector2 = (damager as Projectile).direction
 			new_velocity = new_velocity.normalized()
-			blood_inst.global_rotation = new_velocity.angle()
+			corpse.global_rotation = new_velocity.angle()
+		
 		queue_free()
+	else:
+		spawn(blood_effect_prefab, global_position)
+
+func spawn(prefab: Resource, position: Vector2):
+	var inst = prefab.instantiate()
+	get_tree().current_scene.add_child(inst)
+	inst.global_position = position
+	return inst
