@@ -44,12 +44,3 @@ func set_direction(direction: Vector2):
 
 func set_projectile_owner(projectile_owner: Node2D):
 	self.projectile_owner = projectile_owner
-
-func set_speed(speed: int):
-	self.speed = speed
-func set_damages(damages: int):
-	self.damages = damages
-func set_size(size: float):
-	self.size = size
-func set_impact_force(impact_force: float):
-	self.impact_force = impact_force
