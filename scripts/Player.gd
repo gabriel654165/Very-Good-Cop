@@ -100,4 +100,5 @@ func handle_enemy_died(enemy: Enemy, points: int):
 		weapon_manager.weapon.add_charge_power_points(points)
 
 func handle_hit(damages):
+func handle_hit(damager: Node2D, damages):
 	health.hit(damages)

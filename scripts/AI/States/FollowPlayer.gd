@@ -11,3 +11,7 @@ func update(_delta: float) -> void:
 
 func enter(_msg := {}) -> void:
 	_target = _msg["target"]
+	vision_sensor.set_process(true)
+
+func exit() -> void:
+	vision_sensor.set_process(false)

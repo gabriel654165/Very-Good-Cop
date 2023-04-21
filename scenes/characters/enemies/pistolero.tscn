@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cewhfxsma7527"]
+[gd_scene load_steps=12 format=3 uid="uid://cewhfxsma7527"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
 [ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_xa1nf"]
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
+[ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="9_5t7aw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(20, 36)
@@ -67,3 +68,6 @@ position = Vector2(16, 9)
 
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
 position = Vector2(20, 0)
+
+[node name="VisionSensor" type="Node2D" parent="."]
+script = ExtResource("9_5t7aw")

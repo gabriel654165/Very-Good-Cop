@@ -108,6 +108,7 @@ weapon/recoil_force = 2.0
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_e6w1w")
+weapon_name = "glock"
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("3_ucb1l")
