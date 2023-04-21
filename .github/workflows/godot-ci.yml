@@ -2,7 +2,7 @@ name: "godot-ci export linux"
 on: push
 
 env:
-  GODOT_VERSION: 4.0
+  GODOT_VERSION: 4.0.1
   EXPORT_NAME: game-off
 
 jobs:
