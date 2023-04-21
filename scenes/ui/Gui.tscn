@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://byeald88viaao"]
+[gd_scene load_steps=15 format=3 uid="uid://byeald88viaao"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
 [ext_resource type="PackedScene" uid="uid://bb7av66d8pynv" path="res://scenes/ui/HealthBar.tscn" id="2_k8jrc"]
 [ext_resource type="Script" path="res://scripts/ui/CursorManager.gd" id="3_exgmc"]
 [ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="4_7jw85"]
+[ext_resource type="Script" path="res://scripts/ui/PopUpPointsManager.gd" id="6_dpwpx"]
+[ext_resource type="PackedScene" uid="uid://d0yi638vmgm81" path="res://scenes/ui/PopUpText.tscn" id="7_bnyiq"]
+[ext_resource type="Script" path="res://scripts/ui/PopUpHealthManager.gd" id="8_armf7"]
+[ext_resource type="Script" path="res://scripts/ui/TextPointsManager.gd" id="9_dkbyk"]
+[ext_resource type="PackedScene" uid="uid://c3enp3a1fg70f" path="res://scenes/ui/PanelGui.tscn" id="10_0fs0q"]
+[ext_resource type="Script" path="res://scripts/ui/PanelKillsManager.gd" id="11_f3jk1"]
+[ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
+[ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
+[ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_cf1if")
@@ -14,12 +23,76 @@ script = ExtResource("1_c8amb")
 health_ui = ExtResource("2_k8jrc")
 
 [node name="CursorManager" type="Node2D" parent="."]
+position = Vector2(-540, 154)
 script = ExtResource("3_exgmc")
 cursor_ui = ExtResource("4_7jw85")
 scale_sprite = Vector2(2, 2)
 
+[node name="PopUpHealthManager" type="Node2D" parent="."]
+script = ExtResource("8_armf7")
+pop_up_text_scene = ExtResource("7_bnyiq")
+life_time = 0.7
+enemy_offset = Vector2(0, -60)
+text_scale = Vector2(1.5, 1.3)
+velocity_mov = Vector2(0, 20)
+velocity_scale = Vector2(-1.2, -1.2)
+
 [node name="PopUpPointsManager" type="Node2D" parent="."]
+script = ExtResource("6_dpwpx")
+pop_up_text_scene = ExtResource("7_bnyiq")
+life_time = 0.5
+text_scale = Vector2(1.5, 1.3)
+velocity_mov = Vector2(0, -70)
+velocity_scale = Vector2(1.5, 1.5)
 
-[node name="TextPointsUiManager" type="Node2D" parent="."]
+[node name="PanelPointsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
+script = ExtResource("9_dkbyk")
+panel_gui = ExtResource("10_0fs0q")
+title_panel = "points"
+panels_container = NodePath("../PanelsContainer/HBoxUpperContainer")
 
-[node name="PowerChargeBarManager" type="Node2D" parent="."]
+[node name="PanelKillsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
+script = ExtResource("11_f3jk1")
+panel_gui = ExtResource("10_0fs0q")
+title_panel = "kills"
+panels_container = NodePath("../PanelsContainer/HBoxUpperContainer")
+
+[node name="PanelTimerManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
+script = ExtResource("12_k7vmh")
+panel_gui = ExtResource("10_0fs0q")
+title_panel = "Time"
+panels_container = NodePath("../PanelsContainer/HBoxUpperContainer")
+
+[node name="WeaponPanelManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
+script = ExtResource("13_xqfji")
+weapon_panel_gui = ExtResource("14_nrxer")
+panels_container = NodePath("../PanelsContainer/HBoxBottomContainer")
+
+[node name="PanelsContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxUpperContainer" type="HBoxContainer" parent="PanelsContainer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 48.0
+offset_bottom = 112.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="HBoxBottomContainer" type="HBoxContainer" parent="PanelsContainer"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -82.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1

@@ -11,6 +11,8 @@ func _ready():
 	assign_knife()
 
 func _physics_process(delta):
+	if self.action_disabled:
+		return
 	var move_direction = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -27,14 +29,18 @@ func _physics_process(delta):
 	look_at(get_global_mouse_position())
 
 func _process(delta):
+	if self.action_disabled:
+		return
 	if Input.is_action_pressed("shoot"):
 		if weapon_manager != null:
 			weapon_manager.weapon.shoot()
 
 func _unhandled_input(event):
+	if self.action_disabled:
+		return
 	if event.is_action_pressed("stab"):
 		stab()
-	if event.is_action_pressed("throw_weapon") and !weapon_throwed:
+	if event.is_action_pressed("throw_weapon") and !weapon_throwed and weapon_manager.weapon != null:
 		throw_weapon()
 	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
 		throw_grappling()
@@ -47,10 +53,6 @@ func _unhandled_input(event):
 		print("weapon index : ", index_weapon_selected)
 		unassign_weapon()
 		assign_weapon(index_weapon_selected)
-
-func handle_enemy_died(position: Vector2, points: int):
-	if weapon_manager.weapon.special_power_unlocked:
-		weapon_manager.weapon.add_charge_power_points(points)
 
 func assign_knife():
 	knife = GlobalVariables.all_knife_scene_list[GlobalVariables.index_knife_selected].packed_scene.instantiate()
@@ -92,6 +94,10 @@ func find_weapon(weapon_index: int) -> Object :
 	
 	var weapon_manager : Node2D = await weapon_scene.instantiate()
 	return weapon_manager
+
+func handle_enemy_died(enemy: Node2D, points: int):
+	if weapon_manager.weapon.special_power_unlocked:
+		weapon_manager.weapon.add_charge_power_points(points)
 
 func handle_hit(damager: Node2D, damages):
 	health.hit(damages)

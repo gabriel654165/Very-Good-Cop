@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Game-project-2"
+config/name="Very-Good-Cop"
 run/main_scene="res://scenes/test/Test-1.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"

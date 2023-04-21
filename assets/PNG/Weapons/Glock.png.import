@@ -17,10 +17,10 @@ dest_files=["res://.godot/imported/Glock.png-36d768757685af9c21ed03a3e7f56c7e.ct
 
 compress/mode=0
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/hdr_compression=1
 compress/normal_map=0
-compress/channel_pack=0
+compress/channel_pack=1
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
