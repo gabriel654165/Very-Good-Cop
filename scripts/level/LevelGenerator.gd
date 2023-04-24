@@ -42,15 +42,15 @@ func generate():
 	# NOTE: Find a better rng
 	var number_of_rooms:int = BaseNbOfRoomss + (GlobalVariables.level + randi_range(0, 3))
 
-	print("Generating level with " + str(number_of_rooms) + " rooms")
+	#print("Generating level with " + str(number_of_rooms) + " rooms")
 
 	reset_dungeon_layout()
 	generate_dungeon_layout(number_of_rooms)
 
-	if OS.is_debug_build():
-		print("Generated dungeon:")
-		for line in dungeon_layout:
-			print(line)
+	#if OS.is_debug_build():
+	#	print("Generated dungeon:")
+	#	for line in dungeon_layout:
+	#		print(line)
 
 	fill_doors_identifier()
 
@@ -111,7 +111,7 @@ func generate_dungeon_layout(req_nb_rooms:int):
 	assert(deadends.size() >= 2, "Wrong deadends number")
 
 	entrance_pos = deadends.min()
-	print(entrance_pos)
+	#print(entrance_pos)
 	exit_pos = find_farthest_cell_from(entrance_pos)
 
 func number_of_empty_neighbors_at(pos:Vector2i) -> int:
@@ -188,7 +188,7 @@ func find_farthest_cell_from(pos:Vector2i) -> Vector2i:
 	var cellvd = CellVisitDistance.new()
 	cellvd.cell = pos
 	var farthest_cellvd = find_farthest_cell_with_cellvisitdistance(cellvd, true)
-	print("Player will have to pass by " + str(farthest_cellvd.distance) + " rooms")
+	#print("Player will have to pass by " + str(farthest_cellvd.distance) + " rooms")
 	return farthest_cellvd.cell 
 
 
@@ -273,7 +273,7 @@ static func load_room(room:PackedScene, file_name:String):
 		GlobalVariables.rooms_repository[doors_bitflags] = new_room_array 
 	else:
 		GlobalVariables.rooms_repository[doors_bitflags].append(room_data)
-	print("Loaded room: " + file_name)
+	#print("Loaded room: " + file_name)
 
 
 static func room_nodes_to_door_bitflags(room_nodes:PackedStringArray) -> int:

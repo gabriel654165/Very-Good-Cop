@@ -1,7 +1,7 @@
 extends Node
 
 func _ready():
-	print("Game starting...")
+	#print("Game starting...")
 	init_global_variables()
 	randomize()
 	
@@ -9,7 +9,7 @@ func _ready():
 	print_func_time(
 		Callable(LevelGenerator, "load_all_rooms_from").bind("res://scripts/level/rooms/"), # Just fancy stuff to use bind on a static func, I could also make a lambda where I call the function with the argument
 		"Loaded every room"
-	) 
+	)
 
 
 

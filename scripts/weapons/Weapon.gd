@@ -93,5 +93,5 @@ func add_charge_power_points(points: int):
 	current_points_charge_power += points
 	if current_points_charge_power >= points_to_unlock_power:
 		can_use_power = true
-		print("oki")
+		#print("oki")
 

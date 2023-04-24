@@ -1,6 +1,7 @@
 extends Node2D
 class_name HealthUiManager
 
+@export var active : bool = false
 @export var health_ui : PackedScene
 @export var offset_position : Vector2 = Vector2(-25, -40)
 
@@ -9,8 +10,19 @@ var health_ui_list : Array[Control] = []
 
 func _ready():
 	if health_ui == null:
+		active = false
+
+func set_active(state: bool):
+	if health_ui == null:
 		return
 	
+	active = state
+	if active:
+		generateUi()
+	else:
+		unloadUi()
+
+func generateUi():
 	#aller chercher tout les Health
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Health, health_obj_list, get_tree().root)
 	
@@ -23,7 +35,12 @@ func _ready():
 		set_health_values(health_obj, health_ui_list[index])
 		index += 1
 
+func unloadUi():
+	pass
+
 func _process(delta):
+	if !active:
+		return
 	var index : int = 0
 	while index < health_obj_list.size():
 		var health_obj = health_obj_list[index]

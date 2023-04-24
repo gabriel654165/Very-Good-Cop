@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var active : bool = false
 @export var cursor_ui : PackedScene
 @export var canvas_enemy_offset := Vector2(30, 25)
 @export var cursor_offset := Vector2(6, 6)
@@ -17,7 +18,19 @@ var cursor = load("res://assets/UI/Cursors/sprCursor.png")
 
 func _ready():
 	if cursor_ui == null:
+		active = false
+
+func set_active(state: bool):
+	if cursor_ui == null:
 		return
+	
+	active = state
+	if active:
+		generateUi()
+	else:
+		unloadUi()
+
+func generateUi():
 	var cursor_ui_instance = cursor_ui.instantiate()
 	add_child(cursor_ui_instance)
 	
@@ -30,7 +43,13 @@ func _ready():
 	cursor_animator.play("cursor_idle")
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Enemy, enemy_list, get_tree().root)
 
+func unloadUi():
+	pass
+
 func _process(delta):
+	if !active:
+		return
+	
 	cursor_sprite.global_position = get_viewport().get_mouse_position() + cursor_offset
 	
 	var is_on_enemy_tmp = is_on_enemy()
