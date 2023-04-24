@@ -3,6 +3,7 @@ extends Node2D
 
 var weapon : Node
 
+var weapon_name : String
 var special_power_unlocked : bool = false
 var level : int = 0
 
@@ -10,11 +11,11 @@ var points_to_unlock_power : int = 200
 var current_points_charge_power : int = 0
 var can_use_power : bool = false
 
-var Projectile : PackedScene
-var bullet_speed : float = 4
+var projectile : PackedScene
+var bullet_speed : int = 4
 var bullet_damages : int = 6
-var bullet_size : int = 0.5
-var bullet_impact_force : int = 2
+var bullet_size : float = 0.5
+var bullet_impact_force : float = 2
 
 var loader_capacity : int = 6
 
@@ -24,14 +25,6 @@ var frequence_of_burt : float = 0.1
 var precision_angle : Vector2 = Vector2(-1, 1)
 var precision : float = 0
 var recoil_force : float = 2
-
-#var fire_position : NodePath
-#var fire_direction : NodePath
-#var attack_cooldown : NodePath
-#var reload_cooldown : NodePath
-#var animation : NodePath
-#var sprite : NodePath
-#var side_sprite : NodePath
 
 func _ready():
 	weapon = self.get_child(0) as Weapon
@@ -54,6 +47,7 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	if weapon == null:
 		weapon = new_weapon
 	
+	weapon.weapon_name = self.weapon_name
 	weapon.special_power_unlocked = self.special_power_unlocked
 	weapon.level = self.level
 	
@@ -62,7 +56,7 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.can_use_power = self.can_use_power
 	
 	if upadte_projectile:
-		weapon.Projectile = self.Projectile
+		weapon.projectile = self.projectile
 	weapon.bullet_speed = self.bullet_speed
 	weapon.bullet_damages = self.bullet_damages
 	weapon.bullet_size = self.bullet_size
@@ -76,20 +70,13 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.precision_angle = self.precision_angle
 	weapon.precision = self.precision
 	weapon.recoil_force = self.recoil_force
-	
-	#if update_nodes:
-	#	weapon.fire_position = self.get_node(self.fire_position) as Marker2D
-	#	weapon.fire_direction = self.get_node(self.fire_direction) as Marker2D
-	#	weapon.attack_cooldown = self.get_node(self.attack_cooldown) as Timer
-	#	weapon.reload_cooldown = self.get_node(self.reload_cooldown) as Timer
-	#	weapon.animation = self.get_node(self.animation) as AnimationPlayer
-	#	weapon.sprite = self.get_node(self.sprite) as Sprite2D
-	#	weapon.side_sprite = self.get_node(self.side_sprite) as Sprite2D
 
 func _get(property):
-	if property == 'stats/special_power_unlocked':
+	if property == 'properties/weapon_name':
+		return weapon_name
+	if property == 'properties/special_power_unlocked':
 		return special_power_unlocked
-	if property == 'stats/level':
+	if property == 'properties/level':
 		return level
 	if property == 'power/points_to_unlock_power':
 		return points_to_unlock_power
@@ -98,8 +85,8 @@ func _get(property):
 	if property == 'power/can_use_power':
 		return can_use_power
 	
-	if property == 'bullet/Projectile':
-		return Projectile
+	if property == 'bullet/projectile':
+		return projectile
 	if property == 'bullet/bullet_speed':
 		return bullet_speed
 	if property == 'bullet/bullet_damages':
@@ -124,26 +111,13 @@ func _get(property):
 		return precision
 	if property == 'weapon/recoil_force':
 		return recoil_force
-	
-	#if property == 'objects/fire_position':
-	#	return fire_position
-	#if property == 'objects/fire_direction':
-	#	return fire_direction
-	#if property == 'objects/attack_cooldown':
-	#	return attack_cooldown
-	#if property == 'objects/reload_cooldown':
-	#	return reload_cooldown
-	#if property == 'objects/animation':
-	#	return animation
-	#if property == 'objects/sprite':
-	#	return sprite
-	#if property == 'objects/side_sprite':
-	#	return side_sprite
 
 func _set(property, value) -> bool :
-	if property == 'stats/special_power_unlocked':
+	if property == 'properties/weapon_name':
+		weapon_name = value
+	if property == 'properties/special_power_unlocked':
 		special_power_unlocked = value
-	if property == 'stats/level':
+	if property == 'properties/level':
 		level = value
 	
 	if property == 'power/points_to_unlock_power':
@@ -153,8 +127,8 @@ func _set(property, value) -> bool :
 	if property == 'power/can_use_power':
 		can_use_power = value
 	
-	if property == 'bullet/Projectile':
-		Projectile = value
+	if property == 'bullet/projectile':
+		projectile = value
 	if property == 'bullet/bullet_speed':
 		bullet_speed = value
 	if property == 'bullet/bullet_damages':
@@ -179,31 +153,19 @@ func _set(property, value) -> bool :
 		precision = value
 	if property == 'weapon/recoil_force':
 		recoil_force = value
-	
-	#if property == 'objects/fire_position':
-	#	fire_position = value
-	#if property == 'objects/fire_direction':
-	#	fire_direction = value
-	#if property == 'objects/attack_cooldown':
-	#	attack_cooldown = value
-	#if property == 'objects/reload_cooldown':
-	#	reload_cooldown = value
-	#if property == 'objects/animation':
-	#	animation = value
-	#if property == 'objects/sprite':
-	#	sprite = value
-	#if property == 'objects/side_sprite':
-	#	side_sprite = value
 	return true
 
 func _get_property_list() -> Array:
 	var props = []
 	props.append_array(
 	[{
-		'name': 'stats/special_power_unlocked',
+		'name': 'properties/weapon_name',
+		'type': TYPE_STRING,
+	},{
+		'name': 'properties/special_power_unlocked',
 		'type': TYPE_BOOL,
 	},{
-		'name': 'stats/level',
+		'name': 'properties/level',
 		'type': TYPE_INT,
 	},{
 		'name': 'power/points_to_unlock_power',
@@ -215,20 +177,20 @@ func _get_property_list() -> Array:
 		'name': 'power/can_use_power',
 		'type': TYPE_BOOL,
 	},{
-		'name': 'bullet/Projectile',
+		'name': 'bullet/projectile',
 		'type': TYPE_OBJECT,
 	},{
 		'name': 'bullet/bullet_speed',
-		'type': TYPE_FLOAT,
+		'type': TYPE_INT,
 	},{
 		'name': 'bullet/bullet_damages',
 		'type': TYPE_INT,
 	},{
 		'name': 'bullet/bullet_size',
-		'type': TYPE_INT,
+		'type': TYPE_FLOAT,
 	},{
 		'name': 'bullet/bullet_impact_force',
-		'type': TYPE_INT,
+		'type': TYPE_FLOAT,
 	},{
 		'name': 'loader/loader_capacity',
 		'type': TYPE_INT,
@@ -251,48 +213,5 @@ func _get_property_list() -> Array:
 		'name': 'weapon/recoil_force',
 		'type': TYPE_FLOAT,
 	},
-	#,{
-	#	name="objects/fire_position",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/fire_direction",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/attack_cooldown",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/reload_cooldown",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/animation",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/sprite",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},{
-	#	name= "objects/side_sprite",
-	#	type=TYPE_NODE_PATH,
-	#	usage=PROPERTY_USAGE_DEFAULT,
-	#	hint=35,
-	#	hint_string="Node",
-	#},
 	])
 	return props

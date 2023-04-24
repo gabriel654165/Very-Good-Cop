@@ -102,8 +102,8 @@ func active_mode_ui():
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
 
 func _input(event):
-	if event.is_action_pressed("shoot"):
-		active_mode_hit_marker_gui()
+	#if event.is_action_pressed("shoot"):
+	#	active_mode_hit_marker_gui()
 #debug
 	if event.is_action_pressed("test2"):
 		set_active_mouse()

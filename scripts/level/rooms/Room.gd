@@ -80,5 +80,9 @@ func spawn_enemy(patrol_points:Array):
 
 	var enemy:Enemy = packed_enemy.instantiate()
 	enemy.patrol_points = patrol_points
-	add_child(enemy)
+	
+	#tmp fix
+	room_config.add_child(enemy)
+	enemy.room_config = room_config
+	
 	enemy.global_position = patrol_points[0]

@@ -87,16 +87,17 @@ _data = {
 
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_0rwaq")
-stats/special_power_unlocked = true
-stats/level = 0
+properties/weapon_name = "grenad_launcher"
+properties/special_power_unlocked = false
+properties/level = 1
 power/points_to_unlock_power = 100
 power/current_points_charge_power = 0
 power/can_use_power = false
-bullet/Projectile = ExtResource("2_g75ee")
-bullet/bullet_speed = 4.0
+bullet/projectile = ExtResource("2_g75ee")
+bullet/bullet_speed = 4
 bullet/bullet_damages = 6
-bullet/bullet_size = 0
-bullet/bullet_impact_force = 2
+bullet/bullet_size = 0.0
+bullet/bullet_impact_force = 2.0
 loader/loader_capacity = 6
 weapon/enable = true
 weapon/number_of_balls_by_burt = 3
@@ -105,9 +106,8 @@ weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.75
 weapon/recoil_force = 1.0
 
-[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
+[node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_ieyus")
-parent = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("3_2d1ed")

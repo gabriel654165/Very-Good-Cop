@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://d23r1u15ts4op"]
+
+[ext_resource type="Script" path="res://scripts/ui/PanelWeaponGui.gd" id="1_bq0u4"]
+[ext_resource type="Texture2D" uid="uid://bkm3uemyu060o" path="res://assets/PNG/Weapons/Ak45Stable.png" id="2_11m3n"]
+
+[node name="PanelWeaponGui" type="PanelContainer" node_paths=PackedStringArray("weapon_label", "level_label", "weapon_texture")]
+custom_minimum_size = Vector2(300, 50)
+offset_right = 200.0
+offset_bottom = 64.0
+script = ExtResource("1_bq0u4")
+weapon_label = NodePath("HSplitContainer/VRightSplitContainer/HSplitContainer/WeaponLabel")
+level_label = NodePath("HSplitContainer/VRightSplitContainer/HSplitContainer/WeaponLevel")
+weapon_texture = NodePath("HSplitContainer/VLeftSplitContainer/WeaponTextureRect")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+split_offset = 125
+
+[node name="VLeftSplitContainer" type="VSplitContainer" parent="HSplitContainer"]
+layout_mode = 2
+
+[node name="WeaponTextureRect" type="TextureRect" parent="HSplitContainer/VLeftSplitContainer"]
+layout_mode = 2
+texture = ExtResource("2_11m3n")
+expand_mode = 1
+
+[node name="VRightSplitContainer" type="VSplitContainer" parent="HSplitContainer"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VRightSplitContainer"]
+layout_mode = 2
+split_offset = 75
+
+[node name="WeaponLabel" type="Label" parent="HSplitContainer/VRightSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "AK45"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="WeaponLevel" type="Label" parent="HSplitContainer/VRightSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "LVL.5"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="PowerChargeBar" type="Label" parent="HSplitContainer/VRightSplitContainer"]
+layout_mode = 2
+text = "[====          ]"
+horizontal_alignment = 1

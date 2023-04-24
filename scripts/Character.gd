@@ -6,6 +6,7 @@ class_name Character
 @onready var throw_object_position = $ThrowObjectPosition
 
 #movement
+@export var action_disabled : bool = false
 @export var speed : float = 6
 var force : Vector2 = Vector2.ZERO
 
@@ -24,6 +25,7 @@ var weapon_throwed : bool = false
 var hook_deployed : bool = false
 
 func stab():
+	print("knife null")
 	if knife != null:
 		knife.stab()
 
@@ -53,4 +55,16 @@ func stunned(time_to_sleep: float):
 
 func apply_force(character: Character, direction: Vector2, force: float):
 	character.force = direction * force
+
+func set_able_actions(state: bool):
+	action_disabled = state
+
+func spawnSprite(position: Vector2, sprite: Sprite2D) -> Node2D:
+	var spriteDeadEnemy = Sprite2D.new()
+	spriteDeadEnemy.set_name("SpriteDead")
+	spriteDeadEnemy.texture = sprite.texture
+	spriteDeadEnemy.visible = true
+	get_tree().current_scene.add_child(spriteDeadEnemy)
+	spriteDeadEnemy.global_position = position
+	return spriteDeadEnemy as Node2D
 

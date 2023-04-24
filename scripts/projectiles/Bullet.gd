@@ -28,7 +28,7 @@ func handle_collision(collision: KinematicCollision2D):
 	
 	if object.has_method("handle_hit"):
 		current_piercing_force -= 1
-		object.handle_hit(damages)
+		object.handle_hit(self, damages)
 
 	if object.has_method("apply_force"):
 		object.apply_force(object, self.direction, impact_force)

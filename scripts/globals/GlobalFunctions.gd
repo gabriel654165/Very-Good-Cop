@@ -45,6 +45,17 @@ func append_in_array_on_condition(condition: Callable, array: Array, parent: Nod
 			append_in_array_on_condition(condition, array, child)
 	return
 
+func find_object_on_condition(condition: Callable, parent: Node) -> Node:
+	var object : Node = null
+	
+	for child in parent.get_children():
+		if condition.call(child):
+			object = child
+			break
+		if child.get_child_count() > 0:
+			object = find_object_on_condition(condition, child)
+	return object
+
 
 func print_func_time(fn:Callable, message:=fn.get_method()):
 	var t = Time.get_unix_time_from_system()

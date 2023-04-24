@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GlobalSignals="*res://scripts/globals/GlobalSignals.gd"
 GlobalFunctions="*res://scripts/globals/GlobalFunctions.gd"
 GlobalVariables="*res://scripts/globals/GlobalVariables.gd"
+DetectableTargetManager="*res://scripts/globals/DetectableTargetManager.gd"
 
 [input]
 

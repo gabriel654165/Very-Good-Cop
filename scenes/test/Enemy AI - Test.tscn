@@ -7,12 +7,11 @@
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_gyb4h"]
 [ext_resource type="PackedScene" uid="uid://dvdfosa8s7qft" path="res://scenes/rooms/Room 1.tscn" id="9_1bcuv"]
 
-[node name="Test-2" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="Test-2" type="Node2D"]
 position = Vector2(564, 170)
 script = ExtResource("1_5e57m")
 gui_manager_scene = ExtResource("2_knftv")
 projectile_manager_scene = ExtResource("3_eolho")
-player = NodePath("Player")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-316, -287)

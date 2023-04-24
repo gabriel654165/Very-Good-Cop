@@ -22542,12 +22542,10 @@ shape = SubResource("CircleShape2D_tdnqi")
 rotation = -0.375185
 script = ExtResource("9_poufy")
 
-[node name="PressKeyAndCollide" type="Node2D" parent="HealPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="PressKeyAndCollide" type="Node2D" parent="HealPowerUp"]
 rotation = -0.375185
 script = ExtResource("10_3xvsf")
 interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("ActivateProcessorInteraction")
 
 [node name="KeyPressedInteraction" type="Node2D" parent="HealPowerUp/PressKeyAndCollide"]
 script = ExtResource("11_53i51")
@@ -22559,13 +22557,11 @@ is_active = true
 script = ExtResource("12_3f04b")
 interaction_processor = NodePath("../../SpamClickAndCollide")
 
-[node name="SpamClickAndCollide" type="Node2D" parent="HealPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="SpamClickAndCollide" type="Node2D" parent="HealPowerUp"]
 rotation = -0.375185
 script = ExtResource("10_3xvsf")
 is_active = false
 interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("../AddPassiveEffectInteraction")
 
 [node name="SpamClickInteraction" type="Node2D" parent="HealPowerUp/SpamClickAndCollide"]
 script = ExtResource("13_sk8oi")
@@ -22602,12 +22598,10 @@ shape = SubResource("CircleShape2D_tdnqi")
 rotation = -0.375185
 script = ExtResource("9_poufy")
 
-[node name="PressKeyAndCollide" type="Node2D" parent="SpeedPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="PressKeyAndCollide" type="Node2D" parent="SpeedPowerUp"]
 rotation = -0.375185
 script = ExtResource("10_3xvsf")
 interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("ActivateProcessorInteraction")
 
 [node name="KeyPressedInteraction" type="Node2D" parent="SpeedPowerUp/PressKeyAndCollide"]
 script = ExtResource("11_53i51")
@@ -22619,13 +22613,11 @@ is_active = true
 script = ExtResource("12_3f04b")
 interaction_processor = NodePath("../../SpamClickAndCollide")
 
-[node name="SpamClickAndCollide" type="Node2D" parent="SpeedPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="SpamClickAndCollide" type="Node2D" parent="SpeedPowerUp"]
 rotation = -0.375185
 script = ExtResource("10_3xvsf")
 is_active = false
 interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("../AddPassiveEffectInteraction")
 
 [node name="SpamClickInteraction" type="Node2D" parent="SpeedPowerUp/SpamClickAndCollide"]
 script = ExtResource("13_sk8oi")
@@ -22662,12 +22654,10 @@ shape = SubResource("CircleShape2D_tdnqi")
 rotation = -0.375185
 script = ExtResource("9_poufy")
 
-[node name="PressKeyAndCollide" type="Node2D" parent="SlowMotionPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="PressKeyAndCollide" type="Node2D" parent="SlowMotionPowerUp"]
 rotation = -0.375185
 script = ExtResource("10_3xvsf")
 interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("ActivateProcessorInteraction")
 
 [node name="KeyPressedInteraction" type="Node2D" parent="SlowMotionPowerUp/PressKeyAndCollide"]
 script = ExtResource("11_53i51")
@@ -22679,13 +22669,11 @@ is_active = true
 script = ExtResource("12_3f04b")
 interaction_processor = NodePath("../../SpamClickAndCollide")
 
-[node name="SpamClickAndCollide" type="Node2D" parent="SlowMotionPowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="SpamClickAndCollide" type="Node2D" parent="SlowMotionPowerUp"]
 rotation = -0.375185
 script = ExtResource("10_3xvsf")
 is_active = false
 interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("../AddPassiveEffectInteraction")
 
 [node name="SpamClickInteraction" type="Node2D" parent="SlowMotionPowerUp/SpamClickAndCollide"]
 script = ExtResource("13_sk8oi")
@@ -22722,12 +22710,10 @@ shape = SubResource("CircleShape2D_tdnqi")
 rotation = -0.375185
 script = ExtResource("9_poufy")
 
-[node name="PressKeyAndCollide" type="Node2D" parent="DamagePowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="PressKeyAndCollide" type="Node2D" parent="DamagePowerUp"]
 rotation = -0.375185
 script = ExtResource("10_3xvsf")
 interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("ActivateProcessorInteraction")
 
 [node name="KeyPressedInteraction" type="Node2D" parent="DamagePowerUp/PressKeyAndCollide"]
 script = ExtResource("11_53i51")
@@ -22739,13 +22725,11 @@ is_active = true
 script = ExtResource("12_3f04b")
 interaction_processor = NodePath("../../SpamClickAndCollide")
 
-[node name="SpamClickAndCollide" type="Node2D" parent="DamagePowerUp" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="SpamClickAndCollide" type="Node2D" parent="DamagePowerUp"]
 rotation = -0.375185
 script = ExtResource("10_3xvsf")
 is_active = false
 interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("../AddPassiveEffectInteraction")
 
 [node name="SpamClickInteraction" type="Node2D" parent="DamagePowerUp/SpamClickAndCollide"]
 script = ExtResource("13_sk8oi")
