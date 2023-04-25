@@ -110,7 +110,6 @@ func generate_dungeon_layout(req_nb_rooms:int):
 	assert(deadends.size() >= 2, "Wrong deadends number")
 
 	entrance_pos = deadends.min()
-	#print(entrance_pos)
 	exit_pos = find_farthest_cell_from(entrance_pos)
 
 func number_of_empty_neighbors_at(pos:Vector2i) -> int:
