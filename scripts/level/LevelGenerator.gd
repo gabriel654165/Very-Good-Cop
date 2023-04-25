@@ -42,7 +42,6 @@ func generate():
 	# NOTE: Find a better rng
 	var number_of_rooms:int = BaseNbOfRoomss + (GlobalVariables.level + randi_range(0, 3))
 
-	#print("Generating level with " + str(number_of_rooms) + " rooms")
 
 	reset_dungeon_layout()
 	generate_dungeon_layout(number_of_rooms)
