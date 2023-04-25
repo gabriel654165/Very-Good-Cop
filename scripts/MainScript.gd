@@ -41,3 +41,7 @@ func add_manager(packed_manager:PackedScene, init_func:Callable=func(x):pass):
 	init_func.call(manager)
 
 	return manager
+
+func _input(event):
+	if event.is_action_pressed("reload_level_test"):
+		get_tree().reload_current_scene()
