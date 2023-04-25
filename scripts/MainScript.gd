@@ -8,6 +8,7 @@ extends Node2D
 @onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene)
 @onready var level_generator: LevelGenerator = add_manager(level_generator_scene)
 
+@onready var camera : Camera2D = $Camera2D
 @onready var player : Player = $Player
 
 func _ready():
@@ -29,10 +30,14 @@ func _ready():
 
 	await level_generator.generate()
 	spawn_player()
+	init_camera()
 	gui_manager.generateUi()
 
 func spawn_player():
 	player.position = level_generator.local_to_world_position(level_generator.entrance_pos)
+
+func init_camera():
+	camera.global_position = player.global_position
 
 func add_manager(packed_manager:PackedScene, init_func:Callable=func(x):pass):
 	var manager = packed_manager.instantiate()
@@ -42,6 +47,7 @@ func add_manager(packed_manager:PackedScene, init_func:Callable=func(x):pass):
 
 	return manager
 
+#debug
 func _input(event):
 	if event.is_action_pressed("reload_level_test"):
 		get_tree().reload_current_scene()
