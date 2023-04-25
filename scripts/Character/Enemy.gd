@@ -11,7 +11,6 @@ class_name Enemy
 @onready var blood_effect_prefab = preload("res://scenes/effects/blood.tscn")
 
 var patrol_points: Array = []
-var room_config : RoomConfig = null
 
 func _ready():
 	weapon_manager = get_node("WeaponManager")

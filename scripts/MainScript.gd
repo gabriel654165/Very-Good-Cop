@@ -8,27 +8,24 @@ extends Node2D
 @onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene)
 @onready var level_generator: LevelGenerator = add_manager(level_generator_scene)
 
-#@onready var camera : Camera2D = $Camera2D
-#@onready var remote_transform : RemoteTransform2D = $RemoteTransform2D
 @onready var player : Player = $Player
 
 func _ready():
-	GlobalSignals.connect("player_fired", Callable(gui_manager.cursor_manager, "active_mode_hit_marker_gui"))
+	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.active_mode_hit_marker_gui)
 	
-	GlobalSignals.connect("projectile_fired_spawn", Callable(projectile_manager, "handle_fired_projectile_spawned"))
-	GlobalSignals.connect("projectile_launched_spawn", Callable(projectile_manager, "handle_launched_projectile_spawned"))
-	GlobalSignals.connect("grappling_cable_drag", Callable(projectile_manager, "handle_grappling_cable_drag"))
-	#GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_fired_projectile_spawned)
+	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
+	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)
+	GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_fired_projectile_spawned)
 	
-	GlobalSignals.connect("character_health_changed", Callable(gui_manager.health_ui_manager, "handle_character_health_changed"))
-	GlobalSignals.connect("character_health_changed", Callable(gui_manager.pop_up_health_manager, "handle_character_health_changed"))
-	GlobalSignals.connect("character_max_health_changed", Callable(gui_manager.health_ui_manager, "handle_character_max_health_changed"))
+	GlobalSignals.character_health_changed.connect(gui_manager.health_ui_manager.handle_character_health_changed)
+	GlobalSignals.character_health_changed.connect(gui_manager.pop_up_health_manager.handle_character_health_changed)
+	GlobalSignals.character_max_health_changed.connect(gui_manager.health_ui_manager.handle_character_max_health_changed)
 	
-	GlobalSignals.connect("enemy_died", Callable(player, "handle_enemy_died"))
-	GlobalSignals.connect("enemy_died", Callable(gui_manager.pop_up_points_manager, "handle_enemy_died"))
-	GlobalSignals.connect("enemy_died", Callable(gui_manager.panel_points_manager, "handle_enemy_died"))
-	GlobalSignals.connect("enemy_died", Callable(gui_manager.panel_kills_manager, "handle_enemy_died"))
-	GlobalSignals.connect("enemy_died", Callable(gui_manager.weapon_panel_manager, "handle_enemy_died"))
+	GlobalSignals.enemy_died.connect(player.handle_enemy_died)
+	GlobalSignals.enemy_died.connect(gui_manager.pop_up_points_manager.handle_enemy_died)
+	GlobalSignals.enemy_died.connect(gui_manager.panel_points_manager.handle_enemy_died)
+	GlobalSignals.enemy_died.connect(gui_manager.panel_kills_manager.handle_enemy_died)
+	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
 
 	await level_generator.generate()
 	spawn_player()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0x250onoqdno"]
+[gd_scene load_steps=10 format=3 uid="uid://d0x250onoqdno"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_uemap"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
 [ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
+[ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
@@ -42,3 +43,6 @@ position = Vector2(16, 9)
 position = Vector2(20, 0)
 
 [node name="BulletproofVest" type="Node2D" parent="."]
+
+[node name="DetectableTarget" type="Node2D" parent="."]
+script = ExtResource("8_jhep5")

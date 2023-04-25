@@ -64,12 +64,6 @@ script = ExtResource("7_ar7hp")
 shape = SubResource("CircleShape2D_etnqn")
 
 [node name="WeaponManager" parent="." instance=ExtResource("4_7rejy")]
-stats/special_power_unlocked = false
-stats/level = 0
-bullet/Projectile = null
-bullet/bullet_speed = 4.0
-bullet/bullet_size = 0
-bullet/bullet_impact_force = 2
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(16, 9)
