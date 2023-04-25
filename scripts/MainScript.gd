@@ -31,7 +31,7 @@ func _ready():
 	await level_generator.generate()
 	spawn_player()
 	init_camera()
-	gui_manager.generateUi()
+	gui_manager.generate_ui()
 
 func spawn_player():
 	player.position = level_generator.local_to_world_position(level_generator.entrance_pos)

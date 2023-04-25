@@ -26,11 +26,11 @@ func set_active(state: bool):
 	
 	active = state
 	if active:
-		generateUi()
+		generate_ui()
 	else:
-		unloadUi()
+		unload_ui()
 
-func generateUi():
+func generate_ui():
 	var cursor_ui_instance = cursor_ui.instantiate()
 	add_child(cursor_ui_instance)
 	
@@ -43,7 +43,7 @@ func generateUi():
 	cursor_animator.play("cursor_idle")
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Enemy, enemy_list, get_tree().root)
 
-func unloadUi():
+func unload_ui():
 	pass
 
 func _process(delta):

@@ -18,11 +18,11 @@ func set_active(state: bool):
 	
 	active = state
 	if active:
-		generateUi()
+		generate_ui()
 	else:
-		unloadUi()
+		unload_ui()
 
-func generateUi():
+func generate_ui():
 	#aller chercher tout les Health
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Health, health_obj_list, get_tree().root)
 	
@@ -35,7 +35,7 @@ func generateUi():
 		set_health_values(health_obj, health_ui_list[index])
 		index += 1
 
-func unloadUi():
+func unload_ui():
 	pass
 
 func _process(delta):
