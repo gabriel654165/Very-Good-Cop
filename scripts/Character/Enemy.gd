@@ -5,6 +5,7 @@ class_name Enemy
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 @onready var room_config: RoomConfig = $"../RoomConfig"
 @onready var vision_sensor: VisionSensor = $VisionSensor
+@onready var sprite: Sprite2D = $Sprite2D
 
 @export var distance_to_shoot: float = 70
 @export var point_value: float = 100

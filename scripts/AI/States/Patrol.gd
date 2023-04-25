@@ -34,14 +34,14 @@ func get_target():
 	set_movement_target(current_point)
 
 func enter(_msg := {}) -> void:
-	vision_sensor.set_process(true)
-	vision_sensor.can_see_target.connect(_on_see_target)
-	state_machine.navigation_agent.target_reached.connect(_on_target_reached)
+	if !vision_sensor.can_see_target.is_connected(_on_see_target):
+		vision_sensor.can_see_target.connect(_on_see_target)
+	if !state_machine.navigation_agent.target_reached.is_connected(_on_target_reached):
+		state_machine.navigation_agent.target_reached.connect(_on_target_reached)
 	get_target()
 
 func exit() -> void:
 	vision_sensor.can_see_target.disconnect(_on_see_target)
-	vision_sensor.set_process(false)	
 	state_machine.navigation_agent.target_reached.disconnect(_on_target_reached)
 
 #signals 
