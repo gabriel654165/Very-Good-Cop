@@ -15,7 +15,7 @@ func set_target(movement_target: Node2D):
 func set_movement_target(movement_target: Vector2):
 	state_machine.navigation_agent.target_position = movement_target	
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	move()
 
 func move() -> void:

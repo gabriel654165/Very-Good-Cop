@@ -7,11 +7,13 @@ class_name VisionSensor
 @export_flags_2d_physics var layers_2d_physics
 
 signal can_see_target(target: DetectableTarget)
+signal lost_target(target: DetectableTarget)
 
 var EyeLocation: Vector2
 var EyeDirection: Vector2
 var CosVisionConeAngle: float = 0
 var space: PhysicsDirectSpaceState2D 
+var current_target: DetectableTarget
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +28,7 @@ func _process(delta):
 		queue_redraw()
 		
 	if not Engine.is_editor_hint():
+		var temp_target: DetectableTarget = null
 		for candidate_target in DetectableTargetManager.targets:
 			var vector_to_target: Vector2 = candidate_target.get_parent().global_position - EyeLocation;
 
@@ -44,7 +47,13 @@ func _process(delta):
 			var hit_info = space.intersect_ray(param)
 			if !hit_info.is_empty():
 				if hit_info.collider.name == candidate_target.get_parent().name:
-					can_see_target.emit(candidate_target)
+					temp_target = candidate_target
+		if current_target != temp_target:
+			if  current_target != null:
+				lost_target.emit(current_target)
+			current_target = temp_target
+			if current_target != null:
+				can_see_target.emit(current_target)
 
 func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color):
 	var nb_points = 32
