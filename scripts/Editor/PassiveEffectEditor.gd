@@ -11,9 +11,12 @@ var value_effect : float = 10
 var infinite_effect : bool = false
 var effect_duration : float = 0
 
+var sprite : NodePath
+var used_sprite : NodePath
+
 func _ready():
 	#todo : get child of type PassiveEffect instead
-	passive_effect = get_child(2) as PassiveEffect
+	passive_effect = get_child(3) as PassiveEffect
 	if passive_effect == null:
 		return
 	set_variables(passive_effect)
@@ -27,6 +30,9 @@ func set_variables(new_passive_effect: PassiveEffect):
 	passive_effect.value_effect = self.value_effect
 	passive_effect.infinite_effect = self.infinite_effect
 	passive_effect.effect_duration = self.effect_duration
+	
+	passive_effect.sprite = self.get_node(self.sprite) as Sprite2D
+	passive_effect.used_sprite = self.get_node(self.used_sprite) as Sprite2D
 
 func _process(delta):
 	if not Engine.is_editor_hint():
@@ -43,6 +49,10 @@ func _get(property):
 		return infinite_effect
 	if property == 'effect_duration':
 		return effect_duration
+	if property == 'sprite':
+		return sprite
+	if property == 'used_sprite':
+		return used_sprite
 
 func _set(property, value) -> bool :
 	if property == 'effect_name':
@@ -55,6 +65,10 @@ func _set(property, value) -> bool :
 		infinite_effect = value
 	if property == 'effect_duration':
 		effect_duration = value
+	if property == 'sprite':
+		sprite = value
+	if property == 'used_sprite':
+		used_sprite = value
 	return true
 
 func _get_property_list() -> Array:
@@ -82,6 +96,18 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'effect_duration',
 		'type': TYPE_FLOAT,
+	},{
+		'name': 'sprite',
+		'type': TYPE_NODE_PATH,
+		'usage': PROPERTY_USAGE_DEFAULT,
+		'hint': 35,
+		'hint_string': "Node",
+	},{
+		'name': 'used_sprite',
+		'type': TYPE_NODE_PATH,
+		'usage': PROPERTY_USAGE_DEFAULT,
+		'hint': 35,
+		'hint_string': "Node",
 	}
 	])
 	return props

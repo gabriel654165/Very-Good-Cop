@@ -19,12 +19,9 @@ radius = 152.161
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_ef1gd")
-distance_to_shoot = null
-point_value = null
-action_disabled = null
-speed = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("2_oj8g8")
 region_enabled = true
 region_rect = Rect2(111.512, -1.1273, 53.145, 44.7663)

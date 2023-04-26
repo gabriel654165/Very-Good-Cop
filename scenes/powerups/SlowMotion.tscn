@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://drnc1dk61iwql"]
+
+[ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_eyvvh"]
+[ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="2_5y8iq"]
+[ext_resource type="Texture2D" uid="uid://nyk6qxgsi43u" path="res://assets/PNG/Default size/barrelGreen_side.png" id="2_ua3k7"]
+[ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="3_py8dy"]
+[ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="4_elvs3"]
+[ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="5_7khkc"]
+[ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="6_4hdsu"]
+[ext_resource type="Script" path="res://scripts/Interactions/ActiveProcessorInteraction.gd" id="7_e3dkn"]
+[ext_resource type="Script" path="res://scripts/Interactions/SpamClickInteraction.gd" id="8_mxu2l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
+radius = 28.2312
+
+[node name="SlowMotionPowerUp" type="Node2D"]
+script = ExtResource("1_eyvvh")
+effect_name = "slowmotion"
+type = 2
+value_effect = 10.0
+infinite_effect = false
+effect_duration = 7.5
+sprite = NodePath("Sprite2D")
+used_sprite = NodePath("UsedSprite")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -0.375185
+texture = ExtResource("2_ua3k7")
+
+[node name="UsedSprite" type="Sprite2D" parent="."]
+visible = false
+rotation = -0.75037
+texture = ExtResource("2_5y8iq")
+
+[node name="CharacterCollisionInteraction" type="Node2D" parent="."]
+script = ExtResource("3_py8dy")
+for_who = 3
+is_active = true
+
+[node name="Area2D" type="Area2D" parent="CharacterCollisionInteraction"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterCollisionInteraction/Area2D"]
+shape = SubResource("CircleShape2D_tdnqi")
+
+[node name="AddPassiveEffectInteraction" type="Node2D" parent="."]
+rotation = -0.375185
+script = ExtResource("4_elvs3")
+for_who = 1
+
+[node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("5_7khkc")
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("ActivateProcessorInteraction")
+
+[node name="KeyPressedInteraction" type="Node2D" parent="PressKeyAndCollide"]
+script = ExtResource("6_4hdsu")
+keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="ActivateProcessorInteraction" type="Node2D" parent="PressKeyAndCollide" node_paths=PackedStringArray("interaction_processor")]
+script = ExtResource("7_e3dkn")
+interaction_processor = NodePath("../../SpamClickAndCollide")
+
+[node name="SpamClickAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("5_7khkc")
+is_active = false
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("../AddPassiveEffectInteraction")
+
+[node name="SpamClickInteraction" type="Node2D" parent="SpamClickAndCollide"]
+script = ExtResource("8_mxu2l")
+for_who = 1
+
+[node name="Timer" type="Timer" parent="SpamClickAndCollide/SpamClickInteraction"]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_entered"]
+[connection signal="body_exited" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_exited"]
+[connection signal="timeout" from="SpamClickAndCollide/SpamClickInteraction/Timer" to="SpamClickAndCollide/SpamClickInteraction" method="_on_timer_timeout"]
