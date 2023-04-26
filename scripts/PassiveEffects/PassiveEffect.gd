@@ -26,13 +26,13 @@ func trigger(actor: Node):
 	#print("---Do passive effect action : ", self.name, " on : ", actor.name)
 	#print("Values_effect updated ? : ", value_effect, " and type : ", type)
 	add_passive_effect(actor)
+	sprite.visible = false
+	used_sprite.visible = true
 	await get_tree().create_timer(effect_duration).timeout
 	if actor != null:
 		remove_passive_effect(actor)
 	#print("effect removed")
 	set_active(false)
-	sprite.visible = false
-	used_sprite.visible = true
 
 func add_passive_effect(character: Character):
 	if type == TYPE.HEALTH:
