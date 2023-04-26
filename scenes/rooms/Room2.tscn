@@ -66,5 +66,7 @@ position = Vector2(-38, 192)
 
 [node name="PowerUpPoints" type="Node" parent="RoomConfig"]
 
+[node name="A" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_mt155")

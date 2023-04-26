@@ -28,6 +28,8 @@ layer_0/tile_data = PackedInt32Array(-1441816, 4980736, 54, -1376280, 4980736, 5
 
 [node name="PowerUpPoints" type="Node" parent="RoomConfig"]
 
+[node name="A" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+
 [node name="Walls" type="TileMap" parent="."]
 tile_set = ExtResource("1_7s005")
 format = 2

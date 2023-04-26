@@ -1,13 +1,11 @@
 extends Node
 
 func _ready():
-	#print("Game starting...")
 	init_global_variables()
 	randomize()
 	
-	# TODO: Going to change to res://scenes/...
 	print_func_time(
-		Callable(LevelGenerator, "load_all_rooms_from").bind("res://scripts/level/rooms/"), # Just fancy stuff to use bind on a static func, I could also make a lambda where I call the function with the argument
+		Callable(LevelGenerator, "load_all_rooms_from").bind("res://scenes/rooms/"), # Just fancy stuff to use bind on a static func, I could also make a lambda where I call the function with the argument
 		"Loaded every room"
 	)
 

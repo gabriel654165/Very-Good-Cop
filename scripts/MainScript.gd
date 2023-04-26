@@ -16,7 +16,7 @@ func _ready():
 	
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
 	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)
-	GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_fired_projectile_spawned)
+	GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_grappling_cable_drag)
 	
 	GlobalSignals.character_health_changed.connect(gui_manager.health_ui_manager.handle_character_health_changed)
 	GlobalSignals.character_health_changed.connect(gui_manager.pop_up_health_manager.handle_character_health_changed)
@@ -28,18 +28,22 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.panel_kills_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
 
-	await level_generator.generate()
+	if level_generator != null:
+		await level_generator.generate()
 	spawn_player()
 	init_camera()
 	gui_manager.generate_ui()
 
 func spawn_player():
-	player.position = level_generator.local_to_world_position(level_generator.entrance_pos)
+	if level_generator != null:
+		player.position = level_generator.local_to_world_position(level_generator.entrance_pos)
 
 func init_camera():
 	camera.global_position = player.global_position
 
 func add_manager(packed_manager:PackedScene, init_func:Callable=func(x):pass):
+	if packed_manager == null:
+		return
 	var manager = packed_manager.instantiate()
 	add_child(manager)
 	

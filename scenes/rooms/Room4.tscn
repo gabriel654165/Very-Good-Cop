@@ -63,6 +63,8 @@ position = Vector2(79, -314)
 
 [node name="PowerUpPoints" type="Node" parent="RoomConfig"]
 
+[node name="A" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+
 [node name="Walls" type="TileMap" parent="."]
 tile_set = ExtResource("1_yac5f")
 format = 2

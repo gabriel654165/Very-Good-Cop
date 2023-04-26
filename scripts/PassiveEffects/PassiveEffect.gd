@@ -10,6 +10,9 @@ var value_effect : float = 10
 var infinite_effect : bool = false
 var effect_duration : float = 0
 
+var sprite : Sprite2D
+var used_sprite : Sprite2D
+
 enum TYPE {
 	HEALTH,
 	SPEED,
@@ -24,9 +27,12 @@ func trigger(actor: Node):
 	#print("Values_effect updated ? : ", value_effect, " and type : ", type)
 	add_passive_effect(actor)
 	await get_tree().create_timer(effect_duration).timeout
-	remove_passive_effect(actor)
+	if actor != null:
+		remove_passive_effect(actor)
 	#print("effect removed")
 	set_active(false)
+	sprite.visible = false
+	used_sprite.visible = true
 
 func add_passive_effect(character: Character):
 	if type == TYPE.HEALTH:

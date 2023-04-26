@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvdfosa8s7qft"]
 
-[ext_resource type="Script" path="res://scripts/RoomConfig.gd" id="1_rsw7k"]
-[ext_resource type="PackedScene" uid="uid://cewhfxsma7527" path="res://scenes/characters/enemies/pistolero.tscn" id="2_47iy8"]
-[ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="3_rtj40"]
+[ext_resource type="Script" path="res://scripts/RoomConfig.gd" id="1_5aa33"]
+[ext_resource type="PackedScene" uid="uid://cewhfxsma7527" path="res://scenes/characters/enemies/pistolero.tscn" id="2_ijtxr"]
+[ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="3_quygd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ejre0"]
 vertices = PackedVector2Array(-199.209, -152, -199.209, -188, -137.386, -188, -137.386, -152, 227.666, -152, 227.666, -40, -7.85057, -64, 270.846, -40, 270.846, 32, 227.666, 32, 227.666, 128, -7.85057, 128, -62.8045, -64, -62.8045, 128, -259.069, 128, -259.069, -152)
@@ -10,7 +10,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-259.069, -152, -259.069, 128, -62.8045, 128, -62.8045, -64, -7.85057, -64, -7.85057, 128, 227.666, 128, 227.666, 32, 270.846, 32, 270.846, -40, 227.666, -40, 227.666, -152, -137.386, -152, -137.386, -188, -199.209, -188, -199.209, -152)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78u0y"]
-texture = ExtResource("3_rtj40")
+texture = ExtResource("3_quygd")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -22465,7 +22465,7 @@ sources/2 = SubResource("TileSetAtlasSource_78u0y")
 [node name="Room 1" type="Node2D"]
 
 [node name="RoomConfig" type="Node2D" parent="."]
-script = ExtResource("1_rsw7k")
+script = ExtResource("1_5aa33")
 
 [node name="PatrolPoints" type="Node2D" parent="RoomConfig"]
 
@@ -22494,7 +22494,7 @@ position = Vector2(-40, -88)
 scale = Vector2(1.01903, 1)
 navigation_polygon = SubResource("NavigationPolygon_ejre0")
 
-[node name="Enemy" parent="." instance=ExtResource("2_47iy8")]
+[node name="Enemy" parent="." instance=ExtResource("2_ijtxr")]
 position = Vector2(126.36, 57)
 scale = Vector2(1.01903, 1)
 
