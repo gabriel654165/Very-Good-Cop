@@ -39,7 +39,6 @@ func get_children_positions_array(node:Node):
 
 
 func spawn_powerups(position:Vector2):
-	print("Spawn powerup x")
 	var power_ups:Array[PackedScene] = [
 		preload("res://scenes/powerups/SlowMotion.tscn"),
 		preload("res://scenes/powerups/Speed.tscn"),
