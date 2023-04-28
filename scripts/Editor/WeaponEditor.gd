@@ -11,11 +11,14 @@ var points_to_unlock_power : int = 200
 var current_points_charge_power : int = 0
 var can_use_power : bool = false
 
-var projectile : PackedScene
+var projectile_scene : PackedScene
 var bullet_speed : int = 4
 var bullet_damages : int = 6
 var bullet_size : float = 0.5
 var bullet_impact_force : float = 2
+var bullet_piercing_force : int = 0
+var bullet_should_bounce : bool = false
+var bullet_should_pierce_walls : bool = false
 
 var loader_capacity : int = 6
 
@@ -32,9 +35,9 @@ func _ready():
 		return
 	set_variables(weapon)
 
-func _process(delta):
-	if not Engine.is_editor_hint():
-		set_variables(weapon)
+#func _process(delta):
+#	if not Engine.is_editor_hint():
+#		set_variables(weapon)
 
 func set_pos(position):
 	weapon.global_position = position
@@ -56,11 +59,14 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.can_use_power = self.can_use_power
 	
 	if upadte_projectile:
-		weapon.projectile = self.projectile
+		weapon.projectile_scene = self.projectile_scene
 	weapon.bullet_speed = self.bullet_speed
 	weapon.bullet_damages = self.bullet_damages
 	weapon.bullet_size = self.bullet_size
 	weapon.bullet_impact_force = self.bullet_impact_force
+	weapon.bullet_piercing_force = self.bullet_piercing_force
+	weapon.bullet_should_bounce = self.bullet_should_bounce
+	weapon.bullet_should_pierce_walls = self.bullet_should_pierce_walls
 	
 	weapon.loader_capacity = self.loader_capacity
 	
@@ -78,6 +84,7 @@ func _get(property):
 		return special_power_unlocked
 	if property == 'properties/level':
 		return level
+	
 	if property == 'power/points_to_unlock_power':
 		return points_to_unlock_power
 	if property == 'power/current_points_charge_power':
@@ -86,7 +93,7 @@ func _get(property):
 		return can_use_power
 	
 	if property == 'bullet/projectile':
-		return projectile
+		return projectile_scene
 	if property == 'bullet/bullet_speed':
 		return bullet_speed
 	if property == 'bullet/bullet_damages':
@@ -95,6 +102,12 @@ func _get(property):
 		return bullet_size
 	if property == 'bullet/bullet_impact_force':
 		return bullet_impact_force
+	if property == 'bullet/bullet_piercing_force':
+		return bullet_piercing_force
+	if property == 'bullet/bullet_should_bounce':
+		return bullet_should_bounce
+	if property == 'bullet/bullet_should_pierce_walls':
+		return bullet_should_pierce_walls
 	
 	if property == 'loader/loader_capacity':
 		return loader_capacity
@@ -128,7 +141,7 @@ func _set(property, value) -> bool :
 		can_use_power = value
 	
 	if property == 'bullet/projectile':
-		projectile = value
+		projectile_scene = value
 	if property == 'bullet/bullet_speed':
 		bullet_speed = value
 	if property == 'bullet/bullet_damages':
@@ -137,6 +150,12 @@ func _set(property, value) -> bool :
 		bullet_size = value
 	if property == 'bullet/bullet_impact_force':
 		bullet_impact_force = value
+	if property == 'bullet/bullet_piercing_force':
+		bullet_piercing_force = value
+	if property == 'bullet/bullet_should_bounce':
+		bullet_should_bounce = value
+	if property == 'bullet/bullet_should_pierce_walls':
+		bullet_should_pierce_walls = value
 	
 	if property == 'loader/loader_capacity':
 		loader_capacity = value
@@ -191,6 +210,15 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'bullet/bullet_impact_force',
 		'type': TYPE_FLOAT,
+	},{
+		'name': 'bullet/bullet_piercing_force',
+		'type': TYPE_INT,
+	},{
+		'name': 'bullet/bullet_should_bounce',
+		'type': TYPE_BOOL,
+	},{
+		'name': 'bullet/bullet_should_pierce_walls',
+		'type': TYPE_BOOL,
 	},{
 		'name': 'loader/loader_capacity',
 		'type': TYPE_INT,

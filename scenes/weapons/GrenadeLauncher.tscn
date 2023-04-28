@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6i5jh7uk237l"]
+[gd_scene load_steps=12 format=3 uid="uid://b6i5jh7uk237l"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_0rwaq"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_ieyus"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_2d1ed"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_ut61c"]
 [ext_resource type="Texture2D" uid="uid://6vpkvo2gj1eb" path="res://assets/PNG/Weapons/GenadeLauncher.png" id="5_vuv2i"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/CatchingCable.gd" id="7_ehtt2"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -98,6 +99,9 @@ bullet/bullet_speed = 4
 bullet/bullet_damages = 6
 bullet/bullet_size = 0.0
 bullet/bullet_impact_force = 2.0
+bullet/bullet_piercing_force = 0
+bullet/bullet_should_bounce = false
+bullet/bullet_should_pierce_walls = false
 loader/loader_capacity = 6
 weapon/enable = true
 weapon/number_of_balls_by_burt = 3
@@ -144,3 +148,6 @@ root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
+
+[node name="SpecialPower" type="Node2D" parent="Weapon"]
+script = ExtResource("7_ehtt2")

@@ -4,11 +4,9 @@ class_name Bullet
 #bullet : distance de free & pas timer
 #bullet ; saignement
 
-@export var piercing_force : int = 2
-
 @onready var life_cycle_timer = $LifeCycleTimer
 
-var current_piercing_force : int = 0
+#var last_collided_collision
 
 func _ready():
 	life_cycle_timer.start()
@@ -18,25 +16,28 @@ func _ready():
 func _physics_process(delta):
 	_move_and_collide(delta)
 
-func handle_collision(collision: KinematicCollision2D):
-	if !collision:
-		return
-	var object = collision.get_collider()
-	
-	if object.get_name() == "Walls":
-		queue_free()
-	
+func handle_specific_collision(object: Object):
 	if object.has_method("handle_hit"):
-		current_piercing_force -= 1
 		object.handle_hit(self, damages)
-
 	if object.has_method("apply_force"):
 		object.apply_force(object, self.direction, impact_force)
-
-	if current_piercing_force <= 0:
-		queue_free()
 
 #signals
 func _on_life_cycle_timer_timeout():
 	queue_free()
 
+func _on_area_2d_body_entered(body):
+	if body is Character:
+		current_piercing_force -= 1
+	
+	if body.get_name() == "Walls":
+		if should_pierce_walls:
+			current_piercing_force -= 2
+	
+	if current_piercing_force <= 0:
+		queue_free()
+
+func _on_area_2d_body_exited(body):
+	if body.get_name() == "Walls":
+		# Sprite animation go throught wall
+		return

@@ -10,12 +10,16 @@ var level : int = 0
 var points_to_unlock_power : int = 200
 var current_points_charge_power : int = 0
 var can_use_power : bool = false
+var power_activated : bool = false
 
-var projectile : PackedScene
+var projectile_scene : PackedScene
 var bullet_speed : int = 4
 var bullet_damages : int = 6
 var bullet_size : float = 0.5
 var bullet_impact_force : float = 2
+var bullet_piercing_force : int = 0
+var bullet_should_bounce : bool = false
+var bullet_should_pierce_walls : bool = false
 
 var loader_capacity : int = 6
 
@@ -34,6 +38,7 @@ var recoil_force : float = 2 # the more it's close 0 the more it's precise
 @onready var animation = $Animation
 @onready var sprite = $Sprite2D
 @onready var side_sprite = $SideSprite2D
+@onready var special_power = $SpecialPower
 
 func _ready():
 	if get_parent() != null:
@@ -50,10 +55,9 @@ func shoot():
 			if n != 0:
 				await get_tree().create_timer(frequence_of_burt).timeout
 			
-			#right method ?
-			#set_projectile_scene_variables()
-			var projectile_instance : Projectile = projectile.instantiate()
+			var projectile_instance : Projectile = projectile_scene.instantiate()
 			var direction = fire_direction.global_position - fire_position.global_position
+			set_projectile_variables(projectile_instance)
 			
 			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
 			emit_signals(shooter_actor, projectile_instance, direction)
@@ -86,15 +90,18 @@ func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vec
 	if projectile_instance is Bullet:
 		GlobalSignals.projectile_fired_spawn.emit(null, projectile_instance, fire_position.global_position, direction)
 
-func set_projectile_scene_variables():
-	projectile.set("speed", bullet_speed)
-	projectile.set("damages", bullet_damages)
-	projectile.set("size", bullet_size)
-	projectile.set("impact_force", bullet_impact_force)
+func set_projectile_variables(projectile: Projectile):
+	projectile.speed = bullet_speed
+	projectile.damages = bullet_damages
+	projectile.size = bullet_size
+	projectile.impact_force = bullet_impact_force
+	projectile.piercing_force = bullet_piercing_force
+	projectile.should_bounce = bullet_should_bounce
+	projectile.should_pierce_walls = bullet_should_pierce_walls
 
 func add_charge_power_points(points: int):
 	current_points_charge_power += points
 	if current_points_charge_power >= points_to_unlock_power:
 		can_use_power = true
-		#print("Can use special Power !")
+		print("--> Can use special Power !")
 

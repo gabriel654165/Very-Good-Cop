@@ -12,7 +12,7 @@ extends Node2D
 @onready var player : Player = $Player
 
 func _ready():
-	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.active_mode_hit_marker_gui)
+	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
 	
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
 	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)

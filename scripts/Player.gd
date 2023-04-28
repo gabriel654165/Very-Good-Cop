@@ -26,7 +26,7 @@ func _physics_process(delta):
 	global_position += velocity
 	move_and_slide()
 	velocity = Vector2.ZERO
-	look_at(get_global_mouse_position())
+	look_at(get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position)
 
 func _process(delta):
 	if self.action_disabled:
@@ -44,6 +44,9 @@ func _unhandled_input(event):
 		throw_weapon()
 	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
 		throw_grappling()
+	if event.is_action_pressed("activate_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
+		print("pressed !!!")
+		weapon_manager.weapon.special_power.use_special_power()
 	
 	#switch weapon
 	if event.is_action_pressed("test"):

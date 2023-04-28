@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://r7n15xjnkw6m"]
+[gd_scene load_steps=12 format=3 uid="uid://r7n15xjnkw6m"]
 
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_e6w1w"]
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_yujf1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_ucb1l"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_n0wdy"]
 [ext_resource type="Texture2D" uid="uid://divrx8sn4i1rb" path="res://assets/PNG/Weapons/Glock.png" id="5_0evwv"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/AimBot.gd" id="7_lluol"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -94,10 +95,13 @@ power/points_to_unlock_power = 100
 power/current_points_charge_power = 0
 power/can_use_power = false
 bullet/projectile = ExtResource("2_qu7tn")
-bullet/bullet_speed = 10
-bullet/bullet_damages = 6
-bullet/bullet_size = 0.0
+bullet/bullet_speed = 15
+bullet/bullet_damages = 10
+bullet/bullet_size = 1.0
 bullet/bullet_impact_force = 2.0
+bullet/bullet_piercing_force = 0
+bullet/bullet_should_bounce = false
+bullet/bullet_should_pierce_walls = false
 loader/loader_capacity = 6
 weapon/enable = true
 weapon/number_of_balls_by_burt = 1
@@ -144,3 +148,6 @@ root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
+
+[node name="SpecialPower" type="Node2D" parent="Weapon"]
+script = ExtResource("7_lluol")

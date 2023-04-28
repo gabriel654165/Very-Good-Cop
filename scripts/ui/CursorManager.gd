@@ -5,16 +5,12 @@ extends Node2D
 @export var canvas_enemy_offset := Vector2(30, 25)
 @export var cursor_offset := Vector2(6, 6)
 @export var scale_sprite := Vector2(1, 1)
-
-var is_attack_gui : bool = false
-var is_idle_gui : bool = true
-var is_menu_ui : bool = false
+@export var auto_lock : bool = false
+@export var auto_lock_offset : Vector2 = Vector2(55, 50)
+@export var mouse_visible : bool = true
 
 var enemy_list : Array[Enemy] = []
-var cursor_animator : AnimationPlayer = null
-var cursor_sprite : Sprite2D = null
-#var cursor : Sprite2D = $BasicCursorSprite
-var cursor = load("res://assets/UI/Cursors/sprCursor.png")
+var cursor : Cursor
 
 func _ready():
 	if cursor_ui == null:
@@ -31,16 +27,14 @@ func set_active(state: bool):
 		unload_ui()
 
 func generate_ui():
-	var cursor_ui_instance = cursor_ui.instantiate()
-	add_child(cursor_ui_instance)
-	
+	cursor = cursor_ui.instantiate()
+	add_child(cursor)
 	scale = scale_sprite
-	cursor_animator = cursor_ui_instance.get_node("AnimationPlayer") as AnimationPlayer
-	cursor_sprite = cursor_ui_instance.get_node("Sprite2D") as Sprite2D
 	if cursor != null:
-		Input.set_custom_mouse_cursor(cursor)
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
-	cursor_animator.play("cursor_idle")
+		Input.set_custom_mouse_cursor(cursor.cursor_texture)
+	cursor.cursor_mode = DisplayServer.MOUSE_MODE_VISIBLE if mouse_visible else DisplayServer.MOUSE_MODE_HIDDEN
+	DisplayServer.mouse_set_mode(cursor.cursor_mode)
+	cursor.animator.play("cursor_idle")
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Enemy, enemy_list, get_tree().root)
 
 func unload_ui():
@@ -50,13 +44,53 @@ func _process(delta):
 	if !active:
 		return
 	
-	cursor_sprite.global_position = get_viewport().get_mouse_position() + cursor_offset
-	
+	if !cursor.is_locked_gui:
+		GlobalVariables.cursor_position = get_viewport().get_mouse_position() + cursor_offset
 	var is_on_enemy_tmp = is_on_enemy()
-	if is_on_enemy_tmp and !is_attack_gui:
-		active_mode_attack_gui()
-	if !is_on_enemy_tmp and !is_idle_gui:
-		active_mode_idle_gui()
+	
+	if auto_lock:
+		var target = find_nearest_target()
+		if target != Vector2.ZERO:
+			smooth_clamp_cursor_position(target)
+			if !cursor.is_locked_gui:
+				cursor.active_mode_locked_gui()
+		else:
+			cursor.is_locked_gui = false
+	
+	# faire en sorte que meme en autolock quand il est sur un enemy ca enlève le idle
+	# faire un script cursor qui setactive les differents states
+	
+	if is_on_enemy_tmp and !cursor.is_attack_gui and !auto_lock:
+		cursor.active_mode_attack_gui()
+	if !is_on_enemy_tmp and !cursor.is_idle_gui and !cursor.is_locked_gui:
+		cursor.active_mode_idle_gui()
+	
+	cursor.sprite.global_position = GlobalVariables.cursor_position
+
+# Target are Enemy. Later Barrels will also be one.
+func find_nearest_target() -> Vector2:
+	var index : int = 0
+	var target_pos := Vector2.ZERO
+	
+	while index < enemy_list.size():
+		var enemy = enemy_list[index]
+		
+		if enemy == null:
+			enemy_list.remove_at(index)
+			index += 1
+			continue
+		var enemy_canvas_pos = enemy.get_global_transform_with_canvas().origin
+		var mouse_pos = get_viewport().get_mouse_position()
+		
+		if GlobalFunctions.is_inside_vector_2(enemy_canvas_pos, mouse_pos, auto_lock_offset):
+			var last_target_mouse_distance = (target_pos - mouse_pos).length()
+			var new_target_mouse_distance = (enemy_canvas_pos - mouse_pos).length()
+			if last_target_mouse_distance > new_target_mouse_distance:
+				target_pos = enemy_canvas_pos
+		
+		index += 1
+	return target_pos
+
 
 func is_on_enemy() -> bool:
 	var index : int = 0
@@ -76,40 +110,15 @@ func is_on_enemy() -> bool:
 		index += 1
 	return false
 
-#ui activation
-func active_mode_idle_gui():
-	is_idle_gui = true
-	is_menu_ui = false
-	is_attack_gui = false
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
-	cursor_animator.play("cursor_idle")
-
-func active_mode_hit_marker_gui():
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
-	cursor_animator.play("cursor_hit_marker")
-
-func active_mode_attack_gui():
-	is_attack_gui = true
-	is_menu_ui = false
-	is_idle_gui = false
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
-	cursor_animator.play("cursor_on_enemy")
-
-func active_mode_ui():
-	is_menu_ui = true
-	is_attack_gui = false
-	is_idle_gui = false
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
+func hit_marker_action():
+	cursor.active_mode_hit_marker_gui()
 
 func _input(event):
-	#if event.is_action_pressed("shoot"):
-	#	active_mode_hit_marker_gui()
 #debug
-	if event.is_action_pressed("test2"):
-		set_active_mouse()
+	if event.is_action_pressed("change_cursor_type_test"):
+		mouse_visible = !mouse_visible
+		cursor.set_active_mouse(!mouse_visible)
 
-func set_active_mouse():
-	if DisplayServer.mouse_get_mode() == DisplayServer.MOUSE_MODE_HIDDEN:
-		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
-	else:
-		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
+func smooth_clamp_cursor_position(target: Vector2):
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+	tween.tween_property(GlobalVariables, "cursor_position", target, 0.1)

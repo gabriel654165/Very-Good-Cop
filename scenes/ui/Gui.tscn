@@ -27,6 +27,8 @@ position = Vector2(-540, 154)
 script = ExtResource("3_exgmc")
 cursor_ui = ExtResource("4_7jw85")
 scale_sprite = Vector2(2, 2)
+auto_lock_offset = Vector2(155, 150)
+mouse_visible = false
 
 [node name="PopUpHealthManager" type="Node2D" parent="."]
 script = ExtResource("8_armf7")
