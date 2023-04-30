@@ -93,7 +93,7 @@ func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vec
 	
 	if projectile_instance is CatchingCable:
 		GlobalSignals.catching_cable_spawned.emit(null, projectile_instance, fire_position.global_position, direction, 2)
-	if projectile_instance is Grenade:
+	elif projectile_instance is Grenade:
 		var landing_position : Vector2 = get_global_mouse_position()
 		GlobalSignals.projectile_launched_spawn.emit(null, projectile_instance, fire_position.global_position, direction, landing_position)
 	elif projectile_instance is Bullet:
