@@ -17,6 +17,7 @@ func _ready():
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
 	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)
 	GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_grappling_cable_drag)
+	GlobalSignals.catching_cable_spawned.connect(projectile_manager.handle_catching_cable_spawned)
 	
 	GlobalSignals.character_health_changed.connect(gui_manager.health_ui_manager.handle_character_health_changed)
 	GlobalSignals.character_health_changed.connect(gui_manager.pop_up_health_manager.handle_character_health_changed)

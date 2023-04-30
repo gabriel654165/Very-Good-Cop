@@ -144,9 +144,8 @@ _data = {
 [node name="Grenade" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_hylyk")
-radius_pixels_impact_area = null
-max_launch_distance = null
-landing_precision = null
+max_launch_distance = 500.0
+landing_precision = 2
 speed = 7
 damages = 10
 size = 0.7

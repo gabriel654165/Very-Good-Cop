@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://x0amqpcim4nu"]
+[gd_scene load_steps=12 format=3 uid="uid://x0amqpcim4nu"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_aaa8n"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_jqkmm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_gaw7k"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_favuq"]
 [ext_resource type="Texture2D" uid="uid://40748egngkr8" path="res://assets/PNG/Weapons/MiniUzi.png" id="5_jrvft"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/BouncingBullets.gd" id="7_ptyis"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -98,6 +99,9 @@ bullet/bullet_speed = 4
 bullet/bullet_damages = 6
 bullet/bullet_size = 0.0
 bullet/bullet_impact_force = 2.0
+bullet/bullet_piercing_force = 0
+bullet/bullet_should_bounce = false
+bullet/bullet_should_pierce_walls = false
 loader/loader_capacity = 15
 weapon/enable = true
 weapon/number_of_balls_by_burt = 15
@@ -142,3 +146,6 @@ root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
+
+[node name="SpecialPower" type="Node2D" parent="Weapon"]
+script = ExtResource("7_ptyis")

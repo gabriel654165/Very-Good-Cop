@@ -2,19 +2,13 @@ extends Projectile
 class_name Bullet
 
 #bullet : distance de free & pas timer
-#bullet ; saignement
 
 @onready var life_cycle_timer = $LifeCycleTimer
-
-#var last_collided_collision
 
 func _ready():
 	life_cycle_timer.start()
 	scale = scale * size
 	current_piercing_force = piercing_force
-
-func _physics_process(delta):
-	_move_and_collide(delta)
 
 func handle_specific_collision(object: Object):
 	if object.has_method("handle_hit"):

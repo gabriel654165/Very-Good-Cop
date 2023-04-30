@@ -48,7 +48,8 @@ func _ready():
 func shoot():
 	if !enable:
 		return
-	if attack_cooldown.is_stopped() and Projectile != null:
+	
+	if (attack_cooldown.is_stopped() or should_disable_cooldown()) and Projectile != null:
 		attack_cooldown.start()
 		
 		for n in number_of_balls_by_burt:
@@ -64,6 +65,11 @@ func shoot():
 			recoil_shooter(direction)
 			
 			animation.play("muzzle_flash")
+
+func should_disable_cooldown() -> bool:
+	if "is_shooting" in special_power:
+		return special_power.is_shooting
+	return false;
 
 func recoil_shooter(direction: Vector2):
 	if shooter_actor == null:
@@ -84,10 +90,15 @@ func _random_range(angle: Vector2) -> float:
 func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vector2):
 	if actor is Player:
 		GlobalSignals.player_fired.emit()
+	
+	if projectile_instance is CatchingCable:
+		GlobalSignals.catching_cable_spawned.emit(null, projectile_instance, fire_position.global_position, direction, 2)
 	if projectile_instance is Grenade:
 		var landing_position : Vector2 = get_global_mouse_position()
 		GlobalSignals.projectile_launched_spawn.emit(null, projectile_instance, fire_position.global_position, direction, landing_position)
-	if projectile_instance is Bullet:
+	elif projectile_instance is Bullet:
+		GlobalSignals.projectile_fired_spawn.emit(null, projectile_instance, fire_position.global_position, direction)
+	elif projectile_instance is Projectile:
 		GlobalSignals.projectile_fired_spawn.emit(null, projectile_instance, fire_position.global_position, direction)
 
 func set_projectile_variables(projectile: Projectile):

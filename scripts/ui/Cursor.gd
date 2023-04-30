@@ -9,7 +9,7 @@ var is_idle_gui : bool = true
 var is_menu_ui : bool = false
 var is_locked_gui : bool = false
 
-var cursor_mode := DisplayServer.MOUSE_MODE_VISIBLE
+var cursor_mode := DisplayServer.MOUSE_MODE_HIDDEN
 var cursor_texture = load("res://assets/UI/Cursors/sprCursor.png")
 
 @onready var sprite = $Sprite2D

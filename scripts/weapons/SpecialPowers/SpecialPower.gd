@@ -1,13 +1,18 @@
 extends Node2D
 class_name SpecialPower
 
-var duration : float = 5
+@export var duration : float = 5
+
 var _timer : float = 0
-var weapon : Weapon = null
 var activated : bool = false
+var weapon : Weapon = null
+
+var player : Player = null
+var player_target : Vector2 = Vector2.ZERO
 
 func _ready():
 	weapon = get_parent() as Weapon
+	player = GlobalFunctions.find_object_on_condition(func(elem: Node): return elem is Player, get_tree().root)
 
 func _process(delta):
 	if !activated:

@@ -6,9 +6,6 @@ var time_stunning : float = 3
 #func _ready():
 #	print("THROWED WEAPON\n")
 
-func _physics_process(delta):
-	_move_and_collide(delta)
-
 func handle_collision(collision: KinematicCollision2D):
 	if !collision:
 		return

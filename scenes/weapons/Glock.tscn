@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://r7n15xjnkw6m"]
+[gd_scene load_steps=14 format=3 uid="uid://r7n15xjnkw6m"]
 
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_e6w1w"]
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_yujf1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_n0wdy"]
 [ext_resource type="Texture2D" uid="uid://divrx8sn4i1rb" path="res://assets/PNG/Weapons/Glock.png" id="5_0evwv"]
 [ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/AimBot.gd" id="7_lluol"]
+[ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="8_gess7"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -86,6 +87,9 @@ _data = {
 "muzzle_flash": SubResource("Animation_3sddm")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uempm"]
+radius = 483.456
+
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_yujf1")
 properties/weapon_name = "glock"
@@ -151,3 +155,14 @@ libraries = {
 
 [node name="SpecialPower" type="Node2D" parent="Weapon"]
 script = ExtResource("7_lluol")
+cursor_scene = ExtResource("8_gess7")
+canvas_enemy_offset = Vector2(20, 15)
+speed_aim_cursor = 800.0
+wait_time_between_shoots = 0.2
+
+[node name="Area2D" type="Area2D" parent="Weapon/SpecialPower"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/SpecialPower/Area2D"]
+shape = SubResource("CircleShape2D_uempm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Weapon/SpecialPower"]

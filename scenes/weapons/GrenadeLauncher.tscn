@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6i5jh7uk237l"]
+[gd_scene load_steps=13 format=3 uid="uid://b6i5jh7uk237l"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_0rwaq"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_ieyus"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_ut61c"]
 [ext_resource type="Texture2D" uid="uid://6vpkvo2gj1eb" path="res://assets/PNG/Weapons/GenadeLauncher.png" id="5_vuv2i"]
 [ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/CatchingCable.gd" id="7_ehtt2"]
+[ext_resource type="PackedScene" uid="uid://cjli835xwy0bb" path="res://scenes/projectiles/CatchingCable.tscn" id="8_77p2j"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -89,18 +90,18 @@ _data = {
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_0rwaq")
 properties/weapon_name = "grenad_launcher"
-properties/special_power_unlocked = false
+properties/special_power_unlocked = true
 properties/level = 1
 power/points_to_unlock_power = 100
 power/current_points_charge_power = 0
-power/can_use_power = false
+power/can_use_power = true
 bullet/projectile = ExtResource("2_g75ee")
-bullet/bullet_speed = 4
-bullet/bullet_damages = 6
-bullet/bullet_size = 0.0
+bullet/bullet_speed = 7
+bullet/bullet_damages = 15
+bullet/bullet_size = 0.7
 bullet/bullet_impact_force = 2.0
 bullet/bullet_piercing_force = 0
-bullet/bullet_should_bounce = false
+bullet/bullet_should_bounce = true
 bullet/bullet_should_pierce_walls = false
 loader/loader_capacity = 6
 weapon/enable = true
@@ -151,3 +152,6 @@ libraries = {
 
 [node name="SpecialPower" type="Node2D" parent="Weapon"]
 script = ExtResource("7_ehtt2")
+catching_cable_scene = ExtResource("8_77p2j")
+projectile_speed = 2.0
+duration = 30.0

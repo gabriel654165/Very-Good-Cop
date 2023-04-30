@@ -21,8 +21,7 @@ func _ready():
 	scale = scale * size
 	explosion_area_shape.get_shape().set_radius(radius_pixels_impact_area)
 
-func _physics_process(delta):
-	_move_and_collide(delta)
+func _specific_process(delta):
 	if speed == 0 or direction == Vector2.ZERO:
 		return
 	var range_safe := 5

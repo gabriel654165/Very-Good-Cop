@@ -21,6 +21,10 @@ func _ready():
 	# Maybe never called and not compiling
 	scale = scale * size
 
+func _physics_process(delta):
+	_move_and_collide(delta)
+	_specific_process(delta)
+
 func _move_and_collide(delta: float):
 	if direction != Vector2.ZERO:
 		velocity = direction * GlobalFunctions.get_speed(speed, delta)
@@ -57,6 +61,13 @@ func set_direction(direction: Vector2):
 func set_projectile_owner(projectile_owner: Node2D):
 	self.projectile_owner = projectile_owner
 
+func stop():
+	speed = 0
+	direction = Vector2.ZERO
+
 #virtual func
+func _specific_process(delta: float):
+	pass
+
 func handle_specific_collision(object: Object):
 	pass

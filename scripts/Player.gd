@@ -26,13 +26,25 @@ func _physics_process(delta):
 	global_position += velocity
 	move_and_slide()
 	velocity = Vector2.ZERO
-	look_at(get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position)
+	
+	var direction : Vector2 = Vector2.ZERO
+	if !weapon_manager.weapon.special_power.activated or weapon_manager.weapon.special_power.player_target == Vector2.ZERO:
+		direction = get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position
+	else:
+		direction = weapon_manager.weapon.special_power.player_target
+	look_at(direction)
+
 
 func _process(delta):
 	if self.action_disabled:
 		return
 	if Input.is_action_pressed("shoot"):
-		if weapon_manager != null:
+		var shoot_prohibited : bool = false
+		
+		if "is_shooting" in weapon_manager.weapon.special_power:
+			shoot_prohibited = weapon_manager.weapon.special_power.is_shooting
+		
+		if weapon_manager != null and !shoot_prohibited:
 			weapon_manager.weapon.shoot()
 
 func _unhandled_input(event):
@@ -45,7 +57,6 @@ func _unhandled_input(event):
 	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
 		throw_grappling()
 	if event.is_action_pressed("activate_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
-		print("pressed !!!")
 		weapon_manager.weapon.special_power.use_special_power()
 	
 	#switch weapon
