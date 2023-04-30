@@ -2,6 +2,7 @@ extends Projectile
 class_name CatchingCable
 
 @export var expand_magnitude_factor : Vector2 = Vector2(2, 0)
+@export var speed_drag_center : float = 500
 
 @onready var ball_left = $BallLeft as Projectile
 @onready var ball_right = $BallRight as Projectile
@@ -26,16 +27,54 @@ func _specific_process(delta):
 		stop()
 		drag_objects_catched_to_center()
 
-func drag_objects_catched_to_center():
+func stop_catched_objects():
 	for object in objects_catched_array:
 		if object is Enemy and object != null:
 			saved_enemy_speed.append(object.speed)
 			object.set_speed(0)
+
+func find_points_center() -> Vector2:
+	var base_point : Vector2 = cable.points[0]
+	var farest_point := Vector2.ZERO
+	var index : int = 0
+	
+	for point in cable.points:
+		if index == 0 or index >= cable.points.size() -1:
+			index += 1
+			continue
+		var distance_to_current_farest_point : float = (farest_point - base_point).length()
+		var distance_to_point : float = (point - base_point).length()
+		var is_ball_point : bool = (point == base_point)
+		
+		if !is_ball_point and (distance_to_current_farest_point > distance_to_point or farest_point == Vector2.ZERO):
+			farest_point = to_global(point)
+		index += 1
+	
+	return (farest_point + ball_left.global_position) / 2
+
+func drag_objects_catched_to_center():
+	stop_catched_objects()
 	timer_cable_retention.start()
-	print("speed stopped and timer started")
-	#prendre le point le plus loin d'une boule
-	#faire cePoint - maBoule = centre
-	#les drag au centre (tween ?)
+	var center : Vector2 = find_points_center()
+
+	var distance_to_center : float = 0
+	var duration : float = 0
+	
+	distance_to_center = (ball_left.global_position - center).length()
+	duration = distance_to_center / speed_drag_center
+	var tween_left_ball = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+	tween_left_ball.tween_property(ball_left, "global_position", center, duration)
+	
+	distance_to_center = (ball_right.global_position - center).length()
+	duration = distance_to_center / speed_drag_center
+	var tween_right_ball = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+	tween_right_ball.tween_property(ball_right, "global_position", center, duration)
+	
+	for object in objects_catched_array:
+		distance_to_center = (object.global_position - center).length()
+		duration = distance_to_center / speed_drag_center
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+		tween.tween_property(object, "global_position", center, duration)
 
 func set_cable_points():
 	if ball_left == null or ball_right == null:
@@ -57,7 +96,6 @@ func set_cable_points():
 func process_retract():
 	if is_retracting:
 		return
-	#print("-->retracting<--")
 	is_retracting = true
 	
 	var left_direction = shooting_direction
@@ -76,22 +114,13 @@ func process_retract():
 func set_cable_collision_shapes():
 	if ball_left == null or ball_right == null:
 		return
-	#print("cable_collider.shape.b = ", cable_collider.shape.b)
-	#print("cable_collider.shape.a = ", cable_collider.shape.a, "\n")
 	cable_collider.shape.a = cable_collider.to_local(ball_right.global_position)
 	cable_collider.shape.b = cable_collider.to_local(ball_left.global_position)
-
-
-func handle_specific_collision(object: Object):
-	if object.name == "Walls":
-		queue_free()
-		return
 
 func stop_expand():
 	is_expanding = false
 	if ball_left == null or ball_right == null:
 		return
-	#print("stop expand")
 	ball_left.direction = shooting_direction.normalized()
 	ball_right.direction = shooting_direction.normalized()
 
@@ -124,22 +153,28 @@ func is_cable_closed() -> bool:
 func _on_timer_stop_expend_timeout():
 	if !is_retracting:
 		stop_expand()
-	#process_retract()
 
 func _on_timer_cable_retention_timeout():
 	var index : int = 0
 	for object in objects_catched_array:
-		if object is Enemy && object != null && saved_enemy_speed[index] != null:
+		if object == null or index >= saved_enemy_speed.size():
+			continue
+		if object is Enemy:
 			object.set_speed(saved_enemy_speed[index])
 			index += 1
+	saved_enemy_speed.clear()
+	objects_catched_array.clear()
 	queue_free()
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Walls":
-		queue_free()
-		return
+		if objects_catched_array.size() > 0:
+			process_retract()
+		else:
+			queue_free()
+			return
+
 	if body is Enemy and !objects_catched_array.has(body):
-		#print("Collide on enemy")
 		if objects_catched_array.size() == 0:
 			process_retract()
 		objects_catched_array.append(body)
