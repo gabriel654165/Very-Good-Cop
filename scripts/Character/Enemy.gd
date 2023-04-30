@@ -1,7 +1,7 @@
 extends Character
 class_name Enemy
 
-@onready var fsm: StateMachine = $StateMachine
+@onready var fsm: AIStateMachine = $StateMachine
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 @onready var vision_sensor: VisionSensor = $VisionSensor
 @onready var spriteDead: Sprite2D = $SpriteDead
@@ -16,7 +16,11 @@ func _ready():
 	weapon_manager = get_node("WeaponManager")
 	weapon_manager.weapon.global_position = weapon_position.global_position
 
-	fsm.init(self, weapon_manager.weapon)
+	fsm.init(self, weapon_manager.weapon, speed * 10)
+
+func set_speed(new_speed: float):
+	speed = new_speed
+	fsm._movement_speed = speed * 10
 
 func handle_hit(damager: Node2D, damages):
 	health.hit(damages)

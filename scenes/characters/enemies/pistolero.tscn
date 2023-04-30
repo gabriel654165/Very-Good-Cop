@@ -19,6 +19,7 @@ radius = 152.161
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
+speed = 10.0
 weapon_manager = NodePath("WeaponManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -48,7 +49,6 @@ health = 60
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_vv8m0")
-movement_speed = 100.0
 
 [node name="Patrol" type="Node" parent="StateMachine"]
 script = ExtResource("5_hf2va")

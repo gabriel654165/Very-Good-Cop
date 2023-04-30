@@ -35,7 +35,7 @@ func handle_catching_cable_spawned(projectile_owner: Node2D, catching_cable: Cat
 	var left_direction = shooting_direction
 	var right_direction = shooting_direction
 	if shooting_direction.normalized().x > 0.5 or shooting_direction.normalized().x < -0.5:
-	#	# droite gauche
+		# droite gauche
 		left_direction.y += -1 if (shooting_direction.normalized().x > 0.5) else 1
 		right_direction.y += 1 if (shooting_direction.normalized().x > 0.5) else -1
 	if shooting_direction.normalized().y > 0.5 or shooting_direction.normalized().y < -0.5:
