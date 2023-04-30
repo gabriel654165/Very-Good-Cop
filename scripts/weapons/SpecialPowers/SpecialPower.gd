@@ -24,14 +24,22 @@ func _process(delta):
 	else:
 		specific_process(delta)
 
+func end_power():
+	activated = false
+	weapon.can_use_power = false
+	end_power_child()
+
+func use_special_power():
+	activated = true
+	use_special_child()
+
 # virtual functions
 func specific_process(delta: float):
 	pass
 
-func end_power():
-	activated = false
-	print("parent power no more active")
+func use_special_child():
+	pass
 
-func use_special_power():
-	activated = true
-	print("use parent special power")
+func end_power_child():
+	pass
+	

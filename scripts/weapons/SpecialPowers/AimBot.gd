@@ -50,10 +50,7 @@ func shoot_on_target(target: Node2D):
 		is_shooting = true
 		weapon.shoot()
 
-func use_special_power():
-	activated = true
-	#print("use aim bot")
-	
+func use_special_power_child():
 	var bodies = area_effect.get_overlapping_bodies()
 	for body in bodies:
 		if body == null:
@@ -76,8 +73,7 @@ func smooth_clamp_cursor_position(cursor: Cursor, body: Node2D, delta: float):
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(cursor, "global_position", body.get_global_transform_with_canvas().origin, duration)
 
-func end_power():
-	activated = false
+func end_power_child():
 	is_shooting = false
 	player_target = Vector2.ZERO
 	enemy_list = []

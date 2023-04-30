@@ -2,6 +2,7 @@ extends SpecialPower
 
 @export var catching_cable_scene : PackedScene
 @export var projectile_speed : float = 4
+
 var saved_projectile_scene : PackedScene
 var saved_number_of_balls_by_burt : float = 0
 var saved_should_bouncing : bool = false
@@ -12,8 +13,7 @@ var saved_recoil_force : float = 0
 func specific_process(delta: float):
 	pass
 
-func use_special_power():
-	activated = true
+func use_special_power_child():
 	saved_projectile_scene = weapon.projectile_scene
 	saved_number_of_balls_by_burt = weapon.number_of_balls_by_burt
 	saved_should_bouncing = weapon.bullet_should_bounce
@@ -28,14 +28,13 @@ func use_special_power():
 	weapon.precision = 0
 	weapon.recoil_force = 0
 	weapon.shoot()
-	#print("use catching cable")
+	end_power()
 
-func end_power():
-	activated = false
+func end_power_child():
+	weapon.can_use_power = false
 	weapon.projectile_scene = saved_projectile_scene
 	weapon.number_of_balls_by_burt = saved_number_of_balls_by_burt
 	weapon.bullet_should_bounce = saved_should_bouncing
 	weapon.bullet_speed = saved_projectile_speed
 	weapon.precision = saved_precision
 	weapon.recoil_force = saved_recoil_force
-	#print("catching cable power no more active")
