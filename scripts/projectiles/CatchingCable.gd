@@ -2,7 +2,7 @@ extends Projectile
 class_name CatchingCable
 
 @export var expand_magnitude_factor : Vector2 = Vector2(2, 0)
-@export var speed_drag_center : float = 500
+@export var speed_drag_center : float = 300
 
 @onready var ball_left = $BallLeft as Projectile
 @onready var ball_right = $BallRight as Projectile

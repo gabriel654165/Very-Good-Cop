@@ -74,7 +74,7 @@ one_shot = true
 autostart = true
 
 [node name="TimerCableRetention" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

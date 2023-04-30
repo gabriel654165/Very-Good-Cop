@@ -31,13 +31,13 @@ func end_power():
 
 func use_special_power():
 	activated = true
-	use_special_child()
+	use_special_power_child()
 
 # virtual functions
 func specific_process(delta: float):
 	pass
 
-func use_special_child():
+func use_special_power_child():
 	pass
 
 func end_power_child():

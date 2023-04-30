@@ -153,5 +153,4 @@ libraries = {
 [node name="SpecialPower" type="Node2D" parent="Weapon"]
 script = ExtResource("7_ehtt2")
 catching_cable_scene = ExtResource("8_77p2j")
-projectile_speed = 2.0
 duration = 10.0
