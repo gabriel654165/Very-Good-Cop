@@ -14,7 +14,6 @@ level_generator_scene = ExtResource("4_hawec")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(233, 190)
-position_smoothing_enabled = true
 position_smoothing_speed = 0.9
 
 [node name="Player" parent="." instance=ExtResource("5_h1th4")]

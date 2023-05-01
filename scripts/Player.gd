@@ -28,11 +28,20 @@ func _physics_process(delta):
 	velocity = Vector2.ZERO
 	
 	var direction : Vector2 = Vector2.ZERO
-	if !weapon_manager.weapon.special_power.activated or weapon_manager.weapon.special_power.player_target == Vector2.ZERO:
+	#if !weapon_manager.weapon.special_power.activated or (weapon_manager.weapon.special_power.player_target == Vector2.ZERO and !weapon_manager.weapon.special_power.disable_look_at):
+	if !weapon_manager.weapon.special_power.activated:
+		print("-> look_at cursor")
 		direction = get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position
-	else:
+	
+	elif weapon_manager.weapon.special_power.player_target != Vector2.ZERO and !weapon_manager.weapon.special_power.disable_look_at:
+		print("-> look_at target special pow")
 		direction = weapon_manager.weapon.special_power.player_target
-	look_at(direction)
+	
+	if direction != Vector2.ZERO:
+		print("look_at : ", direction)
+		look_at(direction)
+	else:
+		print("NON look_at")
 
 
 func _process(delta):

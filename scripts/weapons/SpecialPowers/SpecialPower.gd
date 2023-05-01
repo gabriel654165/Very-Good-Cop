@@ -9,6 +9,7 @@ var weapon : Weapon = null
 
 var player : Player = null
 var player_target : Vector2 = Vector2.ZERO
+var disable_look_at : bool = false
 
 func _ready():
 	weapon = get_parent() as Weapon
@@ -24,14 +25,14 @@ func _process(delta):
 	else:
 		specific_process(delta)
 
+func use_special_power():
+	activated = true
+	use_special_power_child()
+
 func end_power():
 	activated = false
 	weapon.can_use_power = false
 	end_power_child()
-
-func use_special_power():
-	activated = true
-	use_special_power_child()
 
 # virtual functions
 func specific_process(delta: float):
@@ -42,4 +43,3 @@ func use_special_power_child():
 
 func end_power_child():
 	pass
-	
