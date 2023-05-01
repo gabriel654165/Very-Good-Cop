@@ -1,0 +1,181 @@
+[gd_scene load_steps=11 format=3 uid="uid://rear12d7xhl4"]
+
+[ext_resource type="Script" path="res://scenes/objects/ExplosiveBarrel.gd" id="1_vpnep"]
+[ext_resource type="Script" path="res://scripts/Health.gd" id="2_hh2m6"]
+[ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="3_w4jdm"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_udvqg"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1s42y"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0w5s"]
+radius = 142.004
+
+[sub_resource type="Animation" id="Animation_56nst"]
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_mj1et"]
+resource_name = "explosion"
+length = 0.2
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.196),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.012, 0.099, 0.1, 0.199),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0.1, 0.1), Vector2(1.5, 1.5)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.199),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"destroy_instance"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.03),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3sddm"]
+resource_name = "muzzle_flash"
+length = 0.07
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.07),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.07),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eygrr"]
+_data = {
+"RESET": SubResource("Animation_56nst"),
+"explosion": SubResource("Animation_mj1et"),
+"muzzle_flash": SubResource("Animation_3sddm")
+}
+
+[node name="ExplosiveBarrel" type="StaticBody2D"]
+script = ExtResource("1_vpnep")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("PlaceholderTexture2D_udvqg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1s42y")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("2_hh2m6")
+max_health = 3
+health = 3
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+
+[node name="ExplosionCollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_r0w5s")
+debug_color = Color(0, 0.592157, 0.745098, 0.419608)
+
+[node name="Explosion" type="Sprite2D" parent="."]
+position = Vector2(0, 7.27596e-12)
+rotation = -1.5708
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_w4jdm")
+vframes = 2
+region_enabled = true
+region_rect = Rect2(66, 70, 51, 104)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Explosion")
+libraries = {
+"": SubResource("AnimationLibrary_eygrr")
+}

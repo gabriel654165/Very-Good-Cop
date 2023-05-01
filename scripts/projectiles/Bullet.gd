@@ -4,7 +4,7 @@ class_name Bullet
 #bullet : distance de free & pas timer
 #bullet ; saignement
 
-@export var piercing_force : int = 2
+@export var piercing_force : int = 1 # TODO @gabi need to change
 
 @onready var life_cycle_timer = $LifeCycleTimer
 
@@ -25,7 +25,7 @@ func handle_collision(collision: KinematicCollision2D):
 	
 	if object.get_name() == "Walls":
 		queue_free()
-	
+
 	if object.has_method("handle_hit"):
 		current_piercing_force -= 1
 		object.handle_hit(self, damages)

@@ -34,12 +34,12 @@ func handle_collision(collision: KinematicCollision2D):
 	if !collision:
 		return
 	var object = collision.get_collider()
-	
+
 	if object is Character:
 		stop()
 		explode()
 		return
-	
+
 	if object.name == "Walls":
 		direction = velocity.normalized().bounce(collision.get_normal())
 
