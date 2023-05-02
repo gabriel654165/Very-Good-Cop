@@ -103,8 +103,10 @@ bullet/bullet_piercing_force = 1
 bullet/bullet_should_bounce = false
 bullet/bullet_should_pierce_walls = false
 bullet/projectile_should_frag = false
-loader/loader_capacity = 6
+loader/loader_capacity = 9
+loader/reloading_cooldown = 2.0
 weapon/enable = true
+weapon/shooting_cooldown = 0.5
 weapon/number_of_balls_by_burt = 3
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
@@ -154,3 +156,5 @@ libraries = {
 script = ExtResource("7_vtkkj")
 number_of_frag_projectile = 10
 duration = 20.0
+
+[connection signal="timeout" from="Weapon/ReloadCoolDown" to="Weapon" method="_on_reload_cool_down_timeout"]

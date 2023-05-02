@@ -27,6 +27,8 @@ var frag_projectile_precision : float = 1
 var number_of_frag_projectile : int = 3
 
 var loader_capacity : int = 6
+var _current_loader_bullets_number : int = 0
+var reloading_cooldown : float = 1
 
 var enable : bool = true
 #changer ces deux pareamètre par fréquence & amplitude (3 balles (fréqeunce) en 1s(amplitude))
@@ -38,7 +40,7 @@ var recoil_force : float = 2 # the more it's close 0 the more it's precise
 
 @onready var fire_position = $FirePosition
 @onready var fire_direction = $FireDirection
-@onready var attack_cooldown = $AttackCoolDown
+@onready var shooting_cooldown = $AttackCoolDown
 @onready var reload_cooldown = $ReloadCoolDown
 @onready var animation = $Animation
 @onready var sprite = $Sprite2D
@@ -54,10 +56,16 @@ func shoot():
 	if !enable:
 		return
 	
-	if (attack_cooldown.is_stopped() or should_disable_cooldown()) and Projectile != null:
-		attack_cooldown.start()
-		
+	if (shooting_cooldown.is_stopped() or should_disable_cooldown()) and Projectile != null and _current_loader_bullets_number >= 0:
+		shooting_cooldown.start()
 		for n in number_of_balls_by_burt:
+			
+			_current_loader_bullets_number -= 1
+			if _current_loader_bullets_number == 0:
+				reload_magazine()
+			if _current_loader_bullets_number < 0:
+				return
+			
 			if n != 0:
 				await get_tree().create_timer(frequence_of_burt).timeout
 			
@@ -114,8 +122,6 @@ func set_projectile_variables(projectile: Projectile):
 	projectile.piercing_force = bullet_piercing_force
 	projectile.should_bounce = bullet_should_bounce
 	projectile.should_pierce_walls = bullet_should_pierce_walls
-	
-	#if projectile.projectile_should_frag:
 	projectile.should_frag = projectile_should_frag
 	frag_projectile_precision_angle = frag_projectile_precision_angle
 	frag_projectile_precision = frag_projectile_precision
@@ -125,5 +131,7 @@ func add_charge_power_points(points: int):
 	current_points_charge_power += points
 	if current_points_charge_power >= points_to_unlock_power:
 		can_use_power = true
-		print("--> Can use special Power !")
 
+func reload_magazine():
+	await get_tree().create_timer(reloading_cooldown).timeout
+	_current_loader_bullets_number = loader_capacity

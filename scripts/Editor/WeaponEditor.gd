@@ -28,8 +28,10 @@ var frag_projectile_precision : float = 1
 var number_of_frag_projectile : int = 3
 
 var loader_capacity : int = 6
+var reloading_cooldown : float = 1
 
 var enable : bool = true
+var shooting_cooldown : float = 0.5
 var number_of_balls_by_burt : int = 1
 var frequence_of_burt : float = 0.1
 var precision_angle : Vector2 = Vector2(-1, 1)
@@ -41,18 +43,11 @@ func _ready():
 	if weapon == null:
 		return
 	set_variables(weapon)
-	
 	saved_property_list = _get_property_list()
-#	self.property_list_changed.connect(self.refresh_property_array)
-
-#func refresh_property_array():
-#	print("zebiou")
-#	self.notify_property_list_changed()
 
 func _process(delta):
 	#if not Engine.is_editor_hint():
 	#	set_variables(weapon)
-	
 	if Engine.is_editor_hint() and _get_property_list() != saved_property_list:
 		self.notify_property_list_changed()
 		saved_property_list = _get_property_list()
@@ -92,8 +87,11 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.number_of_frag_projectile = self.number_of_frag_projectile
 	
 	weapon.loader_capacity = self.loader_capacity
+	weapon._current_loader_bullets_number = self.loader_capacity
+	weapon.reloading_cooldown = self.reloading_cooldown
 	
 	weapon.enable = self.enable
+	weapon.shooting_cooldown.wait_time = self.shooting_cooldown
 	weapon.number_of_balls_by_burt = self.number_of_balls_by_burt
 	weapon.frequence_of_burt = self.frequence_of_burt
 	weapon.precision_angle = self.precision_angle
@@ -143,9 +141,13 @@ func _get(property):
 	
 	if property == 'loader/loader_capacity':
 		return loader_capacity
+	if property == 'loader/reloading_cooldown':
+		return reloading_cooldown
 	
 	if property == 'weapon/enable':
 		return enable
+	if property == 'weapon/shooting_cooldown':
+		return shooting_cooldown
 	if property == 'weapon/number_of_balls_by_burt':
 		return number_of_balls_by_burt
 	if property == 'weapon/frequence_of_burt':
@@ -200,9 +202,13 @@ func _set(property, value) -> bool :
 	
 	if property == 'loader/loader_capacity':
 		loader_capacity = value
+	if property == 'loader/reloading_cooldown':
+		reloading_cooldown = value
 	
 	if property == 'weapon/enable':
 		enable = value
+	if property == 'weapon/shooting_cooldown':
+		shooting_cooldown = value
 	if property == 'weapon/number_of_balls_by_burt':
 		number_of_balls_by_burt = value
 	if property == 'weapon/frequence_of_burt':
@@ -285,12 +291,20 @@ func _get_property_list() -> Array:
 		'type': TYPE_INT,
 	}])
 	
-	var props_weapon = [{
+	var props_loader = [{
 		'name': 'loader/loader_capacity',
 		'type': TYPE_INT,
 	},{
+		'name': 'loader/reloading_cooldown',
+		'type': TYPE_FLOAT,
+	}]
+	
+	var props_weapon = [{
 		'name': 'weapon/enable',
 		'type': TYPE_BOOL,
+	},{
+		'name': 'weapon/shooting_cooldown',
+		'type': TYPE_FLOAT,
 	},{
 		'name': 'weapon/number_of_balls_by_burt',
 		'type': TYPE_INT,
@@ -312,6 +326,7 @@ func _get_property_list() -> Array:
 	props.append_array(props_power)
 	props.append_array(props_projectile)
 	props.append_array(props_frag_bullets)
+	props.append_array(props_loader)
 	props.append_array(props_weapon)
 	
 	return props
