@@ -66,7 +66,6 @@ func print_func_time(fn:Callable, message:=fn.get_method()):
 func save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.WRITE, GlobalVariables.encryption_key)
 	
-	print(save_file.get_path_absolute())
 	var json_save := {
 		"level": GlobalVariables.level,
 
