@@ -33,12 +33,6 @@ func use_special_power_child():
 	rotation_angle = target.global_rotation_degrees
 	player.global_rotation_degrees = rotation_angle
 
-#tej later on
-func end_power():
-	activated = false
-	#weapon.can_use_power = false
-	end_power_child()
-
 func end_power_child():
 	is_shooting = false
 	disable_look_at = false

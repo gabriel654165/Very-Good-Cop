@@ -13,7 +13,11 @@ func _ready():
 func _physics_process(delta):
 	if self.action_disabled:
 		return
-	var move_direction = Vector2(
+	manage_movement(delta)
+	manage_rotation()
+
+func manage_movement(delta: float):
+	move_direction = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
@@ -26,23 +30,16 @@ func _physics_process(delta):
 	global_position += velocity
 	move_and_slide()
 	velocity = Vector2.ZERO
-	
-	var direction : Vector2 = Vector2.ZERO
-	#if !weapon_manager.weapon.special_power.activated or (weapon_manager.weapon.special_power.player_target == Vector2.ZERO and !weapon_manager.weapon.special_power.disable_look_at):
-	if !weapon_manager.weapon.special_power.activated:
-		print("-> look_at cursor")
-		direction = get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position
-	
-	elif weapon_manager.weapon.special_power.player_target != Vector2.ZERO and !weapon_manager.weapon.special_power.disable_look_at:
-		print("-> look_at target special pow")
-		direction = weapon_manager.weapon.special_power.player_target
-	
-	if direction != Vector2.ZERO:
-		print("look_at : ", direction)
-		look_at(direction)
-	else:
-		print("NON look_at")
 
+func manage_rotation():
+	var direction : Vector2 = Vector2.ZERO
+	
+	if !weapon_manager.weapon.special_power.activated or (weapon_manager.weapon.special_power.activated and (!weapon_manager.weapon.special_power.disable_look_at and weapon_manager.weapon.special_power.player_target == Vector2.ZERO)):
+		direction = get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position
+	elif weapon_manager.weapon.special_power.player_target != Vector2.ZERO and !weapon_manager.weapon.special_power.disable_look_at:
+		direction = weapon_manager.weapon.special_power.player_target
+	if direction != Vector2.ZERO:
+		look_at(direction)
 
 func _process(delta):
 	if self.action_disabled:

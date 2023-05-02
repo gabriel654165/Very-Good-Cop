@@ -157,6 +157,7 @@ full_rotation_by_second = 2.0
 duration = 2.0
 
 [node name="Target" type="Node2D" parent="Weapon/SpecialPower"]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon/SpecialPower/Target"]
 texture = ExtResource("8_ose3d")

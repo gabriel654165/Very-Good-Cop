@@ -93,18 +93,18 @@ properties/special_power_unlocked = true
 properties/level = 1
 power/points_to_unlock_power = 200
 power/current_points_charge_power = 0
-power/can_use_power = false
+power/can_use_power = true
 bullet/projectile = ExtResource("2_akemc")
-bullet/bullet_speed = 4
+bullet/bullet_speed = 12
 bullet/bullet_damages = 6
-bullet/bullet_size = 0.0
-bullet/bullet_impact_force = 2.0
+bullet/bullet_size = 1.0
+bullet/bullet_impact_force = 0.5
 bullet/bullet_piercing_force = 0
 bullet/bullet_should_bounce = false
 bullet/bullet_should_pierce_walls = false
 loader/loader_capacity = 15
 weapon/enable = true
-weapon/number_of_balls_by_burt = 15
+weapon/number_of_balls_by_burt = 1
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.35
@@ -128,6 +128,7 @@ position = Vector2(18, 4.48227e-05)
 position = Vector2(20, 4.48227e-05)
 
 [node name="AttackCoolDown" type="Timer" parent="Weapon"]
+wait_time = 0.1
 one_shot = true
 
 [node name="ReloadCoolDown" type="Timer" parent="Weapon"]

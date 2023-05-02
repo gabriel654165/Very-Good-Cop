@@ -8,6 +8,7 @@ class_name Projectile
 @export var piercing_force : int = 0
 @export var should_bounce : bool = false
 @export var should_pierce_walls : bool = false
+@export var should_frag : bool = false
 
 var projectile_owner : Node2D = null
 var sprite : Sprite2D

@@ -5,6 +5,7 @@ class_name Bullet
 
 @onready var life_cycle_timer = $LifeCycleTimer
 
+
 func _ready():
 	life_cycle_timer.start()
 	scale = scale * size
