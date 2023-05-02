@@ -61,7 +61,7 @@ position = Vector2(80, -153)
 [node name="4" type="Node2D" parent="RoomConfig/Patrols/A2"]
 position = Vector2(79, -314)
 
-[node name="PowerUpPoints" type="Node" parent="RoomConfig"]
+[node name="PowerUpPoints" type="Node2D" parent="RoomConfig"]
 
 [node name="A" type="Node2D" parent="RoomConfig/PowerUpPoints"]
 

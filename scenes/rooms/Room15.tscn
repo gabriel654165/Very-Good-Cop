@@ -21,12 +21,6 @@ script = ExtResource("1_s7lwy")
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="RoomConfig" type="Node" parent="."]
-
-[node name="Patrols" type="Node" parent="RoomConfig"]
-
-[node name="PowerUpPoints" type="Node" parent="RoomConfig"]
-
 [node name="Ground" type="TileMap" parent="."]
 tile_set = ExtResource("1_hjg1b")
 format = 2
@@ -39,3 +33,41 @@ layer_0/tile_data = PackedInt32Array(1507350, 6356992, 49, 1507349, 6356992, 49,
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_targi")
+
+[node name="RoomConfig" type="Node2D" parent="."]
+
+[node name="Patrols" type="Node2D" parent="RoomConfig"]
+
+[node name="A" type="Node2D" parent="RoomConfig/Patrols"]
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(-213, 103)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(-149, 184)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(-77, 277)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(-38, 192)
+
+[node name="A2" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(248, -176)
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/A2"]
+position = Vector2(-213, 103)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/A2"]
+position = Vector2(-149, 184)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/A2"]
+position = Vector2(-77, 277)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/A2"]
+position = Vector2(-38, 192)
+
+[node name="PowerUpPoints" type="Node2D" parent="RoomConfig"]
+
+[node name="A" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(-210, -161)

@@ -46,7 +46,7 @@ position = Vector2(203, 258)
 [node name="4" type="Node2D" parent="RoomConfig/Patrols/A"]
 position = Vector2(192, -203)
 
-[node name="PowerUpPoints" type="Node" parent="RoomConfig"]
+[node name="PowerUpPoints" type="Node2D" parent="RoomConfig"]
 
 [node name="Walls" type="TileMap" parent="."]
 tile_set = ExtResource("1_4548q")
