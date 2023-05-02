@@ -5,7 +5,6 @@ class_name Bullet
 
 @onready var life_cycle_timer = $LifeCycleTimer
 
-
 func _ready():
 	life_cycle_timer.start()
 	scale = scale * size
@@ -46,6 +45,7 @@ func init_frag_bullet():
 	direction += Vector2(_random_range(frag_projectile_precision_angle), 0)
 	frag_bullet.direction = direction
 	frag_bullet.should_frag = false
+	frag_bullet.get_node("LifeCycleTimer").wait_time = 0.2
 	
 	GlobalSignals.projectile_fired_spawn.emit(null, frag_bullet, global_position, direction)
 
