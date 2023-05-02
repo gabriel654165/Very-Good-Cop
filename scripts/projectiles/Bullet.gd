@@ -27,7 +27,7 @@ func _on_area_2d_body_entered(body):
 	
 	if body.get_name() == "Walls":
 		if should_pierce_walls:
-			current_piercing_force -= 2
+			current_piercing_force -= 1
 	
 	if current_piercing_force <= 0:
 		queue_free()
