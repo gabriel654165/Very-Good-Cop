@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0x250onoqdno"]
+[gd_scene load_steps=15 format=3 uid="uid://d0x250onoqdno"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ty2w1el7t7x1" path="res://scenes/weapons/Sniper.tscn" id="6_oko04"]
 [ext_resource type="PackedScene" uid="uid://x0amqpcim4nu" path="res://scenes/weapons/MiniUzi.tscn" id="7_at8c2"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
+[ext_resource type="PackedScene" uid="uid://cekv24mq8jxv" path="res://scenes/weapons/Shotgun.tscn" id="8_q5dp1"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
@@ -20,13 +21,14 @@ size = Vector2(28, 43)
 z_index = 1
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
-index_weapon_selected = 4
+index_weapon_selected = 6
 weapon_list = {
 "glock": ExtResource("2_xaulr"),
 "grenade_launcher": ExtResource("3_uemap"),
 "machine_gun": ExtResource("4_vy1d6"),
 "mini_uzi": ExtResource("7_at8c2"),
 "riffle": ExtResource("5_43l82"),
+"shotgun": ExtResource("8_q5dp1"),
 "sniper": ExtResource("6_oko04")
 }
 grappling_hook_scene = ExtResource("5_wxswb")
