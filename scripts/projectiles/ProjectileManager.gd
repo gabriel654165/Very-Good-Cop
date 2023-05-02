@@ -4,13 +4,13 @@ class_name ProjectileManager
 #signal callback
 func handle_fired_projectile_spawned(projectile_owner: Node2D, projectile: Projectile, position: Vector2, direction: Vector2):
 	add_child(projectile)
-	projectile.set_projectile_owner(projectile_owner)
+	projectile.projectile_owner = projectile_owner
 	projectile.global_position = position
 	projectile.set_direction(direction.normalized())
 
 func handle_launched_projectile_spawned(projectile_owner: Node2D, grenade: Grenade, position: Vector2, direction: Vector2, landing_position: Vector2):
 	add_child(grenade)
-	grenade.set_projectile_owner(projectile_owner)
+	grenade.projectile_owner = projectile_owner
 	grenade.global_position = position
 	grenade.set_direction(direction.normalized())
 	grenade.set_landing_position(landing_position)
@@ -28,7 +28,7 @@ func handle_grappling_cable_drag(projectile_owner: Node2D, hook: GrapplingHook, 
 
 func handle_catching_cable_spawned(projectile_owner: Node2D, catching_cable: CatchingCable, position: Vector2, shooting_direction: Vector2, expand_magnitude_factor: float):
 	add_child(catching_cable)
-	catching_cable.set_projectile_owner(projectile_owner)
+	catching_cable.projectile_owner = projectile_owner
 	catching_cable.global_position = position
 	
 	catching_cable.shooting_direction = shooting_direction
