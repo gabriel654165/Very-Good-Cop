@@ -95,13 +95,14 @@ power/points_to_unlock_power = 200
 power/current_points_charge_power = 0
 power/can_use_power = true
 bullet/projectile = ExtResource("2_gwbis")
-bullet/bullet_speed = 15
-bullet/bullet_damages = 7
+bullet/bullet_speed = 13
+bullet/bullet_damages = 1
 bullet/bullet_size = 1.0
 bullet/bullet_impact_force = 2.0
-bullet/bullet_piercing_force = 0
+bullet/bullet_piercing_force = 1
 bullet/bullet_should_bounce = false
 bullet/bullet_should_pierce_walls = false
+bullet/projectile_should_frag = false
 loader/loader_capacity = 6
 weapon/enable = true
 weapon/number_of_balls_by_burt = 3
@@ -151,4 +152,5 @@ libraries = {
 
 [node name="SpecialPower" type="Node2D" parent="Weapon"]
 script = ExtResource("7_vtkkj")
-duration = 8.0
+number_of_frag_projectile = 10
+duration = 20.0

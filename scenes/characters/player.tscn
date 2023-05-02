@@ -20,6 +20,7 @@ size = Vector2(28, 43)
 z_index = 1
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
+index_weapon_selected = 5
 weapon_list = {
 "glock": ExtResource("2_xaulr"),
 "grenade_launcher": ExtResource("3_uemap"),

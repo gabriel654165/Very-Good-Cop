@@ -21,6 +21,11 @@ var bullet_piercing_force : int = 0
 var bullet_should_bounce : bool = false
 var bullet_should_pierce_walls : bool = false
 
+var projectile_should_frag : bool = false
+var frag_projectile_precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
+var frag_projectile_precision : float = 1
+var number_of_frag_projectile : int = 3
+
 var loader_capacity : int = 6
 
 var enable : bool = true
@@ -109,6 +114,12 @@ func set_projectile_variables(projectile: Projectile):
 	projectile.piercing_force = bullet_piercing_force
 	projectile.should_bounce = bullet_should_bounce
 	projectile.should_pierce_walls = bullet_should_pierce_walls
+	
+	#if projectile.projectile_should_frag:
+	projectile.should_frag = projectile_should_frag
+	frag_projectile_precision_angle = frag_projectile_precision_angle
+	frag_projectile_precision = frag_projectile_precision
+	number_of_frag_projectile = number_of_frag_projectile
 
 func add_charge_power_points(points: int):
 	current_points_charge_power += points

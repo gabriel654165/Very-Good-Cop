@@ -1,6 +1,7 @@
 @tool
 extends Node2D
 
+var saved_property_list : Array = []
 var weapon : Node
 
 var weapon_name : String
@@ -12,6 +13,7 @@ var current_points_charge_power : int = 0
 var can_use_power : bool = false
 
 var projectile_scene : PackedScene
+#rename bullets -> projectile
 var bullet_speed : int = 4
 var bullet_damages : int = 6
 var bullet_size : float = 0.5
@@ -19,6 +21,11 @@ var bullet_impact_force : float = 2
 var bullet_piercing_force : int = 0
 var bullet_should_bounce : bool = false
 var bullet_should_pierce_walls : bool = false
+
+var projectile_should_frag : bool = false
+var frag_projectile_precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
+var frag_projectile_precision : float = 1
+var number_of_frag_projectile : int = 3
 
 var loader_capacity : int = 6
 
@@ -34,10 +41,21 @@ func _ready():
 	if weapon == null:
 		return
 	set_variables(weapon)
+	
+	saved_property_list = _get_property_list()
+#	self.property_list_changed.connect(self.refresh_property_array)
 
-#func _process(delta):
-#	if not Engine.is_editor_hint():
-#		set_variables(weapon)
+#func refresh_property_array():
+#	print("zebiou")
+#	self.notify_property_list_changed()
+
+func _process(delta):
+	#if not Engine.is_editor_hint():
+	#	set_variables(weapon)
+	
+	if Engine.is_editor_hint() and _get_property_list() != saved_property_list:
+		self.notify_property_list_changed()
+		saved_property_list = _get_property_list()
 
 func set_pos(position):
 	weapon.global_position = position
@@ -67,6 +85,11 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.bullet_piercing_force = self.bullet_piercing_force
 	weapon.bullet_should_bounce = self.bullet_should_bounce
 	weapon.bullet_should_pierce_walls = self.bullet_should_pierce_walls
+	
+	weapon.projectile_should_frag = self.projectile_should_frag
+	weapon.frag_projectile_precision_angle = self.frag_projectile_precision_angle
+	weapon.frag_projectile_precision = self.frag_projectile_precision
+	weapon.number_of_frag_projectile = self.number_of_frag_projectile
 	
 	weapon.loader_capacity = self.loader_capacity
 	
@@ -108,6 +131,15 @@ func _get(property):
 		return bullet_should_bounce
 	if property == 'bullet/bullet_should_pierce_walls':
 		return bullet_should_pierce_walls
+	
+	if property == 'bullet/projectile_should_frag':
+		return projectile_should_frag
+	if property == 'bullet/frag_projectile_precision_angle':
+		return frag_projectile_precision_angle
+	if property == 'bullet/frag_projectile_precision':
+		return frag_projectile_precision
+	if property == 'bullet/number_of_frag_projectile':
+		return number_of_frag_projectile
 	
 	if property == 'loader/loader_capacity':
 		return loader_capacity
@@ -157,6 +189,15 @@ func _set(property, value) -> bool :
 	if property == 'bullet/bullet_should_pierce_walls':
 		bullet_should_pierce_walls = value
 	
+	if property == 'bullet/projectile_should_frag':
+		projectile_should_frag = value
+	if property == 'bullet/frag_projectile_precision_angle':
+		frag_projectile_precision_angle = value
+	if property == 'bullet/frag_projectile_precision':
+		frag_projectile_precision = value
+	if property == 'bullet/number_of_frag_projectile':
+		number_of_frag_projectile = value
+	
 	if property == 'loader/loader_capacity':
 		loader_capacity = value
 	
@@ -174,10 +215,11 @@ func _set(property, value) -> bool :
 		recoil_force = value
 	return true
 
+
 func _get_property_list() -> Array:
 	var props = []
-	props.append_array(
-	[{
+	
+	var props_proprieties = [{
 		'name': 'properties/weapon_name',
 		'type': TYPE_STRING,
 	},{
@@ -186,7 +228,9 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'properties/level',
 		'type': TYPE_INT,
-	},{
+	}]
+	
+	var props_power = [{
 		'name': 'power/points_to_unlock_power',
 		'type': TYPE_INT,
 	},{
@@ -195,7 +239,9 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'power/can_use_power',
 		'type': TYPE_BOOL,
-	},{
+	}]
+	
+	var props_projectile = [{
 		'name': 'bullet/projectile',
 		'type': TYPE_OBJECT,
 	},{
@@ -219,7 +265,27 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'bullet/bullet_should_pierce_walls',
 		'type': TYPE_BOOL,
+	}]
+	
+	var props_frag_bullets = [{
+		'name': 'bullet/projectile_should_frag',
+		'type': TYPE_BOOL,
+	}]
+	
+	if projectile_should_frag:
+		props_frag_bullets.append_array(
+	[{
+		'name': 'bullet/frag_projectile_precision_angle',
+		'type': TYPE_VECTOR2,
 	},{
+		'name': 'bullet/frag_projectile_precision',
+		'type': TYPE_FLOAT,
+	},{
+		'name': 'bullet/number_of_frag_projectile',
+		'type': TYPE_INT,
+	}])
+	
+	var props_weapon = [{
 		'name': 'loader/loader_capacity',
 		'type': TYPE_INT,
 	},{
@@ -240,6 +306,12 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'weapon/recoil_force',
 		'type': TYPE_FLOAT,
-	},
-	])
+	}]
+
+	props.append_array(props_proprieties)
+	props.append_array(props_power)
+	props.append_array(props_projectile)
+	props.append_array(props_frag_bullets)
+	props.append_array(props_weapon)
+	
 	return props
