@@ -13,7 +13,11 @@ func _ready():
 func _physics_process(delta):
 	if self.action_disabled:
 		return
-	var move_direction = Vector2(
+	manage_movement(delta)
+	manage_rotation()
+
+func manage_movement(delta: float):
+	move_direction = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
@@ -26,13 +30,27 @@ func _physics_process(delta):
 	global_position += velocity
 	move_and_slide()
 	velocity = Vector2.ZERO
-	look_at(get_global_mouse_position())
+
+func manage_rotation():
+	var direction : Vector2 = Vector2.ZERO
+	
+	if !weapon_manager.weapon.special_power.activated or (weapon_manager.weapon.special_power.activated and (!weapon_manager.weapon.special_power.disable_look_at and weapon_manager.weapon.special_power.player_target == Vector2.ZERO)):
+		direction = get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position
+	elif weapon_manager.weapon.special_power.player_target != Vector2.ZERO and !weapon_manager.weapon.special_power.disable_look_at:
+		direction = weapon_manager.weapon.special_power.player_target
+	if direction != Vector2.ZERO:
+		look_at(direction)
 
 func _process(delta):
 	if self.action_disabled:
 		return
 	if Input.is_action_pressed("shoot"):
-		if weapon_manager != null:
+		var shoot_prohibited : bool = false
+		
+		if "is_shooting" in weapon_manager.weapon.special_power:
+			shoot_prohibited = weapon_manager.weapon.special_power.is_shooting
+		
+		if weapon_manager != null and !shoot_prohibited:
 			weapon_manager.weapon.shoot()
 
 func _unhandled_input(event):
@@ -44,6 +62,8 @@ func _unhandled_input(event):
 		throw_weapon()
 	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
 		throw_grappling()
+	if event.is_action_pressed("activate_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
+		weapon_manager.weapon.special_power.use_special_power()
 	
 	#switch weapon
 	if event.is_action_pressed("test"):

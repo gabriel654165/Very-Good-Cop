@@ -8,6 +8,7 @@ class_name HealthUiManager
 var health_obj_list : Array = []
 var health_ui_list : Array[Control] = []
 
+
 func _ready():
 	if health_ui == null:
 		active = false

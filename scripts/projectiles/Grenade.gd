@@ -21,8 +21,7 @@ func _ready():
 	scale = scale * size
 	explosion_area_shape.get_shape().set_radius(radius_pixels_impact_area)
 
-func _physics_process(delta):
-	_move_and_collide(delta)
+func _specific_process(delta):
 	if speed == 0 or direction == Vector2.ZERO:
 		return
 	var range_safe := 5
@@ -30,18 +29,11 @@ func _physics_process(delta):
 	if distance - range_safe <= distance_traveled and distance_traveled <= distance + range_safe:
 		stop()
 
-func handle_collision(collision: KinematicCollision2D):
-	if !collision:
-		return
-	var object = collision.get_collider()
-
+func handle_specific_collision(object: Object):
 	if object is Character:
 		stop()
 		explode()
 		return
-
-	if object.name == "Walls":
-		direction = velocity.normalized().bounce(collision.get_normal())
 
 func stop():
 	speed = 0
