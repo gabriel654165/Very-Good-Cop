@@ -162,6 +162,10 @@ func spawn_dungeon_rooms():
 
 		var instantiated_room:Node2D = chosen_room.factory.instantiate()
 
+		# TODO: Spawn specific entrace and exit rooms
+		if room == entrance_pos or room == exit_pos:
+			instantiated_room.set("should_spawn_stuff", false)
+
 		instantiated_room.position = relative_pos
 		add_child(instantiated_room)
 

@@ -3,12 +3,15 @@ extends Node2D
 class_name Room
 
 @onready var room_config = find_child("RoomConfig")
+var should_spawn_stuff := true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(room_config != null, "Add a room config to your room")
-	spawn_with_room_config("Patrols", get_patrol_paths, spawn_enemy)
-	spawn_with_room_config("PowerUpPoints", get_children_positions_array, spawn_powerups)
+	if should_spawn_stuff:
+		spawn_with_room_config("Patrols", get_patrol_paths, spawn_enemy)
+		spawn_with_room_config("PowerUpPoints", get_children_positions_array, spawn_powerups)
 
 
 func spawn_with_room_config(
@@ -32,6 +35,7 @@ func spawn_with_room_config(
 
 func get_children_positions_array(node:Node):
 	return node.get_children().map(func(node:Node2D): return node.global_position)
+
 
 #
 # Spawn powerups
