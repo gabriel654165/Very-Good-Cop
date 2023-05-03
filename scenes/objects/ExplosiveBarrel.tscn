@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://rear12d7xhl4"]
+[gd_scene load_steps=14 format=3 uid="uid://rear12d7xhl4"]
 
 [ext_resource type="Script" path="res://scenes/objects/ExplosiveBarrel.gd" id="1_vpnep"]
 [ext_resource type="Script" path="res://scripts/Health.gd" id="2_hh2m6"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="3_w4jdm"]
+[ext_resource type="PackedScene" uid="uid://dd4lfl8th5odi" path="res://scenes/particles/Explosion.tscn" id="4_3i7wb"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_udvqg"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r55sq"]
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1s42y"]
@@ -81,28 +82,14 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0.1, 0.1), Vector2(1.5, 1.5)]
 }
-tracks/3/type = "method"
+tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("..")
+tracks/3/path = NodePath("../Sprite2D:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.199),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"destroy_instance"
-}]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Sprite2D:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.03),
+"times": PackedFloat32Array(-0.048),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -144,12 +131,71 @@ _data = {
 "muzzle_flash": SubResource("Animation_3sddm")
 }
 
+[sub_resource type="Animation" id="Animation_50kqf"]
+resource_name = "explosion_praticle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Health")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_una3e"]
+_data = {
+"explosion_praticle": SubResource("Animation_50kqf")
+}
+
 [node name="ExplosiveBarrel" type="StaticBody2D"]
 script = ExtResource("1_vpnep")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = SubResource("PlaceholderTexture2D_udvqg")
+texture = SubResource("PlaceholderTexture2D_r55sq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1s42y")
@@ -178,4 +224,18 @@ region_rect = Rect2(66, 70, 51, 104)
 root_node = NodePath("../Explosion")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
+}
+
+[node name="ExplosionParticle" parent="." instance=ExtResource("4_3i7wb")]
+lifetime = 0.25
+explosiveness = 0.78
+randomness = 1.0
+fixed_fps = 0
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+
+[node name="ParticlePlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ExplosionParticle")
+libraries = {
+"": SubResource("AnimationLibrary_una3e")
 }
