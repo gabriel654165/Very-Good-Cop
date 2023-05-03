@@ -195,6 +195,7 @@ _data = {
 script = ExtResource("1_vpnep")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = SubResource("PlaceholderTexture2D_r55sq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -220,8 +221,7 @@ vframes = 2
 region_enabled = true
 region_rect = Rect2(66, 70, 51, 104)
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Explosion")
+[node name="Animation" type="AnimationPlayer" parent="Explosion"]
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
@@ -234,8 +234,7 @@ fixed_fps = 0
 initial_velocity_min = 500.0
 initial_velocity_max = 500.0
 
-[node name="ParticlePlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../ExplosionParticle")
+[node name="Animation" type="AnimationPlayer" parent="ExplosionParticle"]
 libraries = {
 "": SubResource("AnimationLibrary_una3e")
 }
