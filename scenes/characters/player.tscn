@@ -1,12 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0x250onoqdno"]
+[gd_scene load_steps=15 format=3 uid="uid://d0x250onoqdno"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
 [ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_uemap"]
+[ext_resource type="PackedScene" uid="uid://dpscp32lejm1n" path="res://scenes/weapons/MachineGun.tscn" id="4_vy1d6"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
+[ext_resource type="PackedScene" uid="uid://cu5xhrk3gung2" path="res://scenes/weapons/Riffle.tscn" id="5_43l82"]
 [ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
+[ext_resource type="PackedScene" uid="uid://ty2w1el7t7x1" path="res://scenes/weapons/Sniper.tscn" id="6_oko04"]
+[ext_resource type="PackedScene" uid="uid://x0amqpcim4nu" path="res://scenes/weapons/MiniUzi.tscn" id="7_at8c2"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
+[ext_resource type="PackedScene" uid="uid://cekv24mq8jxv" path="res://scenes/weapons/Shotgun.tscn" id="8_q5dp1"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
@@ -16,9 +21,15 @@ size = Vector2(28, 43)
 z_index = 1
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
+index_weapon_selected = 6
 weapon_list = {
 "glock": ExtResource("2_xaulr"),
-"grenade_launcher": ExtResource("3_uemap")
+"grenade_launcher": ExtResource("3_uemap"),
+"machine_gun": ExtResource("4_vy1d6"),
+"mini_uzi": ExtResource("7_at8c2"),
+"riffle": ExtResource("5_43l82"),
+"shotgun": ExtResource("8_q5dp1"),
+"sniper": ExtResource("6_oko04")
 }
 grappling_hook_scene = ExtResource("5_wxswb")
 projectile_weapon_scene = ExtResource("9_8nmes")

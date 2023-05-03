@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://r7n15xjnkw6m"]
+[gd_scene load_steps=14 format=3 uid="uid://r7n15xjnkw6m"]
 
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_e6w1w"]
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_yujf1"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_ucb1l"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_n0wdy"]
 [ext_resource type="Texture2D" uid="uid://divrx8sn4i1rb" path="res://assets/PNG/Weapons/Glock.png" id="5_0evwv"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/AimBot.gd" id="7_lluol"]
+[ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="8_gess7"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -85,6 +87,9 @@ _data = {
 "muzzle_flash": SubResource("Animation_3sddm")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uempm"]
+radius = 483.456
+
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_yujf1")
 properties/weapon_name = "glock"
@@ -92,19 +97,25 @@ properties/special_power_unlocked = true
 properties/level = 1
 power/points_to_unlock_power = 100
 power/current_points_charge_power = 0
-power/can_use_power = false
+power/can_use_power = true
 bullet/projectile = ExtResource("2_qu7tn")
 bullet/bullet_speed = 10
-bullet/bullet_damages = 6
-bullet/bullet_size = 0.0
+bullet/bullet_damages = 5
+bullet/bullet_size = 1.0
 bullet/bullet_impact_force = 2.0
-loader/loader_capacity = 6
+bullet/bullet_piercing_force = 1
+bullet/bullet_should_bounce = false
+bullet/bullet_should_pierce_walls = false
+bullet/projectile_should_frag = false
+loader/loader_capacity = 12
+loader/reloading_cooldown = 1.0
 weapon/enable = true
+weapon/shooting_cooldown = 0.5
 weapon/number_of_balls_by_burt = 1
-weapon/frequence_of_burt = 0.1
+weapon/frequence_of_burt = 0.0
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.0
-weapon/recoil_force = 2.0
+weapon/recoil_force = 1.0
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_e6w1w")
@@ -144,3 +155,17 @@ root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
+
+[node name="SpecialPower" type="Node2D" parent="Weapon"]
+script = ExtResource("7_lluol")
+cursor_scene = ExtResource("8_gess7")
+canvas_enemy_offset = Vector2(20, 15)
+speed_aim_cursor = 800.0
+wait_time_between_shoots = 0.2
+
+[node name="Area2D" type="Area2D" parent="Weapon/SpecialPower"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/SpecialPower/Area2D"]
+shape = SubResource("CircleShape2D_uempm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Weapon/SpecialPower"]

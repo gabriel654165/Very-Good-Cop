@@ -35,4 +35,4 @@ func set_weapon_panel_variables():
 
 func handle_enemy_died(enemy: Node2D, points: int):
 	panel_weapon.add_charge_power_bar(points)
-	print("power charger = ", panel_weapon.current_power_charger)
+	#print("power charger = ", panel_weapon.current_power_charger)

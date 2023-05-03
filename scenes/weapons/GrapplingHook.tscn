@@ -10,7 +10,7 @@ size = Vector2(14, 8)
 collision_layer = 2
 script = ExtResource("1_na4ob")
 drag_speed = 750
-speed = 10
+speed = 20
 damages = 0
 impact_force = 0.0
 

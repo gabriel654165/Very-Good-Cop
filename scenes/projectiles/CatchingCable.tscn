@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjli835xwy0bb"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/CatchingCable.gd" id="1_l0vmu"]
+[ext_resource type="Script" path="res://scripts/projectiles/Projectile.gd" id="2_4ymas"]
+[ext_resource type="Texture2D" uid="uid://cnmbxvpng45ys" path="res://assets/PNG/Retina/bulletDark3_outline.png" id="2_183pd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cehvc"]
+radius = 2.848
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_so110"]
+radius = 2.53859
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4eikw"]
+a = Vector2(-10, 0)
+b = Vector2(10, 0)
+
+[node name="CatchingCable" type="CharacterBody2D"]
+rotation = 1.5708
+script = ExtResource("1_l0vmu")
+damages = 0
+impact_force = 0.0
+
+[node name="BallRight" type="CharacterBody2D" parent="."]
+position = Vector2(13.3333, 0)
+script = ExtResource("2_4ymas")
+speed = 7
+damages = 0
+size = 0.7
+impact_force = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="BallRight"]
+texture = ExtResource("2_183pd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallRight"]
+shape = SubResource("CircleShape2D_cehvc")
+disabled = true
+
+[node name="BallLeft" type="CharacterBody2D" parent="."]
+position = Vector2(-13.3333, 0)
+script = ExtResource("2_4ymas")
+speed = 7
+damages = 0
+size = 0.7
+impact_force = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="BallLeft"]
+texture = ExtResource("2_183pd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallLeft"]
+shape = SubResource("CircleShape2D_so110")
+disabled = true
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-10, 0, 10, 0)
+width = 8.0
+default_color = Color(0.266667, 0.266667, 0.266667, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 2.5)
+shape = SubResource("SegmentShape2D_4eikw")
+disabled = true
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1, 2.5)
+shape = SubResource("SegmentShape2D_4eikw")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="TimerStopExpend" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="TimerCableRetention" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="TimerStopExpend" to="." method="_on_timer_stop_expend_timeout"]
+[connection signal="timeout" from="TimerCableRetention" to="." method="_on_timer_cable_retention_timeout"]

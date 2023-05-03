@@ -3,7 +3,7 @@ class_name AIStateMachine
 
 @onready var navigation_agent: NavigationAgent2D = $"../NavigationAgent2D"
 
-@export var movement_speed: float = 50.0
+var _movement_speed: float = 50.0
 
 var _weapon : Weapon = null
 var _enemy : Enemy = null
@@ -14,9 +14,10 @@ const SHOOT = "Shoot To Target"
 
 signal state_changed(new_state: AIState)
 
-func init(enemy: Enemy, new_weapon: Weapon):
+func init(enemy: Enemy, new_weapon: Weapon, speed: float):
 	_enemy = enemy
 	_weapon = new_weapon
+	_movement_speed = speed
 	
 	navigation_agent.velocity_computed.connect(on_velocity_computed)
 	
