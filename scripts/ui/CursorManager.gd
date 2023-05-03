@@ -3,7 +3,7 @@ extends Node2D
 @export var active : bool = false
 @export var cursor_ui : PackedScene
 @export var canvas_enemy_offset := Vector2(30, 25)
-@export var cursor_offset := Vector2(6, 6)
+@export var cursor_offset := Vector2(11, 11)
 @export var scale_sprite := Vector2(1, 1)
 @export var auto_lock : bool = false
 @export var auto_lock_offset : Vector2 = Vector2(55, 50)
@@ -31,7 +31,7 @@ func generate_ui():
 	add_child(cursor)
 	scale = scale_sprite
 	if cursor != null:
-		Input.set_custom_mouse_cursor(cursor.cursor_texture)
+		Input.set_custom_mouse_cursor(cursor.cursor_texture, Input.CURSOR_ARROW, cursor_offset)
 	cursor.cursor_mode = DisplayServer.MOUSE_MODE_VISIBLE if mouse_visible else DisplayServer.MOUSE_MODE_HIDDEN
 	DisplayServer.mouse_set_mode(cursor.cursor_mode)
 	cursor.animator.play("cursor_idle")
@@ -45,7 +45,7 @@ func _process(delta):
 		return
 	
 	if !cursor.is_locked_gui:
-		GlobalVariables.cursor_position = get_viewport().get_mouse_position() + cursor_offset
+		GlobalVariables.cursor_position = get_viewport().get_mouse_position() - cursor_offset
 	var is_on_enemy_tmp = is_on_enemy()
 	
 	if auto_lock:
@@ -57,12 +57,9 @@ func _process(delta):
 		else:
 			cursor.is_locked_gui = false
 	
-	# faire en sorte que meme en autolock quand il est sur un enemy ca enlève le idle
-	# faire un script cursor qui setactive les differents states
-	
-	if is_on_enemy_tmp and !cursor.is_attack_gui and !auto_lock:
+	if is_on_enemy_tmp and !cursor.is_attack_gui and !auto_lock and !cursor.is_menu_ui:
 		cursor.active_mode_attack_gui()
-	if !is_on_enemy_tmp and !cursor.is_idle_gui and !cursor.is_locked_gui:
+	if !is_on_enemy_tmp and !cursor.is_idle_gui and !cursor.is_locked_gui and !cursor.is_menu_ui:
 		cursor.active_mode_idle_gui()
 	
 	cursor.sprite.global_position = GlobalVariables.cursor_position
@@ -111,7 +108,8 @@ func is_on_enemy() -> bool:
 	return false
 
 func hit_marker_action():
-	cursor.active_mode_hit_marker_gui()
+	if cursor.is_attack_gui:
+		cursor.active_mode_hit_marker_gui()
 
 func _input(event):
 #debug

@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://byeald88viaao"]
+[gd_scene load_steps=18 format=3 uid="uid://byeald88viaao"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
 [ext_resource type="PackedScene" uid="uid://bb7av66d8pynv" path="res://scenes/ui/HealthBar.tscn" id="2_k8jrc"]
+[ext_resource type="Script" path="res://scripts/ui/PauseManager.gd" id="2_lu52o"]
 [ext_resource type="Script" path="res://scripts/ui/CursorManager.gd" id="3_exgmc"]
 [ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="4_7jw85"]
 [ext_resource type="Script" path="res://scripts/ui/PopUpPointsManager.gd" id="6_dpwpx"]
@@ -14,9 +15,22 @@
 [ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
+[ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
+shader = ExtResource("16_wdi1s")
+shader_parameter/target = Vector2(-1, 1)
+shader_parameter/intensity = 0.0
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_cf1if")
+
+[node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("pause_gui", "base_panel", "option_panel", "color_rect")]
+script = ExtResource("2_lu52o")
+pause_gui = NodePath("../PanelsContainer/PauseControl")
+base_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/BasePanelContainer")
+option_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/OptionTabContainer")
+color_rect = NodePath("../PanelsContainer/PauseControl/ColorRect")
 
 [node name="HealthUiManager" type="Node2D" parent="."]
 script = ExtResource("1_c8amb")
@@ -98,3 +112,75 @@ offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+
+[node name="PauseControl" type="Control" parent="PanelsContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelsContainer/PauseControl"]
+material = SubResource("ShaderMaterial_hi0er")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseContainer" type="CenterContainer" parent="PanelsContainer/PauseControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BasePanelContainer" type="VBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ResumeButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Resume"
+
+[node name="OptionButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Option"
+
+[node name="QuitButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Quit game"
+
+[node name="OptionTabContainer" type="TabContainer" parent="PanelsContainer/PauseControl/PauseContainer"]
+custom_minimum_size = Vector2(800, 450)
+layout_mode = 2
+
+[node name="General" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
+layout_mode = 2
+
+[node name="Controls" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Graphic" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Audio" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/ResumeButton" to="PauseManager" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/OptionButton" to="PauseManager" method="_on_option_button_pressed"]
+[connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/QuitButton" to="PauseManager" method="_on_quit_button_pressed"]
