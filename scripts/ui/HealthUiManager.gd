@@ -23,7 +23,6 @@ func set_active(state: bool):
 		unload_ui()
 
 func generate_ui():
-	#aller chercher tout les Health
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Health, health_obj_list, get_tree().root)
 	
 	var index : int = 0
@@ -58,7 +57,6 @@ func remove_health_bar(index: int):
 
 func set_health_ui_position(aim_position: Vector2, health_ui: Control):
 	health_ui.global_position = aim_position + offset_position
-	#print("aim position to canvas : ", aim_position, " global_position :", health_ui.global_position)
 
 func set_health_values(health: Health, health_ui: Control):
 	health_ui.set_max_health(health._get_max_health())
