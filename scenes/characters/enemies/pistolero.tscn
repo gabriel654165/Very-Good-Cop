@@ -8,13 +8,11 @@
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
 [ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_xa1nf"]
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
+[ext_resource type="Script" path="res://scripts/AI/States/Pursue.gd" id="8_sgcqp"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="9_5t7aw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(20, 36)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_etnqn"]
-radius = 152.161
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_ef1gd")
@@ -52,10 +50,8 @@ script = ExtResource("6_xa1nf")
 [node name="Shoot To Target" type="Node" parent="StateMachine"]
 script = ExtResource("7_ar7hp")
 
-[node name="DetectionZone" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
-shape = SubResource("CircleShape2D_etnqn")
+[node name="Pursue" type="Node" parent="StateMachine"]
+script = ExtResource("8_sgcqp")
 
 [node name="WeaponManager" parent="." instance=ExtResource("4_7rejy")]
 
