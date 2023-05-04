@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://cqra38cu512t2"]
+
+[ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_wfer1"]
+[ext_resource type="Texture2D" uid="uid://nyk6qxgsi43u" path="res://assets/PNG/Default size/barrelGreen_side.png" id="2_cj16a"]
+[ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="2_u3np5"]
+[ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="3_8a6bf"]
+[ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="4_lkd46"]
+[ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="5_b182e"]
+[ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="6_ic2gm"]
+[ext_resource type="Script" path="res://scripts/Interactions/ActiveProcessorInteraction.gd" id="7_l1h8k"]
+[ext_resource type="Script" path="res://scripts/Interactions/SpamClickInteraction.gd" id="8_ttp6i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
+radius = 28.2312
+
+[node name="DamagePowerUp" type="Node2D"]
+script = ExtResource("1_wfer1")
+effect_name = "damages"
+type = 3
+value_effect = 120.0
+infinite_effect = false
+effect_duration = 7.5
+sprite = NodePath("Sprite2D")
+used_sprite = NodePath("UsedSprite")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -0.375185
+texture = ExtResource("2_cj16a")
+
+[node name="UsedSprite" type="Sprite2D" parent="."]
+visible = false
+rotation = -0.75037
+texture = ExtResource("2_u3np5")
+
+[node name="CharacterCollisionInteraction" type="Node2D" parent="."]
+script = ExtResource("3_8a6bf")
+is_active = true
+
+[node name="Area2D" type="Area2D" parent="CharacterCollisionInteraction"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterCollisionInteraction/Area2D"]
+shape = SubResource("CircleShape2D_tdnqi")
+
+[node name="AddPassiveEffectInteraction" type="Node2D" parent="."]
+rotation = -0.375185
+script = ExtResource("4_lkd46")
+for_who = 1
+
+[node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("5_b182e")
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("ActivateProcessorInteraction")
+
+[node name="KeyPressedInteraction" type="Node2D" parent="PressKeyAndCollide"]
+script = ExtResource("6_ic2gm")
+keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="ActivateProcessorInteraction" type="Node2D" parent="PressKeyAndCollide" node_paths=PackedStringArray("interaction_processor")]
+script = ExtResource("7_l1h8k")
+interaction_processor = NodePath("../../SpamClickAndCollide")
+
+[node name="SpamClickAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+rotation = -0.375185
+script = ExtResource("5_b182e")
+is_active = false
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+collision_interaction = NodePath("../CharacterCollisionInteraction")
+next_interaction = NodePath("../AddPassiveEffectInteraction")
+
+[node name="SpamClickInteraction" type="Node2D" parent="SpamClickAndCollide"]
+script = ExtResource("8_ttp6i")
+for_who = 1
+
+[node name="Timer" type="Timer" parent="SpamClickAndCollide/SpamClickInteraction"]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_entered"]
+[connection signal="body_exited" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_exited"]
+[connection signal="timeout" from="SpamClickAndCollide/SpamClickInteraction/Timer" to="SpamClickAndCollide/SpamClickInteraction" method="_on_timer_timeout"]

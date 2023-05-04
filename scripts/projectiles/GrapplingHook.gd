@@ -5,8 +5,7 @@ class_name GrapplingHook
 
 @export var drag_speed : int = 500 
 
-func _physics_process(delta):
-	_move_and_collide(delta)
+func _specific_process(delta):
 	if projectile_owner != null:
 		line_cable.set_point_position(0, to_local(global_position))
 		line_cable.set_point_position(1, to_local(projectile_owner.global_position))

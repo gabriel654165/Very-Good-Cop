@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://x0amqpcim4nu"]
+[gd_scene load_steps=12 format=3 uid="uid://x0amqpcim4nu"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_aaa8n"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_jqkmm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_gaw7k"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_favuq"]
 [ext_resource type="Texture2D" uid="uid://40748egngkr8" path="res://assets/PNG/Weapons/MiniUzi.png" id="5_jrvft"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/BouncingBullets.gd" id="7_ptyis"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -87,27 +88,33 @@ _data = {
 
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_aaa8n")
-stats/special_power_unlocked = false
-stats/level = 0
+properties/weapon_name = "mini_uzi"
+properties/special_power_unlocked = true
+properties/level = 1
 power/points_to_unlock_power = 200
 power/current_points_charge_power = 0
-power/can_use_power = false
-bullet/Projectile = ExtResource("2_akemc")
-bullet/bullet_speed = 4.0
-bullet/bullet_damages = 6
-bullet/bullet_size = 0
-bullet/bullet_impact_force = 2
+power/can_use_power = true
+bullet/projectile = ExtResource("2_akemc")
+bullet/bullet_speed = 12
+bullet/bullet_damages = 5
+bullet/bullet_size = 1.0
+bullet/bullet_impact_force = 0.5
+bullet/bullet_piercing_force = 1
+bullet/bullet_should_bounce = false
+bullet/bullet_should_pierce_walls = false
+bullet/projectile_should_frag = false
 loader/loader_capacity = 15
+loader/reloading_cooldown = 1.0
 weapon/enable = true
-weapon/number_of_balls_by_burt = 15
+weapon/shooting_cooldown = 0.75
+weapon/number_of_balls_by_burt = 5
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.35
 weapon/recoil_force = 0.5
 
-[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
+[node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_jqkmm")
-parent = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("3_gaw7k")
@@ -124,6 +131,7 @@ position = Vector2(18, 4.48227e-05)
 position = Vector2(20, 4.48227e-05)
 
 [node name="AttackCoolDown" type="Timer" parent="Weapon"]
+wait_time = 0.1
 one_shot = true
 
 [node name="ReloadCoolDown" type="Timer" parent="Weapon"]
@@ -142,3 +150,6 @@ root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
+
+[node name="SpecialPower" type="Node2D" parent="Weapon"]
+script = ExtResource("7_ptyis")

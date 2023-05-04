@@ -27,7 +27,7 @@ func move() -> void:
 
 	var new_velocity: Vector2 = next_path_position - current_agent_position
 	new_velocity = new_velocity.normalized()
-	new_velocity = new_velocity * state_machine.movement_speed
+	new_velocity = new_velocity * state_machine._movement_speed
 
 	state_machine.navigation_agent.set_velocity(new_velocity)
 	state_machine._enemy.global_rotation = new_velocity.angle()

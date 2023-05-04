@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cu5xhrk3gung2"]
+[gd_scene load_steps=12 format=3 uid="uid://cu5xhrk3gung2"]
 
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_cxkgv"]
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_eiovr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_h6ytp"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_d6cwx"]
 [ext_resource type="Texture2D" uid="uid://2d8rrfw0oold" path="res://assets/PNG/Weapons/Riffle.png" id="5_oo3ka"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/FragmentationBullets.gd" id="7_vtkkj"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -87,27 +88,33 @@ _data = {
 
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_eiovr")
-stats/special_power_unlocked = false
-stats/level = 0
+properties/weapon_name = "riffle"
+properties/special_power_unlocked = true
+properties/level = 1
 power/points_to_unlock_power = 200
 power/current_points_charge_power = 0
-power/can_use_power = false
-bullet/Projectile = ExtResource("2_gwbis")
-bullet/bullet_speed = 4.0
-bullet/bullet_damages = 6
-bullet/bullet_size = 0
-bullet/bullet_impact_force = 2
-loader/loader_capacity = 6
+power/can_use_power = true
+bullet/projectile = ExtResource("2_gwbis")
+bullet/bullet_speed = 13
+bullet/bullet_damages = 1
+bullet/bullet_size = 1.0
+bullet/bullet_impact_force = 2.0
+bullet/bullet_piercing_force = 1
+bullet/bullet_should_bounce = false
+bullet/bullet_should_pierce_walls = false
+bullet/projectile_should_frag = false
+loader/loader_capacity = 9
+loader/reloading_cooldown = 2.0
 weapon/enable = true
+weapon/shooting_cooldown = 0.5
 weapon/number_of_balls_by_burt = 3
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.5
 weapon/recoil_force = 1.0
 
-[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
+[node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_cxkgv")
-parent = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("3_h6ytp")
@@ -128,7 +135,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="ReloadCoolDown" type="Timer" parent="Weapon"]
-wait_time = 0.8
+wait_time = 2.0
 one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="Weapon"]
@@ -144,3 +151,10 @@ root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
+
+[node name="SpecialPower" type="Node2D" parent="Weapon"]
+script = ExtResource("7_vtkkj")
+number_of_frag_projectile = 10
+duration = 20.0
+
+[connection signal="timeout" from="Weapon/ReloadCoolDown" to="Weapon" method="_on_reload_cool_down_timeout"]

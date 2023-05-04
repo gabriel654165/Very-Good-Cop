@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpscp32lejm1n"]
+[gd_scene load_steps=13 format=3 uid="uid://dpscp32lejm1n"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_1vquv"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_em527"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_g4nn2"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_2c5wk"]
 [ext_resource type="Texture2D" uid="uid://61n0gvkotulb" path="res://assets/PNG/Weapons/BigMachineGun.png" id="5_20v54"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/Shooting360.gd" id="7_4510l"]
+[ext_resource type="Texture2D" uid="uid://bmxguh1pixhh5" path="res://assets/PNG/Default size/barrelBlack_top.png" id="8_ose3d"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -87,18 +89,25 @@ _data = {
 
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_1vquv")
-stats/special_power_unlocked = false
-stats/level = 0
+properties/weapon_name = "machine_gun"
+properties/special_power_unlocked = true
+properties/level = 1
 power/points_to_unlock_power = 200
 power/current_points_charge_power = 0
-power/can_use_power = false
-bullet/Projectile = ExtResource("2_tnhh1")
-bullet/bullet_speed = 4.0
-bullet/bullet_damages = 6
-bullet/bullet_size = 0
-bullet/bullet_impact_force = 1
-loader/loader_capacity = 20
+power/can_use_power = true
+bullet/projectile = ExtResource("2_tnhh1")
+bullet/bullet_speed = 12
+bullet/bullet_damages = 3
+bullet/bullet_size = 1.0
+bullet/bullet_impact_force = 0.5
+bullet/bullet_piercing_force = 0
+bullet/bullet_should_bounce = false
+bullet/bullet_should_pierce_walls = false
+bullet/projectile_should_frag = false
+loader/loader_capacity = 25
+loader/reloading_cooldown = 3.0
 weapon/enable = true
+weapon/shooting_cooldown = 0.0
 weapon/number_of_balls_by_burt = 1
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
@@ -112,6 +121,7 @@ script = ExtResource("1_em527")
 texture = ExtResource("3_g4nn2")
 
 [node name="SideSprite2D" type="Sprite2D" parent="Weapon"]
+visible = false
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_20v54")
 
@@ -142,3 +152,15 @@ root_node = NodePath("../MuzzleFlash")
 libraries = {
 "": SubResource("AnimationLibrary_eygrr")
 }
+
+[node name="SpecialPower" type="Node2D" parent="Weapon"]
+script = ExtResource("7_4510l")
+time_between_shoots = 0.005
+full_rotation_by_second = 2.0
+duration = 2.0
+
+[node name="Target" type="Node2D" parent="Weapon/SpecialPower"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon/SpecialPower/Target"]
+texture = ExtResource("8_ose3d")

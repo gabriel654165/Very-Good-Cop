@@ -5,11 +5,10 @@ enum PatrolType {
 	Sequence,
 	RandomTarget
 }
-
-@onready var fsm: StateMachine = $StateMachine
+@onready var fsm: AIStateMachine = $StateMachine
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
-@onready var room_config: RoomConfig = $"../RoomConfig"
 @onready var vision_sensor: VisionSensor = $VisionSensor
+@onready var spriteDead: Sprite2D = $SpriteDead
 @onready var sprite: Sprite2D = $Sprite2D
 
 @export var patrol_type: PatrolType = PatrolType.Sequence
@@ -30,18 +29,24 @@ enum PatrolType {
 @onready var blood_effect_prefab = preload("res://scenes/effects/small_blood.tscn")
 @onready var corpse_prefab = preload("res://scenes/effects/corpse.tscn")
 
-var patrol_points: Array[Vector2] = []
+var patrol_points: Array = []
 
 func _ready():
-	patrol_points = room_config.patrol_points
 	weapon_manager = get_node("WeaponManager")
 	weapon_manager.weapon.global_position = weapon_position.global_position
-	fsm.init(self, weapon_manager.weapon)
+
+	fsm.init(self, weapon_manager.weapon, speed * 10)
+
+func set_speed(new_speed: float):
+	speed = new_speed
+	fsm._movement_speed = speed * 10
 
 func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
 	if health.is_dead():
-		GlobalSignals.enemy_died.emit(global_position, point_value)
+		var spriteDeadEnemy = spawnSprite(self.global_position, spriteDead)
+		GlobalSignals.enemy_died.emit(spriteDeadEnemy, point_value)
+		#display le sprite au sol
 		if damager is Projectile:
 			var corpse = spawn(corpse_prefab, global_position)
 			var new_velocity: Vector2 = (damager as Projectile).direction
