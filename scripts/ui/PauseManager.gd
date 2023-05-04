@@ -1,4 +1,5 @@
 extends Node
+class_name PauseManager
 
 @export var active : bool = false
 @export var aim_blur_intensity : float = 0.5
@@ -40,16 +41,18 @@ func _process(delta):
 		pause_gui.visible = false
 		display_base_panel()
 
-func resume_flow():
+func resume():
 	unload_ui()
 	gui_manager.cursor_manager.cursor.active_mode_idle_gui()	
-	start_resume_animation()
+	if await start_resume_animation():
+		disable_all_game_objects(false)
+		set_active(false)
 
 func generate_ui():
 	display_base_panel()
 	pause_gui.visible = true
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Character, characters_in_scene, get_tree().root)
-	disable_in_game_objects(true)
+	disable_all_game_objects(true)
 	gui_manager.cursor_manager.cursor.active_mode_ui()
 	set_active_gui_panels(false)
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
@@ -90,21 +93,20 @@ func instanciate_pop_up_text(content: String, duration: float, velocity_scale: V
 	pop_up_text_instance.life_timer.start()
 	return pop_up_text_instance.life_timer
 
-func start_resume_animation():
+func start_resume_animation() -> bool:
 	var index : int = 0
 	for pop_up_content in pop_up_contents:
-		#last pop up will stay longer
+		#last pop up will stay twice longer
 		if index == pop_up_contents.size() -1:
 			pop_up_timer = instanciate_pop_up_text(pop_up_content, resume_pop_up_duration * 2, resume_pop_up_velocity_scale / 2)
 		else:
 			pop_up_timer = instanciate_pop_up_text(pop_up_content, resume_pop_up_duration, resume_pop_up_velocity_scale)
 		await pop_up_timer.timeout
 		if pop_up_timer == null:
-			return
+			return false
 		index += 1
 	pop_up_timer = null
-	disable_in_game_objects(false)
-	set_active(false)
+	return true
 
 func _unhandled_input(event):
 	if event.is_action_pressed("echap"):
@@ -112,11 +114,11 @@ func _unhandled_input(event):
 			pop_up_timer = null
 			set_active(true)
 		elif base_panel.visible:
-			resume_flow()
+			resume()
 		elif option_panel.visible:
 			display_base_panel()
 
-func disable_in_game_objects(state: bool):
+func disable_all_game_objects(state: bool):
 	var index : int = 1
 	for character in characters_in_scene:
 		if character != null:
@@ -128,7 +130,7 @@ func disable_in_game_objects(state: bool):
 
 # Signals
 func _on_resume_button_pressed():
-	resume_flow()
+	resume()
 
 func _on_option_button_pressed():
 	display_panel_option()

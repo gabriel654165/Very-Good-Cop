@@ -1,4 +1,5 @@
 extends Node2D
+class_name CursorManager
 
 @export var active : bool = false
 @export var cursor_ui : PackedScene

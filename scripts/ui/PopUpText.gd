@@ -1,29 +1,18 @@
 extends CanvasGroup
 class_name PopUpText
 
-#deal avec les colors
-# bool : random ou pas ?
-# Mettre 2 color sinon
-
-#objects
 @onready var life_timer = $LifeTimer
-@onready var text_upper = $TextUpper as Label
-@onready var text_under = $TextUnder as Label
+@onready var text_upper : Label = $TextUpper
+@onready var text_under : Label = $TextUnder
 
-#animation
 var velocity_mov : Vector2 = Vector2(0, 0)
 var velocity_scale : Vector2 = Vector2(60, 60)
 
-#data & position
 var life_time : float = 2
 var content : String
 var current_offset := Vector2(0, 0)
-#rename offset
 var base_offset : Vector2 = Vector2(0, 0)
 var world_target : Node2D = null
-
-#func _ready():
-#	pivot_offset = (size / 2)
 
 func _process(delta):
 	current_offset += velocity_mov * delta
