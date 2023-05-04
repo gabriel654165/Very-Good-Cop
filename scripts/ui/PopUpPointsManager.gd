@@ -14,8 +14,8 @@ func handle_enemy_died(enemy: Node2D, points: int):
 	var pop_up_text_instance = pop_up_text_scene.instantiate()
 	add_child(pop_up_text_instance)
 	
-	pop_up_text_instance.set_world_target(enemy)
-	pop_up_text_instance.enemy_base_offset = enemy_offset
+	pop_up_text_instance.world_target = enemy
+	pop_up_text_instance.base_offset = enemy_offset
 	pop_up_text_instance.scale = text_scale
 	pop_up_text_instance.set_life_time(life_time)
 	
