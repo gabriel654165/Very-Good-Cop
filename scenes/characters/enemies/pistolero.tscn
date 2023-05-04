@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cewhfxsma7527"]
+[gd_scene load_steps=12 format=3 uid="uid://cewhfxsma7527"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
-[ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="3_rogn6"]
 [ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_vv8m0"]
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
 [ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_xa1nf"]
@@ -15,8 +14,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(20, 36)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_etnqn"]
-radius = 152.161
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
 speed = 10.0
@@ -27,10 +24,6 @@ z_index = 1
 texture = ExtResource("2_oj8g8")
 region_enabled = true
 region_rect = Rect2(111.512, -1.1273, 53.145, 44.7663)
-
-[node name="SpriteDead" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_rogn6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-8, 0)
@@ -61,9 +54,6 @@ script = ExtResource("7_ar7hp")
 
 [node name="Pursue" type="Node" parent="StateMachine"]
 script = ExtResource("8_sgcqp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
-shape = SubResource("CircleShape2D_etnqn")
 
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
 position = Vector2(20, 0)

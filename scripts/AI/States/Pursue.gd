@@ -31,6 +31,7 @@ func update(_delta: float) -> void:
 		set_movement_target(state_machine._enemy.global_transform.origin + target_move_direction * 500)
 
 func enter(_msg := {}) -> void:
+	stop_tween()
 	_last_target_pos = _msg["last_target_pos"]
 	target_move_direction = _msg["target_move_direction"]
 	set_movement_target(_last_target_pos)
@@ -39,9 +40,11 @@ func enter(_msg := {}) -> void:
 		vision_sensor.can_see_target.connect(_on_see_target)
 
 func exit() -> void:
-	stop_tween()
-	searching = false	
-	vision_sensor.can_see_target.disconnect(_on_see_target)
+	vision_sensor.can_see_target.disconnect(_on_see_target)	
+	searching = false
+	find_timer.stop()
+	wait_rotation_timer.stop()
+	stop_tween()	
 
 #signals 
 func _on_see_target(target: DetectableTarget):
@@ -51,7 +54,6 @@ func _on_pursuit_time_timeout():
 	wait_rotation_timer.start()
 
 func _on_wait_point_timeout():
-	stop_tween()
 	tween = get_tree().create_tween()
 	var initial_degree = state_machine._enemy.rotation_degrees
 	tween.tween_property(state_machine._enemy, "rotation_degrees", initial_degree + state_machine._enemy.pursue_look_angle, 1)
@@ -64,4 +66,6 @@ func _on_wait_point_timeout():
 	
 func stop_tween():
 	if tween != null:
+		print("stop tween")
 		tween.stop()
+	tween = null
