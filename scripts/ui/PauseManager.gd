@@ -36,10 +36,7 @@ func set_active(state: bool):
 func _process(delta):
 	if (active and current_blur_intensity < 1) or (!active and current_blur_intensity > 0):
 		color_rect.get_material().set_shader_parameter("intensity", current_blur_intensity)
-	
-	#trouver un moyen de pas appeler ca en boucle
-	elif !active and current_blur_intensity == 0:
-		#print("resume")
+	elif !active and current_blur_intensity == 0 and !base_panel.visible:
 		pause_gui.visible = false
 		display_base_panel()
 
