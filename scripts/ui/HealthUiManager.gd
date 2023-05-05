@@ -51,12 +51,14 @@ func _process(delta):
 	var index : int = 0
 	while index < health_obj_list.size():
 		var health_obj := health_obj_list[index]
+		var health_canvas := health_ui_list[index]
+
 		if health_obj == null:
 			remove_health_bar(index)
 			index += 1
 			continue
-		elif health_obj.health < health_obj.max_health and (health_ui_list[index] as CanvasItem).visible == false:
-			(health_ui_list[index] as CanvasItem).visible = true
+		elif health_canvas.visible == false and health_obj.health < health_obj.max_health:
+			health_canvas.visible = true
 		set_health_ui_position(health_obj.get_global_transform_with_canvas().origin, health_ui_list[index])
 		index += 1
 
