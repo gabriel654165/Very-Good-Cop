@@ -9,6 +9,9 @@ extends StaticBody2D
 @export var impact_force := 20.0
 
 func handle_hit(damager: Node2D, damage):
+	if health.is_dead():
+		return
+
 	if damager is Bullet:
 		damage = 1
 	health.hit(damage)
