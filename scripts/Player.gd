@@ -26,7 +26,7 @@ func manage_movement(delta: float):
 		self.force = Vector2.ZERO
 		
 	if move_direction != Vector2.ZERO:
-		velocity += move_direction * GlobalFunctions.get_speed(delta, speed) + self.force
+		velocity += move_direction * GlobalFunctions.get_speed(delta, speed)
 	global_position += velocity
 	move_and_slide()
 	velocity = Vector2.ZERO

@@ -46,11 +46,6 @@ func generate():
 	reset_dungeon_layout()
 	generate_dungeon_layout(number_of_rooms)
 
-	#if OS.is_debug_build():
-	#	print("Generated dungeon:")
-	#	for line in dungeon_layout:
-	#		print(line)
-
 	fill_doors_identifier()
 
 	spawn_dungeon_rooms()
@@ -162,13 +157,10 @@ func spawn_dungeon_rooms():
 
 		var instantiated_room:Node2D = chosen_room.factory.instantiate()
 
-		# TODO: Spawn specific entrace and exit rooms
 		if room == entrance_pos or room == exit_pos:
-			instantiated_room.set("should_spawn_stuff", false)
-
+			instantiated_room.should_spawn_stuff = false
 		instantiated_room.position = relative_pos
 		add_child(instantiated_room)
-
 
 #
 # Find farthest cell from another cell
