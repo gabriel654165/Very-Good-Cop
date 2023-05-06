@@ -24,7 +24,6 @@ func set_active(state: bool):
 		unload_ui()
 
 func generate_ui():
-	#aller chercher tout les Health
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Health, health_obj_list, get_tree().root)
 	
 	var index : int = 0
