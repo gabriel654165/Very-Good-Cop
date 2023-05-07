@@ -1,0 +1,9 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cjfggo3iuj2wa"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ydel5"]
+load_path = "res://.godot/imported/wns_expanded_icons.png-4d7c65896da964e2f72c630ee1074ae9.ctex"
+
+[resource]
+atlas = SubResource("CompressedTexture2D_ydel5")
+region = Rect2(85, 37, 10, 10)
+margin = Rect2(0, 0, 1, 1)

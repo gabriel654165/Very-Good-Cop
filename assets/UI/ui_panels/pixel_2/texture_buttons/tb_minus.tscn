@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Texture2D" uid="uid://cmxwe65ra8mc2" path="res://GuiAssets/sprites/gdp_styles.png" id="1_its6c"]
+[ext_resource type="Texture2D" uid="uid://b5h20s54fmkcw" path="res://GuiAssets/styles/buttons/btn_13p_textured_focus.tres" id="2_ywroe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3xiq"]
+atlas = ExtResource("1_its6c")
+region = Rect2(116, 29, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4fja"]
+atlas = ExtResource("1_its6c")
+region = Rect2(116, 43, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mr6dp"]
+atlas = ExtResource("1_its6c")
+region = Rect2(116, 15, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhgbn"]
+atlas = ExtResource("1_its6c")
+region = Rect2(116, 1, 13, 13)
+
+[node name="minus" type="TextureButton"]
+offset_right = 13.0
+offset_bottom = 13.0
+texture_normal = SubResource("AtlasTexture_h3xiq")
+texture_pressed = SubResource("AtlasTexture_k4fja")
+texture_hover = SubResource("AtlasTexture_mr6dp")
+texture_disabled = SubResource("AtlasTexture_qhgbn")
+texture_focused = ExtResource("2_ywroe")

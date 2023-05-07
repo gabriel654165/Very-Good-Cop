@@ -15,7 +15,7 @@ const Exit:int = -4
 
 
 const TileSideSize:int = 16
-const RoomSideSize:int = 48
+const RoomSideSize:int = 34
 const RoomCenterOffset:int = (RoomSideSize - 1)  * (TileSideSize) # TODO: Maybe better name
 const PackedPlayer = preload("res://scenes/characters/player.tscn")
 
@@ -267,6 +267,7 @@ static func load_room(room:PackedScene, file_name:String):
 		GlobalVariables.rooms_repository[doors_bitflags] = new_room_array 
 	else:
 		GlobalVariables.rooms_repository[doors_bitflags].append(room_data)
+	#print("Loaded room: " + file_name)
 
 
 static func room_nodes_to_door_bitflags(room_nodes:PackedStringArray) -> int:

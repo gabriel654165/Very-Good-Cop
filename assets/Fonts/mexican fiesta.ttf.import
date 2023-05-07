@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://dvn5373v6r2c"
+path="res://.godot/imported/mexican fiesta.ttf-49e37fec8fbc1221dee0aaae56b24dc5.fontdata"
+
+[deps]
+
+source_file="res://assets/Fonts/mexican fiesta.ttf"
+dest_files=["res://.godot/imported/mexican fiesta.ttf-49e37fec8fbc1221dee0aaae56b24dc5.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

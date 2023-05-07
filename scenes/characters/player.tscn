@@ -1,7 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://d0x250onoqdno"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
-[ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_cmhid"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
 [ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_uemap"]
 [ext_resource type="PackedScene" uid="uid://dpscp32lejm1n" path="res://scenes/weapons/MachineGun.tscn" id="4_vy1d6"]
@@ -13,15 +12,15 @@
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
 [ext_resource type="PackedScene" uid="uid://cekv24mq8jxv" path="res://scenes/weapons/Shotgun.tscn" id="8_q5dp1"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
+[ext_resource type="Texture2D" uid="uid://dtk16fqh5mb82" path="res://assets/character/Police-HM-2.png" id="11_q2lq8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
-size = Vector2(28, 43)
+size = Vector2(28, 18)
 
 [node name="Player" type="CharacterBody2D" groups=["character", "player"]]
 z_index = 1
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
-index_weapon_selected = 3
 weapon_list = {
 "glock": ExtResource("2_xaulr"),
 "grenade_launcher": ExtResource("3_uemap"),
@@ -37,9 +36,9 @@ projectile_weapon_scene = ExtResource("9_8nmes")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 position = Vector2(-3, 0)
-texture = ExtResource("2_cmhid")
+texture = ExtResource("11_q2lq8")
 region_enabled = true
-region_rect = Rect2(388, 88, 34, 44)
+region_rect = Rect2(451, 457, 30, 17)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, 0)
@@ -48,10 +47,10 @@ shape = SubResource("RectangleShape2D_dfd5l")
 [node name="Health" parent="." instance=ExtResource("4_yibkt")]
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
-position = Vector2(16, 9)
+position = Vector2(-4, 0)
 
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
-position = Vector2(20, 0)
+position = Vector2(5, 0)
 
 [node name="BulletproofVest" type="Node2D" parent="."]
 

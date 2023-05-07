@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://byeald88viaao"]
+[gd_scene load_steps=19 format=3 uid="uid://byeald88viaao"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
 [ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="17_eyt6o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
 shader = ExtResource("16_wdi1s")
@@ -143,6 +144,7 @@ grow_vertical = 2
 visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme = ExtResource("17_eyt6o")
 theme_override_constants/separation = 15
 
 [node name="ResumeButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
@@ -164,8 +166,10 @@ theme_override_font_sizes/font_size = 20
 text = "Quit game"
 
 [node name="OptionTabContainer" type="TabContainer" parent="PanelsContainer/PauseControl/PauseContainer"]
+visible = false
 custom_minimum_size = Vector2(800, 450)
 layout_mode = 2
+theme = ExtResource("17_eyt6o")
 
 [node name="General" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
 layout_mode = 2

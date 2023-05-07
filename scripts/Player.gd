@@ -82,7 +82,7 @@ func assign_knife():
 func set_active_assigned_weapon():
 	weapon_throwed = false
 	weapon_manager.enable = true
-	weapon_manager.weapon.sprite.visible = true
+	#weapon_manager.weapon.sprite.visible = true
 
 func assign_weapon(index: int):
 	weapon_manager = await find_weapon(index_weapon_selected)

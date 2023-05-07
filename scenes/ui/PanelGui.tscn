@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3enp3a1fg70f"]
+[gd_scene load_steps=3 format=3 uid="uid://c3enp3a1fg70f"]
 
 [ext_resource type="Script" path="res://scripts/ui/PanelGui.gd" id="1_cfi1b"]
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_okag4"]
 
 [node name="PanelGui" type="PanelContainer" node_paths=PackedStringArray("title_label", "value_label")]
 custom_minimum_size = Vector2(100, 50)
 offset_right = 69.0
 offset_bottom = 64.0
+theme = ExtResource("1_okag4")
 script = ExtResource("1_cfi1b")
 title_label = NodePath("VSplitContainer/LabelTitle")
 value_label = NodePath("VSplitContainer/LabelValue")

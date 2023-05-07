@@ -1,0 +1,16 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" uid="uid://cmxwe65ra8mc2" path="res://GuiAssets/sprites/gdp_styles.png" id="1_46l3r"]
+
+[resource]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("1_46l3r")
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 2.0
+margin_bottom = 1.0
+region_rect = Rect2(43, 15, 13, 13)
+modulate_color = Color(1, 1, 1, 0.580392)
