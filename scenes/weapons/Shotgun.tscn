@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_rd0x7"]
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_x7pkl"]
-[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_yubjh"]
+[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_oik3w"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_yn37x"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_lhyuc"]
-[ext_resource type="Texture2D" uid="uid://dv63hyh0cesvg" path="res://assets/PNG/Weapons/ShotGun.png" id="5_ucslj"]
+[ext_resource type="Texture2D" uid="uid://dg6j57pe0tfnr" path="res://assets/UI/icons/weapons/ShotGun.png" id="5_73gsu"]
 [ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/FastReloading.gd" id="7_ixd45"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
@@ -76,7 +76,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.5, 1.2)]
+"values": [Vector2(0.5, 0.5), Vector2(0.25, 0.6)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eygrr"]
@@ -91,38 +91,39 @@ script = ExtResource("1_x7pkl")
 properties/weapon_name = "shotgun"
 properties/special_power_unlocked = true
 properties/level = 1
-power/points_to_unlock_power = 200
+power/points_to_unlock_power = 100
 power/current_points_charge_power = 0
 power/can_use_power = true
-bullet/projectile = ExtResource("2_yubjh")
-bullet/bullet_speed = 10
+bullet/projectile = ExtResource("2_oik3w")
+bullet/bullet_speed = 9
 bullet/bullet_damages = 5
-bullet/bullet_size = 1.0
-bullet/bullet_impact_force = 2.0
+bullet/bullet_size = 0.5
+bullet/bullet_impact_force = 1.0
 bullet/bullet_piercing_force = 0
 bullet/bullet_should_bounce = false
 bullet/bullet_should_pierce_walls = false
 bullet/projectile_should_frag = false
 loader/loader_capacity = 10
-loader/reloading_cooldown = 2.0
+loader/reloading_cooldown = 1.5
 weapon/enable = true
-weapon/shooting_cooldown = 0.75
+weapon/shooting_cooldown = 0.6
 weapon/number_of_balls_by_burt = 5
 weapon/frequence_of_burt = 0.0
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 1.0
-weapon/recoil_force = 1.5
+weapon/recoil_force = 2.0
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_rd0x7")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+visible = false
 texture = ExtResource("3_yn37x")
 
 [node name="SideSprite2D" type="Sprite2D" parent="Weapon"]
 visible = false
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("5_ucslj")
+scale = Vector2(0.035, 0.035)
+texture = ExtResource("5_73gsu")
 
 [node name="FirePosition" type="Marker2D" parent="Weapon"]
 position = Vector2(18, 4.48227e-05)
@@ -140,8 +141,9 @@ one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="Weapon"]
 visible = false
-position = Vector2(28, 4.48227e-05)
+position = Vector2(23, 7.27596e-12)
 rotation = -1.5708
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_lhyuc")
 region_enabled = true
 region_rect = Rect2(324, 334, 20, 25)

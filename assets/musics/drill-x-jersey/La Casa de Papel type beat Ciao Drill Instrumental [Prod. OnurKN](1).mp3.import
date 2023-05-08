@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ba3sy0hthhjk5"
+path="res://.godot/imported/La Casa de Papel type beat Ciao Drill Instrumental [Prod. OnurKN](1).mp3-cbeafd255893730d3f17b4d36eb4f289.mp3str"
+
+[deps]
+
+source_file="res://assets/musics/drill-x-jersey/La Casa de Papel type beat Ciao Drill Instrumental [Prod. OnurKN](1).mp3"
+dest_files=["res://.godot/imported/La Casa de Papel type beat Ciao Drill Instrumental [Prod. OnurKN](1).mp3-cbeafd255893730d3f17b4d36eb4f289.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://btcexfdculq0x"]
+
+[ext_resource type="FontFile" uid="uid://bl4mmm33ymfxa" path="res://GuiAssets/fonts/m5x7.ttf" id="1_8jksx"]
+
+[resource]
+base_font = ExtResource("1_8jksx")
+opentype_features = {
+1667329140: 0
+}
+spacing_top = -1

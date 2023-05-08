@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://bb7av66d8pynv"]
 
-[ext_resource type="Texture2D" uid="uid://b5myog5283c0u" path="res://assets/UI/HealthBars/player-health-bar-under.png" id="1_7swia"]
+[ext_resource type="Texture2D" uid="uid://c7mhdv5321ddf" path="res://assets/UI/HealthBars/health_bar_back.png" id="2_cf3ny"]
 [ext_resource type="Texture2D" uid="uid://b3lw7l7gwrdhp" path="res://assets/UI/HealthBars/player-health-bar-over.png" id="2_kfn8e"]
-[ext_resource type="Texture2D" uid="uid://d2wx4o35tdjrh" path="res://assets/UI/HealthBars/player-health-bar-health.png" id="3_s1jy2"]
+[ext_resource type="Texture2D" uid="uid://cjbpodr6kybir" path="res://assets/UI/HealthBars/HUD_fillbar01.png" id="3_rs4g5"]
 [ext_resource type="Script" path="res://scripts/ui/HealthBar.gd" id="3_thb20"]
-[ext_resource type="Texture2D" uid="uid://bi0kjwen0765u" path="res://assets/UI/HealthBars/player-health-bar-damage.png" id="4_o5o2w"]
+[ext_resource type="Texture2D" uid="uid://d3h5ey0c1vf7a" path="res://assets/UI/HealthBars/HUD_fillbar02.png" id="4_2nkf5"]
 
 [node name="HealthBar" type="Control"]
 layout_mode = 3
@@ -19,12 +19,11 @@ offset_right = 47.0
 offset_bottom = 8.0
 value = 100.0
 nine_patch_stretch = true
-texture_under = ExtResource("1_7swia")
+texture_under = ExtResource("2_cf3ny")
 texture_over = ExtResource("2_kfn8e")
-texture_progress = ExtResource("4_o5o2w")
-tint_under = Color(0, 0, 0, 1)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0.996078, 0, 0, 1)
+texture_progress = ExtResource("3_rs4g5")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(0.670588, 0.74902, 0.0392157, 1)
 
 [node name="HealOver" type="TextureProgressBar" parent="."]
 layout_mode = 0
@@ -33,6 +32,6 @@ offset_bottom = 8.0
 value = 100.0
 nine_patch_stretch = true
 texture_over = ExtResource("2_kfn8e")
-texture_progress = ExtResource("3_s1jy2")
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0.451992, 0.969103, 0, 1)
+texture_progress = ExtResource("4_2nkf5")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(0, 0.803922, 0, 1)

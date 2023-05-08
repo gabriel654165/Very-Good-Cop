@@ -1,0 +1,755 @@
+[gd_scene load_steps=41 format=3 uid="uid://bhp1ueu8fdjix"]
+
+[ext_resource type="Theme" uid="uid://b826k6lvqtor5" path="res://GuiAssets/gdp_theme.tres" id="1_a6dvn"]
+[ext_resource type="Script" path="res://GuiAssets/sample_assets/gui_sample.gd" id="2_my338"]
+[ext_resource type="PackedScene" path="res://GuiAssets/texture_buttons/tb_plus.tscn" id="4_quku2"]
+[ext_resource type="PackedScene" path="res://GuiAssets/texture_buttons/tb_minus.tscn" id="5_muf2n"]
+[ext_resource type="Script" path="res://GuiAssets/sample_assets/ProgressBar.gd" id="6_8ocls"]
+[ext_resource type="Texture2D" uid="uid://cmxwe65ra8mc2" path="res://GuiAssets/sprites/gdp_styles.png" id="7_fnebp"]
+[ext_resource type="FontFile" uid="uid://b0fhden5lnkil" path="res://GuiAssets/fonts/TinyPixie2.ttf" id="8_knt0i"]
+[ext_resource type="Script" path="res://GuiAssets/sample_assets/IconContainer.gd" id="9_sgt4s"]
+[ext_resource type="StyleBox" path="res://GuiAssets/styles/containers/square/slim_panel_square.tres" id="10_86qri"]
+[ext_resource type="Texture2D" path="res://GuiAssets/icons/shaded/skull_bones_shaded.tres" id="11_ulihn"]
+[ext_resource type="Texture2D" path="res://GuiAssets/icons/flat/sound_high_flat.tres" id="12_iy25x"]
+[ext_resource type="Texture2D" path="res://GuiAssets/icons/shaded/play_start_shaded.tres" id="13_s1lom"]
+[ext_resource type="Texture2D" path="res://GuiAssets/icons/flat/email_flat.tres" id="14_ke6i1"]
+[ext_resource type="Texture2D" path="res://GuiAssets/icons/shaded/clock_shaded.tres" id="15_welfg"]
+[ext_resource type="Texture2D" uid="uid://jabf8c5jecj4" path="res://GuiAssets/sprites/gdp_icons.png" id="16_4xfcc"]
+[ext_resource type="Texture2D" path="res://GuiAssets/icons/flat/folder_open_flat.tres" id="17_as8pc"]
+[ext_resource type="Texture2D" path="res://GuiAssets/icons/flat/cross_flat.tres" id="18_b6ar2"]
+[ext_resource type="ButtonGroup" uid="uid://d2j0gd4kafiao" path="res://GuiAssets/sample_assets/button_group.tres" id="19_xvadm"]
+[ext_resource type="Texture2D" uid="uid://dob7sjbt6wdoh" path="res://GuiAssets/icons/shaded/locked_shaded.tres" id="20_58uj6"]
+[ext_resource type="Texture2D" uid="uid://uphh0kjil3hv" path="res://GuiAssets/icons/flat/locked_flat.tres" id="21_1ygvx"]
+[ext_resource type="Texture2D" uid="uid://bxwea7ljsrfjb" path="res://GuiAssets/icons/shaded/unlocked_shaded.tres" id="22_p06wf"]
+[ext_resource type="Texture2D" uid="uid://cjfggo3iuj2wa" path="res://GuiAssets/icons/flat/unlocked_flat.tres" id="23_ex0wy"]
+[ext_resource type="Script" path="res://GuiAssets/sample_assets/fill_tree.gd" id="24_pmkag"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xiiqt"]
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_461fh"]
+texture = ExtResource("7_fnebp")
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 3.0
+margin_bottom = 3.0
+region_rect = Rect2(72, 242, 13, 13)
+draw_center = false
+
+[sub_resource type="FontVariation" id="FontVariation_5kfrk"]
+base_font = ExtResource("8_knt0i")
+spacing_bottom = -1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fdw6h"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_bottom = 0.0
+texture = ExtResource("7_fnebp")
+margin_left = 4.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 3.0
+region_rect = Rect2(88, 193, 12, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oodkp"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_bottom = 0.0
+texture = ExtResource("7_fnebp")
+margin_left = 4.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 3.0
+region_rect = Rect2(105, 193, 12, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eephd"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_bottom = 0.0
+texture = ExtResource("7_fnebp")
+margin_left = 4.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 3.0
+region_rect = Rect2(122, 193, 12, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yff63"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_bottom = 0.0
+texture = ExtResource("7_fnebp")
+margin_left = 4.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 3.0
+region_rect = Rect2(139, 193, 12, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4pyg"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_bottom = 0.0
+texture = ExtResource("7_fnebp")
+margin_left = 4.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 3.0
+region_rect = Rect2(156, 193, 12, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghy41"]
+atlas = ExtResource("16_4xfcc")
+region = Rect2(125, 226, 7, 9)
+margin = Rect2(4, 3, 5, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2qqqq"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+bg_color = Color(0.184314, 0.164706, 0.203922, 1)
+corner_detail = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r87mv"]
+load_path = "res://.godot/imported/wns_expanded_icons.png-4d7c65896da964e2f72c630ee1074ae9.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvmp4"]
+atlas = SubResource("CompressedTexture2D_r87mv")
+region = Rect2(110, 23, 9, 9)
+margin = Rect2(0, 0, 2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siimx"]
+atlas = SubResource("CompressedTexture2D_r87mv")
+region = Rect2(121, 23, 9, 9)
+margin = Rect2(0, 0, 2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6ads"]
+atlas = SubResource("CompressedTexture2D_r87mv")
+region = Rect2(73, 145, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpct0"]
+atlas = SubResource("CompressedTexture2D_r87mv")
+region = Rect2(85, 145, 11, 11)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ls7v"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_etdi7"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+
+[node name="GuiSample" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_a6dvn")
+script = ExtResource("2_my338")
+
+[node name="MenuBar" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 169.0
+offset_bottom = 9.0
+
+[node name="MenuButton" type="MenuButton" parent="MenuBar"]
+layout_mode = 2
+offset_right = 11.0
+offset_bottom = 7.0
+text = "File"
+flat = false
+switch_on_hover = true
+item_count = 8
+popup/item_0/text = "New"
+popup/item_0/id = 1
+popup/item_1/text = "Open"
+popup/item_1/id = 0
+popup/item_2/text = "Open Recent"
+popup/item_2/id = 2
+popup/item_3/text = ""
+popup/item_3/id = 3
+popup/item_3/separator = true
+popup/item_4/text = "Save"
+popup/item_4/id = 4
+popup/item_5/text = "Save as..."
+popup/item_5/id = 5
+popup/item_6/text = ""
+popup/item_6/id = 6
+popup/item_6/separator = true
+popup/item_7/text = "Exit"
+popup/item_7/id = 7
+
+[node name="MenuButton2" type="MenuButton" parent="MenuBar"]
+layout_mode = 2
+offset_left = 15.0
+offset_right = 27.0
+offset_bottom = 7.0
+text = "Edit"
+flat = false
+switch_on_hover = true
+item_count = 5
+popup/item_0/text = "Undo"
+popup/item_0/id = 0
+popup/item_1/text = "Redo"
+popup/item_1/id = 1
+popup/item_2/text = "Separator"
+popup/item_2/id = 2
+popup/item_2/separator = true
+popup/item_3/text = "Cut"
+popup/item_3/id = 3
+popup/item_4/text = "Copy"
+popup/item_4/id = 4
+
+[node name="MenuButton3" type="MenuButton" parent="MenuBar"]
+layout_mode = 2
+offset_left = 31.0
+offset_right = 45.0
+offset_bottom = 7.0
+text = "Help"
+flat = false
+switch_on_hover = true
+item_count = 2
+popup/item_0/text = "Readme"
+popup/item_0/id = 1
+popup/item_1/text = "About"
+popup/item_1/id = 2
+
+[node name="TextureButtons" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 57.0
+offset_bottom = 20.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xiiqt")
+text = "TextureButtons
+"
+
+[node name="tb_plus" parent="TextureButtons" instance=ExtResource("4_quku2")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.70589
+anchor_right = 1.70589
+metadata/_edit_use_anchors_ = true
+
+[node name="tb_minus" parent="TextureButtons" instance=ExtResource("5_muf2n")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.03922
+anchor_right = 1.03922
+offset_left = -2.0
+offset_right = 11.0
+
+[node name="ProgressBar" type="ProgressBar" parent="TextureButtons"]
+layout_mode = 0
+offset_left = 66.0
+offset_right = 88.0
+offset_bottom = 13.0
+step = 5.0
+value = 50.0
+rounded = true
+show_percentage = false
+script = ExtResource("6_8ocls")
+
+[node name="Label" type="Label" parent="TextureButtons"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 3.0
+offset_right = 187.0
+offset_bottom = 12.0
+text = "Control a ProgressBar"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 26.0
+offset_right = 152.0
+offset_bottom = 39.0
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 2.0
+offset_right = 100.0
+offset_bottom = 11.0
+text = "Label matching button height"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+offset_left = 104.0
+offset_right = 146.0
+offset_bottom = 13.0
+text = "Button"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 43.0
+offset_right = 163.0
+offset_bottom = 109.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_461fh")
+
+[node name="IconContainer" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 61.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_5kfrk")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxTexture_fdw6h")
+text = "Some Icons"
+script = ExtResource("9_sgt4s")
+label_styles = [SubResource("StyleBoxTexture_fdw6h"), SubResource("StyleBoxTexture_oodkp"), SubResource("StyleBoxTexture_eephd"), SubResource("StyleBoxTexture_yff63"), SubResource("StyleBoxTexture_y4pyg")]
+metadata/_edit_group_ = true
+
+[node name="ItemList" type="ItemList" parent="Panel/IconContainer"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -5.0
+offset_top = 8.0
+offset_right = 79.0
+offset_bottom = 53.0
+theme_override_styles/panel = ExtResource("10_86qri")
+item_count = 8
+max_columns = 4
+fixed_column_width = 13
+item_0/text = ""
+item_0/icon = ExtResource("11_ulihn")
+item_1/text = ""
+item_1/icon = ExtResource("12_iy25x")
+item_2/text = ""
+item_2/icon = ExtResource("13_s1lom")
+item_3/text = ""
+item_3/icon = ExtResource("14_ke6i1")
+item_4/text = ""
+item_4/icon = ExtResource("15_welfg")
+item_5/text = ""
+item_5/icon = SubResource("AtlasTexture_ghy41")
+item_6/text = ""
+item_6/icon = ExtResource("17_as8pc")
+item_7/text = ""
+item_7/icon = ExtResource("18_b6ar2")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = -3.0
+offset_right = 60.0
+offset_bottom = 5.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2qqqq")
+text = "Try Some Styles"
+
+[node name="ContainerStyleOption" type="OptionButton" parent="Panel/Label"]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 25.0
+offset_right = 145.0
+offset_bottom = 38.0
+theme_type_variation = &"OptionTest"
+theme_override_constants/h_separation = 0
+item_count = 5
+selected = 0
+popup/item_0/text = "Square"
+popup/item_0/id = 3
+popup/item_1/text = "Sharper"
+popup/item_1/id = 1
+popup/item_2/text = "Rounded"
+popup/item_2/id = 0
+popup/item_3/text = "Very Rounded"
+popup/item_3/id = 2
+popup/item_4/text = "Pill"
+popup/item_4/id = 4
+
+[node name="UseSlimCheckBox" type="CheckBox" parent="Panel/Label"]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 40.0
+offset_right = 129.0
+offset_bottom = 47.0
+button_pressed = true
+text = "Slim"
+
+[node name="UseDarkCursorCheckBox" type="CheckBox" parent="Panel/Label"]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 49.0
+offset_right = 130.0
+offset_bottom = 56.0
+button_pressed = true
+text = "Dark Cursor"
+
+[node name="ButtonGroup" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 111.0
+offset_right = 40.0
+offset_bottom = 134.0
+theme_override_constants/separation = 1
+metadata/_edit_group_ = true
+
+[node name="Radio0" type="CheckBox" parent="ButtonGroup"]
+layout_mode = 2
+offset_right = 34.0
+offset_bottom = 7.0
+button_pressed = true
+button_group = ExtResource("19_xvadm")
+text = "Radio 0"
+
+[node name="Radio1" type="CheckBox" parent="ButtonGroup"]
+layout_mode = 2
+offset_top = 8.0
+offset_right = 34.0
+offset_bottom = 15.0
+button_group = ExtResource("19_xvadm")
+text = "Radio 1"
+
+[node name="Radio2" type="CheckBox" parent="ButtonGroup"]
+layout_mode = 2
+offset_top = 16.0
+offset_right = 34.0
+offset_bottom = 23.0
+button_group = ExtResource("19_xvadm")
+text = "Radio 2"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 28.0
+offset_right = 228.0
+offset_bottom = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_group_ = true
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+clip_contents = true
+layout_mode = 2
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 59.0
+offset_bottom = 30.0
+columns = 4
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+offset_right = 11.0
+offset_bottom = 11.0
+texture = ExtResource("20_58uj6")
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+offset_left = 15.0
+offset_right = 26.0
+offset_bottom = 11.0
+texture = ExtResource("21_1ygvx")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+offset_left = 30.0
+offset_right = 41.0
+offset_bottom = 11.0
+texture = ExtResource("22_p06wf")
+
+[node name="TextureRect4" type="TextureRect" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+offset_left = 45.0
+offset_right = 56.0
+offset_bottom = 11.0
+texture = ExtResource("23_ex0wy")
+
+[node name="TextureRect5" type="TextureRect" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+offset_top = 15.0
+offset_right = 11.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_tvmp4")
+
+[node name="TextureRect6" type="TextureRect" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 26.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_siimx")
+
+[node name="TextureRect7" type="TextureRect" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 41.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_u6ads")
+
+[node name="TextureRect8" type="TextureRect" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+offset_left = 45.0
+offset_top = 15.0
+offset_right = 56.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_gpct0")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 66.0
+offset_right = 204.0
+offset_bottom = 79.0
+text = "Enter Text:
+"
+
+[node name="LineEdit" type="LineEdit" parent="Label"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 11.0
+offset_right = 74.0
+offset_bottom = 20.0
+text = "They Killed Kenny"
+placeholder_text = "You Bastards!"
+alignment = 2
+clear_button_enabled = true
+
+[node name="VScrollBar" type="VScrollBar" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 162.0
+offset_right = 64.0
+offset_bottom = 196.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="."]
+layout_mode = 1
+offset_left = 67.0
+offset_top = 162.0
+offset_right = 72.0
+offset_bottom = 195.0
+theme_type_variation = &"VScrollButtons"
+step = 5.0
+value = 50.0
+
+[node name="HScrollBar" type="HScrollBar" parent="."]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 98.0
+offset_right = 236.0
+offset_bottom = 103.0
+step = 5.0
+value = 25.0
+
+[node name="Label" type="Label" parent="HScrollBar"]
+layout_mode = 0
+offset_left = -42.0
+offset_top = -8.0
+offset_right = 53.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("8_knt0i")
+theme_override_font_sizes/font_size = 6
+text = "HScrollBar without
+buttons:
+And With
+"
+
+[node name="HScrollBar2" type="HScrollBar" parent="."]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 107.0
+offset_right = 236.0
+offset_bottom = 112.0
+theme_type_variation = &"HScrollButtons"
+step = 5.0
+value = 20.0
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 174.0
+offset_right = 56.0
+offset_bottom = 180.0
+tooltip_text = "50"
+step = 25.0
+value = 50.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="HSlider"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -14.0
+offset_right = 39.0
+offset_bottom = -1.0
+text = "Weapons"
+
+[node name="VSlider" type="VSlider" parent="."]
+layout_mode = 1
+offset_left = 48.0
+offset_top = 122.0
+offset_right = 54.0
+offset_bottom = 166.0
+step = 25.0
+value = 50.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="VSlider"]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 18.0
+offset_right = 13.0
+offset_bottom = 31.0
+text = "Shields
+"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 111.0
+offset_right = 238.0
+offset_bottom = 198.0
+metadata/_edit_group_ = true
+
+[node name="Tree" type="Tree" parent="TabContainer"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 12.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_pmkag")
+
+[node name="Tab1" type="PanelContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 13.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TabContainer/Tab1"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 13.0
+text = "Access Denied! 
+Contacting local authorities..."
+
+[node name="Tab2" type="PanelContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 13.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Popup" type="Popup" parent="."]
+title = "Helou"
+
+[node name="PopupPanel" type="PopupPanel" parent="Popup"]
+position = Vector2i(25, 40)
+size = Vector2i(200, 100)
+
+[node name="Container" type="Control" parent="Popup/PopupPanel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 197.0
+offset_bottom = 97.0
+
+[node name="Label" type="Label" parent="Popup/PopupPanel/Container"]
+layout_mode = 0
+offset_right = 94.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0, 0, 0, 0.941176)
+text = "Generic Dark Pixel UI Theme"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Popup/PopupPanel/Container"]
+layout_mode = 1
+offset_top = 25.712
+offset_right = 27.0
+offset_bottom = 119.712
+theme_override_colors/font_color = Color(0, 0, 0, 0.941176)
+text = "Licence:"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Popup/PopupPanel/Container/Label4"]
+layout_mode = 1
+offset_left = 11.632
+offset_top = 7.952
+offset_right = 141.632
+offset_bottom = 101.952
+theme_override_colors/font_color = Color(0, 0, 0.741176, 1)
+text = "Creative Commons Zero v1.0 Universal"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/PopupPanel/Container"]
+layout_mode = 1
+offset_left = -26.941
+offset_top = 60.182
+offset_right = 67.059
+offset_bottom = 154.088
+theme_override_colors/font_color = Color(0, 0, 0, 0.941176)
+text = "Created By:"
+horizontal_alignment = 1
+
+[node name="Label3" type="RichTextLabel" parent="Popup/PopupPanel/Container/Label2"]
+layout_mode = 1
+offset_left = 35.0
+offset_top = 9.914
+offset_right = 128.983
+offset_bottom = 103.928
+focus_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0.741176, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3ls7v")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_etdi7")
+text = "https://hoonius.itch.io/
+"
+selection_enabled = true
+
+[node name="Label3" type="Label" parent="Popup/PopupPanel/Container"]
+layout_mode = 1
+offset_left = -28.747
+offset_top = 75.0
+offset_right = 65.253
+offset_bottom = 168.903
+theme_override_colors/font_color = Color(0, 0, 0, 0.941176)
+text = "HomePage:"
+horizontal_alignment = 1
+
+[node name="Label3" type="RichTextLabel" parent="Popup/PopupPanel/Container/Label3"]
+layout_mode = 1
+offset_left = 36.783
+offset_top = 10.207
+offset_right = 236.783
+offset_bottom = 104.707
+focus_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0.741176, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3ls7v")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_etdi7")
+text = "https://hoonius.itch.io/generic-dark-pixel-ui
+
+"
+selection_enabled = true
+
+[connection signal="pressed" from="TextureButtons/tb_plus" to="TextureButtons/ProgressBar" method="_on_step_up"]
+[connection signal="pressed" from="TextureButtons/tb_minus" to="TextureButtons/ProgressBar" method="_on_step_down"]
+[connection signal="focus_entered" from="Panel/IconContainer/ItemList" to="Panel/IconContainer" method="_on_item_list_focus_entered"]
+[connection signal="focus_exited" from="Panel/IconContainer/ItemList" to="Panel/IconContainer" method="_on_item_list_focus_exited"]
+[connection signal="item_selected" from="Panel/Label/ContainerStyleOption" to="Panel/IconContainer" method="_on_option_button_item_selected"]
+[connection signal="toggled" from="Panel/Label/UseSlimCheckBox" to="Panel/IconContainer" method="_on_use_slim_toggled"]
+[connection signal="toggled" from="Panel/Label/UseDarkCursorCheckBox" to="Panel/IconContainer" method="_on_use_dark_cursor_check_box_toggled"]
+[connection signal="ready" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="ready" from="VSlider" to="." method="_on_v_slider_value_changed"]
+[connection signal="value_changed" from="VSlider" to="." method="_on_v_slider_value_changed"]

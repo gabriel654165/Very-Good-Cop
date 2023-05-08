@@ -15,7 +15,7 @@ const Exit:int = -4
 
 
 const TileSideSize:int = 16
-const RoomSideSize:int = 48
+const RoomSideSize:int = 34
 const RoomCenterOffset:int = (RoomSideSize - 1)  * (TileSideSize) # TODO: Maybe better name
 const PackedPlayer = preload("res://scenes/characters/player.tscn")
 
@@ -45,11 +45,6 @@ func generate():
 
 	reset_dungeon_layout()
 	generate_dungeon_layout(number_of_rooms)
-
-	#if OS.is_debug_build():
-	#	print("Generated dungeon:")
-	#	for line in dungeon_layout:
-	#		print(line)
 
 	fill_doors_identifier()
 
@@ -162,13 +157,10 @@ func spawn_dungeon_rooms():
 
 		var instantiated_room:Node2D = chosen_room.factory.instantiate()
 
-		# TODO: Spawn specific entrace and exit rooms
 		if room == entrance_pos or room == exit_pos:
-			instantiated_room.set("should_spawn_stuff", false)
-
+			instantiated_room.should_spawn_stuff = false
 		instantiated_room.position = relative_pos
 		add_child(instantiated_room)
-
 
 #
 # Find farthest cell from another cell
@@ -275,6 +267,7 @@ static func load_room(room:PackedScene, file_name:String):
 		GlobalVariables.rooms_repository[doors_bitflags] = new_room_array 
 	else:
 		GlobalVariables.rooms_repository[doors_bitflags].append(room_data)
+	#print("Loaded room: " + file_name)
 
 
 static func room_nodes_to_door_bitflags(room_nodes:PackedStringArray) -> int:
