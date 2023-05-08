@@ -44,6 +44,7 @@ script = ExtResource("1_cf1if")
 [node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("pause_gui", "base_panel", "option_panel", "color_rect")]
 script = ExtResource("2_lu52o")
 pop_up_text_scene = ExtResource("7_bnyiq")
+pop_up_contents = Array[String](["3", "2", "1", "Go !!!"])
 pause_gui = NodePath("../PanelsContainer/PauseControl")
 base_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/BasePanelContainer")
 option_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/OptionTabContainer")

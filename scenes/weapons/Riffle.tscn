@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_ybgct"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_h6ytp"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_d6cwx"]
-[ext_resource type="Texture2D" uid="uid://b2kanrcki6y2j" path="res://assets/UI/icons/weapons/Ak45.png" id="5_iul8n"]
+[ext_resource type="Texture2D" uid="uid://cyom4mc8jgnjo" path="res://assets/UI/icons/weapons/Gun_Smg.png" id="5_2g8xd"]
 [ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/FragmentationBullets.gd" id="7_vtkkj"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
@@ -123,7 +123,7 @@ texture = ExtResource("3_h6ytp")
 [node name="SideSprite2D" type="Sprite2D" parent="Weapon"]
 visible = false
 scale = Vector2(0.035, 0.035)
-texture = ExtResource("5_iul8n")
+texture = ExtResource("5_2g8xd")
 
 [node name="FirePosition" type="Marker2D" parent="Weapon"]
 position = Vector2(18, 4.48227e-05)

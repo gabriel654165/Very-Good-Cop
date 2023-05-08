@@ -20,9 +20,8 @@ func _ready():
 	panels_container.add_child(panel_weapon)
 	set_weapon_panel_variables()
 
-# TEST : switch weapon
 func _unhandled_input(event):
-	if event.is_action_pressed("test"):
+	if event.is_action_pressed("switch_weapon_test"):
 		await get_tree().create_timer(0.2).timeout
 		set_weapon_panel_variables()
 
