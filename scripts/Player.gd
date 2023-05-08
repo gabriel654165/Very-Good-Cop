@@ -59,18 +59,17 @@ func _unhandled_input(event):
 	if event.is_action_pressed("stab"):
 		stab()
 	if event.is_action_pressed("throw_weapon") and !weapon_throwed and weapon_manager.weapon != null:
+		#changer l'animation
 		throw_weapon()
 	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
 		throw_grappling()
 	if event.is_action_pressed("activate_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
 		weapon_manager.weapon.special_power.use_special_power()
 	
-	#switch weapon
-	if event.is_action_pressed("test"):
+	if event.is_action_pressed("switch_weapon_test"):
 		index_weapon_selected += 1
 		if index_weapon_selected > weapon_list.size():
 			index_weapon_selected = 1
-		print("weapon index : ", index_weapon_selected)
 		unassign_weapon()
 		assign_weapon(index_weapon_selected)
 
@@ -83,6 +82,7 @@ func set_active_assigned_weapon():
 	weapon_throwed = false
 	weapon_manager.enable = true
 	#weapon_manager.weapon.sprite.visible = true
+	#changer l'animation
 
 func assign_weapon(index: int):
 	weapon_manager = await find_weapon(index_weapon_selected)
@@ -91,6 +91,7 @@ func assign_weapon(index: int):
 	weapon_manager.set_position(weapon_position.position)
 	self.add_child(weapon_manager)
 	weapon_manager.set_variables(weapon_manager.weapon)
+	#changer l'animation
 
 func unassign_weapon():
 	if weapon_manager == null:

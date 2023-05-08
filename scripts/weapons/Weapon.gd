@@ -117,7 +117,7 @@ func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vec
 func set_projectile_variables(projectile: Projectile):
 	projectile.speed = bullet_speed
 	projectile.damages = bullet_damages
-	projectile.size = bullet_size
+	projectile.scale *= bullet_size
 	projectile.impact_force = bullet_impact_force
 	projectile.piercing_force = bullet_piercing_force
 	projectile.should_bounce = bullet_should_bounce
@@ -131,6 +131,9 @@ func add_charge_power_points(points: int):
 	current_points_charge_power += points
 	if current_points_charge_power >= points_to_unlock_power:
 		can_use_power = true
+		current_points_charge_power = 0
+	else:
+		can_use_power = false
 
 func reload_magazine():
 	await get_tree().create_timer(reloading_cooldown).timeout

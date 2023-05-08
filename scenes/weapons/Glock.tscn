@@ -162,7 +162,7 @@ libraries = {
 script = ExtResource("7_lluol")
 cursor_scene = ExtResource("8_bt7pw")
 canvas_enemy_offset = Vector2(20, 15)
-speed_aim_cursor = 800.0
+speed_aim_cursor = 600.0
 wait_time_between_shoots = 0.2
 
 [node name="Area2D" type="Area2D" parent="Weapon/SpecialPower"]
