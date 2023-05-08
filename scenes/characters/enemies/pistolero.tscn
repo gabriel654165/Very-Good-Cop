@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_3fkuj"]
-[ext_resource type="Texture2D" uid="uid://bwuexse8a2co5" path="res://assets/PNG/Default size/barrelRed_top.png" id="3_j7npo"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
 [ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_vv8m0"]
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
@@ -13,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="10_2hggd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
-size = Vector2(30, 16)
+size = Vector2(20, 36)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
