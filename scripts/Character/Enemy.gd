@@ -9,6 +9,7 @@ enum PatrolType {
 @onready var fsm: AIStateMachine = $StateMachine
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 @onready var vision_sensor: VisionSensor = $VisionSensor
+@onready var hearing_sensor: HearingSensor = $HearingSensor
 @onready var sprite: Sprite2D = $Sprite2D
 
 @export var patrol_type: PatrolType = PatrolType.Sequence
@@ -24,6 +25,8 @@ enum PatrolType {
 @export var vision_cone_angle: float = 60
 @export var vision_cone_range: float = 200
 @export_flags_2d_physics var vision_layers
+
+@export var hearing_range: float = 20
 
 @export var point_value: float = 100
 @onready var blood_effect_prefab = preload("res://scenes/effects/small_blood.tscn")

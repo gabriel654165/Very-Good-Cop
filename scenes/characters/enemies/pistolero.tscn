@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cewhfxsma7527"]
+[gd_scene load_steps=14 format=3 uid="uid://cewhfxsma7527"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="Texture2D" uid="uid://04ra5011x1rs" path="res://assets/Spritesheet/spritesheet_characters.png" id="2_oj8g8"]
@@ -9,15 +9,19 @@
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
 [ext_resource type="Script" path="res://scripts/AI/States/Pursue.gd" id="8_sgcqp"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="9_5t7aw"]
+[ext_resource type="Script" path="res://scripts/AI/States/HearedAt.gd" id="9_p8lre"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="10_2hggd"]
+[ext_resource type="Script" path="res://scripts/AI/Sensors/HearingSensor.gd" id="11_m1rb5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(20, 36)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
+hearing_range = 300.0
 speed = 10.0
 weapon_manager = NodePath("WeaponManager")
+metadata/_edit_horizontal_guides_ = [-176.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -55,6 +59,9 @@ script = ExtResource("7_ar7hp")
 [node name="Pursue" type="Node" parent="StateMachine"]
 script = ExtResource("8_sgcqp")
 
+[node name="HearedAt" type="Node" parent="StateMachine"]
+script = ExtResource("9_p8lre")
+
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
 position = Vector2(20, 0)
 
@@ -65,3 +72,12 @@ script = ExtResource("9_5t7aw")
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(16, 9)
+
+[node name="HearingSensor" type="Node2D" parent="."]
+script = ExtResource("11_m1rb5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 1
+lifetime = 204.0
+speed_scale = 17.93
+gravity = Vector2(0, 0)

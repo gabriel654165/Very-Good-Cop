@@ -33,6 +33,8 @@ func enter(_msg := {}) -> void:
 		vision_sensor.can_see_target.connect(_on_see_target)
 	if !state_machine.navigation_agent.target_reached.is_connected(_on_target_reached):
 		state_machine.navigation_agent.target_reached.connect(_on_target_reached)
+	if !hearing_sensor.sound_heared.is_connected(_on_sound_heared):
+		hearing_sensor.sound_heared.connect(_on_sound_heared)
 	get_target()
 
 func exit() -> void:
@@ -49,3 +51,7 @@ func _on_wait_point_timeout():
 func _on_target_reached() -> void:
 	if wait_timer.is_stopped():
 		wait_timer.start()
+
+func _on_sound_heared(source: Node2D, location: Vector2, intensity: float) -> void:
+	print("jksvfsjkvfdjk bfdjkb")
+	state_machine.transition_to(state_machine.HEAR_STATE, { position_to_move = location })	

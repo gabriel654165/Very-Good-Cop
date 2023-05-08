@@ -12,6 +12,7 @@ const PATROL = "Patrol"
 const FOLLOW_TARGET = "Follow Target"
 const SHOOT = "Shoot To Target"
 const PURSUE = "Pursue"
+const HEAR_STATE = "HearedAt"
 
 signal state_changed(new_state: AIState)
 

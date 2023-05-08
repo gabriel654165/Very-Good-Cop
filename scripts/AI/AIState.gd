@@ -2,12 +2,16 @@ extends State
 class_name AIState
 
 var vision_sensor: VisionSensor = null
+var hearing_sensor: HearingSensor = null
+var enemy: Enemy = null
 var state_machine: AIStateMachine = null :
 	get:
 		return state_machine
 	set(value):
 		state_machine = value
+		enemy = state_machine._enemy
 		vision_sensor = state_machine._enemy.vision_sensor
+		hearing_sensor = state_machine._enemy.hearing_sensor
 
 func set_target(movement_target: Node2D):
 	state_machine.navigation_agent.target_position = movement_target.global_transform.origin

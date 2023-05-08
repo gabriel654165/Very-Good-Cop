@@ -6,6 +6,7 @@ class_name Weapon
 var weapon_name : String = ""
 var special_power_unlocked : bool = false
 var level : int = 0
+var sound_intensity : float = 1
 
 var points_to_unlock_power : int = 200
 var current_points_charge_power : int = 0
@@ -103,6 +104,7 @@ func _random_range(angle: Vector2) -> float:
 func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vector2):
 	if actor is Player:
 		GlobalSignals.player_fired.emit()
+		GlobalSignals.sound_emitted.emit(actor, actor.global_position, sound_intensity)
 	
 	if projectile_instance is CatchingCable:
 		GlobalSignals.catching_cable_spawned.emit(null, projectile_instance, fire_position.global_position, direction, 2)
