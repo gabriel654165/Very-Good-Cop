@@ -11,16 +11,16 @@ func _ready():
 	current_piercing_force = piercing_force
 
 func handle_specific_collision(object: Object):
-	if object.has_method("handle_hit"):
-		object.handle_hit(self, damages)
-	if object.has_method("apply_force"):
-		object.apply_force(object, self.direction, impact_force)
+	pass
 
 #signals
 func _on_life_cycle_timer_timeout():
 	queue_free()
 
 func _on_area_2d_body_entered(body):
+	if body == null:
+		return
+	
 	if body is Character:
 		current_piercing_force -= 1
 	
@@ -34,6 +34,11 @@ func _on_area_2d_body_entered(body):
 	if body.get_name() == "Walls":
 		if should_pierce_walls:
 			current_piercing_force -= 1
+	
+	if body.has_method("handle_hit"):
+		body.handle_hit(self, damages)
+	if body.has_method("apply_force"):
+		body.apply_force(body, self.direction, impact_force)
 	
 	if current_piercing_force <= 0:
 		queue_free()

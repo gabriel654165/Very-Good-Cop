@@ -1,0 +1,14 @@
+Preview window not correct size?
+
+Im using these settings
+
+->Project -> Project Settings -> Display -> Window ->
+	Viewport Width 	'1200'
+	Viewport Height '800'
+	Mode 			'disabled'
+	Aspect		'keep'
+	Scale 		'3'
+
+Blurry textures?
+->Project -> Project Settings -> General -> Rendering -> Textures -> Default Texture Filter -> Set to 'Nearest'
+

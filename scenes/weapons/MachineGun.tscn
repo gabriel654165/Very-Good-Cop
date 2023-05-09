@@ -1,13 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpscp32lejm1n"]
+[gd_scene load_steps=12 format=3 uid="uid://dpscp32lejm1n"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_1vquv"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_em527"]
-[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_tnhh1"]
+[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_a5koy"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_g4nn2"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_2c5wk"]
-[ext_resource type="Texture2D" uid="uid://61n0gvkotulb" path="res://assets/PNG/Weapons/BigMachineGun.png" id="5_20v54"]
-[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/Shooting360.gd" id="7_4510l"]
-[ext_resource type="Texture2D" uid="uid://bmxguh1pixhh5" path="res://assets/PNG/Default size/barrelBlack_top.png" id="8_ose3d"]
+[ext_resource type="Texture2D" uid="uid://bxn2s85g54peo" path="res://assets/UI/icons/weapons/spr_Mg.png" id="5_y6xw7"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/Shooting360.gd" id="7_8keva"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -77,7 +76,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.07),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.5, 1.2)]
+"values": [Vector2(0.5, 0.5), Vector2(0.25, 0.6)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eygrr"]
@@ -92,38 +91,39 @@ script = ExtResource("1_1vquv")
 properties/weapon_name = "machine_gun"
 properties/special_power_unlocked = true
 properties/level = 1
-power/points_to_unlock_power = 200
+power/points_to_unlock_power = 100
 power/current_points_charge_power = 0
 power/can_use_power = true
-bullet/projectile = ExtResource("2_tnhh1")
+bullet/projectile = ExtResource("2_a5koy")
 bullet/bullet_speed = 12
-bullet/bullet_damages = 3
-bullet/bullet_size = 1.0
-bullet/bullet_impact_force = 0.5
+bullet/bullet_damages = 4
+bullet/bullet_size = 0.5
+bullet/bullet_impact_force = 0.25
 bullet/bullet_piercing_force = 0
 bullet/bullet_should_bounce = false
 bullet/bullet_should_pierce_walls = false
 bullet/projectile_should_frag = false
-loader/loader_capacity = 25
-loader/reloading_cooldown = 3.0
+loader/loader_capacity = 30
+loader/reloading_cooldown = 2.5
 weapon/enable = true
-weapon/shooting_cooldown = 0.0
+weapon/shooting_cooldown = 0.1
 weapon/number_of_balls_by_burt = 1
-weapon/frequence_of_burt = 0.1
+weapon/frequence_of_burt = 0.0
 weapon/precision_angle = Vector2(-1, 1)
-weapon/precision = 0.75
-weapon/recoil_force = 1.0
+weapon/precision = 0.5
+weapon/recoil_force = 0.25
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_em527")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+visible = false
 texture = ExtResource("3_g4nn2")
 
 [node name="SideSprite2D" type="Sprite2D" parent="Weapon"]
 visible = false
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("5_20v54")
+scale = Vector2(0.035, 0.035)
+texture = ExtResource("5_y6xw7")
 
 [node name="FirePosition" type="Marker2D" parent="Weapon"]
 position = Vector2(18, 4.48227e-05)
@@ -141,8 +141,9 @@ one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="Weapon"]
 visible = false
-position = Vector2(28, 4.48227e-05)
+position = Vector2(23, 7.27596e-12)
 rotation = -1.5708
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_2c5wk")
 region_enabled = true
 region_rect = Rect2(324, 334, 20, 25)
@@ -154,13 +155,9 @@ libraries = {
 }
 
 [node name="SpecialPower" type="Node2D" parent="Weapon"]
-script = ExtResource("7_4510l")
-time_between_shoots = 0.005
+script = ExtResource("7_8keva")
+time_between_shoots = 0.01
 full_rotation_by_second = 2.0
-duration = 2.0
+duration = 1.0
 
 [node name="Target" type="Node2D" parent="Weapon/SpecialPower"]
-visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="Weapon/SpecialPower/Target"]
-texture = ExtResource("8_ose3d")

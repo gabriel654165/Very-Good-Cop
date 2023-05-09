@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://byeald88viaao"]
+[gd_scene load_steps=19 format=3 uid="uid://byeald88viaao"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
 [ext_resource type="PackedScene" uid="uid://bb7av66d8pynv" path="res://scenes/ui/HealthBar.tscn" id="2_k8jrc"]
+[ext_resource type="Script" path="res://scripts/ui/PauseManager.gd" id="2_lu52o"]
 [ext_resource type="Script" path="res://scripts/ui/CursorManager.gd" id="3_exgmc"]
 [ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="4_7jw85"]
 [ext_resource type="Script" path="res://scripts/ui/PopUpPointsManager.gd" id="6_dpwpx"]
@@ -14,9 +15,24 @@
 [ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
+[ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="17_eyt6o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
+shader = ExtResource("16_wdi1s")
+shader_parameter/target = Vector2(-1, 1)
+shader_parameter/intensity = 0.0
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_cf1if")
+
+[node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("pause_gui", "base_panel", "option_panel", "color_rect")]
+script = ExtResource("2_lu52o")
+pop_up_text_scene = ExtResource("7_bnyiq")
+pause_gui = NodePath("../PanelsContainer/PauseControl")
+base_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/BasePanelContainer")
+option_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/OptionTabContainer")
+color_rect = NodePath("../PanelsContainer/PauseControl/ColorRect")
 
 [node name="HealthUiManager" type="Node2D" parent="."]
 script = ExtResource("1_c8amb")
@@ -98,3 +114,296 @@ offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+
+[node name="PauseControl" type="Control" parent="PanelsContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelsContainer/PauseControl"]
+material = SubResource("ShaderMaterial_hi0er")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseContainer" type="CenterContainer" parent="PanelsContainer/PauseControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BasePanelContainer" type="VBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("17_eyt6o")
+theme_override_constants/separation = 15
+
+[node name="ResumeButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Resume"
+
+[node name="OptionButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Option"
+
+[node name="QuitButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Quit game"
+
+[node name="OptionTabContainer" type="TabContainer" parent="PanelsContainer/PauseControl/PauseContainer"]
+visible = false
+custom_minimum_size = Vector2(800, 450)
+layout_mode = 2
+theme = ExtResource("17_eyt6o")
+
+[node name="General" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/General"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -13.0
+offset_right = 125.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/General/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/General/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Coming soon..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -13.0
+offset_right = 125.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Coming soon..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Graphic" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Graphic"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -15.5
+offset_right = 125.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Graphic/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Graphic/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Resolution"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="MenuButton" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Graphic/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "1920 x 1080"
+item_count = 8
+popup/item_0/text = "1280 x 1024"
+popup/item_0/id = 0
+popup/item_1/text = "1366 x 768"
+popup/item_1/id = 1
+popup/item_2/text = "1600 x 900"
+popup/item_2/id = 2
+popup/item_3/text = "1920 x 1080"
+popup/item_3/id = 3
+popup/item_4/text = "1920 x 1200"
+popup/item_4/id = 4
+popup/item_5/text = "2560 x 1440"
+popup/item_5/id = 5
+popup/item_6/text = "3440 x 1440"
+popup/item_6/id = 6
+popup/item_7/text = "3840 x 2160"
+popup/item_7/id = 7
+
+[node name="Audio" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -85.5
+offset_right = 125.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "General volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Music volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Weapon volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Interaction volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Playlist"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="MenuButton" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "electro"
+item_count = 4
+popup/item_0/text = "electro"
+popup/item_0/id = 0
+popup/item_1/text = "drill"
+popup/item_1/id = 1
+popup/item_2/text = "jersey"
+popup/item_2/id = 2
+popup/item_3/text = "basic"
+popup/item_3/id = 3
+
+[connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/ResumeButton" to="PauseManager" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/OptionButton" to="PauseManager" method="_on_option_button_pressed"]
+[connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/QuitButton" to="PauseManager" method="_on_quit_button_pressed"]

@@ -26,7 +26,7 @@ func manage_movement(delta: float):
 		self.force = Vector2.ZERO
 		
 	if move_direction != Vector2.ZERO:
-		velocity += move_direction * GlobalFunctions.get_speed(delta, speed) + self.force
+		velocity += move_direction * GlobalFunctions.get_speed(delta, speed)
 	global_position += velocity
 	move_and_slide()
 	velocity = Vector2.ZERO
@@ -82,7 +82,7 @@ func assign_knife():
 func set_active_assigned_weapon():
 	weapon_throwed = false
 	weapon_manager.enable = true
-	weapon_manager.weapon.sprite.visible = true
+	#weapon_manager.weapon.sprite.visible = true
 
 func assign_weapon(index: int):
 	weapon_manager = await find_weapon(index_weapon_selected)
