@@ -53,5 +53,4 @@ func _on_target_reached() -> void:
 		wait_timer.start()
 
 func _on_sound_heared(source: Node2D, location: Vector2, intensity: float) -> void:
-	print("jksvfsjkvfdjk bfdjkb")
 	state_machine.transition_to(state_machine.HEAR_STATE, { position_to_move = location })	
