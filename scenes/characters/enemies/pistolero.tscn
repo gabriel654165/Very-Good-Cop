@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cewhfxsma7527"]
+[gd_scene load_steps=14 format=3 uid="uid://cewhfxsma7527"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
-[ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_3fkuj"]
+[ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_kdey6"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
 [ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_vv8m0"]
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
@@ -24,7 +24,7 @@ weapon_manager = NodePath("WeaponManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-texture = ExtResource("2_3fkuj")
+texture = ExtResource("2_kdey6")
 region_enabled = true
 region_rect = Rect2(493, 397, 30, 15)
 
@@ -34,6 +34,7 @@ shape = SubResource("RectangleShape2D_dfd5l")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 20.0
 avoidance_enabled = true
+radius = 89.12
 max_neighbors = 1
 time_horizon = 40.0
 debug_enabled = true
@@ -73,9 +74,7 @@ properties/level = 0
 power/can_use_power = false
 bullet/bullet_speed = 4
 bullet/bullet_damages = 6
-bullet/bullet_impact_force = 2.0
 bullet/bullet_piercing_force = 0
-loader/reloading_cooldown = 1.0
 weapon/recoil_force = 2.0
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
