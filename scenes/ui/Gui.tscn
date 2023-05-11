@@ -132,6 +132,7 @@ grow_vertical = 0
 alignment = 1
 
 [node name="PauseControl" type="Control" parent="PanelsContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -157,35 +158,32 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BasePanelContainer" type="VBoxContainer" parent="PanelsContainer/PauseControl/PauseContainer"]
-visible = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme = ExtResource("17_eyt6o")
-theme_override_constants/separation = 15
-
-[node name="ResumeButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("17_eyt6o")
+theme_override_constants/separation = 20
+
+[node name="ResumeButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Resume"
 
 [node name="OptionButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "Option"
 
 [node name="QuitButton" type="Button" parent="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer"]
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "Quit game"
 
 [node name="OptionTabContainer" type="TabContainer" parent="PanelsContainer/PauseControl/PauseContainer"]
 visible = false
-custom_minimum_size = Vector2(800, 450)
+custom_minimum_size = Vector2(1000, 600)
 layout_mode = 2
 theme = ExtResource("17_eyt6o")
+theme_override_font_sizes/font_size = 30
 
 [node name="General" type="TabBar" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer"]
 layout_mode = 2
@@ -216,6 +214,7 @@ alignment = 1
 [node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/General/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
 text = "Coming soon..."
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -250,6 +249,7 @@ alignment = 1
 [node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
 text = "Coming soon..."
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -283,12 +283,14 @@ alignment = 1
 
 [node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Graphic/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Resolution"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MenuButton" type="MenuButton" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Graphic/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "1920 x 1080"
 item_count = 8
 popup/item_0/text = "1280 x 1024"
@@ -338,6 +340,7 @@ alignment = 1
 [node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 30
 text = "General volume"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -355,6 +358,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Music volume"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -371,6 +375,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Weapon volume"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -387,6 +392,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Interaction volume"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -403,12 +409,14 @@ alignment = 1
 
 [node name="Label" type="Label" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Playlist"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MenuButton" type="MenuButton" parent="PanelsContainer/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "electro"
 item_count = 4
 popup/item_0/text = "electro"
@@ -421,7 +429,6 @@ popup/item_3/text = "basic"
 popup/item_3/id = 3
 
 [node name="WeaponShopControl" type="Control" parent="PanelsContainer"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -443,11 +450,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -101.0
+offset_right = 124.0
+offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TabContainer" type="TabContainer" parent="PanelsContainer/WeaponShopControl/ShopContainer"]
-custom_minimum_size = Vector2(1400, 850)
+custom_minimum_size = Vector2(1400, 750)
 layout_mode = 2
 theme = ExtResource("17_eyt6o")
 theme_override_font_sizes/font_size = 30
@@ -459,8 +470,8 @@ layout_mode = 2
 layout_mode = 0
 offset_left = 16.0
 offset_top = 11.0
-offset_right = 770.0
-offset_bottom = 799.0
+offset_right = 782.0
+offset_bottom = 691.0
 horizontal_scroll_mode = 0
 
 [node name="WeaponList" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/ShopContainer/TabContainer/Distance Weapons/ScrollContainer"]
@@ -2491,10 +2502,11 @@ visible = false
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelsContainer/WeaponShopControl/ShopContainer/TabContainer/Melee Weapons"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 11.0
-offset_right = 770.0
-offset_bottom = 799.0
+offset_right = 782.0
+offset_bottom = 691.0
 horizontal_scroll_mode = 0
 
 [node name="WeaponList" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/ShopContainer/TabContainer/Melee Weapons/ScrollContainer"]
@@ -3560,10 +3572,11 @@ visible = false
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelsContainer/WeaponShopControl/ShopContainer/TabContainer/Equipment"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 11.0
-offset_right = 770.0
-offset_bottom = 799.0
+offset_right = 782.0
+offset_bottom = 691.0
 horizontal_scroll_mode = 0
 
 [node name="EquipmentList" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/ShopContainer/TabContainer/Equipment/ScrollContainer"]

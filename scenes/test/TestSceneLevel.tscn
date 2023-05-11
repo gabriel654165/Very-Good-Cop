@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_hawec"]
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="5_h1th4"]
 
-[node name="TopNode" type="Node2D"]
+[node name="TopNode" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_cprlw")
 gui_manager_scene = ExtResource("2_plfkm")
 projectile_manager_scene = ExtResource("3_u5xh8")

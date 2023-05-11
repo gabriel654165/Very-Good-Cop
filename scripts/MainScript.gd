@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export var gui_manager_scene : PackedScene
 @export var projectile_manager_scene : PackedScene
