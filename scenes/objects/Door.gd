@@ -10,7 +10,7 @@ extends Area2D
 # Two maximum degrees: starting_rotation(rad) + max_deg_angle and starting_rotation(rad) - max_deg_angle
 @export var max_deg_angle := 150
 
-# Tweak for influence of the distrance between body and hinge on the speed
+# Tweak for influence of the distance between body and hinge on the speed 
 @export var distance_from_the_hinge_force_factor := 700.0
 
 # Tweak those for maximum door speed 
