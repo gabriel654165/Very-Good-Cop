@@ -33,5 +33,6 @@ one_shot = true
 shape = SubResource("RectangleShape2D_oxpfh")
 
 [connection signal="timeout" from="LifeCycleTimer" to="." method="_on_life_cycle_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
