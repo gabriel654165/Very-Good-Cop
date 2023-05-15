@@ -1,28 +1,27 @@
-[gd_scene load_steps=15 format=3 uid="uid://bx8cma3ns1wpg"]
+[gd_scene load_steps=16 format=3 uid="uid://bx8cma3ns1wpg"]
 
-[ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_00l0n"]
+[ext_resource type="Script" path="res://scripts/Character/Kamikaz.gd" id="1_tmx5x"]
 [ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_s1m15"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_c8fjn"]
 [ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_tuv5c"]
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_v0cbm"]
 [ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_m7sqt"]
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_d6pp7"]
-[ext_resource type="Script" path="res://scripts/AI/States/Pursue.gd" id="8_eoihe"]
+[ext_resource type="Script" path="res://scripts/AI/States/GoToAndLookAround.gd" id="8_d00hg"]
 [ext_resource type="Script" path="res://scripts/AI/States/HearedAt.gd" id="9_ntefd"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="10_ouxff"]
+[ext_resource type="Script" path="res://scripts/AI/States/GoToPlayerAndExplode.gd" id="10_sqq5i"]
 [ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="11_er80t"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/HearingSensor.gd" id="12_4xjvt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(30, 16)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ybdve"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5x6xs"]
+radius = 75.36
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
-script = ExtResource("1_00l0n")
-vision_layers = 7
-hearing_range = 300.0
-speed = 10.0
+script = ExtResource("1_tmx5x")
 weapon_manager = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -58,11 +57,14 @@ script = ExtResource("6_m7sqt")
 [node name="Shoot To Target" type="Node" parent="StateMachine"]
 script = ExtResource("7_d6pp7")
 
-[node name="Pursue" type="Node" parent="StateMachine"]
-script = ExtResource("8_eoihe")
+[node name="GoToAndLookAround" type="Node" parent="StateMachine"]
+script = ExtResource("8_d00hg")
 
 [node name="HearedAt" type="Node" parent="StateMachine"]
 script = ExtResource("9_ntefd")
+
+[node name="GoToPlayerAndExplode" type="Node" parent="StateMachine"]
+script = ExtResource("10_sqq5i")
 
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
 position = Vector2(4, 0)
@@ -87,4 +89,5 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDamageArea"]
-shape = SubResource("CircleShape2D_ybdve")
+shape = SubResource("CircleShape2D_5x6xs")
+debug_color = Color(0.929412, 0.231373, 0.341176, 0.419608)

@@ -52,7 +52,7 @@ func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
 	if health.is_dead() and !is_dead:
 		is_dead = true
-		var sprite_dead_enemy = spawn(corpse_prefab, self.global_position)		
+		var sprite_dead_enemy = spawn(corpse_prefab, self.global_position)
 		GlobalSignals.enemy_died.emit(sprite_dead_enemy, point_value)
 
 		if damager is Projectile:
