@@ -1,0 +1,90 @@
+[gd_scene load_steps=15 format=3 uid="uid://bx8cma3ns1wpg"]
+
+[ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_00l0n"]
+[ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_s1m15"]
+[ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_c8fjn"]
+[ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_tuv5c"]
+[ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_v0cbm"]
+[ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_m7sqt"]
+[ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_d6pp7"]
+[ext_resource type="Script" path="res://scripts/AI/States/Pursue.gd" id="8_eoihe"]
+[ext_resource type="Script" path="res://scripts/AI/States/HearedAt.gd" id="9_ntefd"]
+[ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="10_ouxff"]
+[ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="11_er80t"]
+[ext_resource type="Script" path="res://scripts/AI/Sensors/HearingSensor.gd" id="12_4xjvt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
+size = Vector2(30, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ybdve"]
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
+script = ExtResource("1_00l0n")
+vision_layers = 7
+hearing_range = 300.0
+speed = 10.0
+weapon_manager = NodePath("")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_s1m15")
+region_enabled = true
+region_rect = Rect2(493, 397, 30, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dfd5l")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 20.0
+avoidance_enabled = true
+radius = 89.12
+max_neighbors = 1
+time_horizon = 40.0
+debug_enabled = true
+
+[node name="Health" parent="." instance=ExtResource("3_c8fjn")]
+max_health = 60
+health = 60
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_tuv5c")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("5_v0cbm")
+
+[node name="Follow Target" type="Node" parent="StateMachine"]
+script = ExtResource("6_m7sqt")
+
+[node name="Shoot To Target" type="Node" parent="StateMachine"]
+script = ExtResource("7_d6pp7")
+
+[node name="Pursue" type="Node" parent="StateMachine"]
+script = ExtResource("8_eoihe")
+
+[node name="HearedAt" type="Node" parent="StateMachine"]
+script = ExtResource("9_ntefd")
+
+[node name="ThrowObjectPosition" type="Marker2D" parent="."]
+position = Vector2(4, 0)
+
+[node name="VisionSensor" type="Node2D" parent="."]
+script = ExtResource("10_ouxff")
+
+[node name="WeaponManager" parent="." instance=ExtResource("11_er80t")]
+properties/special_power_unlocked = false
+power/can_use_power = false
+bullet/bullet_speed = 3
+weapon/shooting_cooldown = 1.0
+weapon/number_of_balls_by_burt = 1
+
+[node name="WeaponPosition" type="Marker2D" parent="."]
+
+[node name="HearingSensor" type="Node2D" parent="."]
+script = ExtResource("12_4xjvt")
+
+[node name="ExplosionDamageArea" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDamageArea"]
+shape = SubResource("CircleShape2D_ybdve")

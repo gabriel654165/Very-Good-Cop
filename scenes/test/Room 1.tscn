@@ -22493,6 +22493,8 @@ scale = Vector2(1.01903, 1)
 navigation_polygon = SubResource("NavigationPolygon_ejre0")
 
 [node name="Enemy" parent="." instance=ExtResource("2_ijtxr")]
+process_mode = 4
+visible = false
 position = Vector2(126.36, 57)
 scale = Vector2(1.01903, 1)
 

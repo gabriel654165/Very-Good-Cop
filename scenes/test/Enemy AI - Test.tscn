@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://8xoniem4oare"]
+[gd_scene load_steps=11 format=3 uid="uid://8xoniem4oare"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_5e57m"]
 [ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="2_knftv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_uv201"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_gyb4h"]
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="7_r514s"]
+[ext_resource type="PackedScene" uid="uid://bx8cma3ns1wpg" path="res://scenes/characters/enemies/kamikaz.tscn" id="8_iwdro"]
 [ext_resource type="PackedScene" uid="uid://dvdfosa8s7qft" path="res://scenes/test/Room 1.tscn" id="9_1bcuv"]
 
 [sub_resource type="Curve" id="Curve_xh0pv"]
@@ -54,3 +55,6 @@ scale_amount_min = 3.0
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_xh0pv")
 color_ramp = SubResource("Gradient_vdhwr")
+
+[node name="Enemy" parent="." instance=ExtResource("8_iwdro")]
+position = Vector2(-130, 103)
