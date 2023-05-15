@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_xa1nf"]
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
 [ext_resource type="Script" path="res://scripts/AI/States/HearedAt.gd" id="8_8m4g8"]
-[ext_resource type="Script" path="res://scripts/AI/States/Pursue.gd" id="8_sgcqp"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="9_5t7aw"]
+[ext_resource type="Script" path="res://scripts/AI/States/GoToAndLookAround.gd" id="9_ngk2c"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="10_2hggd"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/HearingSensor.gd" id="10_mwn3l"]
 
@@ -55,8 +55,8 @@ script = ExtResource("6_xa1nf")
 [node name="Shoot To Target" type="Node" parent="StateMachine"]
 script = ExtResource("7_ar7hp")
 
-[node name="Pursue" type="Node" parent="StateMachine"]
-script = ExtResource("8_sgcqp")
+[node name="GoToAndLookAround" type="Node" parent="StateMachine"]
+script = ExtResource("9_ngk2c")
 
 [node name="HearedAt" type="Node" parent="StateMachine"]
 script = ExtResource("8_8m4g8")
