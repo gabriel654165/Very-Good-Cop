@@ -28,10 +28,10 @@ func _physics_process(delta):
 
 func _move_and_collide(delta: float):
 	if direction != Vector2.ZERO:
-		velocity = direction.normalized() * GlobalFunctions.get_speed(speed, delta)
-
-		var collision = move_and_collide(velocity)
-
+		velocity = direction * GlobalFunctions.get_speed(speed, delta)
+		global_position += velocity
+		var collision = move_and_collide(velocity * delta)
+		
 		handle_collision(collision)
 
 
