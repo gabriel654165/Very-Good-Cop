@@ -12,7 +12,7 @@ const PATROL = "Patrol"
 const FOLLOW_TARGET = "Follow Target"
 const SHOOT = "Shoot To Target"
 const GOTO_LOOK_AROUND = "GoToAndLookAround"
-const HEAR_STATE = "HearedAt"
+const GOTO_STATE = "GoTo"
 
 signal state_changed(new_state: AIState)
 

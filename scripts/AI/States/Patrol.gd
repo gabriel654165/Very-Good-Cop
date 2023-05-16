@@ -53,4 +53,8 @@ func _on_target_reached() -> void:
 		wait_timer.start()
 
 func _on_sound_heared(source: Node2D, location: Vector2, intensity: float) -> void:
-	state_machine.transition_to(state_machine.HEAR_STATE, { position_to_move = location })	
+	state_machine.transition_to(state_machine.GOTO_LOOK_AROUND, {
+		target_pos = location,
+		goto_time = state_machine._enemy.pursue_find_time,
+		wait_before_look_around = state_machine._enemy.pursue_wait_before_look_around
+	})	
