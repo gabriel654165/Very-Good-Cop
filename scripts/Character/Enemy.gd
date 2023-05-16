@@ -20,7 +20,8 @@ enum PatrolType {
 @export var pursue_look_angle: float = 45
 @export var pursue_look_interval: float = 1.3
 @export var pursue_find_time: float = 3
-@export var pursue_wait_rotation_time: float = 3
+@export var pursue_move_distance: float = 500
+@export var pursue_wait_before_look_around: float = 3
 
 @export var vision_cone_angle: float = 60
 @export var vision_cone_range: float = 200
@@ -51,13 +52,13 @@ func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
 	if health.is_dead() and !is_dead:
 		is_dead = true
-		var spriteDeadEnemy = spawn(corpse_prefab, self.global_position)		
-		GlobalSignals.enemy_died.emit(spriteDeadEnemy, point_value)
-		#display le sprite au sol
+		var sprite_dead_enemy = spawn(corpse_prefab, self.global_position)		
+		GlobalSignals.enemy_died.emit(sprite_dead_enemy, point_value)
+
 		if damager is Projectile:
 			var new_velocity: Vector2 = (damager as Projectile).direction
 			new_velocity = new_velocity.normalized()
-			spriteDeadEnemy.global_rotation = new_velocity.angle()
+			sprite_dead_enemy.global_rotation = new_velocity.angle()
 		queue_free()
 	else:
 		spawn(blood_effect_prefab, global_position)
