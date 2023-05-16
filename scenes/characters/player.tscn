@@ -30,7 +30,7 @@ weapon_list = {
 "shotgun": ExtResource("8_q5dp1"),
 "sniper": ExtResource("6_oko04")
 }
-speed = 3.0
+speed = 2.5
 grappling_hook_scene = ExtResource("5_wxswb")
 projectile_weapon_scene = ExtResource("9_8nmes")
 

@@ -30,7 +30,7 @@ func _on_area_2d_body_entered(body):
 			init_frag_bullet()
 			index += 1
 		queue_free()
-
+	
 	if body.get_name() == "Walls":
 		if should_pierce_walls:
 			current_piercing_force -= 1
@@ -67,11 +67,3 @@ func _on_area_2d_body_exited(body):
 	if body.get_name() == "Walls":
 		# Sprite animation go throught wall
 		return
-
-
-func _on_area_2d_area_entered(area):
-	if area.get_name().begins_with("Door"):
-		current_piercing_force -= 1
-	if current_piercing_force <= 0:
-		queue_free()
-
