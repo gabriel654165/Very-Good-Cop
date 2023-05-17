@@ -59,6 +59,8 @@ func _on_pursuit_time_timeout():
 	wait_rotation_timer.start()
 
 func _on_wait_point_timeout():
+	stop_tween()
+
 	tween = get_tree().create_tween()
 	var initial_degree = state_machine._enemy.rotation_degrees
 	tween.tween_property(state_machine._enemy, "rotation_degrees", initial_degree + state_machine._enemy.pursue_look_angle, 1)
