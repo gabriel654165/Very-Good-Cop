@@ -67,6 +67,22 @@ As a children you need a Node2D called "RoomConfig". As a children of this node 
 - `PowerUpPoints`
     - Every place you want a power up to be randomly spawned, put a Node2D as a child of this node
 
+
+Example:
+
+This room has 2 patrols of 4 point each and 1 point where a power up can be spawnedJe regarde tout ça cette aprem
+NOUVEAU
+￼
+gabi_mdk — Aujourd’hui à 15:04
+Yep hésite pas si t'as des questions bg
+￼
+Envoyer un message dans #general
+
+
+![image](https://github.com/gabriel654165/Very-Good-Cop/assets/58398928/daf63012-6e6e-4faf-b6b5-d40049cd6106)
+
+
+
 ## Enemy specific stuff (mandatory)
 
 Yeaaaah so now you have to do the enemies stuff so they can move around in your room and all this shit.
