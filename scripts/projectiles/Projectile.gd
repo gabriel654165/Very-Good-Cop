@@ -30,9 +30,10 @@ func _move_and_collide(delta: float):
 	if direction != Vector2.ZERO:
 		velocity = direction * GlobalFunctions.get_speed(speed, delta)
 		global_position += velocity
-		var collision = move_and_collide(velocity * delta + velocity.normalized())
+		var collision = move_and_collide(velocity * delta)
 		
 		handle_collision(collision)
+
 
 func handle_collision(collision: KinematicCollision2D):
 	if !collision:
