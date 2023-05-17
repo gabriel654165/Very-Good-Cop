@@ -1,21 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://cewhfxsma7527"]
+[gd_scene load_steps=12 format=3 uid="uid://ifc4gbv1je13"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_3fkuj"]
-[ext_resource type="Texture2D" uid="uid://bwuexse8a2co5" path="res://assets/PNG/Default size/barrelRed_top.png" id="3_j7npo"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
 [ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_vv8m0"]
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
 [ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_xa1nf"]
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="9_5t7aw"]
+[ext_resource type="Script" path="res://scripts/AI/States/GoToAndLookAround.gd" id="9_ngk2c"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="10_2hggd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(30, 16)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_etnqn"]
-radius = 152.161
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
@@ -27,11 +24,6 @@ z_index = 1
 texture = ExtResource("2_3fkuj")
 region_enabled = true
 region_rect = Rect2(493, 397, 30, 15)
-
-[node name="SpriteDead" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_j7npo")
-region_rect = Rect2(68, 346, 49, 24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dfd5l")
@@ -59,10 +51,8 @@ script = ExtResource("6_xa1nf")
 [node name="Shoot To Target" type="Node" parent="StateMachine"]
 script = ExtResource("7_ar7hp")
 
-[node name="DetectionZone" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
-shape = SubResource("CircleShape2D_etnqn")
+[node name="GoToAndLookAround" type="Node" parent="StateMachine"]
+script = ExtResource("9_ngk2c")
 
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
 position = Vector2(4, 0)

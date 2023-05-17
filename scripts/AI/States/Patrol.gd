@@ -4,28 +4,21 @@ class_name Patrol
 var current_point: Vector2
 var wait_timer = Timer.new()
 
-enum PatrolType {
-	Sequence,
-	RandomTarget
-}
-
-@export var patrol_type: PatrolType = PatrolType.Sequence
-
 var current_point_index: int = 0
 
 func _ready():
+	await owner.ready
+
 	wait_timer.timeout.connect(_on_wait_point_timeout)
-	wait_timer.wait_time = 3
+	wait_timer.wait_time = state_machine._enemy.patrol_wait
 	wait_timer.one_shot = true
 	add_child(wait_timer)
 
 func get_target():
 	if state_machine._enemy.patrol_points.size() == 0:
 		return
-	
-	
-	
-	if patrol_type == PatrolType.Sequence:
+		
+	if state_machine._enemy.patrol_type == Enemy.PatrolType.Sequence:
 		current_point_index = (current_point_index + 1) % state_machine._enemy.patrol_points.size()
 		current_point = state_machine._enemy.patrol_points[current_point_index]
 	else:
@@ -36,7 +29,6 @@ func get_target():
 	set_movement_target(current_point)
 
 func enter(_msg := {}) -> void:
-	vision_sensor.set_process(true)
 	if !vision_sensor.can_see_target.is_connected(_on_see_target):
 		vision_sensor.can_see_target.connect(_on_see_target)
 	if !state_machine.navigation_agent.target_reached.is_connected(_on_target_reached):
@@ -45,7 +37,6 @@ func enter(_msg := {}) -> void:
 
 func exit() -> void:
 	vision_sensor.can_see_target.disconnect(_on_see_target)
-	vision_sensor.set_process(false)	
 	state_machine.navigation_agent.target_reached.disconnect(_on_target_reached)
 
 #signals 
