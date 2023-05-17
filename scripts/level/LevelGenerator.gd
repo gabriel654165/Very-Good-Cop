@@ -19,6 +19,16 @@ const RoomSideSize:int = 34
 const RoomCenterOffset:int = (RoomSideSize - 1)  * (TileSideSize) # TODO: Maybe better name
 const PackedPlayer = preload("res://scenes/characters/player.tscn")
 
+const LeftDoorPosition := Vector2i(-264, -28)
+const BottomDoorPosition := Vector2i(-28, 264)
+
+const LeftDoor := "_DLeft"
+const RightDoor := "_DRight"
+const TopDoor := "_DUp"
+const BottomDoor := "_DDown"
+const OrderedDoorNames:Array[String]= [LeftDoor, RightDoor, TopDoor, BottomDoor]
+
+
 var StartPos:Vector2i = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
 
 const CardinalPoints:Array[Vector2i] = [
@@ -160,7 +170,22 @@ func spawn_dungeon_rooms():
 		if room == entrance_pos or room == exit_pos:
 			instantiated_room.should_spawn_stuff = false
 		instantiated_room.position = relative_pos
+
+		var door := preload("res://scenes/objects/door.tscn")
+		if door_bitflag_has_door(doors_id, LeftDoor):
+			spawn_child_object(instantiated_room, door, LeftDoorPosition, Vector2.DOWN.angle())
+		if door_bitflag_has_door(doors_id, BottomDoor):
+			spawn_child_object(instantiated_room, door, BottomDoorPosition)
+		
 		add_child(instantiated_room)
+
+
+func spawn_child_object(parent:Node2D, packed_object:PackedScene, local_position:=Vector2(), rotation=null):
+	var obj := packed_object.instantiate()
+	parent.add_child(obj)
+	obj.position = local_position
+	if rotation != null and obj.has_method("rotate"):
+		obj.rotate(rotation)
 
 #
 # Find farthest cell from another cell
@@ -271,12 +296,13 @@ static func load_room(room:PackedScene, file_name:String):
 
 
 static func room_nodes_to_door_bitflags(room_nodes:PackedStringArray) -> int:
-	var door_names:Array[String]= ["_DLeft", "_DRight", "_DUp", "_DDown"]
 	var result:int = 0
 
-	for idx in door_names.size():
-		var has_door = room_nodes.has(door_names[idx])
+	for idx in OrderedDoorNames.size():
+		var has_door = room_nodes.has(OrderedDoorNames[idx])
 		result |= (int(has_door) << idx)
 
 	return result
 
+static func door_bitflag_has_door(bitflag:int, door_name:String) -> bool:
+	return (1 << OrderedDoorNames.find(door_name)) & bitflag

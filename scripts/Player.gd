@@ -16,6 +16,7 @@ func _physics_process(delta):
 	manage_movement(delta)
 	manage_rotation()
 
+
 func manage_movement(delta: float):
 	move_direction = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -26,8 +27,8 @@ func manage_movement(delta: float):
 		self.force = Vector2.ZERO
 		
 	if move_direction != Vector2.ZERO:
-		velocity += move_direction * GlobalFunctions.get_speed(delta, speed)
-	global_position += velocity
+		velocity += move_direction.normalized() * GlobalFunctions.get_speed(delta, speed)
+	velocity *= 100
 	move_and_slide()
 	velocity = Vector2.ZERO
 
