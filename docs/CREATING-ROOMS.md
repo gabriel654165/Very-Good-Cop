@@ -34,6 +34,13 @@ It is the same with top/bottoms doors/walls, we chose in this project to only in
 
 Basically, when you always "draw" a left wall, (with or without door), same for bottom wall. And you only draw right and top wall when there is no door (it applies for the far right collumn of ground and far top row of ground).
 
+## Last thing to do for the doors
+
+As you can see on the test rooms, there is a node called "Doors" with some names, which represents the doors. It's very important for level generation. If you have a room with the 4 doors, it will be like so:
+
+![image](https://github.com/gabriel654165/Very-Good-Cop/assets/58398928/9ec0b2bc-9df5-488e-b030-93ee1ef66148)
+
+
 
 ## Drawing part
 
