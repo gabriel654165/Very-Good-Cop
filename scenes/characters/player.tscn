@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
-[ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_uemap"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_uemap"]
 [ext_resource type="PackedScene" uid="uid://dpscp32lejm1n" path="res://scenes/weapons/MachineGun.tscn" id="4_vy1d6"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
 [ext_resource type="PackedScene" uid="uid://cu5xhrk3gung2" path="res://scenes/weapons/Riffle.tscn" id="5_43l82"]
@@ -30,7 +30,6 @@ weapon_list = {
 "shotgun": ExtResource("8_q5dp1"),
 "sniper": ExtResource("6_oko04")
 }
-speed = 2.5
 grappling_hook_scene = ExtResource("5_wxswb")
 projectile_weapon_scene = ExtResource("9_8nmes")
 
