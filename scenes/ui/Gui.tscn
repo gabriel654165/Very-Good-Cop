@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="18_hj7i6"]
 [ext_resource type="Texture2D" uid="uid://dowkkdr2nl48i" path="res://assets/UI/icons/HUD_ammo01.png" id="19_ubeu4"]
 [ext_resource type="VideoStream" path="res://assets/previews/preview-resized.ogv" id="23_rbbmx"]
-[ext_resource type="Texture2D" uid="uid://c6qtci8f6ncch" path="res://assets/UI/icons/ArrowUpLevelBlue.png" id="33_1qwkh"]
+[ext_resource type="Texture2D" path="res://assets/UI/icons/ArrowUpLevelBlue.png" id="33_1qwkh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
 shader = ExtResource("16_wdi1s")
@@ -121,6 +121,7 @@ grow_vertical = 0
 alignment = 1
 
 [node name="PauseControl" type="Control" parent="PanelsContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

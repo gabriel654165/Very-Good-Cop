@@ -1,13 +1,11 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=11 format=3 uid="uid://birh1smkt0xwf"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_0rwaq"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_ieyus"]
 [ext_resource type="PackedScene" uid="uid://cvdae5oociat5" path="res://scenes/weapons/grenade.tscn" id="2_c67ub"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_2d1ed"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_ut61c"]
-[ext_resource type="Texture2D" uid="uid://bohltm2v0a6m2" path="res://assets/UI/icons/weapons/GrenadeLauncher.png" id="5_tser2"]
-[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/CatchingCable.gd" id="7_ufrcc"]
-[ext_resource type="PackedScene" uid="uid://cjli835xwy0bb" path="res://scenes/projectiles/CatchingCable.tscn" id="8_hti8n"]
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/CatchingCable.gd" id="7_k61as"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -100,7 +98,7 @@ bullet/bullet_speed = 7
 bullet/bullet_damages = 10
 bullet/bullet_size = 0.275
 bullet/bullet_impact_force = 2.0
-bullet/bullet_piercing_force = 0
+bullet/bullet_piercing_force = 1
 bullet/bullet_should_bounce = true
 bullet/bullet_should_pierce_walls = false
 bullet/projectile_should_frag = false
@@ -124,7 +122,6 @@ texture = ExtResource("3_2d1ed")
 [node name="SideSprite2D" type="Sprite2D" parent="Weapon"]
 visible = false
 scale = Vector2(0.035, 0.035)
-texture = ExtResource("5_tser2")
 
 [node name="FirePosition" type="Marker2D" parent="Weapon"]
 position = Vector2(18, 4.48227e-05)
@@ -156,6 +153,4 @@ libraries = {
 }
 
 [node name="SpecialPower" type="Node2D" parent="Weapon"]
-script = ExtResource("7_ufrcc")
-catching_cable_scene = ExtResource("8_hti8n")
-projectile_size = 0.25
+script = ExtResource("7_k61as")
