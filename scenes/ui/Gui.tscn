@@ -417,6 +417,7 @@ popup/item_3/text = "basic"
 popup/item_3/id = 3
 
 [node name="WeaponShopControl" type="Control" parent="PanelsContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
