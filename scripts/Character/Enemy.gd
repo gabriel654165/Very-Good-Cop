@@ -9,7 +9,9 @@ enum PatrolType {
 @onready var fsm: AIStateMachine = $StateMachine
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 @onready var vision_sensor: VisionSensor = $VisionSensor
+@onready var hearing_sensor: HearingSensor = $HearingSensor
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var state_machine := $StateMachine as AIStateMachine
 
 @export var patrol_type: PatrolType = PatrolType.Sequence
 @export var patrol_wait: float = 3
@@ -25,6 +27,8 @@ enum PatrolType {
 @export var vision_cone_angle: float = 60
 @export var vision_cone_range: float = 200
 @export_flags_2d_physics var vision_layers
+
+@export var hearing_range: float = 20
 
 @export var point_value: float = 100
 @onready var blood_effect_prefab = preload("res://scenes/effects/small_blood.tscn")
@@ -48,6 +52,13 @@ func set_speed(new_speed: float):
 
 func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
+	
+	#go to player if he shooting us
+	#todo: projectile_owner seems to be null on projectile
+	#find a way to know the damager owner
+	state_machine.transition_to(state_machine.FOLLOW_TARGET, {
+		target = get_tree().current_scene.find_child("Player")
+	})
 	if health.is_dead() and !is_dead:
 		is_dead = true
 		var sprite_dead_enemy = spawn(corpse_prefab, self.global_position)		

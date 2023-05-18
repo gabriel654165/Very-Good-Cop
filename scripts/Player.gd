@@ -5,6 +5,7 @@ class_name Player
 @export var weapon_list : Dictionary
 
 var move_direction : Vector2 = Vector2.ZERO
+@onready var sound_shoot_vfx: CPUParticles2D = $ShootVFX
 
 func _ready():
 	await assign_weapon(index_weapon_selected)
@@ -53,6 +54,7 @@ func _process(delta):
 		
 		if weapon_manager != null and !shoot_prohibited:
 			weapon_manager.weapon.shoot()
+
 
 func _unhandled_input(event):
 	if self.action_disabled:

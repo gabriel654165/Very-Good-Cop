@@ -1,11 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://8xoniem4oare"]
+[gd_scene load_steps=10 format=3 uid="uid://8xoniem4oare"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_5e57m"]
 [ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="2_knftv"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_eolho"]
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_uv201"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_gyb4h"]
+[ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="7_r514s"]
 [ext_resource type="PackedScene" uid="uid://dvdfosa8s7qft" path="res://scenes/test/Room 1.tscn" id="9_1bcuv"]
+
+[sub_resource type="Curve" id="Curve_xh0pv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_vdhwr"]
+offsets = PackedFloat32Array(0, 0.809091)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Test-2" type="Node2D"]
 position = Vector2(564, 170)
@@ -33,3 +42,15 @@ position = Vector2(-193, 51)
 [node name="Room 2" parent="." instance=ExtResource("9_1bcuv")]
 position = Vector2(358, 31)
 rotation = 3.14159
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1
+lifetime = 1.3
+one_shot = true
+texture = ExtResource("7_r514s")
+gravity = Vector2(0, 0)
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_xh0pv")
+color_ramp = SubResource("Gradient_vdhwr")
