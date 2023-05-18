@@ -5,12 +5,34 @@ class_name Room
 @onready var room_config = find_child("RoomConfig")
 var should_spawn_stuff := true
 
+#1 -> [1 - 1]
+#2 -> [2 - 3]
+#3 -> [2 - 3]
+#4 -> [3 - 5]
+#5 -> [3 - 5]
+#6 -> [4 - 6]
+#7 -> [4 - 6]
+#8 -> [5 - 8]
+func nb_of_enemies(array:Array):
+	var theorical_maximum := array.size()
+	var minimum :int= 1 + GlobalVariables.level/2
+	var maximum :int= minimum * 2 - minimum/2
+
+	return min(randi_range(minimum, maximum), theorical_maximum)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(room_config != null, "Add a room config to your room")
 	if should_spawn_stuff:
-		spawn_with_room_config("Patrols", get_patrol_paths, spawn_enemy)
+		spawn_with_room_config(
+			"Patrols", 
+			get_patrol_paths, 
+			spawn_enemy,
+			true,
+			true,
+			nb_of_enemies
+		)
 		spawn_with_room_config("PowerUpPoints", get_children_positions_array, spawn_powerups)
 
 
@@ -19,12 +41,13 @@ func spawn_with_room_config(
 	process_node:Callable, # Takes the node as a parameter and returns an array. The elements of the array will be passed as a parameter to spawn_function
 	spawn_function:Callable,
 	random_nb_to_spawn := true, # Will call spawn_function between 1 time and process_node's array size time if true, else will call the func for each element of the array  
-	shuffle := true # shuffle process_node's array before spawning
+	shuffle := true, # shuffle process_node's array before spawning
+	random_nb_func := func(array:Array): return randi_range(1, array.size())
 	):
 	var node:Node = room_config.find_child(node_name)
 	var processed_node_as_array:Array = process_node.call(node)
 
-	var nb_to_spawn:int = randi_range(1, processed_node_as_array.size()) if random_nb_to_spawn else processed_node_as_array.size()
+	var nb_to_spawn:int = random_nb_func.call(processed_node_as_array) if random_nb_to_spawn else processed_node_as_array.size()
 
 	if shuffle:
 		processed_node_as_array.shuffle()

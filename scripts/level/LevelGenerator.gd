@@ -6,7 +6,7 @@ class_name LevelGenerator
 # NOTE: I can export some of those but then they are won't be const
 const LevelCanvasSideSize:int = 9
 
-const BaseNbOfRoomss:int = 5
+const BaseNbOfRoomss:int = 3
 
 const NoRoom:int = -1
 const RoomPlaceholder:int = -2 
@@ -45,13 +45,26 @@ var exit_pos: Vector2i
 func local_to_world_position(pos:Vector2i) -> Vector2i:
 	return (pos - StartPos) * RoomCenterOffset
 
+#1 -> [1 - 1]
+#2 -> [2 - 3]
+#3 -> [2 - 3]
+#4 -> [3 - 5]
+#5 -> [3 - 5]
+#6 -> [4 - 6]
+#7 -> [4 - 6]
+#8 -> [5 - 8]
+func random_nb_of_rooms():
+	var minimum :int= 1 + GlobalVariables.level/2
+	var maximum :int= minimum * 2 - minimum/2
+
+	return randi_range(minimum, maximum)
+
 
 # Called when the node enters the scene tree for the first time.
 func generate():
 
 	# NOTE: Find a better rng
-	var number_of_rooms:int = BaseNbOfRoomss + (GlobalVariables.level + randi_range(0, 3))
-
+	var number_of_rooms:int = BaseNbOfRoomss + random_nb_of_rooms()
 
 	reset_dungeon_layout()
 	generate_dungeon_layout(number_of_rooms)
