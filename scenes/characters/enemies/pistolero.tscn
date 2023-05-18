@@ -16,7 +16,7 @@ size = Vector2(30, 16)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
-speed = 10.0
+speed = 100.0
 weapon_manager = NodePath("WeaponManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -29,10 +29,13 @@ region_rect = Rect2(493, 397, 30, 15)
 shape = SubResource("RectangleShape2D_dfd5l")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 20.0
+path_desired_distance = 100.0
+target_desired_distance = 50.0
+path_max_distance = 250.0
 avoidance_enabled = true
 max_neighbors = 1
-time_horizon = 40.0
+time_horizon = 25.0
+max_speed = 250.0
 debug_enabled = true
 
 [node name="Health" parent="." instance=ExtResource("3_onhbj")]
@@ -65,10 +68,9 @@ properties/weapon_name = ""
 properties/special_power_unlocked = false
 properties/level = 0
 power/can_use_power = false
-bullet/bullet_speed = 4
+bullet/bullet_speed = 10
 bullet/bullet_damages = 6
 bullet/bullet_impact_force = 2.0
-bullet/bullet_piercing_force = 0
 loader/reloading_cooldown = 1.0
 weapon/recoil_force = 2.0
 

@@ -22,8 +22,11 @@ func spawn_with_room_config(
 	shuffle := true # shuffle process_node's array before spawning
 	):
 	var node:Node = room_config.find_child(node_name)
+	if node.name == "PowerUpPoints":
+		print(node.get_children())
 	var processed_node_as_array:Array = process_node.call(node)
-
+	if node.name == "PowerUpPoints":
+		print(processed_node_as_array)
 	var nb_to_spawn:int = randi_range(1, processed_node_as_array.size()) if random_nb_to_spawn else processed_node_as_array.size()
 
 	if shuffle:
@@ -34,7 +37,7 @@ func spawn_with_room_config(
 
 
 func get_children_positions_array(node:Node):
-	return node.get_children().map(func(node:Node2D): return node.global_position)
+	return node.get_children().map(func(n:Node2D): return n.global_position)
 
 
 #

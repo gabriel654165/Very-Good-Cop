@@ -25,7 +25,6 @@ var weapon_throwed : bool = false
 var hook_deployed : bool = false
 
 func stab():
-	print("knife null")
 	if knife != null:
 		knife.stab()
 

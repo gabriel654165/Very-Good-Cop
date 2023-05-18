@@ -63,7 +63,7 @@ for_who = 1
 visible = false
 offset_right = 213.0
 offset_bottom = 23.0
-text = "SPAM CLICK !"
+text = "SPAM SPACE !"
 label_settings = SubResource("LabelSettings_5xi0b")
 
 [node name="PressE" type="Label" parent="."]
@@ -107,6 +107,7 @@ next_interaction = NodePath("../AddPassiveEffectInteraction")
 
 [node name="SpamClickInteraction" type="Node2D" parent="SpamClickAndCollide"]
 script = ExtResource("8_aesvb")
+key_code = 32
 for_who = 1
 
 [node name="Timer" type="Timer" parent="SpamClickAndCollide/SpamClickInteraction"]

@@ -64,7 +64,7 @@ label_settings = SubResource("LabelSettings_as8nt")
 visible = false
 offset_right = 213.0
 offset_bottom = 23.0
-text = "SPAM CLICK !"
+text = "SPAM SPACE !"
 label_settings = SubResource("LabelSettings_as8nt")
 
 [node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
@@ -101,6 +101,7 @@ next_interaction = NodePath("../AddPassiveEffectInteraction")
 
 [node name="SpamClickInteraction" type="Node2D" parent="SpamClickAndCollide"]
 script = ExtResource("8_ttp6i")
+key_code = 32
 for_who = 1
 
 [node name="Timer" type="Timer" parent="SpamClickAndCollide/SpamClickInteraction"]
