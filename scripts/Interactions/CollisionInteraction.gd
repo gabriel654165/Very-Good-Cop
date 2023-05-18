@@ -22,7 +22,6 @@ func get_body_touching() -> Character:
 			body_first_priority = body
 	
 	if body_first_priority != null:
-		print("interaction : collision = TRUE by : ", body_first_priority.name)
 		body_touching = body_first_priority
 		is_triggered = true
 
