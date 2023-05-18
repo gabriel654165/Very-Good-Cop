@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6i5jh7uk237l"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_0rwaq"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_ieyus"]
 [ext_resource type="PackedScene" uid="uid://cvdae5oociat5" path="res://scenes/weapons/grenade.tscn" id="2_c67ub"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_2d1ed"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_ut61c"]
-[ext_resource type="Texture2D" uid="uid://bohltm2v0a6m2" path="res://assets/UI/icons/weapons/GenadeLauncher.png" id="5_tser2"]
+[ext_resource type="Texture2D" uid="uid://bohltm2v0a6m2" path="res://assets/UI/icons/weapons/GrenadeLauncher.png" id="5_tser2"]
 [ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/CatchingCable.gd" id="7_ufrcc"]
 [ext_resource type="PackedScene" uid="uid://cjli835xwy0bb" path="res://scenes/projectiles/CatchingCable.tscn" id="8_hti8n"]
 
