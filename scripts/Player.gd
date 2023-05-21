@@ -7,8 +7,12 @@ class_name Player
 var move_direction : Vector2 = Vector2.ZERO
 
 func _ready():
-	await assign_weapon(index_weapon_selected)
-	assign_knife()
+	#await assign_weapon(index_weapon_selected)
+	#assign_knife()
+	#await assign_weapon(index_weapon_selected)
+	
+	GlobalFunctions.set_weapon_properties(weapon_manager, GlobalVariables.index_weapon_selected)
+	#mettre un Y d'animation
 
 func _physics_process(delta):
 	if self.action_disabled:
@@ -66,12 +70,12 @@ func _unhandled_input(event):
 	if event.is_action_pressed("activate_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
 		weapon_manager.weapon.special_power.use_special_power()
 	
-	if event.is_action_pressed("switch_weapon_test"):
-		index_weapon_selected += 1
-		if index_weapon_selected > weapon_list.size():
-			index_weapon_selected = 1
-		unassign_weapon()
-		assign_weapon(index_weapon_selected)
+	#if event.is_action_pressed("switch_weapon_test"):
+	#	index_weapon_selected += 1
+	#	if index_weapon_selected > weapon_list.size():
+	#		index_weapon_selected = 1
+	#	unassign_weapon()
+	#	assign_weapon(index_weapon_selected)
 
 func assign_knife():
 	knife = GlobalVariables.all_knife_scene_list[GlobalVariables.index_knife_selected].packed_scene.instantiate()
@@ -85,7 +89,8 @@ func set_active_assigned_weapon():
 	#changer l'animation
 
 func assign_weapon(index: int):
-	weapon_manager = await find_weapon(index_weapon_selected)
+	weapon_manager = await GlobalFunctions.get_weapon_scene(index)
+	#weapon_manager = await find_weapon(index)
 	if weapon_manager == null:
 		return
 	weapon_manager.set_position(weapon_position.position)
@@ -98,23 +103,23 @@ func unassign_weapon():
 		return
 	weapon_manager.queue_free()
 
-func find_weapon(weapon_index: int) -> Object :
-	var current_index : int = 1 
-	var weapon_scene : Object = null 
-	
-	if weapon_list == null or weapon_list.size() <= 0:
-		return null
-	
-	for key_weapon in weapon_list.keys():
-		if current_index == weapon_index:
-			weapon_scene = weapon_list[key_weapon]
-		current_index += 1
-	
-	if weapon_scene == null:
-		return null
-	
-	var weapon_manager : Node2D = await weapon_scene.instantiate()
-	return weapon_manager
+#func find_weapon(weapon_index: int) -> Object :
+#	var current_index : int = 1 
+#	var weapon_scene : Object = null 
+#	
+#	if weapon_list == null or weapon_list.size() <= 0:
+#		return null
+#	
+#	for key_weapon in weapon_list.keys():
+#		if current_index == weapon_index:
+#			weapon_scene = weapon_list[key_weapon]
+#		current_index += 1
+#	
+#	if weapon_scene == null:
+#		return null
+#	
+#	var weapon_manager : Node2D = await weapon_scene.instantiate()
+#	return weapon_manager
 
 func handle_enemy_died(enemy: Node2D, points: int):
 	if weapon_manager.weapon.special_power_unlocked:

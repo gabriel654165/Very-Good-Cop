@@ -13,27 +13,27 @@ var can_use_power : bool = false
 var power_activated : bool = false
 
 var projectile_scene : PackedScene
-var bullet_speed : int = 4
-var bullet_damages : int = 6
-var bullet_size : float = 0.5
-var bullet_impact_force : float = 2
-var bullet_piercing_force : int = 0
-var bullet_should_bounce : bool = false
-var bullet_should_pierce_walls : bool = false
+var projectile_speed : int = 4
+var projectile_damages : int = 6
+var projectile_size : float = 0.5
+var projectile_impact_force : float = 2
+var projectile_piercing_force : int = 0
+var projectile_should_bounce : bool = false
+var projectile_should_pierce_walls : bool = false
 
 var projectile_should_frag : bool = false
 var frag_projectile_precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
 var frag_projectile_precision : float = 1
 var number_of_frag_projectile : int = 3
 
-var loader_capacity : int = 6
+var ammo_size : int = 6
 var _current_loader_bullets_number : int = 0
-var reloading_cooldown : float = 1
+var ammo_reloading_time : float = 1
 
 var enable : bool = true
 #changer ces deux pareamètre par fréquence & amplitude (3 balles (fréqeunce) en 1s(amplitude))
-var number_of_balls_by_burt : int = 1
-var frequence_of_burt : float = 0.1 #time between balls of burts
+var balls_by_burt : int = 1
+var frequence_of_burt : float = 0 #time between balls of burts
 var precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
 var precision : float = 0 # the more it's close 0 the more it's precise
 var recoil_force : float = 2 # the more it's close 0 the more it's precise
@@ -58,7 +58,7 @@ func shoot():
 	
 	if (shooting_cooldown.is_stopped() or should_disable_cooldown()) and Projectile != null and _current_loader_bullets_number >= 0:
 		shooting_cooldown.start()
-		for n in number_of_balls_by_burt:
+		for n in balls_by_burt:
 			
 			_current_loader_bullets_number -= 1
 			if _current_loader_bullets_number == 0:
@@ -115,13 +115,13 @@ func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vec
 		GlobalSignals.projectile_fired_spawn.emit(null, projectile_instance, fire_position.global_position, direction)
 
 func set_projectile_variables(projectile: Projectile):
-	projectile.speed = bullet_speed
-	projectile.damages = bullet_damages
-	projectile.scale *= bullet_size
-	projectile.impact_force = bullet_impact_force
-	projectile.piercing_force = bullet_piercing_force
-	projectile.should_bounce = bullet_should_bounce
-	projectile.should_pierce_walls = bullet_should_pierce_walls
+	projectile.speed = projectile_speed
+	projectile.damages = projectile_damages
+	projectile.scale *= projectile_size
+	projectile.impact_force = projectile_impact_force
+	projectile.piercing_force = projectile_piercing_force
+	projectile.should_bounce = projectile_should_bounce
+	projectile.should_pierce_walls = projectile_should_pierce_walls
 	projectile.should_frag = projectile_should_frag
 	frag_projectile_precision_angle = frag_projectile_precision_angle
 	frag_projectile_precision = frag_projectile_precision
@@ -136,5 +136,5 @@ func add_charge_power_points(points: int):
 		can_use_power = false
 
 func reload_magazine():
-	await get_tree().create_timer(reloading_cooldown).timeout
-	_current_loader_bullets_number = loader_capacity
+	await get_tree().create_timer(ammo_reloading_time).timeout
+	_current_loader_bullets_number = ammo_size

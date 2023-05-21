@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="18_hj7i6"]
 [ext_resource type="Texture2D" uid="uid://dowkkdr2nl48i" path="res://assets/UI/icons/HUD_ammo01.png" id="19_ubeu4"]
 [ext_resource type="VideoStream" path="res://assets/previews/preview-resized.ogv" id="23_rbbmx"]
-[ext_resource type="Texture2D" path="res://assets/UI/icons/ArrowUpLevelBlue.png" id="33_1qwkh"]
+[ext_resource type="Texture2D" uid="uid://c6qtci8f6ncch" path="res://assets/UI/icons/ArrowUpLevelBlue.png" id="33_1qwkh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
 shader = ExtResource("16_wdi1s")
@@ -71,13 +71,13 @@ velocity_scale = Vector2(1.5, 1.5)
 [node name="PanelPointsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
 script = ExtResource("9_dkbyk")
 panel_gui = ExtResource("10_0fs0q")
-title_panel = "points"
+title_panel = "Points"
 panels_container = NodePath("../PanelsContainer/HBoxUpperContainer")
 
 [node name="PanelKillsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
 script = ExtResource("11_f3jk1")
 panel_gui = ExtResource("10_0fs0q")
-title_panel = "kills"
+title_panel = "Kills"
 panels_container = NodePath("../PanelsContainer/HBoxUpperContainer")
 
 [node name="PanelTimerManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]

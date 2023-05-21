@@ -36,17 +36,20 @@ split_offset = 75
 
 [node name="WeaponLabel" type="Label" parent="HSplitContainer/VRightSplitContainer/HSplitContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "AK45"
 horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="WeaponLevel" type="Label" parent="HSplitContainer/VRightSplitContainer/HSplitContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "LVL.5"
 horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="PowerChargeBar" type="Label" parent="HSplitContainer/VRightSplitContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "[====          ]"
 horizontal_alignment = 1

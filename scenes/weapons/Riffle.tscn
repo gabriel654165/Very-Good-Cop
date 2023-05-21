@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu5xhrk3gung2"]
+[gd_scene load_steps=11 format=3 uid="uid://cu5xhrk3gung2"]
 
-[ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_cxkgv"]
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_eiovr"]
-[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/weapons/bullet.tscn" id="2_ybgct"]
+[ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="2_bydg0"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_h6ytp"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_d6cwx"]
 [ext_resource type="Texture2D" uid="uid://cyom4mc8jgnjo" path="res://assets/UI/icons/weapons/Gun_Smg.png" id="5_2g8xd"]
@@ -94,27 +93,27 @@ properties/level = 1
 power/points_to_unlock_power = 100
 power/current_points_charge_power = 0
 power/can_use_power = true
-bullet/projectile = ExtResource("2_ybgct")
-bullet/bullet_speed = 12
-bullet/bullet_damages = 7
-bullet/bullet_size = 0.5
-bullet/bullet_impact_force = 1.0
-bullet/bullet_piercing_force = 0
-bullet/bullet_should_bounce = false
-bullet/bullet_should_pierce_walls = false
-bullet/projectile_should_frag = false
-loader/loader_capacity = 12
-loader/reloading_cooldown = 1.5
+projectile/projectile = null
+projectile/projectile_speed = 4
+projectile/projectile_damages = 6
+projectile/projectile_size = 0.5
+projectile/projectile_impact_force = 2.0
+projectile/projectile_piercing_force = 0
+projectile/projectile_should_bounce = false
+projectile/projectile_should_pierce_walls = false
+projectile/projectile_should_frag = false
+ammo/ammo_size = 6
+ammo/ammo_reloading_time = 1.0
 weapon/enable = true
 weapon/shooting_cooldown = 0.1
-weapon/number_of_balls_by_burt = 1
+weapon/balls_by_burt = 1
 weapon/frequence_of_burt = 0.1
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.25
 weapon/recoil_force = 1.0
 
 [node name="Weapon" type="Node2D" parent="."]
-script = ExtResource("1_cxkgv")
+script = ExtResource("2_bydg0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 visible = false
