@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://b1uayqlkcr0et"]
 
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_e6w1w"]
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_yujf1"]
-[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/projectiles/bullet.tscn" id="2_tacgw"]
+[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/projectiles/bullet.tscn" id="2_sc3xm"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="3_ucb1l"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="4_n0wdy"]
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="5_6leu0"]
@@ -98,7 +98,7 @@ properties/level = 1
 power/points_to_unlock_power = 200
 power/current_points_charge_power = 0
 power/can_use_power = true
-projectile/projectile = ExtResource("2_tacgw")
+projectile/projectile = ExtResource("2_sc3xm")
 projectile/projectile_speed = 4
 projectile/projectile_damages = 6
 projectile/projectile_size = 0.5
@@ -116,6 +116,7 @@ weapon/frequence_of_burt = 0.0
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.0
 weapon/recoil_force = 1.0
+weapon/auto_lock_target = false
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("1_e6w1w")

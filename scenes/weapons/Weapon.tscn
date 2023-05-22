@@ -116,6 +116,7 @@ weapon/frequence_of_burt = 0.0
 weapon/precision_angle = Vector2(-1, 1)
 weapon/precision = 0.0
 weapon/recoil_force = 1.0
+weapon/auto_lock_target = false
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("3_djx0w")

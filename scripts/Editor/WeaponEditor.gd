@@ -37,6 +37,7 @@ var frequence_of_burt : float = 0
 var precision_angle : Vector2 = Vector2(-1, 1)
 var precision : float = 0
 var recoil_force : float = 2
+var auto_lock_target : bool = false
 
 func _ready():
 	weapon = self.get_child(0) as Weapon
@@ -97,6 +98,7 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.precision_angle = self.precision_angle
 	weapon.precision = self.precision
 	weapon.recoil_force = self.recoil_force
+	weapon.auto_lock_target = self.auto_lock_target
 
 func _get(property):
 	if property == 'properties/weapon_name':
@@ -158,6 +160,8 @@ func _get(property):
 		return precision
 	if property == 'weapon/recoil_force':
 		return recoil_force
+	if property == 'weapon/auto_lock_target':
+		return auto_lock_target
 
 func _set(property, value) -> bool :
 	if property == 'properties/weapon_name':
@@ -219,6 +223,8 @@ func _set(property, value) -> bool :
 		precision = value
 	if property == 'weapon/recoil_force':
 		recoil_force = value
+	if property == 'weapon/auto_lock_target':
+		auto_lock_target = value
 	return true
 
 
@@ -320,6 +326,9 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'weapon/recoil_force',
 		'type': TYPE_FLOAT,
+	},{
+		'name': 'weapon/auto_lock_target',
+		'type': TYPE_BOOL,
 	}]
 
 	props.append_array(props_proprieties)

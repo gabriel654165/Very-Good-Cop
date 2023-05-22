@@ -17,7 +17,7 @@ class_name PauseManager
 @export var color_rect : Node = null
 
 var gui_manager : GuiManager = null
-var characters_in_scene : Array = []
+#var characters_in_scene : Array = []
 var current_blur_intensity : float = 0
 var pop_up_timer : Timer = null
 
@@ -35,7 +35,7 @@ func set_active(state: bool):
 		unload_ui()
 
 func _process(delta):
-	if (active and current_blur_intensity < 1) or (!active and current_blur_intensity > 0):
+	if (active and current_blur_intensity < aim_blur_intensity) or (!active and current_blur_intensity > 0):
 		color_rect.get_material().set_shader_parameter("intensity", current_blur_intensity)
 	elif !active and current_blur_intensity == 0 and !base_panel.visible:
 		pause_gui.visible = false
@@ -43,35 +43,26 @@ func _process(delta):
 
 func resume():
 	unload_ui()
-	gui_manager.cursor_manager.cursor.active_mode_idle_gui()	
+	gui_manager.cursor_manager.cursor.active_mode_idle_gui()
 	if await start_resume_animation():
-		disable_all_game_objects(false)
+		GlobalFunctions.disable_all_game_objects(false)
 		set_active(false)
 
 func generate_ui():
 	display_base_panel()
 	pause_gui.visible = true
-	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Character, characters_in_scene, get_tree().root)
-	disable_all_game_objects(true)
+	#GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Character, characters_in_scene, get_tree().root)
+	GlobalFunctions.disable_all_game_objects(true)
 	gui_manager.cursor_manager.cursor.active_mode_ui()
-	set_active_gui_panels(false)
+	gui_manager.set_active_gui_panels(false)
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "current_blur_intensity", aim_blur_intensity, time_to_blur)
 
 func unload_ui():
 	base_panel.visible = false
-	gui_manager.panel_points_manager.panel.visible = true
-	gui_manager.panel_kills_manager.panel.visible = true
-	gui_manager.panel_timer_manager.panel.visible = true
-	gui_manager.weapon_panel_manager.panel_weapon.visible = true
+	gui_manager.set_active_gui_panels(true)
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "current_blur_intensity", 0, time_to_blur)
-
-func set_active_gui_panels(state: bool):
-	gui_manager.panel_points_manager.panel.visible = state
-	gui_manager.panel_kills_manager.panel.visible = state
-	gui_manager.panel_timer_manager.panel.visible = state
-	gui_manager.weapon_panel_manager.panel_weapon.visible = state
 
 func display_base_panel():
 	base_panel.visible = true
@@ -109,6 +100,7 @@ func start_resume_animation() -> bool:
 	return true
 
 func _unhandled_input(event):
+	return
 	if event.is_action_pressed("echap"):
 		if !active or pop_up_timer != null:
 			pop_up_timer = null
@@ -117,16 +109,6 @@ func _unhandled_input(event):
 			resume()
 		elif option_panel.visible:
 			display_base_panel()
-
-func disable_all_game_objects(state: bool):
-	var index : int = 1
-	for character in characters_in_scene:
-		if character != null:
-			character.action_disabled = state
-		else:
-			characters_in_scene.remove_at(index)
-			continue
-		index += 1
 
 # Signals
 func _on_resume_button_pressed():

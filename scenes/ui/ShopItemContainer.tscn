@@ -1,0 +1,160 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfrnw0kq0ry4j"]
+
+[ext_resource type="Script" path="res://scripts/ui/ShopItemContainer.gd" id="1_g2lhk"]
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_hhfpf"]
+[ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="2_hkj58"]
+[ext_resource type="PackedScene" uid="uid://bdx282nh2kvp0" path="res://scenes/ui/ShopUpgradeItemStatPanel.tscn" id="3_7xo1g"]
+
+[node name="ShopItemContainer" type="PanelContainer" node_paths=PackedStringArray("item_texture", "item_name_label", "unlock_item_container", "buy_item_button", "buy_item_price_label", "upgrade_properties_container", "property_list_parent", "special_power_list_parent")]
+theme = ExtResource("1_hhfpf")
+script = ExtResource("1_g2lhk")
+item_texture = NodePath("VBoxContainer/Container/WeaponContainer/WeaponImageTextureRect")
+item_name_label = NodePath("VBoxContainer/Container/WeaponContainer/WeaponNameLabel")
+unlock_item_container = NodePath("VBoxContainer/Container/UnlockWeaponContainer")
+buy_item_button = NodePath("VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer/BuyButton")
+buy_item_price_label = NodePath("VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer/PriceLabel")
+upgrade_properties_container = NodePath("VBoxContainer/Container/UpgradePropertiesContainer")
+property_list_parent = NodePath("VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer/PropertiesPanelsContainer/ScrollContainer/PropertiesContainer")
+special_power_list_parent = NodePath("VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer")
+upgrade_item_stat_panel_scene = ExtResource("3_7xo1g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Margin-Container" type="AspectRatioContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Container" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Margin" type="AspectRatioContainer" parent="VBoxContainer/Container"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="WeaponContainer" type="VBoxContainer" parent="VBoxContainer/Container"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="WeaponNameLabel" type="Label" parent="VBoxContainer/Container/WeaponContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/line_spacing = 10
+theme_override_font_sizes/font_size = 25
+text = "Glock"
+horizontal_alignment = 1
+
+[node name="WeaponImageTextureRect" type="TextureRect" parent="VBoxContainer/Container/WeaponContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_hkj58")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Margin-Container3" type="AspectRatioContainer" parent="VBoxContainer/Container/WeaponContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Margin2" type="AspectRatioContainer" parent="VBoxContainer/Container"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="UnlockWeaponContainer" type="HBoxContainer" parent="VBoxContainer/Container"]
+layout_mode = 2
+
+[node name="Margin-in" type="AspectRatioContainer" parent="VBoxContainer/Container/UnlockWeaponContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BuyButtonContainer" type="VBoxContainer" parent="VBoxContainer/Container/UnlockWeaponContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+
+[node name="TopMargin" type="AspectRatioContainer" parent="VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="BuyButton" type="Button" parent="VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer"]
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Buy"
+icon_alignment = 2
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "200$"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradePropertiesContainer" type="VBoxContainer" parent="VBoxContainer/Container"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PropertiesPanelContainer" type="PanelContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer"]
+layout_mode = 2
+
+[node name="PropertiesPanelsContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer/PropertiesPanelsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 22
+text = "Properties"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer/PropertiesPanelsContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="PropertiesContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer/PropertiesPanelsContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpecialPower-PanelContainer" type="PanelContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer"]
+layout_mode = 2
+
+[node name="SpecialPowersContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 22
+text = "Special Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="SpecialPowersContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpgradeDamagePanel" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer/ScrollContainer/SpecialPowersContainer" instance=ExtResource("3_7xo1g")]
+layout_mode = 2
+
+[node name="Margin3" type="AspectRatioContainer" parent="VBoxContainer/Container"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Margin-Container2" type="AspectRatioContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer/BuyButton" to="." method="_on_buy_button_pressed"]

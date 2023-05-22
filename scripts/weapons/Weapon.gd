@@ -3,7 +3,7 @@ class_name Weapon
 
 @export var shooter_actor : Node
 
-var weapon_name : String = ""
+var weapon_name : String = ''
 var special_power_unlocked : bool = false
 var level : int = 0
 
@@ -33,10 +33,11 @@ var ammo_reloading_time : float = 1
 var enable : bool = true
 #changer ces deux pareamètre par fréquence & amplitude (3 balles (fréqeunce) en 1s(amplitude))
 var balls_by_burt : int = 1
-var frequence_of_burt : float = 0 #time between balls of burts
+var frequence_of_burt : float = 0
 var precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
 var precision : float = 0 # the more it's close 0 the more it's precise
-var recoil_force : float = 2 # the more it's close 0 the more it's precise
+var recoil_force : float = 2
+var auto_lock_target : bool = false
 
 @onready var fire_position = $FirePosition
 @onready var fire_direction = $FireDirection
