@@ -10,12 +10,6 @@ func _ready():
 	change_playlist(current_playlist)
 	play()
 
-func _input(event):
-	if Input.is_key_pressed(KEY_A):
-		next_track(true)
-	if Input.is_key_pressed(KEY_B):
-		change_playlist(GlobalVariables.playlists.keys()[(GlobalVariables.playlists.keys().find(current_playlist) + 1) % GlobalVariables.playlists.keys().size()], true)
-
 
 func get_playlists() -> Array:
 	return GlobalVariables.playlists.keys()
