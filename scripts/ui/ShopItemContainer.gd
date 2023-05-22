@@ -74,6 +74,8 @@ func generate_property_list_by_save(ref_item_stats_list, player_item_stats_list,
 		var ref_list_key = ref_item_stats_list[index].keys()[0]
 		var stat_max_lvl = ref_item_stats_list[index][ref_list_key].number_of_levels
 		upgrade_item_stat_panel_ui.set_name_label(ref_list_key)
+		upgrade_item_stat_panel_ui.item_name = item_name
+		upgrade_item_stat_panel_ui.weapon_manager = weapon_manager
 		upgrade_item_stat_panel_ui.set_level_label(value, stat_max_lvl)
 		upgrade_item_stat_panel_ui.set_price(100)
 		upgrade_item_stat_panel_ui.update()

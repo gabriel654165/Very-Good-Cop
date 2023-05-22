@@ -8,6 +8,7 @@ class_name WeaponShopManager
 @export var weapon_shop_gui : Node = null
 @export var shop_container : Node = null
 @export var player_infos_container : Node = null
+@export var player_infos_container_parent : Node = null
 @export var hover_container : Node = null
 @export var buttons_container : Node = null
 @export var color_rect : Node = null
@@ -15,9 +16,11 @@ class_name WeaponShopManager
 @export var melee_weapon_list_parent : Node = null
 @export var equipment_list_parent : Node = null
 
-@export var item_container_scene : PackedScene = null
+@export var item_container_scene : PackedScene
+@export var player_bank_account_panel_scene : PackedScene
 
 var gui_manager : GuiManager = null
+var player_bank_account_panel : PlayerBankAccountPanel = null
 var current_blur_intensity : float = 0
 var shop_item_distance_weapon_list : Array[ShopItemContainer] = []
 var shop_item_melee_weapon_list : Array[ShopItemContainer] = []
@@ -50,6 +53,7 @@ func update():
 		melee_weapon_item.update()
 	for equipment_item in shop_item_equipment_list:
 		equipment_item.update()
+	player_bank_account_panel.update()
 
 
 func generate_item_list_by_save(all_item_infos_list, player_item_list, parent) -> Array[ShopItemContainer]:
@@ -76,6 +80,10 @@ func generate_ui():
 	gui_manager.set_active_gui_panels(false)
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "current_blur_intensity", aim_blur_intensity, time_to_blur)
+	
+	player_bank_account_panel = player_bank_account_panel_scene.instantiate()
+	player_infos_container_parent.add_child(player_bank_account_panel)
+	player_bank_account_panel.update()
 
 func unload_ui():
 	weapon_shop_gui.visible = false
@@ -85,3 +93,10 @@ func unload_ui():
 	shop_item_distance_weapon_list = []
 	shop_item_melee_weapon_list = []
 	shop_item_equipment_list = []
+
+# Signals
+func _on_quit_button_pressed():
+	get_tree().quit()
+
+func _on_continue_button_pressed():
+	get_tree().reload_current_scene()

@@ -1,0 +1,161 @@
+[gd_scene load_steps=3 format=3 uid="uid://3bjanvfpb1pa"]
+
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_5ib7t"]
+[ext_resource type="Script" path="res://scripts/ui/PlayerBankAccountPanel.gd" id="2_q5tg1"]
+
+[node name="PlayerBankAccountPanel" type="PanelContainer" node_paths=PackedStringArray("money_value_label", "account_log_container_parent", "account_log_total_container")]
+theme = ExtResource("1_5ib7t")
+script = ExtResource("2_q5tg1")
+money_value_label = NodePath("VBoxContainer/CurrentMoney-PanelContainer/HBoxContainer/VBoxContainer/MoneyValueLabel")
+account_log_container_parent = NodePath("VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent")
+account_log_total_container = NodePath("VBoxContainer/AccountLog-PanelContainer/VBoxContainer/AccountLogTotalContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "Your bank account"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentMoney-PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CurrentMoney-PanelContainer"]
+layout_mode = 2
+
+[node name="Margin-Container" type="AspectRatioContainer" parent="VBoxContainer/CurrentMoney-PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CurrentMoney-PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Margin-Container" type="AspectRatioContainer" parent="VBoxContainer/CurrentMoney-PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="MoneyValueLabel" type="Label" parent="VBoxContainer/CurrentMoney-PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "300 $"
+
+[node name="Margin-Container2" type="AspectRatioContainer" parent="VBoxContainer/CurrentMoney-PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Margin-Container2" type="AspectRatioContainer" parent="VBoxContainer/CurrentMoney-PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="AccountLog-PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 22
+text = "Account log history :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="AccountLogContainerParent" type="VBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="AccountLogExempleContainer" type="HBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent/AccountLogExempleContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "+ 200$"
+
+[node name="Label" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent/AccountLogExempleContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "- salary mission 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AccountLogExempleContainer2" type="HBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent/AccountLogExempleContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "- 100$"
+
+[node name="Label" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent/AccountLogExempleContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "- glock"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AccountLogExempleContainer3" type="HBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent/AccountLogExempleContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "- 50$"
+
+[node name="Label" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent/AccountLogExempleContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "- glock damages"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AccountLogExempleContainer4" type="HBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent/AccountLogExempleContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "+ 250$"
+
+[node name="Label" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/HBoxContainer2/AccountLogContainerParent/AccountLogExempleContainer4"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "- salary mission 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AccountLogTotalContainer" type="HBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/AccountLogTotalContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Total money earned :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TotalValueLabel" type="Label" parent="VBoxContainer/AccountLog-PanelContainer/VBoxContainer/AccountLogTotalContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "450$"

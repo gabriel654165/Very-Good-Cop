@@ -17,7 +17,6 @@ class_name PauseManager
 @export var color_rect : Node = null
 
 var gui_manager : GuiManager = null
-#var characters_in_scene : Array = []
 var current_blur_intensity : float = 0
 var pop_up_timer : Timer = null
 
@@ -51,7 +50,6 @@ func resume():
 func generate_ui():
 	display_base_panel()
 	pause_gui.visible = true
-	#GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Character, characters_in_scene, get_tree().root)
 	GlobalFunctions.disable_all_game_objects(true)
 	gui_manager.cursor_manager.cursor.active_mode_ui()
 	gui_manager.set_active_gui_panels(false)

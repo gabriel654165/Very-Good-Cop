@@ -19,6 +19,8 @@ class_name GuiManager
 func generate_ui():
 	health_ui_manager.set_active(true)
 	cursor_manager.set_active(true)
+	#weapon_shop_manager.set_active(false)
+	#choose_weapon_manager.set_active(false)
 
 func set_active_gui_panels(state: bool):
 	panel_points_manager.panel.visible = state

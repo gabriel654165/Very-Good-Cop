@@ -102,3 +102,5 @@ vertical_alignment = 1
 
 [node name="LeftMargin2" type="AspectRatioContainer" parent="SpecialPowers-List"]
 layout_mode = 2
+
+[connection signal="pressed" from="SpecialPowers-List/SpecialPower-Item5/UpgradeButton" to="." method="_on_upgrade_button_pressed"]

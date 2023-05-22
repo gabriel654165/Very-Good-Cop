@@ -11,13 +11,17 @@ class_name ShopUpgradeItemStatPanel
 var _price : int = 0
 var _current_item_level : int = 0
 var _max_item_level : int = 0
+var _property_name : String = ''
+var item_name : String = ''
+var weapon_manager : WeaponShopManager
 
 func set_level_label(current_lvl: int, max_lvl: int):
-	_current_item_level = _current_item_level
+	_current_item_level = current_lvl
 	_max_item_level = max_lvl
-	level_label.text = str(current_lvl) + "/" + str(max_lvl)
+	level_label.text = str(_current_item_level) + "/" + str(_max_item_level)
 
 func set_name_label(variable_stat_name: String):
+	_property_name = variable_stat_name
 	name_label.text = variable_stat_name.replace('_', ' ')
 
 func set_price(price: int):
@@ -40,3 +44,29 @@ func update_buy_info():
 		upgrade_button.visible = false
 		price_label.visible = false
 		max_level_container.visible = true
+
+func upgrade_property():
+	if GlobalVariables.money < _price:
+		return
+	GlobalVariables.money -= _price
+	
+	for player_item in GlobalVariables.player_distance_weapon_list:
+		if player_item.name == item_name:
+			player_item[_property_name + '_lvl'] += 1
+			break
+	for player_item in GlobalVariables.player_melee_weapon_list:
+		if player_item.name == item_name:
+			player_item[_property_name + '_lvl'] += 1
+			break
+	for player_item in GlobalVariables.player_equipment_list:
+		if player_item.name == item_name:
+			player_item[_property_name + '_lvl'] += 1
+			break
+	
+	if weapon_manager != null:
+		weapon_manager.update()
+	
+
+#signals
+func _on_upgrade_button_pressed():
+	upgrade_property()
