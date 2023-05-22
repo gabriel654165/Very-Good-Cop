@@ -1,0 +1,95 @@
+extends AudioStreamPlayer
+
+class_name MusicPlaylistsPlayer
+
+# TODO: Might make it work with saves later on
+@onready var current_playlist := String(GlobalVariables.playlists.keys()[0])
+var current_track := 0
+
+func _ready():
+	change_playlist(current_playlist)
+	play()
+
+func _input(event):
+	if Input.is_key_pressed(KEY_A):
+		next_track(true)
+	if Input.is_key_pressed(KEY_B):
+		change_playlist(GlobalVariables.playlists.keys()[(GlobalVariables.playlists.keys().find(current_playlist) + 1) % GlobalVariables.playlists.keys().size()], true)
+
+
+func get_playlists() -> Array:
+	return GlobalVariables.playlists.keys()
+
+
+func put_track(track:int, play_it:=false):
+	assert(track < GlobalVariables.playlists[current_playlist].size(), "Invalid track: " + str(track) + " > "+ current_playlist + " size")
+	current_track = track
+	stream = GlobalVariables.playlists[current_playlist][track]
+	if play_it:
+		play()
+
+
+func next_track(play_it:=false):
+	var next_track :int= ((current_track + 1) % GlobalVariables.playlists[current_playlist].size())
+	put_track(next_track, play_it)
+
+
+func change_playlist(playlist:String, play_it:=false, first_track:=0):
+	assert(GlobalVariables.playlists.has(playlist), "Unknown playlist " + playlist)
+
+	current_playlist = playlist
+	put_track(first_track, play_it)
+
+
+
+static func get_musics_from_folder(path:String) -> Array[AudioStream]:
+	var dir = DirAccess.open(path)
+	var res : Array[AudioStream]
+
+	if path != "/":
+		path += "/"
+
+	assert(dir != null, "Cannot open " + path)
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		var full_path = path + file_name
+		
+		if file_name.ends_with(".remap"):
+			file_name.trim_suffix(".remap")
+		
+		var new_stream : AudioStream
+		# I don't like it but dunno how to make it better
+		if file_name.ends_with("mp3"):
+			new_stream = AudioStreamMP3.new()
+		elif file_name.ends_with("wav"):
+			new_stream = AudioStreamWAV.new()
+		elif file_name.ends_with("ogg"):
+			new_stream = AudioStreamOggVorbis.new()
+		else:
+			file_name = dir.get_next()
+			continue
+
+		var file_bytes := FileAccess.get_file_as_bytes(full_path)
+		new_stream.data = file_bytes
+		res.append(new_stream)
+		file_name = dir.get_next()
+
+	return res
+
+
+static func load_all_playlists_from(path:String):
+	var dir = DirAccess.open(path)
+
+	assert(dir != null, "Cannot open " + path)
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		var full_path = path + file_name
+		if dir.current_is_dir():
+			GlobalVariables.playlists[file_name] = get_musics_from_folder(full_path)
+		file_name = dir.get_next()
+
+
+func _on_finished():
+	next_track(true)
