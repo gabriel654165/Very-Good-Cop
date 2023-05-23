@@ -6,12 +6,19 @@ class_name MusicPlaylistsPlayer
 @onready var current_playlist := String(GlobalVariables.playlists.keys()[0])
 var current_track := 0
 
+var audio_stream_factory := {
+	"mp3": func(): return AudioStreamMP3.new(),
+	"ogg": func(): return AudioStreamOggVorbis.new(),
+	"wav": func(): return AudioStreamWAV.new(),
+}
+
+
 func _ready():
 	change_playlist(current_playlist)
 	play()
 
 
-func get_playlists() -> Array:
+func get_playlist_names() -> Array:
 	return GlobalVariables.playlists.keys()
 
 
@@ -33,7 +40,6 @@ func change_playlist(playlist:String, play_it:=false, first_track:=0):
 
 	current_playlist = playlist
 	put_track(first_track, play_it)
-
 
 
 static func get_musics_from_folder(path:String) -> Array[AudioStream]:
