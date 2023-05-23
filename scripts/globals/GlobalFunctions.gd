@@ -91,7 +91,7 @@ func linear_ratio(min_val, max_val, total_lvl, current_lvl, error_value_case):
 
 func get_propriety_by_level(weapon_stats, weapon_property_level, propriety_name, weapon_value):
 	for stat_dictionnary in weapon_stats.stats:
-		if (propriety_name in stat_dictionnary) and (weapon_property_level != -1):
+		if (propriety_name in stat_dictionnary):
 			var stat = stat_dictionnary[propriety_name]
 			#from lvl 1 bool will always be set to maw_val
 			if (stat.min_value is bool) or (stat.max_value is bool):
@@ -100,14 +100,19 @@ func get_propriety_by_level(weapon_stats, weapon_property_level, propriety_name,
 			return linear_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_property_level, weapon_value)
 	return weapon_value
 
-
-func set_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
+func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
 	var current_index : int = 0
 	
 	for weapon_properties_levels in GlobalVariables.player_distance_weapon_list:
 		if current_index == weapon_index:
 			weapon_editor.weapon_name = weapon_properties_levels.name
 			weapon_editor.projectile_scene = GlobalVariables.all_distance_weapon_list[current_index].projectile_packed_scene
+			
+			var special_power_scene = GlobalVariables.all_distance_weapon_list[current_index].special_power_packed_scene
+			var special_power_instance = special_power_scene.instantiate()
+			weapon_editor.weapon.add_child(special_power_instance)
+			weapon_editor.special_power = special_power_instance
+			
 			weapon_editor.weapon.side_sprite.texture = GlobalVariables.all_distance_weapon_list[current_index].gui_texture
 			
 			weapon_editor.shooting_cooldown = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.shooting_cooldown_lvl, "shooting_cooldown", weapon_editor.shooting_cooldown)
@@ -127,6 +132,19 @@ func set_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
 		current_index += 1
 	weapon_editor.set_variables(weapon_editor.weapon)
 
+#func set_melee_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
+#	var current_index : int = 0
+#	
+#	for weapon_properties_levels in GlobalVariables.player_melee_weapon_list:
+#		if current_index == weapon_index:
+#			weapon_editor.weapon_name = weapon_properties_levels.name
+#			weapon_editor.projectile_scene = GlobalVariables.all_melee_weapon_list[current_index].projectile_packed_scene
+#			weapon_editor.weapon.side_sprite.texture = GlobalVariables.all_melee_weapon_list[current_index].gui_texture
+#			
+#			weapon_editor.shooting_cooldown = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.shooting_cooldown_lvl, "shooting_cooldown", weapon_editor.shooting_cooldown)
+#			break
+#		current_index += 1
+#	weapon_editor.set_variables(weapon_editor.weapon)
 
 func save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.WRITE, GlobalVariables.encryption_key)
@@ -147,8 +165,8 @@ func save():
 
 		"bulletproof_vest_level": GlobalVariables.bulletproof_vest_level,
 
-		"index_weapon_selected": GlobalVariables.index_weapon_selected,
-		"index_knife_selected": GlobalVariables.index_knife_selected,
+		"index_distance_weapon_selected": GlobalVariables.index_distance_weapon_selected,
+		"index_melee_weapon_selected": GlobalVariables.index_melee_weapon_selected,
 	}
 	
 	save_file.store_string(JSON.stringify(json_save))
@@ -180,8 +198,8 @@ func load_save():
 
 	GlobalVariables.bulletproof_vest_level = save_file_object["bulletproof_vest_level"]
 
-	GlobalVariables.index_weapon_selected = save_file_object["index_weapon_selected"]
-	GlobalVariables.index_knife_selected = save_file_object["index_knife_selected"]
+	GlobalVariables.index_distance_weapon_selected = save_file_object["index_distance_weapon_selected"]
+	GlobalVariables.index_melee_weapon_selected = save_file_object["index_melee_weapon_selected"]
 
 	save_file.close()
 

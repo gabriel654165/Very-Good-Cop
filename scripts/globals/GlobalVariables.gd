@@ -15,8 +15,14 @@ var money : int = 500
 
 var grappling_hook_level : int = 1
 
-var index_weapon_selected : int = 0
-var index_knife_selected : int = 0
+var index_distance_weapon_selected : int = 0
+var index_melee_weapon_selected : int = 0
+
+#si glock a auto_lock=-1, la valeur weapon.auto_lock=true va rester
+# il faudrait mettre une valeure par defaut dans all_distance_weapon_list
+# avec 1 seul niveau et min = max
+
+# dans globalFunctions quand c -1 on met la valeure par defaut
 
 var player_distance_weapon_list = [
 	{
@@ -37,7 +43,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'shotgun',
-		unlocked = false,
+		unlocked = true,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= 0,
 		frequence_of_burt_lvl= -1,
@@ -53,7 +59,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'mini_uzi',
-		unlocked = false,
+		unlocked = true,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
@@ -69,7 +75,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'riffle',
-		unlocked = false,
+		unlocked = true,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= 0,
 		frequence_of_burt_lvl= 0,
@@ -85,7 +91,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'machine_gun',
-		unlocked = false,
+		unlocked = true,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
@@ -101,7 +107,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name='grenade_launcher',
-		unlocked = false,
+		unlocked = true,
 		shooting_cooldown_lvl= 10,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
@@ -117,7 +123,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name='sniper',
-		unlocked = false,
+		unlocked = true,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
@@ -145,12 +151,16 @@ func level_stat(min_value, max_value, number_of_levels: int):
 var all_distance_weapon_list = [
 	{
 		name="glock",
-		packed_scene=preload("res://scenes/weapons/Glock.tscn"),
 		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/AimBot.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
 		stats= [{
 			shooting_cooldown= level_stat(1, 0.1, 10),
-			ui_texture=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
+			texture_ui=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
+		}, {
+			balls_by_burt= level_stat(1, 1, 1)#default value
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1)#default value
 		}, {
 			precision= level_stat(0.5, 0, 6)
 		}, {
@@ -166,17 +176,23 @@ var all_distance_weapon_list = [
 		}, {
 			projectile_impact_force= level_stat(0.1, 2, 4)
 		}, {
+			projectile_bouncing= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
+		}, {
+			auto_lock_target= level_stat(false, false, 1)# default value
 		}]
 	},{
 		name="shotgun",
-		packed_scene=preload("res://scenes/weapons/Shotgun.tscn"),
 		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FastReloading.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_shotgun.png"),
 		stats= [{
 			shooting_cooldown= level_stat(2, 0.25, 7)
 		}, {
 			balls_by_burt= level_stat(3, 12, 8)
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1)# default value
 		}, {
 			precision= level_stat(1, 0.5, 6)
 		}, {
@@ -192,15 +208,23 @@ var all_distance_weapon_list = [
 		}, {
 			projectile_impact_force= level_stat(0.1, 1.5, 5)
 		}, {
+			projectile_bouncing= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
+		}, {
+			auto_lock_target= level_stat(false, false, 1)# default value
 		}]
 	},{
 		name="mini_uzi",
-		packed_scene=preload("res://scenes/weapons/MiniUzi.tscn"),
 		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/BouncingBullets.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Uzi.png"),
 		stats= [{
 			shooting_cooldown= level_stat(0.2, 0.1, 5)
+		}, {
+			balls_by_burt= level_stat(1, 1, 1)# default value
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1)# default value
 		}, {
 			precision= level_stat(1, 0.25, 6)
 		}, {
@@ -214,12 +238,18 @@ var all_distance_weapon_list = [
 		}, {
 			projectile_damages= level_stat(2, 500, 100)#infinit
 		}, {
+			projectile_impact_force= level_stat(1, 1, 1)# default value
+		}, {
+			projectile_bouncing= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
+		}, {
+			auto_lock_target= level_stat(false, false, 1)# default value
 		}]
 	},{
 		name="riffle",
-		packed_scene=preload("res://scenes/weapons/Riffle.tscn"),
 		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FragmentationBullets.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr__Aka.png"),
 		stats= [{
 			shooting_cooldown= level_stat(1.5, 0.5, 6)
@@ -242,15 +272,23 @@ var all_distance_weapon_list = [
 		}, {
 			projectile_impact_force= level_stat(0.5, 2, 5)
 		}, {
+			projectile_bouncing= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
+		}, {
+			auto_lock_target= level_stat(false, false, 1)# default value
 		}]
 	},{
 		name="machine_gun",
-		packed_scene=preload("res://scenes/weapons/MachineGun.tscn"),
 		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/Shooting360.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Mg.png"),
 		stats= [{
-			shooting_cooldown= level_stat(0.5, 0.1, 5)
+			shooting_cooldown= level_stat(0.15, 0.05, 3)
+		}, {
+			balls_by_burt= level_stat(1, 1, 1)# default value
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1)# default value
 		}, {
 			precision= level_stat(1, 0.2, 6)
 		}, {
@@ -266,15 +304,23 @@ var all_distance_weapon_list = [
 		}, {
 			projectile_impact_force= level_stat(0.5, 1.5, 3)
 		}, {
+			projectile_bouncing= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
+		}, {
+			auto_lock_target= level_stat(false, false, 1)# default value
 		}]
 	},{
 		name="grenade_launcher",
-		packed_scene=preload("res://scenes/weapons/GrenadeLauncher.tscn"),
 		projectile_packed_scene=preload("res://scenes/projectiles/grenade.tscn"),
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/CatchingCable.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_grenade_launcher.png"),
 		stats= [{
 			shooting_cooldown= level_stat(1, 0.1, 10)
+		}, {
+			balls_by_burt= level_stat(1, 1, 1)# default value
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1)# default value
 		}, {
 			precision= level_stat(1, 0.5, 3)
 		}, {
@@ -293,14 +339,20 @@ var all_distance_weapon_list = [
 			projectile_bouncing= level_stat(false, true, 1)
 		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
+		}, {
+			auto_lock_target= level_stat(false, false, 1)# default value
 		}]
 	},{
 		name="sniper",
-		packed_scene=preload("res://scenes/weapons/Sniper.tscn"),
 		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/ThroughWallsBullets.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_sniper.png"),
 		stats= [{
 			shooting_cooldown= level_stat(1.5, 0.25, 6)
+		}, {
+			balls_by_burt= level_stat(1, 1, 1)# default value
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1)# default value
 		}, {
 			precision= level_stat(0.5, 0, 3)
 		}, {
@@ -313,6 +365,10 @@ var all_distance_weapon_list = [
 			projectile_speed= level_stat(15, 30, 6)
 		}, {
 			projectile_damages= level_stat(15, 500, 100)#infinit
+		}, {
+			projectile_impact_force= level_stat(1, 1, 1)# default value
+		}, {
+			projectile_bouncing= level_stat(false, false, 1)# default va
 		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}, {
@@ -333,7 +389,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'brass_knuckles',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -341,7 +397,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'baseball_bat',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -349,7 +405,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'golf_club',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -357,7 +413,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'pocket_chain_saw',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -365,7 +421,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'pan',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -373,7 +429,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'tequilla',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -381,7 +437,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'heineken',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -389,7 +445,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'machete',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -397,7 +453,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'skate',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -405,7 +461,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'police_baton',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -413,7 +469,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'axe',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -421,7 +477,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'shovel',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -429,7 +485,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'katana',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -437,7 +493,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'sword',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -445,7 +501,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'blue_lightsaber_toy',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -453,7 +509,7 @@ var player_melee_weapon_list = [
 		special_power_cooldown_lvl=0,
 	}, {
 		name= 'red_lightsaber_toy',
-		unlocked = false,
+		unlocked = true,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
@@ -466,7 +522,6 @@ var player_melee_weapon_list = [
 var all_melee_weapon_list = [
 	{
 		name="knife",
-		packed_scene=preload("res://scenes/weapons/Knife.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Knife.png"),
 		stats= [{
 			attack_cooldown= level_stat(1, 0.1, 6)
@@ -488,6 +543,8 @@ var all_melee_weapon_list = [
 			attack_distance= level_stat(0.2, 0.2, 1)#always the same...
 		}, {
 			damages= level_stat(8, 30, 10)
+		}, {
+			can_throw= level_stat(false, false, 1)# default value
 		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
@@ -515,6 +572,8 @@ var all_melee_weapon_list = [
 		}, {
 			damages= level_stat(5, 40, 15)
 		}, {
+			can_throw= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
 	},{
@@ -526,6 +585,8 @@ var all_melee_weapon_list = [
 			attack_distance= level_stat(0.5, 0.5, 1)#always the same...
 		}, {
 			damages= level_stat(1, 10, 10)
+		}, {
+			can_throw= level_stat(false, false, 1)# default value
 		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
@@ -581,6 +642,8 @@ var all_melee_weapon_list = [
 		}, {
 			damages= level_stat(10, 60, 15)
 		}, {
+			can_throw= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
 	},{
@@ -592,6 +655,8 @@ var all_melee_weapon_list = [
 			attack_distance= level_stat(0.75, 0.75, 1)#always the same...
 		}, {
 			damages= level_stat(5, 35, 12)
+		}, {
+			can_throw= level_stat(false, false, 1)# default value
 		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
@@ -619,6 +684,8 @@ var all_melee_weapon_list = [
 		}, {
 			damages= level_stat(13, 70, 20)
 		}, {
+			can_throw= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
 	},{
@@ -630,6 +697,8 @@ var all_melee_weapon_list = [
 			attack_distance= level_stat(1.4, 1.4, 1)#always the same...
 		}, {
 			damages= level_stat(7, 40, 12)
+		}, {
+			can_throw= level_stat(false, false, 1)# default value
 		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
@@ -643,6 +712,8 @@ var all_melee_weapon_list = [
 		}, {
 			damages= level_stat(12, 100, 22)
 		}, {
+			can_throw= level_stat(false, false, 1)# default value
+		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
 	},{
@@ -654,6 +725,8 @@ var all_melee_weapon_list = [
 			attack_distance= level_stat(1.1, 1.1, 1)#always the same...
 		}, {
 			damages= level_stat(15, 115, 22)
+		}, {
+			can_throw= level_stat(false, false, 1)# default value
 		}, {
 			special_power_cooldown= level_stat(120, 30, 6)
 		}]
@@ -692,7 +765,7 @@ var all_melee_weapon_list = [
 var player_equipment_list = [
 	{
 		name= 'diaper',
-		unlocked= true,
+		unlocked= false,
 		health_bonus_lvl= 0,
 		speed_bonus_lvl= -1,
 	}, {
@@ -720,21 +793,32 @@ var all_equipment_list = [
 		gui_texture=load("res://assets/UI/icons/equipment/diaper.png"),
 		stats= [{
 			health_bonus= level_stat(0.5, 10, 10),
+		}, {
+			speed_bonus= level_stat(0, 0, 1),# default value
 		}]
 	}, {
 		name= 'bullet_proof_vest',
 		gui_texture=load("res://assets/UI/icons/equipment/bulletproof_vest.png"),
 		stats= [{
 			health_bonus= level_stat(10, 100, 20),
+		}, {
+			speed_bonus= level_stat(0, 0, 1),# default value
 		}]
 	}, {
 		name= 'air_max',
 		gui_texture=load("res://assets/UI/icons/equipment/air_max.png"),
 		stats= [{
+			health_bonus= level_stat(0, 0, 1),# default value
+		}, {
 			speed_bonus= level_stat(1, 4, 20),
 		}]
 	}, {
 		name= 'gas_mask',
 		gui_texture=load("res://assets/UI/icons/equipment/gas_mask.png"),
+		stats= [{
+			health_bonus= level_stat(0, 0, 1),# default value
+		}, {
+			speed_bonus= level_stat(0, 0, 1),# default value
+		}]
 	}
 ]

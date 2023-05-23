@@ -39,6 +39,8 @@ var precision : float = 0 # the more it's close 0 the more it's precise
 var recoil_force : float = 2
 var auto_lock_target : bool = false
 
+var special_power : SpecialPower
+
 @onready var fire_position = $FirePosition
 @onready var fire_direction = $FireDirection
 @onready var shooting_cooldown = $AttackCoolDown
@@ -46,7 +48,7 @@ var auto_lock_target : bool = false
 @onready var animation = $Animation
 @onready var sprite = $Sprite2D
 @onready var side_sprite = $SideSprite2D
-@onready var special_power = $SpecialPower
+
 
 func _ready():
 	if get_parent() != null:
@@ -81,6 +83,8 @@ func shoot():
 			animation.play("muzzle_flash")
 
 func should_disable_cooldown() -> bool:
+	if special_power == null:
+		return false
 	if "is_shooting" in special_power:
 		return special_power.is_shooting
 	return false;

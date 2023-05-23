@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_xa1nf"]
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="9_5t7aw"]
-[ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="10_2hggd"]
+[ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="10_5xgn2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(30, 16)
@@ -70,16 +70,6 @@ position = Vector2(4, 0)
 [node name="VisionSensor" type="Node2D" parent="."]
 script = ExtResource("9_5t7aw")
 
-[node name="WeaponManager" parent="." instance=ExtResource("10_2hggd")]
-properties/weapon_name = ""
-properties/special_power_unlocked = false
-properties/level = 0
-power/can_use_power = false
-bullet/bullet_speed = 4
-bullet/bullet_damages = 6
-bullet/bullet_impact_force = 2.0
-bullet/bullet_piercing_force = 0
-loader/reloading_cooldown = 1.0
-weapon/recoil_force = 2.0
-
 [node name="WeaponPosition" type="Marker2D" parent="."]
+
+[node name="WeaponManager" parent="." instance=ExtResource("10_5xgn2")]

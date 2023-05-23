@@ -64,21 +64,19 @@ func generate_property_list_by_save(ref_item_stats_list, player_item_stats_list,
 		
 		if value is String or value is bool:
 			continue
-		if value == -1:
-			continue
-		
-		var upgrade_item_stat_panel_ui = upgrade_item_stat_panel_scene.instantiate()
-		item_property_list.push_front(upgrade_item_stat_panel_ui)
-		parent.add_child(upgrade_item_stat_panel_ui)
-		
-		var ref_list_key = ref_item_stats_list[index].keys()[0]
-		var stat_max_lvl = ref_item_stats_list[index][ref_list_key].number_of_levels
-		upgrade_item_stat_panel_ui.set_name_label(ref_list_key)
-		upgrade_item_stat_panel_ui.item_name = item_name
-		upgrade_item_stat_panel_ui.weapon_manager = weapon_manager
-		upgrade_item_stat_panel_ui.set_level_label(value, stat_max_lvl)
-		upgrade_item_stat_panel_ui.set_price(100)
-		upgrade_item_stat_panel_ui.update()
+		if value != -1:
+			var upgrade_item_stat_panel_ui = upgrade_item_stat_panel_scene.instantiate()
+			item_property_list.push_front(upgrade_item_stat_panel_ui)
+			parent.add_child(upgrade_item_stat_panel_ui)
+			
+			var ref_list_key = ref_item_stats_list[index].keys()[0]
+			var stat_max_lvl = ref_item_stats_list[index][ref_list_key].number_of_levels
+			upgrade_item_stat_panel_ui.set_name_label(ref_list_key)
+			upgrade_item_stat_panel_ui.item_name = item_name
+			upgrade_item_stat_panel_ui.weapon_manager = weapon_manager
+			upgrade_item_stat_panel_ui.set_level_label(value, stat_max_lvl)
+			upgrade_item_stat_panel_ui.set_price(100)
+			upgrade_item_stat_panel_ui.update()
 		
 		index += 1
 	return item_property_list

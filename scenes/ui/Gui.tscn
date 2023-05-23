@@ -19,9 +19,9 @@
 [ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="17_eyt6o"]
 [ext_resource type="Script" path="res://scripts/ui/ChooseWeaponManager.gd" id="17_r1vvb"]
-[ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="18_hj7i6"]
 [ext_resource type="PackedScene" uid="uid://dfrnw0kq0ry4j" path="res://scenes/ui/ShopItemContainer.tscn" id="20_n36a6"]
 [ext_resource type="PackedScene" uid="uid://3bjanvfpb1pa" path="res://scenes/ui/PlayerBankAccountPanel.tscn" id="21_cdjol"]
+[ext_resource type="PackedScene" uid="uid://cq5wv7kjj7me4" path="res://scenes/ui/ChooseWeaponItemPanel.tscn" id="23_8p1eu"]
 [ext_resource type="VideoStream" path="res://assets/previews/preview-resized.ogv" id="23_rbbmx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
@@ -35,7 +35,6 @@ script = ExtResource("1_cf1if")
 [node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("pause_gui", "base_panel", "option_panel", "color_rect")]
 script = ExtResource("2_lu52o")
 pop_up_text_scene = ExtResource("7_bnyiq")
-pop_up_contents = Array[String](["3", "2", "1", "Go !!!"])
 pause_gui = NodePath("../PanelsContainer/PauseControl")
 base_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/BasePanelContainer")
 option_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/OptionTabContainer")
@@ -108,8 +107,15 @@ equipment_list_parent = NodePath("../PanelsContainer/WeaponShopControl/ShopTabCo
 item_container_scene = ExtResource("20_n36a6")
 player_bank_account_panel_scene = ExtResource("21_cdjol")
 
-[node name="ChooseWeaponManager" type="Node2D" parent="."]
+[node name="ChooseWeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("choose_weapon_gui", "base_panel", "color_rect", "distance_weapon_grid", "melee_weapon_grid")]
 script = ExtResource("17_r1vvb")
+pop_up_text_scene = ExtResource("7_bnyiq")
+choose_weapon_gui = NodePath("../PanelsContainer/ChooseWeaponControl")
+base_panel = NodePath("../PanelsContainer/ChooseWeaponControl/BaseContainer")
+color_rect = NodePath("../PanelsContainer/ChooseWeaponControl/ColorRect")
+distance_weapon_grid = NodePath("../PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/DistanceWeaponGridContainer")
+melee_weapon_grid = NodePath("../PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/MeleeWeaponGridContainer")
+choose_weapon_item_panel_scene = ExtResource("23_8p1eu")
 
 [node name="PanelsContainer" type="Control" parent="."]
 layout_mode = 3
@@ -1319,502 +1325,119 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl"]
-custom_minimum_size = Vector2(500, 600)
+[node name="BaseContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -300.0
-offset_right = 360.0
-offset_bottom = 300.0
+offset_left = -206.0
+offset_top = -251.0
+offset_right = 206.0
+offset_bottom = 251.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer"]
+[node name="DistanceWeaponPanel" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel"]
+custom_minimum_size = Vector2(190, 380)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginLeft" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="MarginTop" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="GridContainer1" type="GridContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="DistanceWeaponGridContainer" type="GridContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 15
-columns = 4
+columns = 3
 
-[node name="Weapon-Item-PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer"]
-layout_mode = 2
-
-[node name="Margin-Container" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_hj7i6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margin-Container2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="Weapon-Item-PanelContainer2" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2"]
-layout_mode = 2
-
-[node name="Margin-Container" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_hj7i6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margin-Container2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="Weapon-Item-PanelContainer3" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3"]
-layout_mode = 2
-
-[node name="Margin-Container" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_hj7i6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margin-Container2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer3/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="Weapon-Item-PanelContainer4" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4"]
-layout_mode = 2
-
-[node name="Margin-Container" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_hj7i6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margin-Container2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer4/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="Weapon-Item-PanelContainer5" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5"]
-layout_mode = 2
-
-[node name="Margin-Container" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_hj7i6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margin-Container2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer5/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="Weapon-Item-PanelContainer6" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6"]
-layout_mode = 2
-
-[node name="Margin-Container" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_hj7i6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margin-Container2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer6/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="Weapon-Item-PanelContainer7" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7"]
-layout_mode = 2
-
-[node name="Margin-Container" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_hj7i6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margin-Container2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer7/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="Weapon-Item-PanelContainer8" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8"]
-layout_mode = 2
-
-[node name="Margin-Container" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_hj7i6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Glock"
-horizontal_alignment = 1
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margin-Container2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer/GridContainer1/Weapon-Item-PanelContainer8/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="MarginBottom" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer"]
+[node name="MarginRight" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="MeleeWeaponPanel" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel"]
+custom_minimum_size = Vector2(190, 380)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginLeft" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginTop" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MeleeWeaponGridContainer" type="GridContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 15
+columns = 3
+
+[node name="MarginBottom" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MarginRight" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="Button-Container" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer"]
+[node name="Button-Container" type="HBoxContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Button" type="Button" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/Button-Container"]
+[node name="QuitButton" type="Button" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/Button-Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "Quit game"
 
-[node name="Button2" type="Button" parent="PanelsContainer/ChooseWeaponControl/VBoxContainer/Button-Container"]
+[node name="StartButton" type="Button" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/Button-Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1826,3 +1449,5 @@ text = "Start mission"
 [connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/QuitButton" to="PauseManager" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="PanelsContainer/WeaponShopControl/ButtonsContainer/Buttons-Container/QuitButton" to="WeaponShopManager" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="PanelsContainer/WeaponShopControl/ButtonsContainer/Buttons-Container/ContinueButton" to="WeaponShopManager" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="PanelsContainer/ChooseWeaponControl/BaseContainer/Button-Container/QuitButton" to="ChooseWeaponManager" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PanelsContainer/ChooseWeaponControl/BaseContainer/Button-Container/StartButton" to="ChooseWeaponManager" method="_on_start_button_pressed"]

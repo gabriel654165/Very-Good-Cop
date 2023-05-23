@@ -19,8 +19,11 @@ class_name GuiManager
 func generate_ui():
 	health_ui_manager.set_active(true)
 	cursor_manager.set_active(true)
-	#weapon_shop_manager.set_active(false)
-	#choose_weapon_manager.set_active(false)
+	
+	pause_manager.set_active(false)
+	weapon_shop_manager.set_active(false)
+
+	choose_weapon_manager.set_active(true)
 
 func set_active_gui_panels(state: bool):
 	panel_points_manager.panel.visible = state
@@ -29,6 +32,8 @@ func set_active_gui_panels(state: bool):
 	weapon_panel_manager.panel_weapon.visible = state
 
 # test
+var test : bool = false
 func _unhandled_input(event):
 	if event.is_action_pressed("echap"):
-		weapon_shop_manager.set_active(true)
+		test = !test
+		weapon_shop_manager.set_active(test)

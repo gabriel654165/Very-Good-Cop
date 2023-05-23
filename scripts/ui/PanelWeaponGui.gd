@@ -9,13 +9,7 @@ class_name PanelWeaponGui
 var current_power_charger : float = 0
 
 func set_weapon_name(name: String):
-	weapon_label.text = name
-
-func set_level_value(level: String):
-	level_label.text = level
-
-func set_weapon_sprite(sprite: Sprite2D):
-	weapon_texture.texture = sprite.texture
+	weapon_label.text = name.replace('_', ' ')
 
 func reset_current_power_charger():
 	current_power_charger = 0

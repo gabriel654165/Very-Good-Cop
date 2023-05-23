@@ -27,10 +27,20 @@ func _unhandled_input(event):
 
 #call when weapon is switched
 func set_weapon_panel_variables():
-	panel_weapon.set_weapon_name(player.weapon_manager.weapon.weapon_name)
-	panel_weapon.set_level_value("lvl-" + str(player.weapon_manager.weapon.level))
-	panel_weapon.set_weapon_sprite(player.weapon_manager.weapon.side_sprite)
-	panel_weapon.reset_current_power_charger()
+	var index : int = 0
+	
+	for weapon in GlobalVariables.all_distance_weapon_list:
+		if index == GlobalVariables.index_distance_weapon_selected:
+			panel_weapon.set_weapon_name(weapon.name)
+			panel_weapon.weapon_texture.texture = weapon.gui_texture
+			panel_weapon.reset_current_power_charger()
+			
+			#implem
+			#ammo
+			#reloading cooldown
+			
+			break
+		index += 1
 
 func handle_enemy_died(enemy: Node2D, points: int):
 	panel_weapon.add_charge_power_bar(points)

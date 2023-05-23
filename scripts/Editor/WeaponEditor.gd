@@ -39,6 +39,8 @@ var precision : float = 0
 var recoil_force : float = 2
 var auto_lock_target : bool = false
 
+var special_power : SpecialPower
+
 func _ready():
 	weapon = self.get_child(0) as Weapon
 	if weapon == null:
@@ -99,6 +101,8 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.precision = self.precision
 	weapon.recoil_force = self.recoil_force
 	weapon.auto_lock_target = self.auto_lock_target
+	
+	weapon.special_power = self.special_power
 
 func _get(property):
 	if property == 'properties/weapon_name':

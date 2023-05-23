@@ -12,6 +12,8 @@ extends Control
 @onready var player : Player = $Player
 
 func _ready():
+	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
+	
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
 	
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)

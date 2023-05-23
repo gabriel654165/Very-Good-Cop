@@ -1,5 +1,7 @@
 extends Node
 
+signal assign_player_weapons()
+
 signal player_fired()
 
 signal projectile_fired_spawn(projectile_owner: Node2D, projectile: Projectile, position: Vector2, direction: Vector2)

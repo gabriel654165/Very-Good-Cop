@@ -78,6 +78,7 @@ func generate_ui():
 	GlobalFunctions.disable_all_game_objects(true)
 	gui_manager.cursor_manager.cursor.active_mode_ui()
 	gui_manager.set_active_gui_panels(false)
+	gui_manager.pause_manager.disable_pause = true
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "current_blur_intensity", aim_blur_intensity, time_to_blur)
 	
@@ -88,6 +89,7 @@ func generate_ui():
 func unload_ui():
 	weapon_shop_gui.visible = false
 	gui_manager.set_active_gui_panels(true)
+	gui_manager.pause_manager.disable_pause = false
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "current_blur_intensity", 0, time_to_blur)
 	shop_item_distance_weapon_list = []

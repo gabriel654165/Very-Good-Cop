@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2dcjd5l1cl3e"]
+
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/BouncingBullets.gd" id="1_oftuo"]
+
+[node name="BouncingBullets" type="Node2D"]
+script = ExtResource("1_oftuo")
