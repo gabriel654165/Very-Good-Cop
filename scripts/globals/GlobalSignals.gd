@@ -7,6 +7,8 @@ signal projectile_launched_spawn(projectile_owner: Node2D, grenade: Grenade, pos
 signal grappling_cable_drag(projectile_owner: Node2D, hook: GrapplingHook, projectile_position: Vector2, drag_speed: int)
 signal catching_cable_spawned(projectile_owner: Node2D, catching_cable: CatchingCable, position: Vector2, shooting_direction: Vector2, expand_magnitude_factor: float)
 
+signal play_sound(sound:AudioStream, volume_db:float, pitch_scale:float, pos:Vector2i)
+
 signal character_health_changed(health: Health, value: float)
 signal character_max_health_changed(health: Health, value: float)
 

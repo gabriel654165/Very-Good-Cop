@@ -15,6 +15,8 @@ extends Node2D
 func _ready():
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
 
+	GlobalSignals.play_sound.connect(_do_play_sound)
+
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
 	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)
 	GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_grappling_cable_drag)
@@ -36,6 +38,20 @@ func _ready():
 	init_camera()
 	gui_manager.generate_ui()
 
+
+# NOTE: Should we put an autoload function or keep it as a signal ? (https://github.com/godotengine/godot-proposals/issues/1827)
+func _do_play_sound(sound:AudioStream, volume_db: float = 0.0, pitch_scale: float = 1.0, pos:Vector2i = player.global_position):
+	var audio_stream_player := AudioStreamPlayer2D.new()
+	add_child(audio_stream_player)
+	audio_stream_player.bus = "Sounds"
+	audio_stream_player.stream = sound
+	audio_stream_player.volume_db = volume_db * 10
+	audio_stream_player.pitch_scale = pitch_scale
+	audio_stream_player.global_position = pos
+	audio_stream_player.play()
+	
+	audio_stream_player.finished.connect(audio_stream_player.queue_free)
+	
 
 func spawn_player():
 	if level_generator != null:
