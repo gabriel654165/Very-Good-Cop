@@ -3,7 +3,7 @@ extends AudioStreamPlayer
 class_name MusicPlaylistsPlayer
 
 # TODO: Might make it work with saves later on
-@onready var current_playlist := String(GlobalVariables.playlists.keys()[0])
+var current_playlist : String
 var current_track := 0
 
 var audio_stream_factory := {
