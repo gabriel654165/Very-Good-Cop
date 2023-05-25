@@ -98,3 +98,7 @@ reload_level_test={
 [navigation]
 
 2d/default_edge_connection_margin=10
+
+[physics]
+
+common/physics_ticks_per_second=120

@@ -73,3 +73,4 @@ func _specific_process(delta: float):
 
 func handle_specific_collision(object: Object):
 	pass
+
