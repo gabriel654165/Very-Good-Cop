@@ -11,6 +11,7 @@ extends Node2D
 @onready var camera : Camera2D = $Camera2D
 @onready var player : Player = $Player
 
+@onready var minimap : Minimap = Minimap.new()
 
 func _ready():
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
@@ -32,6 +33,11 @@ func _ready():
 
 	if level_generator != null:
 		await level_generator.generate()
+
+		minimap.player_ref = player
+		minimap.load_map(level_generator.dungeon_layout.duplicate())
+		add_child(minimap)
+
 	spawn_player()
 	init_camera()
 	gui_manager.generate_ui()
