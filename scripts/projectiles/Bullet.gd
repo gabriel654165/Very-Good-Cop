@@ -31,9 +31,9 @@ func _on_area_2d_body_entered(body):
 			index += 1
 		queue_free()
 
-	if body.get_name() == "Walls":
-		if should_pierce_walls:
-			current_piercing_force -= 1
+	if (body.get_name() == "Walls" and should_pierce_walls) \
+		or body.get_name().begins_with("ExplosiveBarrel"):
+		current_piercing_force -= 1
 	
 	if body.has_method("handle_hit"):
 		body.handle_hit(self, damages)

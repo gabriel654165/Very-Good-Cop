@@ -32,6 +32,9 @@ editor_draw_drag_margin = true
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+current = true
+
 [node name="MusicPlaylistsPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
 script = ExtResource("6_acyjm")
