@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ducmier407fm"]
+[gd_scene load_steps=15 format=3 uid="uid://ducmier407fm"]
 
 [ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_y76wg"]
 [ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="2_k4nnl"]
@@ -7,23 +7,36 @@
 [ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="4_2xfyv"]
 [ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="5_wphnt"]
 [ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="6_45kie"]
+[ext_resource type="Script" path="res://scripts/Interactions/ChangeVisibility.gd" id="7_01auj"]
 [ext_resource type="Script" path="res://scripts/Interactions/ActiveProcessorInteraction.gd" id="7_n7hyo"]
 [ext_resource type="Script" path="res://scripts/Interactions/SpamClickInteraction.gd" id="8_t0mbo"]
+[ext_resource type="FontFile" uid="uid://sph0kotu777o" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/m5x7.ttf" id="10_d4o4o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
 radius = 28.2312
+
+[sub_resource type="LabelSettings" id="LabelSettings_8lg12"]
+font = ExtResource("10_d4o4o")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ld8c"]
+font = ExtResource("10_d4o4o")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [node name="SpeedPowerUp" type="Node2D"]
 script = ExtResource("1_y76wg")
 effect_name = "speed"
 type = 1
-value_effect = 30.0
+value_effect = 2.0
 infinite_effect = false
 effect_duration = 5.0
 sprite = NodePath("Sprite2D")
 used_sprite = NodePath("UsedSprite")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.941176, 0.905882, 0, 1)
 rotation = -0.375185
 texture = ExtResource("2_tgi4p")
 
@@ -46,11 +59,26 @@ shape = SubResource("CircleShape2D_tdnqi")
 rotation = -0.375185
 script = ExtResource("4_2xfyv")
 for_who = 1
+is_active = null
+
+[node name="PressE" type="Label" parent="."]
+visible = false
+offset_right = 213.0
+offset_bottom = 23.0
+text = "Press E to start engaging with PowerUP"
+label_settings = SubResource("LabelSettings_8lg12")
+
+[node name="SpamClick" type="Label" parent="."]
+visible = false
+offset_right = 213.0
+offset_bottom = 23.0
+text = "SPAM SPACE !"
+label_settings = SubResource("LabelSettings_5ld8c")
 
 [node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
 rotation = -0.375185
 script = ExtResource("5_wphnt")
-interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction"), NodePath("ChangeCanvasVisibility")])
 collision_interaction = NodePath("../CharacterCollisionInteraction")
 next_interaction = NodePath("ActivateProcessorInteraction")
 
@@ -64,21 +92,35 @@ is_active = true
 script = ExtResource("7_n7hyo")
 interaction_processor = NodePath("../../SpamClickAndCollide")
 
+[node name="ChangeCanvasVisibility" type="Node" parent="PressKeyAndCollide" node_paths=PackedStringArray("canvas")]
+script = ExtResource("7_01auj")
+canvas = NodePath("../../PressE")
+visibility = true
+for_who = 1
+is_active = true
+
 [node name="SpamClickAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
 rotation = -0.375185
 script = ExtResource("5_wphnt")
 is_active = false
-interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction"), NodePath("ChangeCanvasVisibility")])
 collision_interaction = NodePath("../CharacterCollisionInteraction")
 next_interaction = NodePath("../AddPassiveEffectInteraction")
 
 [node name="SpamClickInteraction" type="Node2D" parent="SpamClickAndCollide"]
 script = ExtResource("8_t0mbo")
+key_code = 32
 for_who = 1
 
 [node name="Timer" type="Timer" parent="SpamClickAndCollide/SpamClickInteraction"]
 wait_time = 10.0
 one_shot = true
+
+[node name="ChangeCanvasVisibility" type="Node" parent="SpamClickAndCollide" node_paths=PackedStringArray("canvas")]
+script = ExtResource("7_01auj")
+canvas = NodePath("../../SpamClick")
+visibility = true
+for_who = 1
 
 [connection signal="body_entered" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_entered"]
 [connection signal="body_exited" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_exited"]

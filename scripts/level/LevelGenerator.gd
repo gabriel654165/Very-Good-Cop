@@ -6,7 +6,7 @@ class_name LevelGenerator
 # NOTE: I can export some of those but then they are won't be const
 const LevelCanvasSideSize:int = 9
 
-const BaseNbOfRoomss:int = 5
+const BaseNbOfRoomss:int = 3
 
 const NoRoom:int = -1
 const RoomPlaceholder:int = -2 
@@ -18,6 +18,16 @@ const TileSideSize:int = 16
 const RoomSideSize:int = 34
 const RoomCenterOffset:int = (RoomSideSize - 1)  * (TileSideSize) # TODO: Maybe better name
 const PackedPlayer = preload("res://scenes/characters/player.tscn")
+
+const LeftDoorPosition := Vector2i(-264, -28)
+const BottomDoorPosition := Vector2i(-28, 264)
+
+const LeftDoor := "_DLeft"
+const RightDoor := "_DRight"
+const TopDoor := "_DUp"
+const BottomDoor := "_DDown"
+const OrderedDoorNames:Array[String]= [LeftDoor, RightDoor, TopDoor, BottomDoor]
+
 
 var StartPos:Vector2i = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
 
@@ -35,13 +45,26 @@ var exit_pos: Vector2i
 func local_to_world_position(pos:Vector2i) -> Vector2i:
 	return (pos - StartPos) * RoomCenterOffset
 
+#1 -> [1 - 1]
+#2 -> [2 - 3]
+#3 -> [2 - 3]
+#4 -> [3 - 5]
+#5 -> [3 - 5]
+#6 -> [4 - 6]
+#7 -> [4 - 6]
+#8 -> [5 - 8]
+func random_nb_of_rooms():
+	var minimum :int= 1 + GlobalVariables.level/2
+	var maximum :int= minimum * 2 - minimum/2
+
+	return randi_range(minimum, maximum)
+
 
 # Called when the node enters the scene tree for the first time.
 func generate():
 
 	# NOTE: Find a better rng
-	var number_of_rooms:int = BaseNbOfRoomss + (GlobalVariables.level + randi_range(0, 3))
-
+	var number_of_rooms:int = BaseNbOfRoomss + random_nb_of_rooms()
 
 	reset_dungeon_layout()
 	generate_dungeon_layout(number_of_rooms)
@@ -160,7 +183,22 @@ func spawn_dungeon_rooms():
 		if room == entrance_pos or room == exit_pos:
 			instantiated_room.should_spawn_stuff = false
 		instantiated_room.position = relative_pos
+
+		var door := preload("res://scenes/objects/door.tscn")
+		if door_bitflag_has_door(doors_id, LeftDoor):
+			spawn_child_object(instantiated_room, door, LeftDoorPosition, Vector2.DOWN.angle())
+		if door_bitflag_has_door(doors_id, BottomDoor):
+			spawn_child_object(instantiated_room, door, BottomDoorPosition)
+		
 		add_child(instantiated_room)
+
+
+func spawn_child_object(parent:Node2D, packed_object:PackedScene, local_position:=Vector2(), rotation=null):
+	var obj := packed_object.instantiate()
+	parent.add_child(obj)
+	obj.position = local_position
+	if rotation != null and obj.has_method("rotate"):
+		obj.rotate(rotation)
 
 #
 # Find farthest cell from another cell
@@ -182,7 +220,6 @@ func find_farthest_cell_from(pos:Vector2i) -> Vector2i:
 	var cellvd = CellVisitDistance.new()
 	cellvd.cell = pos
 	var farthest_cellvd = find_farthest_cell_with_cellvisitdistance(cellvd, true)
-	#print("Player will have to pass by " + str(farthest_cellvd.distance) + " rooms")
 	return farthest_cellvd.cell 
 
 
@@ -226,8 +263,8 @@ static func load_all_rooms_from(path :String):
 
 	if !path.ends_with("/"):
 		path += "/"
-	
-	
+
+
 	assert(dir != null, "Cannot open " + path)
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
@@ -267,16 +304,16 @@ static func load_room(room:PackedScene, file_name:String):
 		GlobalVariables.rooms_repository[doors_bitflags] = new_room_array 
 	else:
 		GlobalVariables.rooms_repository[doors_bitflags].append(room_data)
-	#print("Loaded room: " + file_name)
 
 
 static func room_nodes_to_door_bitflags(room_nodes:PackedStringArray) -> int:
-	var door_names:Array[String]= ["_DLeft", "_DRight", "_DUp", "_DDown"]
 	var result:int = 0
 
-	for idx in door_names.size():
-		var has_door = room_nodes.has(door_names[idx])
+	for idx in OrderedDoorNames.size():
+		var has_door = room_nodes.has(OrderedDoorNames[idx])
 		result |= (int(has_door) << idx)
 
 	return result
 
+static func door_bitflag_has_door(bitflag:int, door_name:String) -> bool:
+	return (1 << OrderedDoorNames.find(door_name)) & bitflag

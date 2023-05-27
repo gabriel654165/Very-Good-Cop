@@ -9,6 +9,11 @@ func _ready():
 		"Loaded every room"
 	)
 
+	print_func_time(
+		Callable(MusicPlaylistsPlayer, "load_all_playlists_from").bind("res://assets/musics/"),
+		"Loaded every music"
+	)
+
 
 func init_global_variables():
 	GlobalVariables.rooms_repository.resize(0b1111 + 1) # All 4 doors in a room is represented as 0b1111 (bitflag) + make up the fact that we want the number of numbers from 0 to 0b1111 so +1

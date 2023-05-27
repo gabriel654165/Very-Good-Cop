@@ -11,6 +11,7 @@ var _enemy : Enemy = null
 const PATROL = "Patrol"
 const FOLLOW_TARGET = "Follow Target"
 const SHOOT = "Shoot To Target"
+const GOTO_LOOK_AROUND = "GoToAndLookAround"
 
 signal state_changed(new_state: AIState)
 

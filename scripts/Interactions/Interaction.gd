@@ -5,6 +5,8 @@ class_name Interaction
 @export var is_active : bool = false
 var is_triggered : bool = false
 
+var data : Dictionary
+
 enum TRIGGER_ACTOR {
 	NONE,
 	PLAYER,
@@ -23,3 +25,6 @@ func check_trigger() -> bool:
 	if !is_active:
 		return false
 	return is_triggered
+
+func update_data(common_data:Dictionary):
+	pass

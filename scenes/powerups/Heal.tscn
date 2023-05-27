@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1d72b817u5"]
+[gd_scene load_steps=15 format=3 uid="uid://b1d72b817u5"]
 
 [ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_rw64s"]
 [ext_resource type="Texture2D" uid="uid://nyk6qxgsi43u" path="res://assets/PNG/Default size/barrelGreen_side.png" id="2_kxv68"]
@@ -9,9 +9,21 @@
 [ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="6_xhm2m"]
 [ext_resource type="Script" path="res://scripts/Interactions/ActiveProcessorInteraction.gd" id="7_6sxug"]
 [ext_resource type="Script" path="res://scripts/Interactions/SpamClickInteraction.gd" id="8_aesvb"]
+[ext_resource type="Script" path="res://scripts/Interactions/ChangeVisibility.gd" id="9_wjuka"]
+[ext_resource type="FontFile" uid="uid://sph0kotu777o" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/m5x7.ttf" id="10_fy4hs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
 radius = 28.2312
+
+[sub_resource type="LabelSettings" id="LabelSettings_5xi0b"]
+font = ExtResource("10_fy4hs")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_axiem"]
+font = ExtResource("10_fy4hs")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [node name="HealPowerUp" type="Node2D"]
 script = ExtResource("1_rw64s")
@@ -47,10 +59,24 @@ rotation = -0.375185
 script = ExtResource("4_ecofi")
 for_who = 1
 
+[node name="SpamClick" type="Label" parent="."]
+visible = false
+offset_right = 213.0
+offset_bottom = 23.0
+text = "SPAM SPACE !"
+label_settings = SubResource("LabelSettings_5xi0b")
+
+[node name="PressE" type="Label" parent="."]
+visible = false
+offset_right = 213.0
+offset_bottom = 23.0
+text = "Press E to start engaging with PowerUP"
+label_settings = SubResource("LabelSettings_axiem")
+
 [node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
 rotation = -0.375185
 script = ExtResource("5_nhdlj")
-interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction"), NodePath("ChangeCanvasVisibility")])
 collision_interaction = NodePath("../CharacterCollisionInteraction")
 next_interaction = NodePath("ActivateProcessorInteraction")
 
@@ -64,21 +90,35 @@ is_active = true
 script = ExtResource("7_6sxug")
 interaction_processor = NodePath("../../SpamClickAndCollide")
 
+[node name="ChangeCanvasVisibility" type="Node" parent="PressKeyAndCollide" node_paths=PackedStringArray("canvas")]
+script = ExtResource("9_wjuka")
+canvas = NodePath("../../PressE")
+visibility = true
+for_who = 1
+is_active = true
+
 [node name="SpamClickAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
 rotation = -0.375185
 script = ExtResource("5_nhdlj")
 is_active = false
-interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction")])
+interactions_nps = Array[NodePath]([NodePath("SpamClickInteraction"), NodePath("../CharacterCollisionInteraction"), NodePath("ChangeCanvasVisibility")])
 collision_interaction = NodePath("../CharacterCollisionInteraction")
 next_interaction = NodePath("../AddPassiveEffectInteraction")
 
 [node name="SpamClickInteraction" type="Node2D" parent="SpamClickAndCollide"]
 script = ExtResource("8_aesvb")
+key_code = 32
 for_who = 1
 
 [node name="Timer" type="Timer" parent="SpamClickAndCollide/SpamClickInteraction"]
 wait_time = 10.0
 one_shot = true
+
+[node name="ChangeCanvasVisibility" type="Node" parent="SpamClickAndCollide" node_paths=PackedStringArray("canvas")]
+script = ExtResource("9_wjuka")
+canvas = NodePath("../../SpamClick")
+visibility = true
+for_who = 1
 
 [connection signal="body_entered" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_entered"]
 [connection signal="body_exited" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_exited"]

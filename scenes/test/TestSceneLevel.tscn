@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://djsd576ac8w0q"]
+[gd_scene load_steps=7 format=3 uid="uid://djsd576ac8w0q"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_cprlw"]
 [ext_resource type="PackedScene" uid="uid://bsqpnn0rfxvic" path="res://scenes/ui/Gui.tscn" id="2_plfkm"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_u5xh8"]
 [ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_hawec"]
-[ext_resource type="PackedScene" uid="uid://xxld75mg1fqf" path="res://scenes/characters/player.tscn" id="5_h1th4"]
+[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="5_h1th4"]
+[ext_resource type="Script" path="res://scripts/Sounds/MusicPlaylists.gd" id="6_acyjm"]
 
 [node name="TopNode" type="Control"]
 layout_mode = 3
@@ -30,3 +31,12 @@ editor_draw_drag_margin = true
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+current = true
+
+[node name="MusicPlaylistsPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+script = ExtResource("6_acyjm")
+
+[connection signal="finished" from="MusicPlaylistsPlayer" to="MusicPlaylistsPlayer" method="_on_finished"]

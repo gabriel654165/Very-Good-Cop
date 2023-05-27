@@ -25,5 +25,5 @@ func exit() -> void:
 	state_machine.navigation_agent.set_process(true)
 	state_machine.navigation_agent.set_physics_process(true)
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	pass

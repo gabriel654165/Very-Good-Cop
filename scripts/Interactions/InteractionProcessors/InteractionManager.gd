@@ -24,11 +24,16 @@ func _process(delta):
 	var all_interactions_finished = true
 	var body_touching : Node = null
 	
+	var common_data : Dictionary
+	
 	if collision_interaction != null:
 		body_touching = collision_interaction.get_body_touching()
-	
+
 	for interaction in interactions:
 		#print("interaction : ", interaction.name, " / is triggered : ", interaction.is_triggered)
+		
+		interaction.update_data(common_data)
+		interaction.data = common_data
 		
 		if collision_interaction == null:
 			all_interactions_finished = all_interactions_finished && interaction.is_triggered

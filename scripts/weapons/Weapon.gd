@@ -2,8 +2,12 @@ extends Node2D
 class_name Weapon
 
 @export var shooter_actor : Node
+@export var shooting_sound : AudioStream
+@export var reloading_sound : AudioStream
 
 var weapon_name : String = ''
+
+var sound_intensity : float = 1
 
 var points_to_use_special_power : int = 2
 var current_points_to_use_special_power : int = 0
@@ -52,11 +56,19 @@ func _ready():
 	if get_parent() != null:
 		shooter_actor = get_parent().get_parent()
 	randomize()
+	
+	# TODO: To remove @gabriel
+	shooting_sound = AudioStreamMP3.new()
+	(shooting_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/5.56.mp3")
+
+	reloading_sound = AudioStreamMP3.new()
+	(reloading_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/reload.mp3")
 
 func shoot():
 	if !enable:
 		return
-	
+#	var shot := false
+	var projectile_instance : Projectile = null
 	if (shooting_cooldown.is_stopped() or should_disable_cooldown()) and Projectile != null and _current_loader_bullets_number >= 0:
 		shooting_cooldown.start()
 		for n in balls_by_burt:
@@ -69,16 +81,18 @@ func shoot():
 			
 			if n != 0:
 				await get_tree().create_timer(frequence_of_burt).timeout
-			
-			var projectile_instance : Projectile = projectile_scene.instantiate()
+#			shot = true
+			projectile_instance = projectile_scene.instantiate()
 			var direction = fire_direction.global_position - fire_position.global_position
 			set_projectile_variables(projectile_instance)
 			
 			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
 			emit_signals(shooter_actor, projectile_instance, direction)
 			recoil_shooter(direction)
-			
+
 			animation.play("muzzle_flash")
+		if projectile_instance != null:
+			GlobalSignals.play_sound.emit(shooting_sound, 0, 1, global_position)
 
 func should_disable_cooldown() -> bool:
 	if special_power == null:
@@ -106,6 +120,7 @@ func _random_range(angle: Vector2) -> float:
 func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vector2):
 	if actor is Player:
 		GlobalSignals.player_fired.emit()
+		GlobalSignals.sound_emitted.emit(actor, actor.global_position, sound_intensity)
 	
 	if projectile_instance is CatchingCable:
 		GlobalSignals.catching_cable_spawned.emit(null, projectile_instance, fire_position.global_position, direction, 2)
@@ -141,5 +156,9 @@ func add_charge_power_points(points: int):
 func reload_magazine():
 	if shooter_actor is Player:
 		GlobalSignals.player_reloading.emit(ammo_reloading_time)
+	
+	var pitch_scale:float =  reloading_sound.get_length() / ammo_reloading_time
+	GlobalSignals.play_sound.emit(reloading_sound, 1, pitch_scale, global_position)
+
 	await get_tree().create_timer(ammo_reloading_time).timeout
 	_current_loader_bullets_number = ammo_size

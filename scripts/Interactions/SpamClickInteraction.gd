@@ -2,7 +2,7 @@ extends Interaction
 
 @export var time_to_complete : float = 2
 @export var total_nb_click : int = 10
-
+@export var key_code : Key = KEY_NONE
 @onready var timer = $Timer as Timer
 
 var started_clicking : bool = false
@@ -23,7 +23,7 @@ func _input(event):
 	#if !is_active:
 	if !is_active || is_triggered:
 		return
-	if event is InputEventMouseButton:
+	if event is InputEventKey and event.keycode == key_code and event.pressed:
 		print(current_nb_click)
 		current_nb_click += 1
 		if !started_clicking:

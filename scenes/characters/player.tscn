@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://xxld75mg1fqf"]
+[gd_scene load_steps=13 format=3 uid="uid://xxld75mg1fqf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
@@ -8,9 +8,18 @@
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="10_5l0q5"]
 [ext_resource type="Texture2D" uid="uid://dtk16fqh5mb82" path="res://assets/character/Police-HM-2.png" id="11_q2lq8"]
 [ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_18ulw"]
+[ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="14_bgmhi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(28, 18)
+
+[sub_resource type="Curve" id="Curve_ggetg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_werjm"]
+offsets = PackedFloat32Array(0, 0.718182)
+colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 0)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager", "knife") groups=["character", "player"]]
 z_index = 1
@@ -48,3 +57,19 @@ script = ExtResource("8_jhep5")
 [node name="WeaponManager" parent="." instance=ExtResource("13_18ulw")]
 
 [node name="Knife" parent="." instance=ExtResource("8_nt46u")]
+
+[node name="ShootVFX" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 3
+lifetime = 1.3
+one_shot = true
+preprocess = 0.4
+explosiveness = 0.5
+texture = ExtResource("14_bgmhi")
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_ggetg")
+color_ramp = SubResource("Gradient_werjm")

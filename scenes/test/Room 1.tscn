@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvdfosa8s7qft"]
+[gd_scene load_steps=6 format=3 uid="uid://dvdfosa8s7qft"]
 
-[ext_resource type="Script" path="res://scripts/RoomConfig.gd" id="1_5aa33"]
 [ext_resource type="PackedScene" uid="uid://cewhfxsma7527" path="res://scenes/characters/enemies/pistolero.tscn" id="2_ijtxr"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="3_quygd"]
 
@@ -22465,7 +22464,6 @@ sources/2 = SubResource("TileSetAtlasSource_78u0y")
 [node name="Room 1" type="Node2D"]
 
 [node name="RoomConfig" type="Node2D" parent="."]
-script = ExtResource("1_5aa33")
 
 [node name="PatrolPoints" type="Node2D" parent="RoomConfig"]
 
