@@ -65,8 +65,29 @@ func upgrade_property():
 	
 	if weapon_manager != null:
 		weapon_manager.update()
-	
+
 
 #signals
 func _on_upgrade_button_pressed():
 	upgrade_property()
+	if weapon_manager != null:
+		weapon_manager.unload_hover()
+		weapon_manager.load_hover(item_name, _property_name)
+
+func _on_mouse_entered():
+	if weapon_manager != null:
+		weapon_manager.unload_hover()
+		weapon_manager.load_hover(item_name, _property_name)
+
+func _on_mouse_exited():
+	if weapon_manager != null:
+		weapon_manager.unload_hover()
+
+func _on_upgrade_button_mouse_entered():
+	if weapon_manager != null:
+		weapon_manager.unload_hover()
+		weapon_manager.load_hover(item_name, _property_name)
+
+func _on_upgrade_button_mouse_exited():
+	if weapon_manager != null:
+		weapon_manager.unload_hover()

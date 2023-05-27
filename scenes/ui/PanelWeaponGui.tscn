@@ -4,54 +4,120 @@
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_vn5co"]
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="3_5icef"]
 
-[node name="PanelWeaponGui" type="PanelContainer" node_paths=PackedStringArray("weapon_label", "level_label", "weapon_texture")]
-custom_minimum_size = Vector2(300, 50)
-offset_right = 200.0
-offset_bottom = 64.0
+[node name="PanelWeaponGui" type="PanelContainer" node_paths=PackedStringArray("weapon_label", "weapon_texture", "ammo_container", "ammo_size_label", "ammo_progress_bar", "special_power_container", "power_progress_bar")]
+offset_right = 140.0
+offset_bottom = 114.0
 theme = ExtResource("1_vn5co")
 script = ExtResource("1_bq0u4")
-weapon_label = NodePath("HSplitContainer/VRightSplitContainer/HSplitContainer/WeaponLabel")
-level_label = NodePath("HSplitContainer/VRightSplitContainer/HSplitContainer/WeaponLevel")
-weapon_texture = NodePath("HSplitContainer/VLeftSplitContainer/WeaponTextureRect")
+weapon_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WeaponContainer/NameLabel")
+weapon_texture = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WeaponContainer/WeaponTextureRect")
+ammo_container = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer")
+ammo_size_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer/AmmoContainerLabels/AmmoSizeLabel")
+ammo_progress_bar = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer/AmmoProgressBar")
+special_power_container = NodePath("VBoxContainer/SpecialPowerContainer")
+power_progress_bar = NodePath("VBoxContainer/SpecialPowerContainer/PowerProgressBar")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-split_offset = 125
 
-[node name="VLeftSplitContainer" type="VSplitContainer" parent="HSplitContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="WeaponTextureRect" type="TextureRect" parent="HSplitContainer/VLeftSplitContainer"]
+[node name="LeftContainer" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer3" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="WeaponContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="WeaponTextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WeaponContainer"]
+custom_minimum_size = Vector2(100, 75)
 layout_mode = 2
 texture = ExtResource("3_5icef")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VRightSplitContainer" type="VSplitContainer" parent="HSplitContainer"]
-layout_mode = 2
-
-[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/VRightSplitContainer"]
-layout_mode = 2
-split_offset = 75
-
-[node name="WeaponLabel" type="Label" parent="HSplitContainer/VRightSplitContainer/HSplitContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "AK45"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="WeaponLevel" type="Label" parent="HSplitContainer/VRightSplitContainer/HSplitContainer"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WeaponContainer"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "LVL.5"
+text = "glock"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
-[node name="PowerChargeBar" type="Label" parent="HSplitContainer/VRightSplitContainer"]
+[node name="AmmoContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="AmmoContainerLabels" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer"]
+layout_mode = 2
+
+[node name="AmmoLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer/AmmoContainerLabels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
 theme_override_font_sizes/font_size = 30
-text = "[====          ]"
+text = "Ammo"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AmmoSizeLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer/AmmoContainerLabels"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "20/20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="AmmoProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/AmmoContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+value = 50.0
+fill_mode = 3
+
+[node name="MarginContainer" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="RightContainer" type="AspectRatioContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="SpecialPowerContainer" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SpecialPowerLabel" type="Label" parent="VBoxContainer/SpecialPowerContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+text = "Special power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="PowerProgressBar" type="ProgressBar" parent="VBoxContainer/SpecialPowerContainer"]
+layout_mode = 2
+value = 50.0
+
+[node name="BottomMargin" type="AspectRatioContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2

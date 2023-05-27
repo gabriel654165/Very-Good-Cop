@@ -4,11 +4,9 @@ class_name Weapon
 @export var shooter_actor : Node
 
 var weapon_name : String = ''
-var special_power_unlocked : bool = false
-var level : int = 0
 
-var points_to_unlock_power : int = 200
-var current_points_charge_power : int = 0
+var points_to_use_special_power : int = 2
+var current_points_to_use_special_power : int = 0
 var can_use_power : bool = false
 var power_activated : bool = false
 
@@ -133,13 +131,15 @@ func set_projectile_variables(projectile: Projectile):
 	number_of_frag_projectile = number_of_frag_projectile
 
 func add_charge_power_points(points: int):
-	current_points_charge_power += points
-	if current_points_charge_power >= points_to_unlock_power:
+	current_points_to_use_special_power += points
+	if current_points_to_use_special_power >= points_to_use_special_power:
 		can_use_power = true
-		current_points_charge_power = 0
+		current_points_to_use_special_power = 0
 	else:
 		can_use_power = false
 
 func reload_magazine():
+	if shooter_actor is Player:
+		GlobalSignals.player_reloading.emit(ammo_reloading_time)
 	await get_tree().create_timer(ammo_reloading_time).timeout
 	_current_loader_bullets_number = ammo_size

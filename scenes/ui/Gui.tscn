@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://252cec3m1lc4"]
+[gd_scene load_steps=27 format=3 uid="uid://bsqpnn0rfxvic"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -19,10 +19,12 @@
 [ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="17_eyt6o"]
 [ext_resource type="Script" path="res://scripts/ui/ChooseWeaponManager.gd" id="17_r1vvb"]
+[ext_resource type="PackedScene" uid="uid://cln3tm4tpayb6" path="res://scenes/ui/ItemPreviewPanel.tscn" id="20_2od0h"]
 [ext_resource type="PackedScene" uid="uid://dfrnw0kq0ry4j" path="res://scenes/ui/ShopItemContainer.tscn" id="20_n36a6"]
+[ext_resource type="PackedScene" uid="uid://c46ciaasvkpi4" path="res://scenes/ui/ItemDescriptionPanel.tscn" id="21_3i6ap"]
 [ext_resource type="PackedScene" uid="uid://3bjanvfpb1pa" path="res://scenes/ui/PlayerBankAccountPanel.tscn" id="21_cdjol"]
 [ext_resource type="PackedScene" uid="uid://cq5wv7kjj7me4" path="res://scenes/ui/ChooseWeaponItemPanel.tscn" id="23_8p1eu"]
-[ext_resource type="VideoStream" path="res://assets/previews/preview-resized.ogv" id="23_rbbmx"]
+[ext_resource type="PackedScene" uid="uid://rrwoshph15c5" path="res://scenes/ui/ItemStatsPanel.tscn" id="24_hkhpj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
 shader = ExtResource("16_wdi1s")
@@ -92,13 +94,15 @@ script = ExtResource("13_xqfji")
 weapon_panel_gui = ExtResource("14_nrxer")
 panels_container = NodePath("../PanelsContainer/HBoxBottomContainer")
 
-[node name="WeaponShopManager" type="Node2D" parent="." node_paths=PackedStringArray("weapon_shop_gui", "shop_container", "player_infos_container", "player_infos_container_parent", "hover_container", "buttons_container", "color_rect", "distance_weapon_list_parent", "melee_weapon_list_parent", "equipment_list_parent")]
+[node name="WeaponShopManager" type="Node2D" parent="." node_paths=PackedStringArray("weapon_shop_gui", "shop_container", "weapon_tab_container", "player_infos_container", "player_infos_container_parent", "hover_container", "hover_panel_parent", "buttons_container", "color_rect", "distance_weapon_list_parent", "melee_weapon_list_parent", "equipment_list_parent")]
 script = ExtResource("16_1slr4")
 weapon_shop_gui = NodePath("../PanelsContainer/WeaponShopControl")
 shop_container = NodePath("../PanelsContainer/WeaponShopControl/ShopTabContainer")
+weapon_tab_container = NodePath("../PanelsContainer/WeaponShopControl/ShopTabContainer")
 player_infos_container = NodePath("../PanelsContainer/WeaponShopControl/PlayerInfosContainer")
 player_infos_container_parent = NodePath("../PanelsContainer/WeaponShopControl/PlayerInfosContainer/ScrollContainer/PlayerInfoContainerParent")
 hover_container = NodePath("../PanelsContainer/WeaponShopControl/HoverContainer")
+hover_panel_parent = NodePath("../PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/HoverPanelParent")
 buttons_container = NodePath("../PanelsContainer/WeaponShopControl/ButtonsContainer")
 color_rect = NodePath("../PanelsContainer/WeaponShopControl/ColorRect")
 distance_weapon_list_parent = NodePath("../PanelsContainer/WeaponShopControl/ShopTabContainer/Distance Weapons/ScrollContainer/DistanceWeaponListParent")
@@ -106,6 +110,9 @@ melee_weapon_list_parent = NodePath("../PanelsContainer/WeaponShopControl/ShopTa
 equipment_list_parent = NodePath("../PanelsContainer/WeaponShopControl/ShopTabContainer/Equipment/ScrollContainer/EquipmentListParent")
 item_container_scene = ExtResource("20_n36a6")
 player_bank_account_panel_scene = ExtResource("21_cdjol")
+stats_panel_scene = ExtResource("24_hkhpj")
+preview_panel_scene = ExtResource("20_2od0h")
+description_panel_scene = ExtResource("21_3i6ap")
 
 [node name="ChooseWeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("choose_weapon_gui", "base_panel", "color_rect", "distance_weapon_grid", "melee_weapon_grid")]
 script = ExtResource("17_r1vvb")
@@ -483,6 +490,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 13
 
 [node name="PlayerCurrentWeaponStatPanel" type="PanelContainer" parent="PanelsContainer/WeaponShopControl/PlayerInfosContainer/ScrollContainer/PlayerInfoContainerParent"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/PlayerInfosContainer/ScrollContainer/PlayerInfoContainerParent/PlayerCurrentWeaponStatPanel"]
@@ -818,6 +826,7 @@ button_pressed = true
 flat = true
 
 [node name="ShopTabContainer" type="TabContainer" parent="PanelsContainer/WeaponShopControl"]
+visible = false
 custom_minimum_size = Vector2(800, 800)
 layout_mode = 2
 offset_left = 560.0
@@ -896,392 +905,14 @@ custom_minimum_size = Vector2(0, 767)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer"]
+[node name="HoverPanelParent" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 13
 
-[node name="Description-PanelContainer" type="PanelContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_stretch_ratio = 0.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Description-PanelContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Description-PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
-text = "Description"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Description" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Description-PanelContainer/VBoxContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 20
-text = "The Glock 17 is a short recoil–operated, locked-breech semi-automatic pistol that uses a modified Browning cam-lock system adapted from the Hi-Power pistol."
-autowrap_mode = 2
-
-[node name="Preview-PanelContainer" type="PanelContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Preview-PanelContainer"]
-layout_mode = 2
-
-[node name="Preview" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Preview-PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
-text = "Preview"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Preview-PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 300)
-layout_mode = 2
-stream = ExtResource("23_rbbmx")
-autoplay = true
-expand = true
-
-[node name="Stats-PanelContainer" type="PanelContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Title" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
-text = "Stats"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Proprieties-PanelContainer" type="PanelContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 22
-text = "Proprieties"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GridContainer" type="GridContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 15
-columns = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Shooting cooldown :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Balls by burt :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Frequence of burt :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Precision :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer4"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer5"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Recoil force :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Proprieties-PanelContainer/VBoxContainer/GridContainer/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="Ammo-PanelContainer" type="PanelContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 22
-text = "Ammo"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GridContainer" type="GridContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 15
-columns = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Size :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Reloading time :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Ammo-PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="Projectiles-PanelContainer" type="PanelContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 22
-text = "Projectiles"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GridContainer" type="GridContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 15
-columns = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Speed :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Damages :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Impact force :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Bouncing :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CheckBox" type="CheckBox" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer4"]
-layout_mode = 2
-disabled = true
-button_pressed = true
-flat = true
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer5"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Pierce walls :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CheckBox" type="CheckBox" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer5"]
-layout_mode = 2
-disabled = true
-button_pressed = true
-flat = true
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer6"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Frag on impact :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CheckBox" type="CheckBox" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Projectiles-PanelContainer/VBoxContainer/GridContainer/HBoxContainer6"]
-layout_mode = 2
-disabled = true
-button_pressed = true
-flat = true
-
-[node name="Powers-PanelContainer" type="PanelContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 22
-text = "Powers"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GridContainer" type="GridContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 15
-columns = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Cooldown special power :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Value" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer/VBoxContainer/GridContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Autolock targets :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CheckBox" type="CheckBox" parent="PanelsContainer/WeaponShopControl/HoverContainer/ScrollContainer/VBoxContainer2/Stats-PanelContainer/VBoxContainer/Powers-PanelContainer/VBoxContainer/GridContainer/HBoxContainer2"]
-layout_mode = 2
-disabled = true
-button_pressed = true
-flat = true
-
 [node name="ButtonsContainer" type="AspectRatioContainer" parent="PanelsContainer/WeaponShopControl"]
+visible = false
 layout_mode = 2
 offset_top = 916.0
 offset_right = 1920.0
@@ -1345,6 +976,7 @@ layout_mode = 2
 
 [node name="DistanceWeaponPanel" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel"]
 custom_minimum_size = Vector2(190, 380)
@@ -1384,6 +1016,7 @@ layout_mode = 2
 
 [node name="MeleeWeaponPanel" type="PanelContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel"]
 custom_minimum_size = Vector2(190, 380)
@@ -1430,7 +1063,12 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="LeftMargin" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/Button-Container"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
 [node name="QuitButton" type="Button" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/Button-Container"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1438,11 +1076,16 @@ theme_override_font_sizes/font_size = 35
 text = "Quit game"
 
 [node name="StartButton" type="Button" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/Button-Container"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "Start mission"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="PanelsContainer/ChooseWeaponControl/BaseContainer/Button-Container"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
 [connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/ResumeButton" to="PauseManager" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PanelsContainer/PauseControl/PauseContainer/BasePanelContainer/OptionButton" to="PauseManager" method="_on_option_button_pressed"]

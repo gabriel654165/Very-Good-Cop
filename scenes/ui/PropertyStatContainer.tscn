@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://khytb6gq0ut"]
+
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_kxrul"]
+[ext_resource type="Script" path="res://scripts/ui/PropertyStatContainer.gd" id="2_1o0a6"]
+
+[node name="PropertyStatContainer" type="HBoxContainer" node_paths=PackedStringArray("name_label", "value_label", "value_checkbox", "compare_value_label_container", "compare_value_checkbox_container", "compare_value_label", "compare_checkbox", "compare_checkbox_label")]
+theme = ExtResource("1_kxrul")
+script = ExtResource("2_1o0a6")
+name_label = NodePath("StatNameLabel")
+value_label = NodePath("ValueLabel")
+value_checkbox = NodePath("ValueCheckBox")
+compare_value_label_container = NodePath("CompareValueLabelContainer")
+compare_value_checkbox_container = NodePath("CompareValueCheckBoxContainer")
+compare_value_label = NodePath("CompareValueLabelContainer/ComparedValueLabel")
+compare_checkbox = NodePath("CompareValueCheckBoxContainer/CompareValueCheckBox")
+compare_checkbox_label = NodePath("CompareValueCheckBoxContainer/ArrowLabel")
+
+[node name="StatNameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 25
+text = "Shooting cooldown :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ValueLabel" type="Label" parent="."]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="CompareValueLabelContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="ComparedValueLabel" type="Label" parent="CompareValueLabelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "-1"
+
+[node name="CompareValueCheckBoxContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="CompareValueCheckBox" type="CheckBox" parent="CompareValueCheckBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+disabled = true
+flat = true
+
+[node name="ArrowLabel" type="Label" parent="CompareValueCheckBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "->"
+
+[node name="ValueCheckBox" type="CheckBox" parent="."]
+visible = false
+layout_mode = 2
+disabled = true
+button_pressed = true
+flat = true

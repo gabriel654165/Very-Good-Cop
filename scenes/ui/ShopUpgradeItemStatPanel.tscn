@@ -23,6 +23,7 @@ alignment = 1
 layout_mode = 2
 
 [node name="PanelIconContainer" type="PanelContainer" parent="SpecialPowers-List"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -103,4 +104,8 @@ vertical_alignment = 1
 [node name="LeftMargin2" type="AspectRatioContainer" parent="SpecialPowers-List"]
 layout_mode = 2
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="SpecialPowers-List/SpecialPower-Item5/UpgradeButton" to="." method="_on_upgrade_button_mouse_entered"]
+[connection signal="mouse_exited" from="SpecialPowers-List/SpecialPower-Item5/UpgradeButton" to="." method="_on_upgrade_button_mouse_exited"]
 [connection signal="pressed" from="SpecialPowers-List/SpecialPower-Item5/UpgradeButton" to="." method="_on_upgrade_button_pressed"]

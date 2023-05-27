@@ -15,6 +15,9 @@ func _ready():
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
 	
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
+	GlobalSignals.player_fired.connect(gui_manager.weapon_panel_manager.handle_player_fired)
+	GlobalSignals.player_reloading.connect(gui_manager.weapon_panel_manager.handle_player_reload)
+	GlobalSignals.player_use_special_power.connect(gui_manager.weapon_panel_manager.handle_use_special_power)
 	
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
 	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)

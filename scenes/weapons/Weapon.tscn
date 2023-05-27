@@ -88,11 +88,9 @@ _data = {
 [node name="WeaponManager" type="Node2D"]
 script = ExtResource("1_x1vvy")
 properties/weapon_name = "glock"
-properties/special_power_unlocked = true
-properties/level = 1
-power/points_to_unlock_power = 200
-power/current_points_charge_power = 0
-power/can_use_power = true
+power/points_to_use_special_power = 2
+power/current_points_to_use_special_power = 0
+power/can_use_power = false
 projectile/projectile = ExtResource("2_ki847")
 projectile/projectile_speed = 1
 projectile/projectile_damages = 1

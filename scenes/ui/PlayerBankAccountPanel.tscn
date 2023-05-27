@@ -17,7 +17,7 @@ theme_override_constants/separation = 10
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 30
 text = "Your bank account"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -159,3 +159,8 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "450$"
+
+[node name="BottomMargin" type="AspectRatioContainer" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2

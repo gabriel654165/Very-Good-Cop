@@ -65,7 +65,7 @@ func _unhandled_input(event):
 		throw_weapon()
 	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
 		throw_grappling()
-	if event.is_action_pressed("activate_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
+	if event.is_action_pressed("use_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
 		weapon_manager.weapon.special_power.use_special_power()
 
 func assign_knife():
@@ -80,7 +80,8 @@ func set_active_assigned_weapon():
 	#changer l'animation
 
 func handle_enemy_died(enemy: Node2D, points: int):
-	if weapon_manager.weapon.special_power_unlocked:
+	var index : int = GlobalVariables.index_distance_weapon_selected
+	if GlobalVariables.player_distance_weapon_list[index].special_power_unlocked:
 		weapon_manager.weapon.add_charge_power_points(points)
 
 func handle_hit(damager: Node2D, damages):

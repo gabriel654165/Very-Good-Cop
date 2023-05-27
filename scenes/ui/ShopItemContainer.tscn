@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfrnw0kq0ry4j"]
+[gd_scene load_steps=6 format=3 uid="uid://dfrnw0kq0ry4j"]
 
 [ext_resource type="Script" path="res://scripts/ui/ShopItemContainer.gd" id="1_g2lhk"]
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_hhfpf"]
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="2_hkj58"]
 [ext_resource type="PackedScene" uid="uid://bdx282nh2kvp0" path="res://scenes/ui/ShopUpgradeItemStatPanel.tscn" id="3_7xo1g"]
+[ext_resource type="PackedScene" uid="uid://dc66iolbp47rh" path="res://scenes/ui/ShopUnlockSpecialPowerPanel.tscn" id="5_ovkt7"]
 
-[node name="ShopItemContainer" type="PanelContainer" node_paths=PackedStringArray("item_texture", "item_name_label", "unlock_item_container", "buy_item_button", "buy_item_price_label", "upgrade_properties_container", "property_list_parent", "special_power_list_parent")]
+[node name="ShopItemContainer" type="PanelContainer" node_paths=PackedStringArray("item_texture", "item_name_label", "unlock_item_container", "buy_item_button", "buy_item_price_label", "upgrade_properties_container", "equiped_label", "property_list_panel", "special_power_list_panel", "property_list_parent", "special_power_list_parent")]
 theme = ExtResource("1_hhfpf")
 script = ExtResource("1_g2lhk")
 item_texture = NodePath("VBoxContainer/Container/WeaponContainer/WeaponImageTextureRect")
@@ -14,9 +15,13 @@ unlock_item_container = NodePath("VBoxContainer/Container/UnlockWeaponContainer"
 buy_item_button = NodePath("VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer/BuyButton")
 buy_item_price_label = NodePath("VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer/PriceLabel")
 upgrade_properties_container = NodePath("VBoxContainer/Container/UpgradePropertiesContainer")
-property_list_parent = NodePath("VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer/PropertiesPanelsContainer/ScrollContainer/PropertiesContainer")
-special_power_list_parent = NodePath("VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer")
+equiped_label = NodePath("VBoxContainer/Container/WeaponContainer/EquipedLabel")
+property_list_panel = NodePath("VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanel")
+special_power_list_panel = NodePath("VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer")
+property_list_parent = NodePath("VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanel/PropertiesPanelsContainer/ScrollContainer/PropertiesContainer")
+special_power_list_parent = NodePath("VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersPanelsContainer/SpecialPowersContainer")
 upgrade_item_stat_panel_scene = ExtResource("3_7xo1g")
+special_power_panel_scene = ExtResource("5_ovkt7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -53,6 +58,15 @@ texture = ExtResource("2_hkj58")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="EquipedLabel" type="Label" parent="VBoxContainer/Container/WeaponContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 25
+text = "(equiped)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Margin-Container3" type="AspectRatioContainer" parent="VBoxContainer/Container/WeaponContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
@@ -62,6 +76,7 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="UnlockWeaponContainer" type="HBoxContainer" parent="VBoxContainer/Container"]
+visible = false
 layout_mode = 2
 
 [node name="Margin-in" type="AspectRatioContainer" parent="VBoxContainer/Container/UnlockWeaponContainer"]
@@ -96,58 +111,51 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="UpgradePropertiesContainer" type="VBoxContainer" parent="VBoxContainer/Container"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PropertiesPanelContainer" type="PanelContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer"]
+[node name="PropertiesPanel" type="PanelContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer"]
 layout_mode = 2
 
-[node name="PropertiesPanelsContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer"]
+[node name="PropertiesPanelsContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanel"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer/PropertiesPanelsContainer"]
+[node name="Title" type="Label" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanel/PropertiesPanelsContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 22
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 25
 text = "Properties"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer/PropertiesPanelsContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanel/PropertiesPanelsContainer"]
 custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="PropertiesContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanelContainer/PropertiesPanelsContainer/ScrollContainer"]
+[node name="PropertiesContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/PropertiesPanel/PropertiesPanelsContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="SpecialPower-PanelContainer" type="PanelContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer"]
 layout_mode = 2
 
-[node name="SpecialPowersContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer"]
+[node name="SpecialPowersPanelsContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer"]
+[node name="Title" type="Label" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersPanelsContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 22
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 25
 text = "Special Power"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-horizontal_scroll_mode = 0
-
-[node name="SpecialPowersContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer/ScrollContainer"]
+[node name="SpecialPowersContainer" type="VBoxContainer" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersPanelsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="UpgradeDamagePanel" parent="VBoxContainer/Container/UpgradePropertiesContainer/SpecialPower-PanelContainer/SpecialPowersContainer/ScrollContainer/SpecialPowersContainer" instance=ExtResource("3_7xo1g")]
-layout_mode = 2
 
 [node name="Margin3" type="AspectRatioContainer" parent="VBoxContainer/Container"]
 custom_minimum_size = Vector2(20, 0)
@@ -157,4 +165,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/Container/UnlockWeaponContainer/BuyButtonContainer/BuyButton" to="." method="_on_buy_button_pressed"]

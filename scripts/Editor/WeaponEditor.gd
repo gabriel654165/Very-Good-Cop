@@ -6,15 +6,13 @@ var saved_property_list : Array = []
 var weapon : Node
 
 var weapon_name : String
-var special_power_unlocked : bool = false
-var level : int = 0
 
-var points_to_unlock_power : int = 200
-var current_points_charge_power : int = 0
+var points_to_use_special_power : int = 2
+var current_points_to_use_special_power : int = 0
 var can_use_power : bool = false
 
 var projectile_scene : PackedScene
-var projectile_speed : int = 4
+var projectile_speed : int = 6
 var projectile_damages : int = 6
 var projectile_size : float = 0.5
 var projectile_impact_force : float = 2
@@ -67,11 +65,9 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 		weapon = new_weapon
 	
 	weapon.weapon_name = self.weapon_name
-	weapon.special_power_unlocked = self.special_power_unlocked
-	weapon.level = self.level
 	
-	weapon.points_to_unlock_power = self.points_to_unlock_power
-	weapon.current_points_charge_power = self.current_points_charge_power
+	weapon.points_to_use_special_power = self.points_to_use_special_power
+	weapon.current_points_to_use_special_power = self.current_points_to_use_special_power
 	weapon.can_use_power = self.can_use_power
 	
 	if upadte_projectile:
@@ -107,15 +103,11 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 func _get(property):
 	if property == 'properties/weapon_name':
 		return weapon_name
-	if property == 'properties/special_power_unlocked':
-		return special_power_unlocked
-	if property == 'properties/level':
-		return level
 	
-	if property == 'power/points_to_unlock_power':
-		return points_to_unlock_power
-	if property == 'power/current_points_charge_power':
-		return current_points_charge_power
+	if property == 'power/points_to_use_special_power':
+		return points_to_use_special_power
+	if property == 'power/current_points_to_use_special_power':
+		return current_points_to_use_special_power
 	if property == 'power/can_use_power':
 		return can_use_power
 	
@@ -170,15 +162,11 @@ func _get(property):
 func _set(property, value) -> bool :
 	if property == 'properties/weapon_name':
 		weapon_name = value
-	if property == 'properties/special_power_unlocked':
-		special_power_unlocked = value
-	if property == 'properties/level':
-		level = value
 	
-	if property == 'power/points_to_unlock_power':
-		points_to_unlock_power = value
-	if property == 'power/current_points_charge_power':
-		current_points_charge_power = value
+	if property == 'power/points_to_use_special_power':
+		points_to_use_special_power = value
+	if property == 'power/current_points_to_use_special_power':
+		current_points_to_use_special_power = value
 	if property == 'power/can_use_power':
 		can_use_power = value
 	
@@ -238,19 +226,13 @@ func _get_property_list() -> Array:
 	var props_proprieties = [{
 		'name': 'properties/weapon_name',
 		'type': TYPE_STRING,
-	},{
-		'name': 'properties/special_power_unlocked',
-		'type': TYPE_BOOL,
-	},{
-		'name': 'properties/level',
-		'type': TYPE_INT,
 	}]
 	
 	var props_power = [{
-		'name': 'power/points_to_unlock_power',
+		'name': 'power/points_to_use_special_power',
 		'type': TYPE_INT,
 	},{
-		'name': 'power/current_points_charge_power',
+		'name': 'power/current_points_to_use_special_power',
 		'type': TYPE_INT,
 	},{
 		'name': 'power/can_use_power',

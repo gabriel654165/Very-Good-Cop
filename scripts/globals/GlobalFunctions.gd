@@ -88,17 +88,24 @@ func linear_ratio(min_val, max_val, total_lvl, current_lvl, error_value_case):
 	var add_value = diff_val / ratio_lvl
 	return min_val + add_value
 
-
-func get_propriety_by_level(weapon_stats, weapon_property_level, propriety_name, weapon_value):
+func boolean_ratio(min_val, max_val, total_lvl, current_lvl, error_value_case):
+	if current_lvl > total_lvl:
+		return max_val
+	if current_lvl == 0:
+		return min_val
+	elif current_lvl == 1:
+		return max_val
+	return error_value_case
+	
+func get_propriety_by_level(weapon_stats, weapon_property_level, propriety_name, weapon_default_value):
 	for stat_dictionnary in weapon_stats.stats:
 		if (propriety_name in stat_dictionnary):
 			var stat = stat_dictionnary[propriety_name]
-			#from lvl 1 bool will always be set to maw_val
+			
 			if (stat.min_value is bool) or (stat.max_value is bool):
-				return stat.max_value
-			#weapon_value = exponential_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_value)
-			return linear_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_property_level, weapon_value)
-	return weapon_value
+				return boolean_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_property_level, weapon_default_value)
+			return linear_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_property_level, weapon_default_value)
+	return weapon_default_value
 
 func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
 	var current_index : int = 0
@@ -126,7 +133,7 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 			weapon_editor.projectile_damages = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_damages_lvl, "projectile_damages", weapon_editor.projectile_damages)
 			weapon_editor.projectile_impact_force = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_impact_force_lvl, "projectile_impact_force", weapon_editor.projectile_impact_force)
 			weapon_editor.projectile_should_bounce = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_bouncing_lvl, "projectile_bouncing", weapon_editor.projectile_should_bounce)
-			#weapon_editor.special_power_cooldown = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.special_power_cooldown_lvl, "special_power_cooldown", weapon_editor.special_power_cooldown)
+			weapon_editor.points_to_use_special_power = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.points_to_use_special_power_lvl, "points_to_use_special_power", weapon_editor.points_to_use_special_power)
 			weapon_editor.auto_lock_target = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.auto_lock_target_lvl, "auto_lock_target", weapon_editor.auto_lock_target)
 			break
 		current_index += 1
@@ -151,20 +158,13 @@ func save():
 	
 	var json_save := {
 		"level": GlobalVariables.level,
-
-		"glock_level": GlobalVariables.glock_level,
-		"shotgun_level": GlobalVariables.shotgun_level,
-		"mini_uzi_level": GlobalVariables.mini_uzi_level,
-		"riffle_level": GlobalVariables.riffle_level,
-		"machine_gun_level": GlobalVariables.machine_gun_level,
-		"grenade_launcher_level": GlobalVariables.grenade_launcher_level,
-		"sniper_level": GlobalVariables.sniper_level,
-		"knife_level": GlobalVariables.knife_level,
-
+		
+		"player_distance_weapon_list": GlobalVariables.player_distance_weapon_list,
+		"player_melee_weapon_list": GlobalVariables.player_melee_weapon_list,
+		"player_equipment_list": GlobalVariables.player_equipment_list,
+		
 		"grappling_hook_level": GlobalVariables.grappling_hook_level,
-
-		"bulletproof_vest_level": GlobalVariables.bulletproof_vest_level,
-
+		
 		"index_distance_weapon_selected": GlobalVariables.index_distance_weapon_selected,
 		"index_melee_weapon_selected": GlobalVariables.index_melee_weapon_selected,
 	}
@@ -185,19 +185,12 @@ func load_save():
 
 	GlobalVariables.level = save_file_object["level"]
 
-	GlobalVariables.glock_level = save_file_object["glock_level"]
-	GlobalVariables.shotgun_level = save_file_object["shotgun_level"]
-	GlobalVariables.mini_uzi_level = save_file_object["mini_uzi_level"]
-	GlobalVariables.riffle_level = save_file_object["riffle_level"]
-	GlobalVariables.machine_gun_level = save_file_object["machine_gun_level"]
-	GlobalVariables.grenade_launcher_level = save_file_object["grenade_launcher_level"]
-	GlobalVariables.sniper_level = save_file_object["sniper_level"]
-	GlobalVariables.knife_level = save_file_object["knife_level"]
-
+	GlobalVariables.player_distance_weapon_list = save_file_object["player_distance_weapon_list"]
+	GlobalVariables.player_melee_weapon_list = save_file_object["player_melee_weapon_list"]
+	GlobalVariables.player_equipment_list = save_file_object["player_equipment_list"]
+	
 	GlobalVariables.grappling_hook_level = save_file_object["grappling_hook_level"]
-
-	GlobalVariables.bulletproof_vest_level = save_file_object["bulletproof_vest_level"]
-
+	
 	GlobalVariables.index_distance_weapon_selected = save_file_object["index_distance_weapon_selected"]
 	GlobalVariables.index_melee_weapon_selected = save_file_object["index_melee_weapon_selected"]
 
