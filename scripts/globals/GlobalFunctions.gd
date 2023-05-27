@@ -144,20 +144,6 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 		current_index += 1
 	weapon_editor.set_variables(weapon_editor.weapon)
 
-#func set_melee_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
-#	var current_index : int = 0
-#	
-#	for weapon_properties_levels in GlobalVariables.player_melee_weapon_list:
-#		if current_index == weapon_index:
-#			weapon_editor.weapon_name = weapon_properties_levels.name
-#			weapon_editor.projectile_scene = GlobalVariables.all_melee_weapon_list[current_index].projectile_packed_scene
-#			weapon_editor.weapon.side_sprite.texture = GlobalVariables.all_melee_weapon_list[current_index].gui_texture
-#			
-#			weapon_editor.shooting_cooldown = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.shooting_cooldown_lvl, "shooting_cooldown", weapon_editor.shooting_cooldown)
-#			break
-#		current_index += 1
-#	weapon_editor.set_variables(weapon_editor.weapon)
-
 func save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.WRITE, GlobalVariables.encryption_key)
 	
