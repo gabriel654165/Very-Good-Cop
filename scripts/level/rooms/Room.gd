@@ -45,8 +45,6 @@ func spawn_with_room_config(
 	random_nb_func := func(array:Array): return randi_range(1, array.size())
 	):
 	var node:Node = room_config.find_child(node_name)
-	if node.name == "PowerUpPoints":
-		print(node.get_children())
 	var processed_node_as_array:Array = process_node.call(node)
 
 	var nb_to_spawn:int = random_nb_func.call(processed_node_as_array) if random_nb_to_spawn else processed_node_as_array.size()

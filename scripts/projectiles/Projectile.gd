@@ -21,6 +21,7 @@ var current_piercing_force : int = 0
 
 func _init():
 	scale = scale * size
+	
 
 func _physics_process(delta):
 	_move_and_collide(delta)

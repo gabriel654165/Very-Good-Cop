@@ -2,6 +2,8 @@ extends Node2D
 class_name Weapon
 
 @export var shooter_actor : Node
+@export var shooting_sound : AudioStream
+@export var reloading_sound : AudioStream
 
 var weapon_name : String = ""
 var special_power_unlocked : bool = false
@@ -52,11 +54,19 @@ func _ready():
 	if get_parent() != null:
 		shooter_actor = get_parent().get_parent()
 	randomize()
+	
+	# TODO: To remove @gabriel
+	shooting_sound = AudioStreamMP3.new()
+	(shooting_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/5.56.mp3")
+
+	reloading_sound = AudioStreamMP3.new()
+	(reloading_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/reload.mp3")
 
 func shoot():
 	if !enable:
 		return
-	
+#	var shot := false
+	var projectile_instance : Projectile = null
 	if (shooting_cooldown.is_stopped() or should_disable_cooldown()) and Projectile != null and _current_loader_bullets_number >= 0:
 		shooting_cooldown.start()
 		for n in number_of_balls_by_burt:
@@ -69,16 +79,18 @@ func shoot():
 			
 			if n != 0:
 				await get_tree().create_timer(frequence_of_burt).timeout
-			
-			var projectile_instance : Projectile = projectile_scene.instantiate()
+#			shot = true
+			projectile_instance = projectile_scene.instantiate()
 			var direction = fire_direction.global_position - fire_position.global_position
 			set_projectile_variables(projectile_instance)
 			
 			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
 			emit_signals(shooter_actor, projectile_instance, direction)
 			recoil_shooter(direction)
-			
+
 			animation.play("muzzle_flash")
+		if projectile_instance != null:
+			GlobalSignals.play_sound.emit(shooting_sound, 0, 1, global_position)
 
 func should_disable_cooldown() -> bool:
 	if "is_shooting" in special_power:
@@ -135,5 +147,9 @@ func add_charge_power_points(points: int):
 		can_use_power = true
 
 func reload_magazine():
+	var pitch_scale:float =  reloading_sound.get_length() / reloading_cooldown
+	GlobalSignals.play_sound.emit(reloading_sound, 1, pitch_scale, global_position)
+
 	await get_tree().create_timer(reloading_cooldown).timeout
 	_current_loader_bullets_number = loader_capacity
+	
