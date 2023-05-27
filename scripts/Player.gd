@@ -7,11 +7,9 @@ var move_direction : Vector2 = Vector2.ZERO
 func _ready():
 	# Test : skipping the choose weapons panel and take the global
 	assign_weapons()
-	# mettre un Y d'animation au sprite
 
 func assign_weapons():
 	GlobalFunctions.set_distance_weapon_properties(weapon_manager, GlobalVariables.index_distance_weapon_selected)
-	#GlobalFunctions.set_melee_weapon_properties(weapon_manager, GlobalVariables.index_melee_weapon_selected)
 
 func _physics_process(delta):
 	if self.action_disabled:

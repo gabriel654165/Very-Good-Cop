@@ -102,7 +102,7 @@ func boolean_ratio(min_val, max_val, total_lvl, current_lvl, error_value_case):
 		return max_val
 	return error_value_case
 	
-func get_propriety_by_level(weapon_stats, weapon_property_level, propriety_name, weapon_default_value):
+func get_property_by_level(weapon_stats, weapon_property_level, propriety_name, weapon_default_value):
 	for stat_dictionnary in weapon_stats.stats:
 		if (propriety_name in stat_dictionnary):
 			var stat = stat_dictionnary[propriety_name]
@@ -127,36 +127,22 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 			
 			weapon_editor.weapon.side_sprite.texture = GlobalVariables.all_distance_weapon_list[current_index].gui_texture
 			
-			weapon_editor.shooting_cooldown = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.shooting_cooldown_lvl, "shooting_cooldown", weapon_editor.shooting_cooldown)
-			weapon_editor.balls_by_burt = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.balls_by_burt_lvl, "balls_by_burt", weapon_editor.balls_by_burt)
-			weapon_editor.frequence_of_burt = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.frequence_of_burt_lvl, "frequence_of_burt", weapon_editor.frequence_of_burt)
-			weapon_editor.precision = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.precision_lvl, "precision", weapon_editor.precision)
-			weapon_editor.recoil_force = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.recoil_force_lvl, "recoil_force", weapon_editor.recoil_force)
-			weapon_editor.ammo_size = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.ammo_size_lvl, "ammo_size", weapon_editor.ammo_size)
-			weapon_editor.ammo_reloading_time = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.ammo_reloading_time_lvl, "ammo_reloading_time", weapon_editor.ammo_reloading_time)
-			weapon_editor.projectile_speed = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_speed_lvl, "projectile_speed", weapon_editor.projectile_speed)
-			weapon_editor.projectile_damages = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_damages_lvl, "projectile_damages", weapon_editor.projectile_damages)
-			weapon_editor.projectile_impact_force = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_impact_force_lvl, "projectile_impact_force", weapon_editor.projectile_impact_force)
-			weapon_editor.projectile_should_bounce = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_bouncing_lvl, "projectile_bouncing", weapon_editor.projectile_should_bounce)
-			weapon_editor.points_to_use_special_power = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.points_to_use_special_power_lvl, "points_to_use_special_power", weapon_editor.points_to_use_special_power)
-			weapon_editor.auto_lock_target = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.auto_lock_target_lvl, "auto_lock_target", weapon_editor.auto_lock_target)
+			weapon_editor.shooting_cooldown = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.shooting_cooldown_lvl, "shooting_cooldown", weapon_editor.shooting_cooldown)
+			weapon_editor.balls_by_burt = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.balls_by_burt_lvl, "balls_by_burt", weapon_editor.balls_by_burt)
+			weapon_editor.frequence_of_burt = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.frequence_of_burt_lvl, "frequence_of_burt", weapon_editor.frequence_of_burt)
+			weapon_editor.precision = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.precision_lvl, "precision", weapon_editor.precision)
+			weapon_editor.recoil_force = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.recoil_force_lvl, "recoil_force", weapon_editor.recoil_force)
+			weapon_editor.ammo_size = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.ammo_size_lvl, "ammo_size", weapon_editor.ammo_size)
+			weapon_editor.ammo_reloading_time = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.ammo_reloading_time_lvl, "ammo_reloading_time", weapon_editor.ammo_reloading_time)
+			weapon_editor.projectile_speed = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_speed_lvl, "projectile_speed", weapon_editor.projectile_speed)
+			weapon_editor.projectile_damages = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_damages_lvl, "projectile_damages", weapon_editor.projectile_damages)
+			weapon_editor.projectile_impact_force = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_impact_force_lvl, "projectile_impact_force", weapon_editor.projectile_impact_force)
+			weapon_editor.projectile_should_bounce = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_bouncing_lvl, "projectile_bouncing", weapon_editor.projectile_should_bounce)
+			weapon_editor.points_to_use_special_power = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.points_to_use_special_power_lvl, "points_to_use_special_power", weapon_editor.points_to_use_special_power)
+			weapon_editor.auto_lock_target = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.auto_lock_target_lvl, "auto_lock_target", weapon_editor.auto_lock_target)
 			break
 		current_index += 1
 	weapon_editor.set_variables(weapon_editor.weapon)
-
-#func set_melee_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
-#	var current_index : int = 0
-#	
-#	for weapon_properties_levels in GlobalVariables.player_melee_weapon_list:
-#		if current_index == weapon_index:
-#			weapon_editor.weapon_name = weapon_properties_levels.name
-#			weapon_editor.projectile_scene = GlobalVariables.all_melee_weapon_list[current_index].projectile_packed_scene
-#			weapon_editor.weapon.side_sprite.texture = GlobalVariables.all_melee_weapon_list[current_index].gui_texture
-#			
-#			weapon_editor.shooting_cooldown = get_propriety_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.shooting_cooldown_lvl, "shooting_cooldown", weapon_editor.shooting_cooldown)
-#			break
-#		current_index += 1
-#	weapon_editor.set_variables(weapon_editor.weapon)
 
 func save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.WRITE, GlobalVariables.encryption_key)
