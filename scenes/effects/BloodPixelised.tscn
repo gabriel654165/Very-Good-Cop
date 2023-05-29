@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://cm0fqcrxuvdy0"]
+
+[ext_resource type="Shader" path="res://scripts/shaders/CanvasPixelised.gdshader" id="1_hvyhe"]
+[ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="2_hg1qh"]
+[ext_resource type="Script" path="res://scripts/Blood.gd" id="2_y4yfe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdrva"]
+shader = ExtResource("1_hvyhe")
+shader_parameter/pixelSize = 4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m56yn"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[node name="BloodPixelised" type="Node2D"]
+visibility_layer = 16
+z_index = 5
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 1
+amount = 3
+lifetime = 0.2
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 100.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 300.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color = Color(0.752941, 0, 0, 1)
+script = ExtResource("2_y4yfe")
+
+[node name="Timer" type="Timer" parent="CPUParticles2D"]
+wait_time = 0.15
+one_shot = true
+autostart = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Control/CanvasLayer"]
+material = SubResource("ShaderMaterial_bdrva")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_m56yn")
+texture = ExtResource("2_hg1qh")
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.5
+
+[connection signal="timeout" from="CPUParticles2D/Timer" to="CPUParticles2D" method="_on_timer_timeout"]

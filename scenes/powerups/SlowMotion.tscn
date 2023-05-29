@@ -61,17 +61,24 @@ for_who = 1
 
 [node name="PressE" type="Label" parent="."]
 visible = false
-offset_right = 213.0
-offset_bottom = 23.0
+offset_left = -101.0
+offset_top = -46.0
+offset_right = 112.0
+offset_bottom = -23.0
 text = "Press E to start engaging with PowerUP"
 label_settings = SubResource("LabelSettings_7y7ql")
+vertical_alignment = 1
 
 [node name="SpamClick" type="Label" parent="."]
 visible = false
-offset_right = 213.0
-offset_bottom = 23.0
+offset_left = -101.0
+offset_top = -46.0
+offset_right = 112.0
+offset_bottom = -23.0
 text = "SPAM SPACE !"
 label_settings = SubResource("LabelSettings_s5pk1")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
 rotation = -0.375185

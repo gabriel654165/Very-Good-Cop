@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://in7hxftu4bux"]
+[gd_scene load_steps=6 format=3 uid="uid://bsmds3f5t14j"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/Bullet.gd" id="1_2jtls"]
 [ext_resource type="Texture2D" uid="uid://cntb7fb243sp0" path="res://assets/Spritesheet/sheet_tanks.png" id="1_g8iif"]
+[ext_resource type="PackedScene" uid="uid://xdkaf1s14ef6" path="res://scenes/particles/BulletImpactFragments.tscn" id="2_ce033"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxpfh"]
 size = Vector2(12, 24)
+
+[sub_resource type="Gradient" id="Gradient_0p2yp"]
+offsets = PackedFloat32Array(0, 0.636364)
+colors = PackedColorArray(0.890196, 0, 0, 1, 1, 0.392157, 0.0588235, 1)
 
 [node name="Bullet" type="CharacterBody2D"]
 position = Vector2(-131, 38)
@@ -14,6 +19,7 @@ collision_layer = 2
 script = ExtResource("1_2jtls")
 speed = 10
 damages = 5
+bullet_impact_fragments_scene = ExtResource("2_ce033")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -31,6 +37,23 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_oxpfh")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 5
+amount = 6
+lifetime = 0.2
+lifetime_randomness = 0.17
+fixed_fps = 45
+emission_shape = 1
+emission_sphere_radius = 20.0
+particle_flag_align_y = true
+direction = Vector2(0, 1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_0p2yp")
 
 [connection signal="timeout" from="LifeCycleTimer" to="." method="_on_life_cycle_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

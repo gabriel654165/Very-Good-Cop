@@ -1,16 +1,100 @@
-[gd_scene load_steps=7 format=3 uid="uid://djsd576ac8w0q"]
+[gd_scene load_steps=18 format=3 uid="uid://brbf0uftiswvt"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_cprlw"]
 [ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="2_plfkm"]
-[ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_u5xh8"]
+[ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_aq33h"]
 [ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_hawec"]
-[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="5_h1th4"]
+[ext_resource type="Shader" path="res://scripts/shaders/ChromaticAberationShader.gdshader" id="5_4xmsp"]
+[ext_resource type="Shader" path="res://scripts/shaders/PixelisedShader.gdshader" id="5_7ggqc"]
+[ext_resource type="PackedScene" uid="uid://b2icao5su4lyo" path="res://scenes/characters/player.tscn" id="5_h1th4"]
 [ext_resource type="Script" path="res://scripts/Sounds/MusicPlaylists.gd" id="6_acyjm"]
+[ext_resource type="Shader" path="res://scripts/shaders/StretchShader.gdshader" id="7_oia4r"]
+[ext_resource type="Shader" path="res://scripts/shaders/ShockWaveShader.gdshader" id="8_n1517"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tt72j"]
+shader = ExtResource("5_7ggqc")
+shader_parameter/pixelSize = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3q02d"]
+shader = ExtResource("5_4xmsp")
+shader_parameter/offset = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_snw35"]
+shader = ExtResource("7_oia4r")
+shader_parameter/deformation = Vector2(0, 0)
+shader_parameter/sideWaysDeformationFactor = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysnqx"]
+shader = ExtResource("8_n1517")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/force = 0.1
+shader_parameter/size = 1.0
+shader_parameter/thickness = 0.01
+
+[sub_resource type="Animation" id="Animation_yeqyy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect-ShockWave:material:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect-ShockWave:material:shader_parameter/force")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
+
+[sub_resource type="Animation" id="Animation_lolpv"]
+resource_name = "shockwave_shader_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect-ShockWave:material:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect-ShockWave:material:shader_parameter/force")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.03]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wqy4q"]
+_data = {
+"RESET": SubResource("Animation_yeqyy"),
+"shockwave_shader_animation": SubResource("Animation_lolpv")
+}
 
 [node name="TopNode" type="Node2D"]
 script = ExtResource("1_cprlw")
 gui_manager_scene = ExtResource("2_plfkm")
-projectile_manager_scene = ExtResource("3_u5xh8")
+projectile_manager_scene = ExtResource("3_aq33h")
 level_generator_scene = ExtResource("4_hawec")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -26,6 +110,55 @@ drag_right_margin = 0.3
 drag_bottom_margin = 0.15
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+visible = false
+
+[node name="ColorRect-Pixels" type="ColorRect" parent="Camera2D/CanvasLayer"]
+material = SubResource("ShaderMaterial_tt72j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Camera2D"]
+visible = false
+
+[node name="ColorRect-Chrom" type="ColorRect" parent="Camera2D/CanvasLayer2"]
+material = SubResource("ShaderMaterial_3q02d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="Camera2D"]
+visible = false
+
+[node name="ColorRect-Stretch" type="ColorRect" parent="Camera2D/CanvasLayer3"]
+material = SubResource("ShaderMaterial_snw35")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer4" type="CanvasLayer" parent="Camera2D"]
+visible = false
+
+[node name="ColorRect-ShockWave" type="ColorRect" parent="Camera2D/CanvasLayer4"]
+material = SubResource("ShaderMaterial_ysnqx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/CanvasLayer4"]
+libraries = {
+"": SubResource("AnimationLibrary_wqy4q")
+}
 
 [node name="Player" parent="." instance=ExtResource("5_h1th4")]
 

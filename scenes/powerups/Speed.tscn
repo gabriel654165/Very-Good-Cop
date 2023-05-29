@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://ducmier407fm"]
 
 [ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_y76wg"]
+[ext_resource type="Texture2D" uid="uid://ctcn0ao4kpm4b" path="res://assets/Powerups/Coke.png" id="2_fuqeh"]
 [ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="2_k4nnl"]
-[ext_resource type="Texture2D" uid="uid://nyk6qxgsi43u" path="res://assets/PNG/Default size/barrelGreen_side.png" id="2_tgi4p"]
 [ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="3_bu3c0"]
 [ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="4_2xfyv"]
 [ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="5_wphnt"]
@@ -36,9 +36,8 @@ sprite = NodePath("Sprite2D")
 used_sprite = NodePath("UsedSprite")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.941176, 0.905882, 0, 1)
 rotation = -0.375185
-texture = ExtResource("2_tgi4p")
+texture = ExtResource("2_fuqeh")
 
 [node name="UsedSprite" type="Sprite2D" parent="."]
 visible = false

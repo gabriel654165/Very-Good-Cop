@@ -14,9 +14,10 @@ var audio_stream_factory := {
 
 
 func _ready():
-	if !GlobalVariables.playlists.keys().is_empty():
-		change_playlist(GlobalVariables.playlists.keys()[0])
-	play()
+	#if !GlobalVariables.playlists.keys().is_empty():
+	#	change_playlist(GlobalVariables.playlists.keys()[0])
+	#play()
+	pass
 
 
 func get_playlist_names() -> Array:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://b1d72b817u5"]
 
 [ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_rw64s"]
-[ext_resource type="Texture2D" uid="uid://nyk6qxgsi43u" path="res://assets/PNG/Default size/barrelGreen_side.png" id="2_kxv68"]
+[ext_resource type="Texture2D" uid="uid://bet4samxck2gc" path="res://assets/Powerups/syringe.png" id="2_hir21"]
 [ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="2_w44ab"]
 [ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="3_ms868"]
 [ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="4_ecofi"]
@@ -37,7 +37,7 @@ used_sprite = NodePath("UsedSprite")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -0.375185
-texture = ExtResource("2_kxv68")
+texture = ExtResource("2_hir21")
 
 [node name="UsedSprite" type="Sprite2D" parent="."]
 visible = false

@@ -43,10 +43,11 @@ func add_passive_effect(character: Character):
 	if type == TYPE.DAMAGE:
 		value_save = character.weapon_manager.bullet_damages
 		character.weapon_manager.bullet_damages = value_effect
-	
 	if type == TYPE.SLOW_MOTION:
-		pass
-		#prendre tout les caractères et les slow down
+		var camera = get_tree().current_scene.find_child("Camera2D")
+		#camera.canvas.shader_pixels
+		#camera.canvas.shader_pixels
+		Engine.time_scale = 0.4
 
 func remove_passive_effect(character: Character):
 	if type == TYPE.HEALTH:
@@ -55,7 +56,5 @@ func remove_passive_effect(character: Character):
 		character.speed = value_save
 	if type == TYPE.DAMAGE:
 		character.weapon_manager.bullet_damages = value_save
-	
 	if type == TYPE.SLOW_MOTION:
-		pass
-		#prendre tout les caractères et les slow down
+		Engine.time_scale = 1

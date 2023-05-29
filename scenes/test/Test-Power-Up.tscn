@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4y6r77j5osaj"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_2q6o2"]
 [ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="2_2gdt8"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_pgev3"]
-[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_v2c66"]
+[ext_resource type="PackedScene" uid="uid://dji2wpedam34s" path="res://scenes/characters/player.tscn" id="3_v2c66"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_ylgbd"]
 [ext_resource type="PackedScene" uid="uid://b1d72b817u5" path="res://scenes/powerups/Heal.tscn" id="6_jlal5"]
 [ext_resource type="PackedScene" uid="uid://ducmier407fm" path="res://scenes/powerups/Speed.tscn" id="7_mfywq"]

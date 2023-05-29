@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6i5jh7uk237l"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_0rwaq"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="1_ieyus"]

@@ -10,6 +10,8 @@ class_name Projectile
 @export var should_pierce_walls : bool = false
 @export var should_frag : bool = false
 
+@export var bullet_impact_fragments_scene : PackedScene
+
 var frag_projectile_precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
 var frag_projectile_precision : float = 1
 var number_of_frag_projectile : int = 3
@@ -32,7 +34,6 @@ func _move_and_collide(delta: float):
 		velocity = direction * GlobalFunctions.get_speed(speed, delta)
 		global_position += velocity
 		var collision = move_and_collide(velocity * delta)
-		
 		handle_collision(collision)
 
 
@@ -40,11 +41,11 @@ func handle_collision(collision: KinematicCollision2D):
 	if !collision:
 		return
 	var object = collision.get_collider()
-	
 	if object.get_name() == "Walls":
 		if should_bounce:
 			direction = velocity.normalized().bounce(collision.get_normal())
 		if !should_bounce and !should_pierce_walls:
+			handle_specific_collision(object)
 			queue_free()
 	handle_specific_collision(object)
 

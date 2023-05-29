@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_ssaqb"]
 [ext_resource type="Texture2D" uid="uid://dkaajkhddrtrt" path="res://assets/Tilesheet/tilesheet_complete.png" id="2_rygxq"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_eh3m0"]
-[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_oup5r"]
+[ext_resource type="PackedScene" uid="uid://dji2wpedam34s" path="res://scenes/characters/player.tscn" id="3_oup5r"]
 [ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_0cg3x"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_y8uir"]
 [ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="7_urwtj"]

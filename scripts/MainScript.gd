@@ -1,15 +1,20 @@
-extends Node2D
+extends Control
 
 @export var gui_manager_scene : PackedScene
 @export var projectile_manager_scene : PackedScene
 @export var level_generator_scene : PackedScene
+@export var player : Player
 
-@onready var gui_manager : GuiManager = add_manager(gui_manager_scene)
-@onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene)
-@onready var level_generator: LevelGenerator = add_manager(level_generator_scene)
+@export var subviewport_container : SubViewportContainer
+@export var regular_subviewport : SubViewport
+@export var pixelized_subviewport : SubViewport
 
-@onready var camera : Camera2D = $Camera2D
-@onready var player : Player = $Player
+@export var test : Node
+
+@onready var gui_manager : GuiManager = add_manager(gui_manager_scene, self, func(x):pass)
+@onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene, self, func(x):pass)
+@onready var level_generator: LevelGenerator = add_manager(level_generator_scene, self, func(x):pass)
+@onready var camera : Camera2D = $MainCamera
 
 
 func _ready():
@@ -51,20 +56,25 @@ func _do_play_sound(sound:AudioStream, volume_db: float = 0.0, pitch_scale: floa
 	audio_stream_player.play()
 	
 	audio_stream_player.finished.connect(audio_stream_player.queue_free)
-	
+
 
 func spawn_player():
 	if level_generator != null:
-		player.position = level_generator.local_to_world_position(level_generator.entrance_pos)
+		player.global_position = level_generator.local_to_world_position(level_generator.entrance_pos)
+
 
 func init_camera():
 	camera.global_position = player.global_position
 
-func add_manager(packed_manager:PackedScene, init_func:Callable=func(x):pass):
+func _process(delta: float):
+	subviewport_container.global_position = player.global_position
+	#test.global_position = player.global_position
+
+func add_manager(packed_manager:PackedScene, parent: Node, init_func:Callable=func(x):pass):
 	if packed_manager == null:
 		return
 	var manager = packed_manager.instantiate()
-	add_child(manager)
+	parent.add_child(manager)
 	
 	init_func.call(manager)
 

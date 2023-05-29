@@ -31,8 +31,8 @@ enum PatrolType {
 @export var hearing_range: float = 20
 
 @export var point_value: float = 100
-@onready var blood_effect_prefab = preload("res://scenes/effects/small_blood.tscn")
-@onready var corpse_prefab = preload("res://scenes/effects/corpse.tscn")
+@export var blood_effect_prefab : PackedScene
+@export var corpse_prefab : PackedScene
 
 var patrol_points: Array = []
 
@@ -45,6 +45,10 @@ func _ready():
 
 	weapon_manager.weapon.bullet_damages = weapon_manager.bullet_damages + GlobalVariables.level * 1.75 
 	fsm.init(self, weapon_manager.weapon, speed * 10)
+
+func _process(delta):
+	if action_disabled:
+		return
 
 func set_speed(new_speed: float):
 	speed = new_speed
@@ -61,7 +65,7 @@ func handle_hit(damager: Node2D, damages):
 	})
 	if health.is_dead() and !is_dead:
 		is_dead = true
-		var sprite_dead_enemy = spawn(corpse_prefab, self.global_position)		
+		var sprite_dead_enemy = spawn(corpse_prefab, self.global_position)
 		GlobalSignals.enemy_died.emit(sprite_dead_enemy, point_value)
 
 		if damager is Projectile:

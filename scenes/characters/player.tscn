@@ -1,17 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0x250onoqdno"]
+[gd_scene load_steps=16 format=3 uid="uid://b2icao5su4lyo"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
-[ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
-[ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_uemap"]
-[ext_resource type="PackedScene" uid="uid://dpscp32lejm1n" path="res://scenes/weapons/MachineGun.tscn" id="4_vy1d6"]
+[ext_resource type="PackedScene" uid="uid://c48gqwma6fv20" path="res://scenes/weapons/Glock.tscn" id="2_mu4yj"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_4brpw"]
+[ext_resource type="PackedScene" uid="uid://dpscp32lejm1n" path="res://scenes/weapons/MachineGun.tscn" id="4_hd63c"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
-[ext_resource type="PackedScene" uid="uid://cu5xhrk3gung2" path="res://scenes/weapons/Riffle.tscn" id="5_43l82"]
-[ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
-[ext_resource type="PackedScene" uid="uid://ty2w1el7t7x1" path="res://scenes/weapons/Sniper.tscn" id="6_oko04"]
-[ext_resource type="PackedScene" uid="uid://x0amqpcim4nu" path="res://scenes/weapons/MiniUzi.tscn" id="7_at8c2"]
+[ext_resource type="PackedScene" uid="uid://x0amqpcim4nu" path="res://scenes/weapons/MiniUzi.tscn" id="5_548j5"]
+[ext_resource type="PackedScene" uid="uid://cu5xhrk3gung2" path="res://scenes/weapons/Riffle.tscn" id="6_uekx1"]
+[ext_resource type="PackedScene" uid="uid://cekv24mq8jxv" path="res://scenes/weapons/Shotgun.tscn" id="7_me1ab"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
-[ext_resource type="PackedScene" uid="uid://cekv24mq8jxv" path="res://scenes/weapons/Shotgun.tscn" id="8_q5dp1"]
-[ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
+[ext_resource type="PackedScene" uid="uid://ty2w1el7t7x1" path="res://scenes/weapons/Sniper.tscn" id="8_wbl2l"]
 [ext_resource type="Texture2D" uid="uid://dtk16fqh5mb82" path="res://assets/character/Police-HM-2.png" id="11_q2lq8"]
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="14_bgmhi"]
 
@@ -30,18 +28,17 @@ colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 0)
 z_index = 1
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
+index_weapon_selected = 3
 weapon_list = {
-"glock": ExtResource("2_xaulr"),
-"grenade_launcher": ExtResource("3_uemap"),
-"machine_gun": ExtResource("4_vy1d6"),
-"mini_uzi": ExtResource("7_at8c2"),
-"riffle": ExtResource("5_43l82"),
-"shotgun": ExtResource("8_q5dp1"),
-"sniper": ExtResource("6_oko04")
+"glock": ExtResource("2_mu4yj"),
+"grenade_launcher": ExtResource("3_4brpw"),
+"machine_gun": ExtResource("4_hd63c"),
+"mini_uzi": ExtResource("5_548j5"),
+"riffle": ExtResource("6_uekx1"),
+"shotgun": ExtResource("7_me1ab"),
+"sniper": ExtResource("8_wbl2l")
 }
 speed = 2.5
-grappling_hook_scene = ExtResource("5_wxswb")
-projectile_weapon_scene = ExtResource("9_8nmes")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1

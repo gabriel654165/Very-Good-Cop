@@ -1,7 +1,6 @@
 extends StaticBody2D
 
 @onready var health := $Health as Health
-@onready var animation := $Explosion/Animation as AnimationPlayer
 @onready var particle_player := $ExplosionParticle/Animation as AnimationPlayer
 @onready var explosion_area := $ExplosionArea as Area2D
 
@@ -22,8 +21,6 @@ func destroy_instance():
 	queue_free()
 
 func explode():
-	animation.play("explosion")
-
 	particle_player.play("explosion_praticle")
 
 	var bodies := explosion_area.get_overlapping_bodies()
