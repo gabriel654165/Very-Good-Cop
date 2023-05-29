@@ -11,7 +11,6 @@ func _ready():
 	assert(room_config != null, "Add a room config to your room")
 	if should_spawn_stuff:
 		spawn_with_room_config("Patrols", get_patrol_paths, spawn_enemy)
-		spawn_with_room_config("PowerUpPoints", get_children_positions_array, spawn_powerups)
 
 
 func spawn_with_room_config(
