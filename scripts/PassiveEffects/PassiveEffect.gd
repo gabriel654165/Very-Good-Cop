@@ -14,11 +14,17 @@ var sprite : Sprite2D
 var used_sprite : Sprite2D
 
 enum TYPE {
-	HEALTH,
+	HEAL,
 	SPEED,
 	SLOW_MOTION,
-	DAMAGE
+	DAMAGE,
+	MINIMAP_EXTEND
 }
+
+
+func _ready():
+	pass
+
 
 func trigger(actor: Node):
 	if actor == null || !(actor is Character):
@@ -34,27 +40,38 @@ func trigger(actor: Node):
 	#print("effect removed")
 	set_active(false)
 
+
 func add_passive_effect(character: Character):
-	if type == TYPE.HEALTH:
+	if type == TYPE.HEAL:
 		character.health.heal(value_effect)
+		GlobalSignals.active_heal_power_up.emit(true)
 	if type == TYPE.SPEED:
 		value_save = character.speed
 		character.speed += value_effect
+		GlobalSignals.active_speed_power_up.emit(true)
 	if type == TYPE.DAMAGE:
 		value_save = character.weapon_manager.bullet_damages
 		character.weapon_manager.bullet_damages = value_effect
+		GlobalSignals.active_damage_power_up.emit(true)
 	if type == TYPE.SLOW_MOTION:
 		var camera = get_tree().current_scene.find_child("Camera2D")
-		#camera.canvas.shader_pixels
-		#camera.canvas.shader_pixels
 		Engine.time_scale = 0.4
+		GlobalSignals.active_slowmotion_power_up.emit(true)
+	if type == TYPE.MINIMAP_EXTEND:
+		GlobalSignals.active_minimap_power_up.emit(true)
+
 
 func remove_passive_effect(character: Character):
-	if type == TYPE.HEALTH:
+	if type == TYPE.HEAL:
 		pass
 	if type == TYPE.SPEED:
 		character.speed = value_save
+		GlobalSignals.active_speed_power_up.emit(false)
 	if type == TYPE.DAMAGE:
 		character.weapon_manager.bullet_damages = value_save
+		GlobalSignals.active_damage_power_up.emit(false)
 	if type == TYPE.SLOW_MOTION:
 		Engine.time_scale = 1
+		GlobalSignals.active_slowmotion_power_up.emit(true)
+	if type == TYPE.MINIMAP_EXTEND:
+		GlobalSignals.active_minimap_power_up.emit(false)

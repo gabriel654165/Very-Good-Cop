@@ -15,11 +15,11 @@ var sprite : NodePath
 var used_sprite : NodePath
 
 func _ready():
-	#todo : get child of type PassiveEffect instead
-	passive_effect = get_child(3) as PassiveEffect
+	passive_effect = get_node("./AddPassiveEffectInteraction") as PassiveEffect
 	if passive_effect == null:
 		return
 	set_variables(passive_effect)
+
 
 func set_variables(new_passive_effect: PassiveEffect):
 	if passive_effect == null:

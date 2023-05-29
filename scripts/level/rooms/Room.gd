@@ -67,10 +67,11 @@ func get_children_positions_array(node:Node):
 
 func spawn_powerups(position:Vector2):
 	var power_ups:Array[PackedScene] = [
-		preload("res://scenes/powerups/SlowMotion.tscn"),
+		#preload("res://scenes/powerups/SlowMotion.tscn"),
 		preload("res://scenes/powerups/Speed.tscn"),
-		preload("res://scenes/powerups/Damage.tscn"),
-		preload("res://scenes/powerups/Heal.tscn"),
+		#preload("res://scenes/powerups/Damage.tscn"),
+		#preload("res://scenes/powerups/Heal.tscn"),
+		#preload("res://scenes/powerups/MinimapExtend.tscn"),
 	]
 	var power_up = power_ups.pick_random().instantiate()
 	add_child(power_up)

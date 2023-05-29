@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://bsg7wbhktsf6b"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
+[ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="2_5lu21"]
 [ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_kdey6"]
-[ext_resource type="PackedScene" uid="uid://dho1bvmk2csju" path="res://scenes/particles/small_blood.tscn" id="2_n37tk"]
 [ext_resource type="PackedScene" uid="uid://bcs1erw2idhma" path="res://scenes/effects/corpse.tscn" id="3_j3lui"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
 [ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_vv8m0"]
@@ -20,8 +20,8 @@ size = Vector2(30, 16)
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
 hearing_range = 300.0
-blood_effect_prefab = ExtResource("2_n37tk")
-corpse_prefab = ExtResource("3_j3lui")
+blood_effect_scene = ExtResource("2_5lu21")
+corpse_scene = ExtResource("3_j3lui")
 speed = 10.0
 weapon_manager = NodePath("WeaponManager")
 

@@ -31,8 +31,8 @@ enum PatrolType {
 @export var hearing_range: float = 20
 
 @export var point_value: float = 100
-@export var blood_effect_prefab : PackedScene
-@export var corpse_prefab : PackedScene
+@export var blood_effect_scene : PackedScene
+@export var corpse_scene : PackedScene
 
 var patrol_points: Array = []
 
@@ -65,19 +65,26 @@ func handle_hit(damager: Node2D, damages):
 	})
 	if health.is_dead() and !is_dead:
 		is_dead = true
-		var sprite_dead_enemy = spawn(corpse_prefab, self.global_position)
+		var sprite_dead_enemy = instanciate_corpse(self.global_position, get_tree().current_scene, damager)
 		GlobalSignals.enemy_died.emit(sprite_dead_enemy, point_value)
-
-		if damager is Projectile:
-			var new_velocity: Vector2 = (damager as Projectile).direction
-			new_velocity = new_velocity.normalized()
-			sprite_dead_enemy.global_rotation = new_velocity.angle()
 		queue_free()
 	else:
-		spawn(blood_effect_prefab, global_position)
+		instanciate_blood_effect(self.global_position, get_tree().current_scene, damager)
 
-func spawn(prefab: Resource, position: Vector2):
-	var inst = prefab.instantiate()
-	get_tree().current_scene.add_child(inst)
+func instanciate_corpse(position: Vector2, parent: Node, damager: Node2D) -> Node:
+	var inst = corpse_scene.instantiate()
+	parent.add_child(inst)
 	inst.global_position = position
+	if damager is Projectile:
+		var new_velocity: Vector2 = (damager as Projectile).direction
+		new_velocity = new_velocity.normalized()
+		inst.global_rotation = new_velocity.angle()
 	return inst
+
+func instanciate_blood_effect(position: Vector2, parent: Node, damager: Node2D):
+	var inst = blood_effect_scene.instantiate()
+	parent.add_child(inst)
+	if damager is Projectile:
+		var new_velocity : Vector2 = damager.direction.normalized()
+		inst.get_node("SubViewportContainer/PixelizedSubViewport/CircleBloodParticles").set_rotation(new_velocity.angle())
+	inst.global_position = position - inst.size / 2

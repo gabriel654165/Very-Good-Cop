@@ -7,7 +7,7 @@ func _input(event):
 		#print("interaction : press = INACTIVE")
 		return
 	if Input.is_key_pressed(keyCode):
-		print("interaction : press = TRUE")
+		#print("interaction : press = TRUE")
 		is_triggered = true
 	else:
 		is_triggered = false

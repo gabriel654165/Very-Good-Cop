@@ -21,11 +21,11 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_werjm"]
-offsets = PackedFloat32Array(0, 0.718182)
+offsets = PackedFloat32Array(0, 0.388732)
 colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 0)
 
 [node name="Player" type="CharacterBody2D" groups=["character", "player"]]
-z_index = 1
+z_index = 2
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
 index_weapon_selected = 3

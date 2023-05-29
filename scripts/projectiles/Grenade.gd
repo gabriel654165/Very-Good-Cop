@@ -4,12 +4,12 @@ class_name Grenade
 @export var radius_pixels_impact_area : float = 100
 @export var max_launch_distance : float = 400
 @export var landing_precision : int = 1
+@export var shader_animation : AnimationPlayer
+@export var particle_animation : AnimationPlayer
 
 @onready var explosion_timer = $ExplosionTimer
 @onready var explosion_area = $ExplosionArea
 @onready var explosion_area_shape = get_node("ExplosionArea/ExplosionCollisionShape2D")
-
-@onready var animation = $Animation
 
 var bodies = []
 var distance : float = 0
@@ -56,7 +56,8 @@ func calulate_distance():
 	distance += range
 
 func explode():
-	animation.play("explosion")
+	shader_animation.play("shockwave_shader_animation")
+	particle_animation.play("grenade_explosion_particles")
 	bodies = explosion_area.get_overlapping_bodies()
 	#print("Explosion on : ", bodies, "\n")
 	for body in bodies:

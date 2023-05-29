@@ -22,6 +22,10 @@ GlobalFunctions="*res://scripts/globals/GlobalFunctions.gd"
 GlobalVariables="*res://scripts/globals/GlobalVariables.gd"
 DetectableTargetManager="*res://scripts/globals/DetectableTargetManager.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 right={

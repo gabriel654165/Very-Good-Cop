@@ -1,15 +1,14 @@
-extends Control
+extends Node2D
+class_name MainScript
 
 @export var gui_manager_scene : PackedScene
 @export var projectile_manager_scene : PackedScene
 @export var level_generator_scene : PackedScene
 @export var player : Player
 
-@export var subviewport_container : SubViewportContainer
-@export var regular_subviewport : SubViewport
-@export var pixelized_subviewport : SubViewport
-
-@export var test : Node
+@export var colorect_chromatic : ColorRect
+@export var colorect_stretched : ColorRect
+@export var colorect_distortion : ColorRect
 
 @onready var gui_manager : GuiManager = add_manager(gui_manager_scene, self, func(x):pass)
 @onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene, self, func(x):pass)
@@ -36,12 +35,37 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.panel_points_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.panel_kills_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
+	
+	GlobalSignals.active_minimap_power_up.connect(_set_minimap_power_up)
+	GlobalSignals.active_slowmotion_power_up.connect(_set_slowmotion_power_up)
+	GlobalSignals.active_speed_power_up.connect(_set_speed_power_up)
+	GlobalSignals.active_damage_power_up.connect(_set_damage_power_up)
+	GlobalSignals.active_heal_power_up.connect(_set_heal_power_up)
 
 	if level_generator != null:
 		await level_generator.generate()
 	spawn_player()
 	init_camera()
 	gui_manager.generate_ui()
+
+
+# TODO : animation of heal and after visible = false, enable not needed
+func _set_heal_power_up(enable: bool):
+	pass
+
+func _set_damage_power_up(enable: bool):
+	pass
+
+func _set_speed_power_up(enable: bool):
+	#colorect_stretched.visible = enable
+	pass
+
+func _set_slowmotion_power_up(enable: bool):
+	colorect_distortion.visible = enable
+
+# TODO : display entiere minimap with arrival room
+func _set_minimap_power_up(enable: bool):
+	colorect_chromatic.visible = enable
 
 
 # NOTE: Should we put an autoload function or keep it as a signal ? (https://github.com/godotengine/godot-proposals/issues/1827)
@@ -66,9 +90,6 @@ func spawn_player():
 func init_camera():
 	camera.global_position = player.global_position
 
-func _process(delta: float):
-	subviewport_container.global_position = player.global_position
-	#test.global_position = player.global_position
 
 func add_manager(packed_manager:PackedScene, parent: Node, init_func:Callable=func(x):pass):
 	if packed_manager == null:

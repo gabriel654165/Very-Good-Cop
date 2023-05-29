@@ -16,4 +16,10 @@ signal enemy_died(enemy: Node2D, points: int)
 
 signal level_generated(player_position: Vector2)
 
+signal active_minimap_power_up(enable: bool)
+signal active_slowmotion_power_up(enable: bool)
+signal active_speed_power_up(enable: bool)
+signal active_damage_power_up(enable: bool)
+signal active_heal_power_up(enable: bool)
+
 signal sound_emitted(source: Node2D, location: Vector2, intensity: float)
