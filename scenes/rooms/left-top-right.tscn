@@ -1061,7 +1061,7 @@ vertices = PackedVector2Array(257, -10, 267, -12, 267, 16, 256, 16, -112, 47, -6
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(4, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(13, 19, 20, 14), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 10, 14, 27, 15, 28), PackedInt32Array(4, 9, 26, 25), PackedInt32Array(28, 18, 29, 0, 3), PackedInt32Array(28, 15, 18), PackedInt32Array(28, 3, 21, 24)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-258, 259, 258, 259, 256, 16, 267, 16, 267, -12, 257, -10, 258, -258, 32, -258, 32, -264, -32, -264, -31.7628, -258, -258, -258, -253, -18, -276, -17, -280, 18, -254, 20, -256, 166, -196, 169, -196, 27, -133, 29, -134, 46, -178, 46, -177, 146, -61, 147, -61, 44, -112, 47, -110, 29, -45, 28, -42, 170, -256, 167)])
 
-[node name="TestRoom2" type="Node2D"]
+[node name="TestRoom3" type="Node2D"]
 script = ExtResource("1_50vuh")
 
 [node name="Doors" type="Node2D" parent="."]

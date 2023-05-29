@@ -1,4 +1,3 @@
-[gd_scene load_steps=13 format=3 uid="uid://bd1suthadqbc8"]
 
 [ext_resource type="Script" path="res://scripts/level/rooms/Room.gd" id="1_nb310"]
 [ext_resource type="Texture2D" uid="uid://dw70vdas1wntp" path="res://assets/tilemaps/hm_2_tilesets/ground.png" id="2_dtb4k"]
