@@ -16,11 +16,13 @@ size = Vector2(30, 16)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
+vision_cone_angle = 160.0
+vision_cone_range = 600.0
 speed = 10.0
 weapon_manager = NodePath("WeaponManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
+z_index = 3
 texture = ExtResource("2_3fkuj")
 region_enabled = true
 region_rect = Rect2(493, 397, 30, 15)
