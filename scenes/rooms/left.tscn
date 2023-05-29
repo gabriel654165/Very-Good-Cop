@@ -1033,7 +1033,7 @@ vertices = PackedVector2Array(-245, 22, -274, 24, -274, -21, -249, -21, 259, 260
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 0, 6), PackedInt32Array(7, 6, 0, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-258, -258, 259, -258, 259, 260, -258, 258, -245, 22, -274, 24, -274, -21, -249, -21)])
 
-[node name="TestRoom2" type="Node2D"]
+[node name="TestRoom3" type="Node2D"]
 script = ExtResource("1_uamjp")
 
 [node name="Doors" type="Node2D" parent="."]
