@@ -22,7 +22,7 @@ func handle_collision(collision: KinematicCollision2D):
 		return
 	var object = collision.get_collider()
 
-	if object.get_name() == "Walls" or object is Character or object.get_name().begins_with("Door"):
+	if object.get_name() == "Walls" or object is Character:
 		stop()
 		GlobalSignals.emit_signal("grappling_cable_drag", projectile_owner, self, global_position, drag_speed)
 
