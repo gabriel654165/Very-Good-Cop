@@ -1061,7 +1061,7 @@ vertices = PackedVector2Array(-258, 258, -258, -258, -32, -258, -32, 258, -32, -
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6, 7), PackedInt32Array(6, 8, 9, 7), PackedInt32Array(3, 7, 10, 11)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-258, 258, -32, 258, -32, 264, 32, 264, 32, 258, 258, 258, 258, -258, 32, -258, 32, -264, -32, -264, -32, -258, -258, -258)])
 
-[node name="TestRoom2" type="Node2D"]
+[node name="TestRoom3" type="Node2D"]
 script = ExtResource("1_dpqnn")
 metadata/_edit_horizontal_guides_ = []
 metadata/_edit_vertical_guides_ = [-32.0, 32.0]
