@@ -17,10 +17,12 @@ layout_mode = 2
 
 [node name="LabelTitle" type="Label" parent="VSplitContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Points"
 horizontal_alignment = 1
 
 [node name="LabelValue" type="Label" parent="VSplitContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "1000 PTS"
 horizontal_alignment = 1

@@ -2,8 +2,8 @@ extends SpecialPower
 
 @onready var target = $Target
 
-@export var time_between_shoots : float = 0.025
-@export var full_rotation_by_second : float = 1
+@export var time_between_shoots : float = 0.001
+@export var full_rotation_by_second : float = 2
 
 var save_recoil_force : float = 0
 var save_player_speed : float = 0
