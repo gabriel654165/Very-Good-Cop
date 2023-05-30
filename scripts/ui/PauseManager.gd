@@ -2,7 +2,7 @@ extends Node
 class_name PauseManager
 
 @export var active : bool = false
-@export var aim_blur_intensity : float = 0.5
+@export var aim_blur_intensity : float = 1.0
 @export var time_to_blur : float = 0.5
 
 @export var pop_up_text_scene : PackedScene
@@ -35,7 +35,7 @@ func set_active(state: bool):
 		unload_ui()
 
 func _process(delta):
-	if (active and current_blur_intensity < 1) or (!active and current_blur_intensity > 0):
+	if (active and current_blur_intensity < aim_blur_intensity) or (!active and current_blur_intensity > 0):
 		color_rect.get_material().set_shader_parameter("intensity", current_blur_intensity)
 	elif !active and current_blur_intensity == 0 and !base_panel.visible:
 		pause_gui.visible = false

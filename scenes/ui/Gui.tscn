@@ -20,15 +20,16 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
 shader = ExtResource("16_wdi1s")
-shader_parameter/target = Vector2(-1, 1)
-shader_parameter/intensity = 0.0
-shader_parameter/focusSize = null
+shader_parameter/has_target = false
+shader_parameter/target = Vector2(0.5, 0.5)
+shader_parameter/intensity = 1.0
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_cf1if")
 
 [node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("pause_gui", "base_panel", "option_panel", "color_rect")]
 script = ExtResource("2_lu52o")
+aim_blur_intensity = 1.5
 pop_up_text_scene = ExtResource("7_bnyiq")
 pause_gui = NodePath("../PanelsContainer/PauseControl")
 base_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/BasePanelContainer")

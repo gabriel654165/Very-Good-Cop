@@ -17,10 +17,14 @@ void fragment() {
 	vec4 hotnessColor = (hotColor * currentHot);
 	vec2 modifiedUVHot = SCREEN_UV;
 	
-	modifiedUVHot.x -= (((1.0 - modifiedUVHot.y) * heatAmplitude) *
-	sin(heatPeriod * (modifiedUVHot.y - (TIME * 0.016 * heatPhaseShift)))) *
-	clamp(1.0 - (modifiedUVHot.y * (10.0 - heatUpperLimit)), 0.0, 0.5) * 
-	currentHot;
+	modifiedUVHot.x -= 
+		(
+			((1.0 - modifiedUVHot.y) * heatAmplitude) *
+			sin(heatPeriod * (modifiedUVHot.y - (TIME * 0.016 * heatPhaseShift)))
+		) * 
+			clamp(1.0 - (modifiedUVHot.y * (10.0 - heatUpperLimit)), 0.0, 0.5
+		) * 
+			currentHot;
 	
 	COLOR = texture(SCREEN_TEXTURE, modifiedUVHot);
 	COLOR.rgb += hotnessColor.rgb * hotnessColor.a;

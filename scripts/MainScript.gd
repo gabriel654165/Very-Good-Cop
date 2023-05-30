@@ -7,7 +7,7 @@ class_name MainScript
 @export var player : Player
 
 @export var colorect_chromatic : ColorRect
-@export var colorect_stretched : ColorRect
+@export var colorect_redialdistortion : ColorRect
 @export var colorect_distortion : ColorRect
 
 @onready var gui_manager : GuiManager = add_manager(gui_manager_scene, self, func(x):pass)
@@ -57,8 +57,7 @@ func _set_damage_power_up(enable: bool):
 	pass
 
 func _set_speed_power_up(enable: bool):
-	#colorect_stretched.visible = enable
-	pass
+	colorect_redialdistortion.visible = enable
 
 func _set_slowmotion_power_up(enable: bool):
 	colorect_distortion.visible = enable
