@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cln3tm4tpayb6"]
+
+[ext_resource type="Script" path="res://scripts/ui/ItemPreviewPanel.gd" id="1_5vb6i"]
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_alkyp"]
+[ext_resource type="VideoStream" path="res://assets/previews/preview-resized.ogv" id="1_duicl"]
+
+[node name="PreviewPanel" type="PanelContainer" node_paths=PackedStringArray("video_stream_player")]
+theme = ExtResource("1_alkyp")
+script = ExtResource("1_5vb6i")
+video_stream_player = NodePath("VBoxContainer/VideoStreamPlayer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Preview" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Preview"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+stream = ExtResource("1_duicl")
+autoplay = true
+expand = true
