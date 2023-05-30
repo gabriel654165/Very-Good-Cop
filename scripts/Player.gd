@@ -37,7 +37,7 @@ func manage_rotation():
 	var direction : Vector2 = Vector2.ZERO
 	
 	if !weapon_manager.weapon.special_power.activated or (weapon_manager.weapon.special_power.activated and (!weapon_manager.weapon.special_power.disable_look_at and weapon_manager.weapon.special_power.player_target == Vector2.ZERO)):
-		direction = get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position
+		direction = get_canvas_transform().affine_inverse() * GlobalVariables.cursor_position
 	elif weapon_manager.weapon.special_power.player_target != Vector2.ZERO and !weapon_manager.weapon.special_power.disable_look_at:
 		direction = weapon_manager.weapon.special_power.player_target
 	if direction != Vector2.ZERO:
