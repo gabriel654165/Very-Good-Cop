@@ -39,6 +39,24 @@ one_shot = true
 shape = SubResource("RectangleShape2D_oxpfh")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+z_index = 5
+amount = 6
+lifetime = 0.2
+lifetime_randomness = 0.17
+fixed_fps = 45
+emission_shape = 1
+emission_sphere_radius = 20.0
+particle_flag_align_y = true
+direction = Vector2(0, 1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_0p2yp")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
 z_index = 5
 amount = 6
 lifetime = 0.2

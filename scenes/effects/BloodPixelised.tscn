@@ -11,6 +11,7 @@ shader = ExtResource("1_i8vio")
 shader_parameter/pixelSize = 4
 
 [node name="BloodPixelised" type="Control"]
+visibility_layer = 2
 z_index = 1
 material = SubResource("ShaderMaterial_i0wup")
 custom_minimum_size = Vector2(100, 100)
@@ -25,7 +26,7 @@ grow_vertical = 2
 pivot_offset = Vector2(100, 100)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-visibility_layer = 3
+visibility_layer = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,9 +54,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SquareBloodParticles" parent="SubViewportContainer/PixelizedSubViewport" instance=ExtResource("5_bgix0")]
-visible = false
 position = Vector2(100, 100)
+amount = 3
+spread = 70.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
 
 [node name="CircleBloodParticles" parent="SubViewportContainer/PixelizedSubViewport" instance=ExtResource("6_6hh5g")]
+visible = false
 visibility_layer = 2
 position = Vector2(100, 100)
+scale_amount_min = 0.02

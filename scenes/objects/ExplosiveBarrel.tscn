@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxjxhq5autr58"]
+[gd_scene load_steps=15 format=3 uid="uid://cxjxhq5autr58"]
 
 [ext_resource type="Script" path="res://scripts/objects/ExplosiveBarrel.gd" id="1_o5qxv"]
 [ext_resource type="Script" path="res://scripts/Health.gd" id="2_hh2m6"]
 [ext_resource type="PackedScene" uid="uid://hcaid5opl6tx" path="res://scenes/particles/ExplosionParticles.tscn" id="3_hqxlf"]
 [ext_resource type="Shader" path="res://scripts/shaders/ShockWaveShader.gdshader" id="4_i7m5n"]
+[ext_resource type="Shader" path="res://scripts/shaders/PixelisedShader.gdshader" id="4_ibhi4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r55sq"]
 size = Vector2(32, 32)
@@ -11,8 +12,9 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1s42y"]
 size = Vector2(32, 32)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r0w5s"]
-radius = 142.004
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g47pp"]
+shader = ExtResource("4_ibhi4")
+shader_parameter/pixelSize = 10
 
 [sub_resource type="Animation" id="Animation_rj804"]
 resource_name = "barrel_explosion_particles"
@@ -32,7 +34,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:visible")
+tracks/1/path = NodePath("../../../../Sprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -44,7 +46,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("..")
+tracks/2/path = NodePath("../../../..")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -168,8 +170,8 @@ _data = {
 
 [node name="ExplosiveBarrel" type="StaticBody2D" node_paths=PackedStringArray("particle_animation", "shader_animation")]
 script = ExtResource("1_o5qxv")
-particle_animation = NodePath("ExplosionParticles/AnimationPlayer")
-shader_animation = NodePath("Control/AnimationPlayer")
+particle_animation = NodePath("ExplosionControl/SubViewportContainer/PixelizedSubViewport/ExplosionParticles/AnimationPlayer")
+shader_animation = NodePath("ShockWaveControl/AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_r55sq")
@@ -182,20 +184,59 @@ script = ExtResource("2_hh2m6")
 max_health = 3
 health = 3
 
-[node name="ExplosionArea" type="Area2D" parent="."]
+[node name="ExplosionControl" type="Control" parent="."]
+visibility_layer = 2
+z_index = 1
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="ExplosionCollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
-shape = SubResource("CircleShape2D_r0w5s")
-debug_color = Color(0, 0.592157, 0.745098, 0.419608)
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ExplosionControl"]
+visibility_layer = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 150)
 
-[node name="ExplosionParticles" parent="." instance=ExtResource("3_hqxlf")]
+[node name="PixelizedSubViewport" type="SubViewport" parent="ExplosionControl/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294967294
+size = Vector2i(300, 300)
+render_target_update_mode = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ExplosionParticles"]
+[node name="CanvasLayer" type="CanvasLayer" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport"]
+
+[node name="ColorRect-Pixels" type="ColorRect" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport/CanvasLayer"]
+visibility_layer = 2
+material = SubResource("ShaderMaterial_g47pp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExplosionParticles" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport" instance=ExtResource("3_hqxlf")]
+visibility_layer = 2
+position = Vector2(150, 150)
+amount = 25
+speed_scale = 0.75
+scale_amount_min = 4.0
+scale_amount_max = 16.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport/ExplosionParticles"]
 libraries = {
 "": SubResource("AnimationLibrary_aby0j")
 }
 
-[node name="Control" type="Control" parent="."]
+[node name="ShockWaveControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -150.0
@@ -203,7 +244,7 @@ offset_top = -150.0
 offset_right = 150.0
 offset_bottom = 150.0
 
-[node name="ColorRectShockWave" type="ColorRect" parent="Control"]
+[node name="ColorRectShockWave" type="ColorRect" parent="ShockWaveControl"]
 visible = false
 material = SubResource("ShaderMaterial_r4phg")
 layout_mode = 1
@@ -213,7 +254,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShockWaveControl"]
 libraries = {
 "": SubResource("AnimationLibrary_wqy4q")
 }

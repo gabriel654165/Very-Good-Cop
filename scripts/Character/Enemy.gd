@@ -86,5 +86,6 @@ func instanciate_blood_effect(position: Vector2, parent: Node, damager: Node2D):
 	parent.add_child(inst)
 	if damager is Projectile:
 		var new_velocity : Vector2 = damager.direction.normalized()
+		inst.get_node("SubViewportContainer/PixelizedSubViewport/SquareBloodParticles").set_rotation(new_velocity.angle())
 		inst.get_node("SubViewportContainer/PixelizedSubViewport/CircleBloodParticles").set_rotation(new_velocity.angle())
 	inst.global_position = position - inst.size / 2

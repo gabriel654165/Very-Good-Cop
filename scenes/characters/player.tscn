@@ -28,7 +28,6 @@ colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 0)
 z_index = 2
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
-index_weapon_selected = 3
 weapon_list = {
 "glock": ExtResource("2_mu4yj"),
 "grenade_launcher": ExtResource("3_4brpw"),
