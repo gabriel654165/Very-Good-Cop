@@ -1,18 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsmds3f5t14j"]
+[gd_scene load_steps=10 format=3 uid="uid://bsmds3f5t14j"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/Bullet.gd" id="1_2jtls"]
 [ext_resource type="Texture2D" uid="uid://cntb7fb243sp0" path="res://assets/Spritesheet/sheet_tanks.png" id="1_g8iif"]
 [ext_resource type="PackedScene" uid="uid://xdkaf1s14ef6" path="res://scenes/particles/BulletImpactFragments.tscn" id="2_ce033"]
+[ext_resource type="PackedScene" uid="uid://dx37tptpyigj7" path="res://scenes/effects/ShootingTrail.tscn" id="4_efhkj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxpfh"]
 size = Vector2(12, 24)
 
 [sub_resource type="Gradient" id="Gradient_0p2yp"]
-offsets = PackedFloat32Array(0, 0.636364)
+offsets = PackedFloat32Array(0, 0.560411)
 colors = PackedColorArray(0.890196, 0, 0, 1, 1, 0.392157, 0.0588235, 1)
 
+[sub_resource type="Gradient" id="Gradient_2tekx"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.192157)
+
+[sub_resource type="Gradient" id="Gradient_pfw6x"]
+offsets = PackedFloat32Array(0, 0.511568, 0.681234, 0.876607)
+colors = PackedColorArray(1, 1, 1, 1, 0.818595, 0.818595, 0.818595, 1, 0.660775, 0.660775, 0.660775, 1, 0.479043, 0.479043, 0.479043, 1)
+
+[sub_resource type="Gradient" id="Gradient_jf3ll"]
+offsets = PackedFloat32Array(0, 0.910026, 0.956298, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 0.686138, 0.641023, 1, 1, 0.537255, 0.945098, 1, 1, 0.278431, 1)
+
 [node name="Bullet" type="CharacterBody2D"]
-position = Vector2(-131, 38)
+z_index = 1
 rotation = 1.5708
 scale = Vector2(0.359327, 0.360007)
 collision_layer = 2
@@ -22,7 +34,6 @@ damages = 5
 bullet_impact_fragments_scene = ExtResource("2_ce033")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_oxpfh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -38,7 +49,7 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_oxpfh")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="SmallRedParticles" type="CPUParticles2D" parent="."]
 visible = false
 z_index = 5
 amount = 6
@@ -56,7 +67,7 @@ initial_velocity_max = 350.0
 scale_amount_max = 3.0
 color_ramp = SubResource("Gradient_0p2yp")
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+[node name="SmallWhiteParticles" type="CPUParticles2D" parent="."]
 z_index = 5
 amount = 6
 lifetime = 0.2
@@ -71,7 +82,85 @@ gravity = Vector2(0, 0)
 initial_velocity_min = 350.0
 initial_velocity_max = 350.0
 scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_2tekx")
+
+[node name="RedParticles" type="Node2D" parent="."]
+visible = false
+
+[node name="CPUParticlesLine" type="CPUParticles2D" parent="RedParticles"]
+z_index = 5
+amount = 20
+lifetime = 0.1
+lifetime_randomness = 0.17
+fixed_fps = 45
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, 1)
+spread = 1.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+scale_amount_max = 3.0
 color_ramp = SubResource("Gradient_0p2yp")
+
+[node name="CPUParticlesBullet" type="CPUParticles2D" parent="RedParticles"]
+z_index = 5
+amount = 20
+lifetime = 0.02
+speed_scale = 0.5
+lifetime_randomness = 0.17
+fixed_fps = 45
+emission_shape = 3
+emission_rect_extents = Vector2(15, 10)
+direction = Vector2(0, 1)
+spread = 1.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_0p2yp")
+
+[node name="WhiteParticles" type="Node2D" parent="."]
+visible = false
+
+[node name="CPUParticlesLine" type="CPUParticles2D" parent="WhiteParticles"]
+z_index = 5
+amount = 20
+lifetime = 0.1
+lifetime_randomness = 0.17
+fixed_fps = 45
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, 1)
+spread = 1.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_pfw6x")
+
+[node name="CPUParticlesBullet" type="CPUParticles2D" parent="WhiteParticles"]
+z_index = 5
+amount = 20
+lifetime = 0.02
+speed_scale = 0.5
+lifetime_randomness = 0.17
+fixed_fps = 45
+emission_shape = 3
+emission_rect_extents = Vector2(10, 15)
+direction = Vector2(0, 1)
+spread = 1.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 350.0
+initial_velocity_max = 350.0
+scale_amount_max = 3.0
+
+[node name="ShootingTrail" parent="." node_paths=PackedStringArray("bullet_instance") instance=ExtResource("4_efhkj")]
+z_index = -1
+width = 10.0
+gradient = SubResource("Gradient_jf3ll")
+trail_length = 20
+bullet_instance = NodePath("..")
 
 [connection signal="timeout" from="LifeCycleTimer" to="." method="_on_life_cycle_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c48gqwma6fv20"]
+[gd_scene load_steps=15 format=3 uid="uid://c48gqwma6fv20"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_l0sh4"]
 [ext_resource type="PackedScene" uid="uid://bsmds3f5t14j" path="res://scenes/weapons/bullet.tscn" id="2_6sna8"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="3_g5r07"]
+[ext_resource type="PackedScene" uid="uid://dx37tptpyigj7" path="res://scenes/effects/ShootingTrail.tscn" id="4_02fco"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="4_dg1tv"]
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="5_58qos"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="6_ms0f7"]
@@ -119,6 +120,7 @@ weapon/recoil_force = 1.0
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("3_g5r07")
+shooting_trail_scene = ExtResource("4_02fco")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 visible = false

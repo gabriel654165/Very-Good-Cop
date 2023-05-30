@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxjxhq5autr58"]
+[gd_scene load_steps=16 format=3 uid="uid://cxjxhq5autr58"]
 
 [ext_resource type="Script" path="res://scripts/objects/ExplosiveBarrel.gd" id="1_o5qxv"]
 [ext_resource type="Script" path="res://scripts/Health.gd" id="2_hh2m6"]
@@ -11,6 +11,9 @@ size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1s42y"]
 size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjap6"]
+radius = 142.004
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g47pp"]
 shader = ExtResource("4_ibhi4")
@@ -178,6 +181,12 @@ texture = SubResource("PlaceholderTexture2D_r55sq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1s42y")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+
+[node name="ExplosionCollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_cjap6")
+debug_color = Color(0, 0.592157, 0.745098, 0.419608)
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("2_hh2m6")

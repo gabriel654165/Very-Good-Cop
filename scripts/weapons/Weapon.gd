@@ -5,6 +5,9 @@ class_name Weapon
 @export var shooting_sound : AudioStream
 @export var reloading_sound : AudioStream
 
+@export var shooting_trail_scene : PackedScene
+var shooting_trail : ShootingTrail
+
 var weapon_name : String = ""
 var special_power_unlocked : bool = false
 var level : int = 0
@@ -79,13 +82,19 @@ func shoot():
 			
 			if n != 0:
 				await get_tree().create_timer(frequence_of_burt).timeout
-#			shot = true
+
 			projectile_instance = projectile_scene.instantiate()
 			var direction = fire_direction.global_position - fire_position.global_position
 			set_projectile_variables(projectile_instance)
-			
 			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
 			emit_signals(shooter_actor, projectile_instance, direction)
+			
+			#--
+			#shooting_trail = shooting_trail_scene.instantiate()
+			#get_tree().current_scene.add_child(shooting_trail)
+			#shooting_trail.bullet_instance = projectile_instance
+			#--
+			
 			recoil_shooter(direction)
 
 			animation.play("muzzle_flash")
