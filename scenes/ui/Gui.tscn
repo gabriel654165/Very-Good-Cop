@@ -22,6 +22,7 @@
 shader = ExtResource("16_wdi1s")
 shader_parameter/target = Vector2(-1, 1)
 shader_parameter/intensity = 0.0
+shader_parameter/focusSize = null
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_cf1if")

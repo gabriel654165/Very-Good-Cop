@@ -5,11 +5,11 @@
 
 [node name="BloodParticles" type="CPUParticles2D"]
 z_index = 5
-amount = 10
+amount = 2
 lifetime = 0.2
 explosiveness = 1.0
 texture = ExtResource("1_e2fmf")
-spread = 25.0
+spread = 90.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 75.0
 initial_velocity_max = 290.0

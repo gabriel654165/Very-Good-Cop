@@ -57,5 +57,5 @@ visible = false
 position = Vector2(100, 100)
 
 [node name="CircleBloodParticles" parent="SubViewportContainer/PixelizedSubViewport" instance=ExtResource("6_6hh5g")]
-visibility_layer = 3
+visibility_layer = 2
 position = Vector2(100, 100)
