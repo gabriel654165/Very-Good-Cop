@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
 [ext_resource type="PackedScene" uid="uid://cxsu4atm07u3i" path="res://scenes/weapons/Knife.tscn" id="8_nt46u"]
-[ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="10_5l0q5"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/throwed_weapon.tscn" id="10_5l0q5"]
 [ext_resource type="Texture2D" uid="uid://dtk16fqh5mb82" path="res://assets/character/Police-HM-2.png" id="11_q2lq8"]
-[ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_18ulw"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/Weapon.tscn" id="13_18ulw"]
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="14_bgmhi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
