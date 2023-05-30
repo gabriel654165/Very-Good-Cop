@@ -16,6 +16,7 @@ extends Area2D
 # Tweak those for maximum door speed 
 @export var max_door_speed_rad := 15
 @export var min_magnitude := 25
+@export var max_magnitude := 41.5
 
 var door_speed_rad := 0.0
 
@@ -33,8 +34,7 @@ func _on_body_entered(body:Node2D):
 	var rotation_is_clockwise := body_collision_angle > 0
 
 	var magnitude := door_origin_to_body.length()
-	magnitude = min_magnitude if magnitude < min_magnitude else magnitude
-
+	magnitude = clamp(magnitude, min_magnitude, max_magnitude)
 	var magnitude_force_factor : float = distance_from_the_hinge_force_factor/magnitude # The closer we are to door's hinge, the faster it will go
 
 	var clockwise_factor := 1 if rotation_is_clockwise else -1 
