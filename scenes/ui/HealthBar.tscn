@@ -9,8 +9,9 @@
 [node name="HealthBar" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 38.0
-offset_bottom = 6.0
+offset_right = 47.0
+offset_bottom = 8.0
+pivot_offset = Vector2(23.5, 3.5)
 script = ExtResource("3_thb20")
 
 [node name="HealUnder" type="TextureProgressBar" parent="."]
@@ -29,6 +30,7 @@ tint_progress = Color(0.670588, 0.74902, 0.0392157, 1)
 layout_mode = 0
 offset_right = 47.0
 offset_bottom = 8.0
+pivot_offset = Vector2(0.748, 0)
 value = 100.0
 nine_patch_stretch = true
 texture_over = ExtResource("2_kfn8e")
