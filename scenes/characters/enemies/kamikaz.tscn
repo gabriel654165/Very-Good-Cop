@@ -18,7 +18,7 @@
 size = Vector2(30, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5x6xs"]
-radius = 75.36
+radius = 90.0
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_tmx5x")
@@ -66,6 +66,9 @@ script = ExtResource("9_ntefd")
 [node name="GoToPlayerAndExplode" type="Node" parent="StateMachine"]
 script = ExtResource("10_sqq5i")
 
+[node name="TimerBeforeExplode" type="Timer" parent="StateMachine/GoToPlayerAndExplode"]
+one_shot = true
+
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
 position = Vector2(4, 0)
 
@@ -91,3 +94,7 @@ collision_mask = 7
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDamageArea"]
 shape = SubResource("CircleShape2D_5x6xs")
 debug_color = Color(0.929412, 0.231373, 0.341176, 0.419608)
+
+[node name="TimerBeforeExplode" type="Timer" parent="."]
+
+[connection signal="timeout" from="StateMachine/GoToPlayerAndExplode/TimerBeforeExplode" to="StateMachine/GoToPlayerAndExplode" method="_on_timer_before_explode_timeout"]

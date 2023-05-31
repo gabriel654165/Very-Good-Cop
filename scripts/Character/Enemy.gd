@@ -52,7 +52,7 @@ func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
 	if health.is_dead() and !is_dead:
 		is_dead = true
-		var sprite_dead_enemy = spawn(corpse_prefab, self.global_position)
+		var sprite_dead_enemy = GlobalFunctions.spawn(corpse_prefab, self.global_position)
 		GlobalSignals.enemy_died.emit(sprite_dead_enemy, point_value)
 
 		if damager is Projectile:
@@ -61,10 +61,4 @@ func handle_hit(damager: Node2D, damages):
 			sprite_dead_enemy.global_rotation = new_velocity.angle()
 		queue_free()
 	else:
-		spawn(blood_effect_prefab, global_position)
-
-func spawn(prefab: Resource, position: Vector2):
-	var inst = prefab.instantiate()
-	get_tree().current_scene.add_child(inst)
-	inst.global_position = position
-	return inst
+		GlobalFunctions.spawn(blood_effect_prefab, global_position)

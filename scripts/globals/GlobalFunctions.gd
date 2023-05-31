@@ -120,3 +120,25 @@ func load_save():
 
 	save_file.close()
 
+func spawn(prefab: Resource, position: Vector2):
+	var inst = prefab.instantiate()
+	get_tree().current_scene.add_child(inst)
+	inst.global_position = position
+	return inst
+
+func spawn_and_destroy(prefab: Resource, position: Vector2, wait_time: float):
+	var inst = spawn(prefab, position)
+	var timer = Timer.new()
+	timer.wait_time = wait_time
+	timer.one_shot = true
+	inst.add_child(timer)
+	return inst
+
+func spawn_and_destroy_cb(prefab: Resource, position: Vector2, wait_time: float, callback: Callable):
+	var inst = spawn(prefab, position)
+	var timer = Timer.new()
+	timer.timeout.connect(callback)
+	timer.wait_time = wait_time
+	timer.one_shot = true
+	inst.add_child(timer)
+	return inst
