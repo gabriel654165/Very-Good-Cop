@@ -22,22 +22,15 @@ enum TYPE {
 }
 
 
-func _ready():
-	pass
-
-
 func trigger(actor: Node):
 	if actor == null || !(actor is Character):
 		return
-	#print("---Do passive effect action : ", self.name, " on : ", actor.name)
-	#print("Values_effect updated ? : ", value_effect, " and type : ", type)
 	add_passive_effect(actor)
 	sprite.visible = false
 	used_sprite.visible = true
 	await get_tree().create_timer(effect_duration).timeout
 	if actor != null:
 		remove_passive_effect(actor)
-	#print("effect removed")
 	set_active(false)
 
 
@@ -54,7 +47,6 @@ func add_passive_effect(character: Character):
 		character.weapon_manager.projectile_damages = value_effect
 		GlobalSignals.active_damage_power_up.emit(true)
 	if type == TYPE.SLOW_MOTION:
-		var camera = get_tree().current_scene.find_child("Camera2D")
 		Engine.time_scale = 0.4
 		GlobalSignals.active_slowmotion_power_up.emit(true)
 	if type == TYPE.MINIMAP_EXTEND:
@@ -62,8 +54,6 @@ func add_passive_effect(character: Character):
 
 
 func remove_passive_effect(character: Character):
-	if type == TYPE.HEAL:
-		pass
 	if type == TYPE.SPEED:
 		character.speed = value_save
 		GlobalSignals.active_speed_power_up.emit(false)

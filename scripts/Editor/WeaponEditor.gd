@@ -27,7 +27,6 @@ var number_of_frag_projectile : int = 3
 
 var ammo_size : int = 6
 var ammo_reloading_time : float = 1
-var shot_shell_particle_scene : PackedScene
 var shot_shell_texture : Texture2D
 
 var enable : bool = true
@@ -144,8 +143,6 @@ func _get(property):
 		return ammo_size
 	if property == 'ammo/ammo_reloading_time':
 		return ammo_reloading_time
-	if property == 'ammo/shot_shell_particle_scene':
-		return shot_shell_particle_scene
 	if property == 'ammo/shot_shell_texture':
 		return shot_shell_texture
 	
@@ -207,8 +204,6 @@ func _set(property, value) -> bool :
 		ammo_size = value
 	if property == 'ammo/ammo_reloading_time':
 		ammo_reloading_time = value
-	if property == 'ammo/shot_shell_particle_scene':
-		shot_shell_particle_scene = value
 	if property == 'ammo/shot_shell_texture':
 		shot_shell_texture = value
 	
@@ -300,9 +295,6 @@ func _get_property_list() -> Array:
 	},{
 		'name': 'ammo/ammo_reloading_time',
 		'type': TYPE_FLOAT,
-	}, {
-		'name': 'ammo/shot_shell_particle_scene',
-		'type': TYPE_OBJECT,
 	}, {
 		'name': 'ammo/shot_shell_texture',
 		'type': TYPE_OBJECT,

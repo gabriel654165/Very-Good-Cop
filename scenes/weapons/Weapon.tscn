@@ -103,7 +103,6 @@ projectile/projectile_should_pierce_walls = false
 projectile/projectile_should_frag = false
 ammo/ammo_size = 1
 ammo/ammo_reloading_time = 1.0
-ammo/shot_shell_particle_scene = ExtResource("7_1qqsf")
 ammo/shot_shell_texture = null
 weapon/enable = true
 weapon/shooting_cooldown = 0.5

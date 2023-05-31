@@ -22,8 +22,7 @@ func generate_ui():
 	cursor_manager.set_active(true)
 	pause_manager.set_active(false)
 	weapon_shop_manager.set_active(false)
-	
-	choose_weapon_manager.set_active(false)
+	choose_weapon_manager.set_active(true)
 
 func set_active_gui_panels(state: bool):
 	panel_points_manager.panel.visible = state

@@ -9,9 +9,7 @@ class_name Projectile
 @export var should_bounce : bool = false
 @export var should_pierce_walls : bool = false
 @export var should_frag : bool = false
-
 @export var bullet_impact_fragments_scene : PackedScene
-
 @export var animation_player : AnimationPlayer
 
 var frag_projectile_precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo

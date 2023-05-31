@@ -183,8 +183,6 @@ func spawn_dungeon_rooms():
 		if room == entrance_pos or room == exit_pos:
 			instantiated_room.should_spawn_stuff = false
 		instantiated_room.position = relative_pos
-		
-		#print("relative_pos = ", relative_pos)
 
 		var door := preload("res://scenes/objects/door.tscn")
 		if door_bitflag_has_door(doors_id, LeftDoor):
