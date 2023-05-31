@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export var gui_manager_scene : PackedScene
 @export var projectile_manager_scene : PackedScene
@@ -11,9 +11,17 @@ extends Node2D
 @onready var camera : Camera2D = $Camera2D
 @onready var player : Player = $Player
 
+
 func _ready():
-	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
+	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
 	
+	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
+	GlobalSignals.player_fired.connect(gui_manager.weapon_panel_manager.handle_player_fired)
+	GlobalSignals.player_reloading.connect(gui_manager.weapon_panel_manager.handle_player_reload)
+	GlobalSignals.player_use_special_power.connect(gui_manager.weapon_panel_manager.handle_use_special_power)
+
+	GlobalSignals.play_sound.connect(_do_play_sound)
+
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
 	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)
 	GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_grappling_cable_drag)
@@ -22,7 +30,7 @@ func _ready():
 	GlobalSignals.character_health_changed.connect(gui_manager.health_ui_manager.handle_character_health_changed)
 	GlobalSignals.character_health_changed.connect(gui_manager.pop_up_health_manager.handle_character_health_changed)
 	GlobalSignals.character_max_health_changed.connect(gui_manager.health_ui_manager.handle_character_max_health_changed)
-	
+
 	GlobalSignals.enemy_died.connect(player.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.pop_up_points_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.panel_points_manager.handle_enemy_died)
@@ -34,6 +42,21 @@ func _ready():
 	spawn_player()
 	init_camera()
 	gui_manager.generate_ui()
+
+
+# NOTE: Should we put an autoload function or keep it as a signal ? (https://github.com/godotengine/godot-proposals/issues/1827)
+func _do_play_sound(sound:AudioStream, volume_db: float = 0.0, pitch_scale: float = 1.0, pos:Vector2i = player.global_position):
+	var audio_stream_player := AudioStreamPlayer2D.new()
+	add_child(audio_stream_player)
+	audio_stream_player.bus = "Sounds"
+	audio_stream_player.stream = sound
+	audio_stream_player.volume_db = volume_db * 10
+	audio_stream_player.pitch_scale = pitch_scale
+	audio_stream_player.global_position = pos
+	audio_stream_player.play()
+	
+	audio_stream_player.finished.connect(audio_stream_player.queue_free)
+	
 
 func spawn_player():
 	if level_generator != null:

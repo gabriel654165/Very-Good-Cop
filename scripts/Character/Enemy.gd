@@ -11,6 +11,7 @@ enum PatrolType {
 @onready var vision_sensor: VisionSensor = $VisionSensor
 @onready var hearing_sensor: HearingSensor = $HearingSensor
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var state_machine := $StateMachine as AIStateMachine
 
 @export var patrol_type: PatrolType = PatrolType.Sequence
 @export var patrol_wait: float = 3
@@ -42,6 +43,7 @@ func _ready():
 	weapon_manager = get_node("WeaponManager")
 	weapon_manager.weapon.global_position = weapon_position.global_position
 
+	weapon_manager.weapon.projectile_damages = weapon_manager.projectile_damages + GlobalVariables.level * 1.75 
 	fsm.init(self, weapon_manager.weapon, speed * 10)
 
 func set_speed(new_speed: float):
@@ -50,6 +52,13 @@ func set_speed(new_speed: float):
 
 func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
+	
+	#go to player if he shooting us
+	#todo: projectile_owner seems to be null on projectile
+	#find a way to know the damager owner
+	state_machine.transition_to(state_machine.FOLLOW_TARGET, {
+		target = get_tree().current_scene.find_child("Player")
+	})
 	if health.is_dead() and !is_dead:
 		is_dead = true
 		var sprite_dead_enemy = GlobalFunctions.spawn(corpse_prefab, self.global_position)

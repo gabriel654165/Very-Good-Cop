@@ -33,12 +33,13 @@ func enter(_msg := {}) -> void:
 		vision_sensor.can_see_target.connect(_on_see_target)
 	if !state_machine.navigation_agent.target_reached.is_connected(_on_target_reached):
 		state_machine.navigation_agent.target_reached.connect(_on_target_reached)
-	if !hearing_sensor.sound_heared.is_connected(_on_sound_heared):
-		hearing_sensor.sound_heared.connect(_on_sound_heared)
+	if !hearing_sensor.sound_heard.is_connected(_on_sound_heard):
+		hearing_sensor.sound_heard.connect(_on_sound_heard)
 	get_target()
 
 func exit() -> void:
 	vision_sensor.can_see_target.disconnect(_on_see_target)
+	hearing_sensor.sound_heard.disconnect(_on_sound_heard)
 	state_machine.navigation_agent.target_reached.disconnect(_on_target_reached)
 
 #signals 
@@ -52,5 +53,9 @@ func _on_target_reached() -> void:
 	if wait_timer.is_stopped():
 		wait_timer.start()
 
-func _on_sound_heared(source: Node2D, location: Vector2, intensity: float) -> void:
-	state_machine.transition_to(state_machine.HEAR_STATE, { position_to_move = location })	
+func _on_sound_heard(source: Node2D, location: Vector2, intensity: float) -> void:
+	state_machine.transition_to(state_machine.GOTO_LOOK_AROUND, {
+		target_pos = location,
+		goto_time = state_machine._enemy.pursue_find_time,
+		wait_before_look_around = state_machine._enemy.pursue_wait_before_look_around
+	})	

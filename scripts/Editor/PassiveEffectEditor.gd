@@ -39,6 +39,8 @@ func _process(delta):
 		set_variables(passive_effect)
 
 func _get(property):
+	if property == 'global_position':
+		return global_position
 	if property == 'effect_name':
 		return effect_name
 	if property == 'type':
@@ -55,6 +57,8 @@ func _get(property):
 		return used_sprite
 
 func _set(property, value) -> bool :
+	if property == 'global_position':
+		global_position = value
 	if property == 'effect_name':
 		effect_name = value
 	if property == 'type':

@@ -1,0 +1,119 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc66iolbp47rh"]
+
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_8pprd"]
+[ext_resource type="Texture2D" uid="uid://dowkkdr2nl48i" path="res://assets/UI/icons/HUD_ammo01.png" id="1_pr14k"]
+[ext_resource type="Script" path="res://scripts/ui/ShopUnlockSpecialPowerPanel.gd" id="1_wchgf"]
+
+[node name="UnlockSpecialPowerPanel" type="PanelContainer" node_paths=PackedStringArray("name_label", "price_label", "obtained_container", "buy_button")]
+theme = ExtResource("1_8pprd")
+script = ExtResource("1_wchgf")
+name_label = NodePath("VerticalContainer/PowerNameLabel")
+price_label = NodePath("VerticalContainer/SpecialPower-Item5/PriceLabel")
+obtained_container = NodePath("VerticalContainer/SpecialPower-Item5/ObtainedContainer")
+buy_button = NodePath("VerticalContainer/SpecialPower-Item5/BuyButton")
+
+[node name="VerticalContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="VerticalContainer"]
+layout_mode = 2
+
+[node name="PanelIconContainer" type="PanelContainer" parent="VerticalContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Icon" type="TextureRect" parent="VerticalContainer/PanelIconContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_pr14k")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="PowerNameLabel" type="Label" parent="VerticalContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "aim bot"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="VerticalContainer"]
+layout_mode = 2
+
+[node name="UnlockCountdownLabel" type="Label" parent="VerticalContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "power unlocked in"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="VerticalContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "x/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterMargin" type="AspectRatioContainer" parent="VerticalContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpecialPower-Item5" type="VBoxContainer" parent="VerticalContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="TopMargin" type="AspectRatioContainer" parent="VerticalContainer/SpecialPower-Item5"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ObtainedContainer" type="VBoxContainer" parent="VerticalContainer/SpecialPower-Item5"]
+visible = false
+layout_mode = 2
+
+[node name="ObtainedPanel" type="PanelContainer" parent="VerticalContainer/SpecialPower-Item5/ObtainedContainer"]
+layout_mode = 2
+
+[node name="ObtainedLabel" type="Label" parent="VerticalContainer/SpecialPower-Item5/ObtainedContainer/ObtainedPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Obtained"
+horizontal_alignment = 1
+
+[node name="TopMargin2" type="AspectRatioContainer" parent="VerticalContainer/SpecialPower-Item5/ObtainedContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="BuyButton" type="Button" parent="VerticalContainer/SpecialPower-Item5"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Buy"
+
+[node name="PriceLabel" type="Label" parent="VerticalContainer/SpecialPower-Item5"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "200$"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftMargin2" type="AspectRatioContainer" parent="VerticalContainer"]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="VerticalContainer/SpecialPower-Item5/BuyButton" to="." method="_on_buy_button_mouse_entered"]
+[connection signal="mouse_exited" from="VerticalContainer/SpecialPower-Item5/BuyButton" to="." method="_on_buy_button_mouse_exited"]
+[connection signal="pressed" from="VerticalContainer/SpecialPower-Item5/BuyButton" to="." method="_on_buy_button_pressed"]

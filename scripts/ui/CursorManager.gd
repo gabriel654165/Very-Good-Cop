@@ -49,6 +49,10 @@ func _process(delta):
 		GlobalVariables.cursor_position = get_viewport().get_mouse_position() - cursor_offset
 	var is_on_enemy_tmp = is_on_enemy()
 	
+	var player = GlobalFunctions.find_object_on_condition(func(elem: Node): return elem is Player, get_tree().root)
+	if player.weapon_manager != null:
+		auto_lock = player.weapon_manager.weapon.auto_lock_target
+	
 	if auto_lock:
 		var target = find_nearest_target()
 		if target != Vector2.ZERO:

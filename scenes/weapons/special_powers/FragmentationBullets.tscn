@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://naai0i1det0"]
+
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/FragmentationBullets.gd" id="1_0s4ts"]
+
+[node name="FragmentationBullets" type="Node2D"]
+script = ExtResource("1_0s4ts")
+duration = 10.0
