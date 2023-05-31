@@ -12,7 +12,7 @@ func set_damage_power_up(enable: bool):
 	pass
 
 func set_speed_power_up(enable: bool):
-	shaders_manager.set_radial_distortion(enable)
+	shaders_manager.set_colorect_radial_distortion(enable)
 
 func set_slowmotion_power_up(enable: bool):
 	shaders_manager.set_colorect_distortion(enable)

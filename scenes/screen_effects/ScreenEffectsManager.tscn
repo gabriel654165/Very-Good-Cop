@@ -1,39 +1,186 @@
-[gd_scene load_steps=9 format=3 uid="uid://dojy4bytupqgt"]
+[gd_scene load_steps=15 format=3 uid="uid://dojy4bytupqgt"]
 
 [ext_resource type="Script" path="res://scripts/ScreenEffects/ScreenEffectsManager.gd" id="1_rfbnb"]
 [ext_resource type="Script" path="res://scripts/ScreenEffects/ShadersManager.gd" id="2_2wp0k"]
+[ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="3_hlliw"]
 [ext_resource type="Shader" path="res://scripts/shaders/ChromaticAberationShader.gdshader" id="3_tvjr5"]
 [ext_resource type="Shader" path="res://scripts/shaders/DistortionShader.gdshader" id="4_dicm2"]
 [ext_resource type="Shader" path="res://scripts/shaders/RadialDistortionShader.gdshader" id="5_6ytj8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uwrjn"]
 shader = ExtResource("3_tvjr5")
-shader_parameter/offset = 15.0
+shader_parameter/offset = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dk61l"]
 shader = ExtResource("4_dicm2")
-shader_parameter/temperatureRange = 0.5
-shader_parameter/hotColor = Color(0, 0.619608, 0, 0.807843)
-shader_parameter/heatAmplitude = 0.15
-shader_parameter/heatPeriod = 20.0
-shader_parameter/heatPhaseShift = 5.0
-shader_parameter/heatUpperLimit = 10.0
+shader_parameter/color = Color(0, 0.619608, 0, 0)
+shader_parameter/amplitude = 0.0
+shader_parameter/period = 20.0
+shader_parameter/phaseShift = 5.0
+shader_parameter/upperLimit = 10.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qpj7u"]
 shader = ExtResource("5_6ytj8")
 shader_parameter/aspect = 0.5
-shader_parameter/distortion = 0.33
+shader_parameter/distortion = 0.5
 shader_parameter/radius = 1.0
-shader_parameter/alpha = 1.0
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Animation" id="Animation_l3lkr"]
+resource_name = "chromatic_shader_on"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../ShadersManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_visibility_chromatic_colorect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_44lhm"]
+resource_name = "distortion_shader_enable"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DistortionColorRect:material:shader_parameter/amplitude")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.05]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../DistortionColorRect:material:shader_parameter/color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.619608, 0, 0), Color(0, 0.619608, 0, 0.490196)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../ShadersManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_visibility_distortion_colorect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_peqpc"]
+resource_name = "radial_distortion_shader_enable"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../RadialDistortionColorRect:material:shader_parameter/aspect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../RadialDistortionColorRect:material:shader_parameter/distortion")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.33]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../RadialDistortionColorRect:material:shader_parameter/alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../ShadersManager")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_visibility_radial_distortion_colorect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_iumpt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../RadialDistortionColorRect:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h7ryi"]
+_data = {
+"RESET": SubResource("Animation_iumpt"),
+"chromatic_shader_enable": SubResource("Animation_l3lkr"),
+"distortion_shader_enable": SubResource("Animation_44lhm"),
+"radial_distortion_shader_enable": SubResource("Animation_peqpc")
+}
 
 [node name="ScreenEffectsManager" type="CanvasLayer"]
 script = ExtResource("1_rfbnb")
 
-[node name="ShadersManager" type="Node2D" parent="." node_paths=PackedStringArray("colorect_chromatic", "colorect_distortion", "colorect_redial_distortion")]
+[node name="ShadersManager" type="Node2D" parent="." node_paths=PackedStringArray("colorect_chromatic", "colorect_distortion", "colorect_radial_distortion", "shader_animation_player")]
 script = ExtResource("2_2wp0k")
 colorect_chromatic = NodePath("../ScreenEffectsControl/ChromaticColorRect")
 colorect_distortion = NodePath("../ScreenEffectsControl/DistortionColorRect")
-colorect_redial_distortion = NodePath("../ScreenEffectsControl/RadialDistortionColorRect")
+colorect_radial_distortion = NodePath("../ScreenEffectsControl/RadialDistortionColorRect")
+shader_animation_player = NodePath("../ScreenEffectsControl/AnimationPlayer")
 
 [node name="ScreenEffectsControl" type="Control" parent="."]
 layout_mode = 3
@@ -42,6 +189,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ScreenEffectsControl"]
+visible = false
+position = Vector2(966, 585)
+texture = ExtResource("3_hlliw")
 
 [node name="ChromaticColorRect" type="ColorRect" parent="ScreenEffectsControl"]
 visible = false
@@ -76,3 +228,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenEffectsControl"]
+root_node = NodePath("../ChromaticColorRect")
+libraries = {
+"": SubResource("AnimationLibrary_h7ryi")
+}

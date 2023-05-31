@@ -72,6 +72,6 @@ func remove_passive_effect(character: Character):
 		GlobalSignals.active_damage_power_up.emit(false)
 	if type == TYPE.SLOW_MOTION:
 		Engine.time_scale = 1
-		GlobalSignals.active_slowmotion_power_up.emit(true)
+		GlobalSignals.active_slowmotion_power_up.emit(false)
 	if type == TYPE.MINIMAP_EXTEND:
 		GlobalSignals.active_minimap_power_up.emit(false)
