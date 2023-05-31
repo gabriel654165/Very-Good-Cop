@@ -154,7 +154,7 @@ func level_stat(min_value, max_value, number_of_levels: int):
 var all_distance_weapon_list = [
 	{
 		name="glock",
-		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
 		special_power_name= "aim_bot",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/AimBot.tscn"),
@@ -202,7 +202,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="shotgun",
-		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_shotgun.png"),
 		special_power_name= "fast_reloading",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FastReloading.tscn"),
@@ -250,7 +250,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="mini_uzi",
-		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Uzi.png"),
 		special_power_name= "bouncing_bullets",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/BouncingBullets.tscn"),
@@ -298,7 +298,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="riffle",
-		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr__Aka.png"),
 		special_power_name= "fragmentation_bullets",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FragmentationBullets.tscn"),
@@ -346,7 +346,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="machine_gun",
-		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Mg.png"),
 		special_power_name= "shooting_360",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/Shooting360.tscn"),
@@ -394,7 +394,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="grenade_launcher",
-		projectile_packed_scene=preload("res://scenes/projectiles/grenade.tscn"),
+		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_grenade_launcher.png"),
 		special_power_name= "catching_cable",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/CatchingCable.tscn"),
@@ -442,7 +442,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="sniper",
-		projectile_packed_scene=preload("res://scenes/projectiles/bullet.tscn"),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_sniper.png"),
 		special_power_name= "throught_wall_bullets",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/ThroughWallsBullets.tscn"),

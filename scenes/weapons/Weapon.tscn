@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://c477b1thhwo0i"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_x1vvy"]
-[ext_resource type="PackedScene" uid="uid://in7hxftu4bux" path="res://scenes/projectiles/bullet.tscn" id="2_ki847"]
+[ext_resource type="PackedScene" uid="uid://cpjhdsrfevptf" path="res://scenes/projectiles/Bullet.tscn" id="2_j2en7"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="3_djx0w"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="4_oyirm"]
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="5_sv8ut"]
@@ -91,7 +91,7 @@ properties/weapon_name = "glock"
 power/points_to_use_special_power = 2
 power/current_points_to_use_special_power = 0
 power/can_use_power = false
-projectile/projectile = ExtResource("2_ki847")
+projectile/projectile = ExtResource("2_j2en7")
 projectile/projectile_speed = 1
 projectile/projectile_damages = 1
 projectile/projectile_size = 0.5

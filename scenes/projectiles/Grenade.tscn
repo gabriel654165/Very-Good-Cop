@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://cvdae5oociat5"]
 
-[ext_resource type="Script" path="res://scripts/projectiles/Grenade.gd" id="1_hylyk"]
-[ext_resource type="Texture2D" uid="uid://dqnt55tmn2gec" path="res://assets/Spritesheet/allSprites_retina.png" id="2_ilsa6"]
-[ext_resource type="Shader" path="res://scripts/shaders/PixelisedShader.gdshader" id="4_ioqto"]
-[ext_resource type="Shader" path="res://scripts/shaders/ShockWaveShader.gdshader" id="4_kdrdb"]
-[ext_resource type="PackedScene" uid="uid://hcaid5opl6tx" path="res://scenes/particles/ExplosionParticles.tscn" id="5_s00jj"]
+[ext_resource type="Script" path="res://scripts/projectiles/Grenade.gd" id="1_b6dp5"]
+[ext_resource type="Texture2D" uid="uid://dqnt55tmn2gec" path="res://assets/Spritesheet/allSprites_retina.png" id="2_vlp02"]
+[ext_resource type="Shader" path="res://scripts/shaders/PixelisedShader.gdshader" id="3_y60vn"]
+[ext_resource type="PackedScene" uid="uid://hcaid5opl6tx" path="res://scenes/particles/ExplosionParticles.tscn" id="4_iykil"]
+[ext_resource type="Shader" path="res://scripts/shaders/ShockWaveShader.gdshader" id="5_tb318"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b75nu"]
 size = Vector2(15, 35)
@@ -64,11 +64,11 @@ _data = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cayae"]
-shader = ExtResource("4_ioqto")
+shader = ExtResource("3_y60vn")
 shader_parameter/pixelSize = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_djmat"]
-shader = ExtResource("4_kdrdb")
+shader = ExtResource("5_tb318")
 shader_parameter/center = Vector2(0.5, 0.5)
 shader_parameter/force = 0.493994
 shader_parameter/size = 0.05
@@ -174,7 +174,7 @@ _data = {
 
 [node name="Grenade" type="CharacterBody2D" node_paths=PackedStringArray("shader_animation", "particle_animation")]
 collision_layer = 0
-script = ExtResource("1_hylyk")
+script = ExtResource("1_b6dp5")
 shader_animation = NodePath("ShockWaveControl/AnimationPlayer")
 particle_animation = NodePath("ExplosionControl/SubViewportContainer/PixelizedSubViewport/ExplosionParticles/AnimationPlayer")
 speed = 7
@@ -193,7 +193,7 @@ shape = SubResource("CircleShape2D_6quda")
 debug_color = Color(0, 0.592157, 0.745098, 0.419608)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ilsa6")
+texture = ExtResource("2_vlp02")
 region_enabled = true
 region_rect = Rect2(1106, 492, 17, 37)
 
@@ -265,7 +265,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ExplosionParticles" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport" instance=ExtResource("5_s00jj")]
+[node name="ExplosionParticles" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport" instance=ExtResource("4_iykil")]
 visibility_layer = 2
 position = Vector2(150, 150)
 amount = 25

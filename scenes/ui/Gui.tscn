@@ -37,7 +37,7 @@ script = ExtResource("1_cf1if")
 
 [node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("pause_gui", "base_panel", "option_panel", "color_rect")]
 script = ExtResource("2_lu52o")
-aim_blur_intensity = 1.5
+aim_blur_intensity = 2.0
 pop_up_text_scene = ExtResource("7_bnyiq")
 pause_gui = NodePath("../PanelsContainer/PauseControl")
 base_panel = NodePath("../PanelsContainer/PauseControl/PauseContainer/BasePanelContainer")
@@ -98,6 +98,7 @@ panels_container = NodePath("../PanelsContainer/HBoxBottomContainer")
 
 [node name="WeaponShopManager" type="Node2D" parent="." node_paths=PackedStringArray("weapon_shop_gui", "shop_container", "weapon_tab_container", "player_infos_container", "player_infos_container_parent", "hover_container", "hover_panel_parent", "buttons_container", "color_rect", "distance_weapon_list_parent", "melee_weapon_list_parent", "equipment_list_parent")]
 script = ExtResource("16_1slr4")
+aim_blur_intensity = 3.0
 weapon_shop_gui = NodePath("../PanelsContainer/WeaponShopControl")
 shop_container = NodePath("../PanelsContainer/WeaponShopControl/ShopTabContainer")
 weapon_tab_container = NodePath("../PanelsContainer/WeaponShopControl/ShopTabContainer")
@@ -118,6 +119,7 @@ description_panel_scene = ExtResource("21_3i6ap")
 
 [node name="ChooseWeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("choose_weapon_gui", "base_panel", "color_rect", "distance_weapon_grid", "melee_weapon_grid")]
 script = ExtResource("17_r1vvb")
+aim_blur_intensity = 3.0
 pop_up_text_scene = ExtResource("7_bnyiq")
 choose_weapon_gui = NodePath("../PanelsContainer/ChooseWeaponControl")
 base_panel = NodePath("../PanelsContainer/ChooseWeaponControl/BaseContainer")

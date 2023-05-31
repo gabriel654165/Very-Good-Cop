@@ -25,6 +25,7 @@ colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 0)
 z_index = 2
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
+speed = 2.5
 weapon_manager = NodePath("WeaponManager")
 knife = NodePath("Knife")
 grappling_hook_scene = ExtResource("5_wxswb")
