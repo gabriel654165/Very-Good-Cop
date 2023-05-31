@@ -43,7 +43,7 @@ func _ready():
 	weapon_manager = get_node("WeaponManager")
 	weapon_manager.weapon.global_position = weapon_position.global_position
 
-	weapon_manager.weapon.bullet_damages = weapon_manager.bullet_damages + GlobalVariables.level * 1.75 
+	weapon_manager.weapon.projectile_damages = weapon_manager.projectile_damages + GlobalVariables.level * 1.75 
 	fsm.init(self, weapon_manager.weapon, speed * 10)
 
 func _process(delta):

@@ -1,6 +1,10 @@
 extends Node
 
+signal assign_player_weapons()
+
 signal player_fired()
+signal player_reloading(ammo_reloading_time: float)
+signal player_use_special_power()
 
 signal projectile_fired_spawn(projectile_owner: Node2D, projectile: Projectile, position: Vector2, direction: Vector2)
 signal projectile_launched_spawn(projectile_owner: Node2D, grenade: Grenade, position: Vector2, direction: Vector2, landing_position: Vector2)

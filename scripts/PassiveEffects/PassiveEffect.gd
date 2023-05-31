@@ -50,8 +50,8 @@ func add_passive_effect(character: Character):
 		character.speed += value_effect
 		GlobalSignals.active_speed_power_up.emit(true)
 	if type == TYPE.DAMAGE:
-		value_save = character.weapon_manager.bullet_damages
-		character.weapon_manager.bullet_damages = value_effect
+		value_save = character.weapon_manager.projectile_damages
+		character.weapon_manager.projectile_damages = value_effect
 		GlobalSignals.active_damage_power_up.emit(true)
 	if type == TYPE.SLOW_MOTION:
 		var camera = get_tree().current_scene.find_child("Camera2D")
@@ -68,7 +68,7 @@ func remove_passive_effect(character: Character):
 		character.speed = value_save
 		GlobalSignals.active_speed_power_up.emit(false)
 	if type == TYPE.DAMAGE:
-		character.weapon_manager.bullet_damages = value_save
+		character.weapon_manager.projectile_damages = value_save
 		GlobalSignals.active_damage_power_up.emit(false)
 	if type == TYPE.SLOW_MOTION:
 		Engine.time_scale = 1

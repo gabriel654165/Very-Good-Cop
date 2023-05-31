@@ -3,8 +3,6 @@ render_mode blend_premul_alpha,unshaded;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
-//uniform sampler2D diffuse;
-
 uniform int pixelSize : hint_range(2, 16, 2) = 4;
 
 void fragment() 

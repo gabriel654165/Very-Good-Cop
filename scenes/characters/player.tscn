@@ -1,16 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2icao5su4lyo"]
+[gd_scene load_steps=13 format=3 uid="uid://xxld75mg1fqf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
-[ext_resource type="PackedScene" uid="uid://c48gqwma6fv20" path="res://scenes/weapons/Glock.tscn" id="2_mu4yj"]
-[ext_resource type="PackedScene" path="res://scenes/weapons/GrenadeLauncher.tscn" id="3_4brpw"]
-[ext_resource type="PackedScene" uid="uid://dpscp32lejm1n" path="res://scenes/weapons/MachineGun.tscn" id="4_hd63c"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
-[ext_resource type="PackedScene" uid="uid://x0amqpcim4nu" path="res://scenes/weapons/MiniUzi.tscn" id="5_548j5"]
-[ext_resource type="PackedScene" uid="uid://cu5xhrk3gung2" path="res://scenes/weapons/Riffle.tscn" id="6_uekx1"]
-[ext_resource type="PackedScene" uid="uid://cekv24mq8jxv" path="res://scenes/weapons/Shotgun.tscn" id="7_me1ab"]
+[ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
-[ext_resource type="PackedScene" uid="uid://ty2w1el7t7x1" path="res://scenes/weapons/Sniper.tscn" id="8_wbl2l"]
+[ext_resource type="PackedScene" uid="uid://cxsu4atm07u3i" path="res://scenes/weapons/Knife.tscn" id="8_nt46u"]
+[ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="10_5l0q5"]
 [ext_resource type="Texture2D" uid="uid://dtk16fqh5mb82" path="res://assets/character/Police-HM-2.png" id="11_q2lq8"]
+[ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_18ulw"]
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="14_bgmhi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
@@ -24,20 +21,14 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.388732)
 colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 0)
 
-[node name="Player" type="CharacterBody2D" groups=["character", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager", "knife") groups=["character", "player"]]
 z_index = 2
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
-weapon_list = {
-"glock": ExtResource("2_mu4yj"),
-"grenade_launcher": ExtResource("3_4brpw"),
-"machine_gun": ExtResource("4_hd63c"),
-"mini_uzi": ExtResource("5_548j5"),
-"riffle": ExtResource("6_uekx1"),
-"shotgun": ExtResource("7_me1ab"),
-"sniper": ExtResource("8_wbl2l")
-}
-speed = 2.5
+weapon_manager = NodePath("WeaponManager")
+knife = NodePath("Knife")
+grappling_hook_scene = ExtResource("5_wxswb")
+projectile_weapon_scene = ExtResource("10_5l0q5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -62,6 +53,10 @@ position = Vector2(5, 0)
 
 [node name="DetectableTarget" type="Node2D" parent="."]
 script = ExtResource("8_jhep5")
+
+[node name="WeaponManager" parent="." instance=ExtResource("13_18ulw")]
+
+[node name="Knife" parent="." instance=ExtResource("8_nt46u")]
 
 [node name="ShootVFX" type="CPUParticles2D" parent="."]
 emitting = false

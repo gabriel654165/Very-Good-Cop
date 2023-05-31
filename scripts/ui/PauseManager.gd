@@ -6,7 +6,7 @@ class_name PauseManager
 @export var time_to_blur : float = 0.5
 
 @export var pop_up_text_scene : PackedScene
-@export var pop_up_contents : Array[String] = ["3", "2", "1", "Go fuck some bitches !!!"]
+@export var pop_up_contents : Array[String] = ["3", "2", "1", "Go !!!"]
 @export var resume_pop_up_duration : float = 0.5
 @export var resume_pop_up_scale := Vector2(5, 5)
 @export var resume_pop_up_velocity_scale := Vector2(3, 3)
@@ -17,9 +17,9 @@ class_name PauseManager
 @export var color_rect : Node = null
 
 var gui_manager : GuiManager = null
-var characters_in_scene : Array = []
 var current_blur_intensity : float = 0
 var pop_up_timer : Timer = null
+var disable_pause : bool = false
 
 func _ready():
 	gui_manager = get_parent() as GuiManager
@@ -37,41 +37,32 @@ func set_active(state: bool):
 func _process(delta):
 	if (active and current_blur_intensity < aim_blur_intensity) or (!active and current_blur_intensity > 0):
 		color_rect.get_material().set_shader_parameter("intensity", current_blur_intensity)
-	elif !active and current_blur_intensity == 0 and !base_panel.visible:
-		pause_gui.visible = false
-		display_base_panel()
 
 func resume():
-	unload_ui()
-	gui_manager.cursor_manager.cursor.active_mode_idle_gui()	
+	base_panel.visible = false
+	gui_manager.cursor_manager.cursor.active_mode_idle_gui()
+	gui_manager.set_active_gui_panels(true)
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "current_blur_intensity", 0, time_to_blur)
 	if await start_resume_animation():
-		disable_all_game_objects(false)
+		GlobalFunctions.disable_all_game_objects(false)
+		gui_manager.panel_timer_manager.resume_timer()
 		set_active(false)
 
 func generate_ui():
 	display_base_panel()
 	pause_gui.visible = true
-	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Character, characters_in_scene, get_tree().root)
-	disable_all_game_objects(true)
+	GlobalFunctions.disable_all_game_objects(true)
 	gui_manager.cursor_manager.cursor.active_mode_ui()
-	set_active_gui_panels(false)
+	gui_manager.panel_timer_manager.stop_timer()
+	gui_manager.set_active_gui_panels(false)
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "current_blur_intensity", aim_blur_intensity, time_to_blur)
 
 func unload_ui():
-	base_panel.visible = false
-	gui_manager.panel_points_manager.panel.visible = true
-	gui_manager.panel_kills_manager.panel.visible = true
-	gui_manager.panel_timer_manager.panel.visible = true
-	gui_manager.weapon_panel_manager.panel_weapon.visible = true
-	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "current_blur_intensity", 0, time_to_blur)
-
-func set_active_gui_panels(state: bool):
-	gui_manager.panel_points_manager.panel.visible = state
-	gui_manager.panel_kills_manager.panel.visible = state
-	gui_manager.panel_timer_manager.panel.visible = state
-	gui_manager.weapon_panel_manager.panel_weapon.visible = state
+	pause_gui.visible = false
+	display_base_panel()
+	color_rect.get_material().set_shader_parameter("intensity", 0)
 
 func display_base_panel():
 	base_panel.visible = true
@@ -110,6 +101,14 @@ func start_resume_animation() -> bool:
 
 func _unhandled_input(event):
 	if event.is_action_pressed("echap"):
+		if disable_pause:
+			return
+		if (!active and pop_up_timer == null) and (gui_manager.choose_weapon_manager.active and gui_manager.choose_weapon_manager.pop_up_timer != null):
+			gui_manager.choose_weapon_manager.pop_up_timer = null
+			gui_manager.choose_weapon_manager.set_active(false)
+			set_active(true)
+			return
+
 		if !active or pop_up_timer != null:
 			pop_up_timer = null
 			set_active(true)
@@ -117,16 +116,6 @@ func _unhandled_input(event):
 			resume()
 		elif option_panel.visible:
 			display_base_panel()
-
-func disable_all_game_objects(state: bool):
-	var index : int = 1
-	for character in characters_in_scene:
-		if character != null:
-			character.action_disabled = state
-		else:
-			characters_in_scene.remove_at(index)
-			continue
-		index += 1
 
 # Signals
 func _on_resume_button_pressed():

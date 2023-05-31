@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://djsd576ac8w0q"]
+
+[ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_cprlw"]
+[ext_resource type="PackedScene" uid="uid://bsqpnn0rfxvic" path="res://scenes/ui/Gui.tscn" id="2_plfkm"]
+[ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_u5xh8"]
+[ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_hawec"]
+[ext_resource type="PackedScene" uid="uid://xxld75mg1fqf" path="res://scenes/characters/player.tscn" id="5_h1th4"]
+[ext_resource type="Script" path="res://scripts/Sounds/MusicPlaylists.gd" id="6_acyjm"]
+
+[node name="TopNode" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cprlw")
+gui_manager_scene = ExtResource("2_plfkm")
+projectile_manager_scene = ExtResource("3_u5xh8")
+level_generator_scene = ExtResource("4_hawec")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(233, 190)
+zoom = Vector2(1.75, 1.75)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+drag_left_margin = 0.3
+drag_top_margin = 0.15
+drag_right_margin = 0.3
+drag_bottom_margin = 0.15
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="Player" parent="." instance=ExtResource("5_h1th4")]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+current = true
+
+[node name="MusicPlaylistsPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+script = ExtResource("6_acyjm")
+
+[connection signal="finished" from="MusicPlaylistsPlayer" to="MusicPlaylistsPlayer" method="_on_finished"]

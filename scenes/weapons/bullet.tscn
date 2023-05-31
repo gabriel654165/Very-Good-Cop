@@ -28,7 +28,7 @@ z_index = 1
 rotation = 1.5708
 scale = Vector2(0.359327, 0.360007)
 collision_layer = 2
-script = ExtResource("1_2jtls")
+script = ExtResource("1_kbmsp")
 speed = 10
 damages = 5
 bullet_impact_fragments_scene = ExtResource("2_ce033")
@@ -37,7 +37,7 @@ bullet_impact_fragments_scene = ExtResource("2_ce033")
 shape = SubResource("RectangleShape2D_oxpfh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_g8iif")
+texture = ExtResource("2_xdohl")
 region_enabled = true
 region_rect = Rect2(188, 345, 12, 25)
 
