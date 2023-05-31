@@ -13,13 +13,9 @@ uniform float upperLimit : hint_range(0.0, 10.0);
 void fragment() {
 	vec2 modifiedUV = SCREEN_UV;
 	
-	modifiedUV.x -= 
-		(
-			((1.0 - modifiedUV.y) * amplitude) *
-			sin(period * (modifiedUV.y - (TIME * 0.016 * phaseShift)))
-		) * 
-			clamp(1.0 - (modifiedUV.y * (10.0 - upperLimit)), 0.0, 0.5
-		);
+	modifiedUV.x -= (((1.0 - modifiedUV.y) * amplitude) *
+		sin(period * (modifiedUV.y - (TIME * 0.016 * phaseShift)))) * 
+		clamp(1.0 - (modifiedUV.y * (10.0 - upperLimit)), 0.0, 0.5);
 	
 	COLOR = texture(SCREEN_TEXTURE, modifiedUV);
 	COLOR.rgb += color.rgb * color.a;

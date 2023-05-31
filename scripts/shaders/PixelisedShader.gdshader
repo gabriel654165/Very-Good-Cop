@@ -25,6 +25,4 @@ void fragment()
 	    texCol.a=0.0;
 	}
 	COLOR.a = texCol.a;
-	
-	//COLOR = texture(SCREEN_TEXTURE, vec2(x, y));
 }
