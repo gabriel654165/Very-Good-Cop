@@ -39,6 +39,8 @@ func stop():
 	speed = 0
 	direction = Vector2.ZERO
 	explosion_timer.start()
+	if animation_player != null:
+		animation_player.stop()
 
 func set_lauching_position(position: Vector2):
 	self.lauching_position = position

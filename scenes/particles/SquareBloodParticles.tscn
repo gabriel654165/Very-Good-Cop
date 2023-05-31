@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c1dioapnrpyg4"]
 
-[ext_resource type="Script" path="res://scripts/Blood.gd" id="1_xv4un"]
+[ext_resource type="Script" path="res://scripts/Particles/Blood.gd" id="1_eqbp2"]
 
 [node name="SquareBloodParticles" type="CPUParticles2D"]
 visibility_layer = 3
@@ -16,7 +16,7 @@ initial_velocity_max = 400.0
 scale_amount_min = 5.0
 scale_amount_max = 5.0
 color = Color(0.752941, 0, 0, 1)
-script = ExtResource("1_xv4un")
+script = ExtResource("1_eqbp2")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.15

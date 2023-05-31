@@ -12,6 +12,8 @@ class_name Projectile
 
 @export var bullet_impact_fragments_scene : PackedScene
 
+@export var animation_player : AnimationPlayer
+
 var frag_projectile_precision_angle : Vector2 = Vector2(-1, 1)#coordonées de trigo
 var frag_projectile_precision : float = 1
 var number_of_frag_projectile : int = 3

@@ -1,18 +1,16 @@
 extends Node2D
 
 @export var gui_manager_scene : PackedScene
+@export var screen_effects_manager_scene : PackedScene
 @export var projectile_manager_scene : PackedScene
 @export var level_generator_scene : PackedScene
 @export var player : Player
 
-@export var colorect_chromatic : ColorRect
-@export var colorect_redialdistortion : ColorRect
-@export var colorect_distortion : ColorRect
-
+@onready var camera : Camera2D = $MainCamera
 @onready var gui_manager : GuiManager = add_manager(gui_manager_scene, self, func(x):pass)
+@onready var screen_effects_manager : ScreenEffectsManager = add_manager(screen_effects_manager_scene, camera, func(x):pass)
 @onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene, self, func(x):pass)
 @onready var level_generator: LevelGenerator = add_manager(level_generator_scene, self, func(x):pass)
-@onready var camera : Camera2D = $MainCamera
 
 
 func _ready():
@@ -40,35 +38,17 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.panel_kills_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
 	
-	GlobalSignals.active_minimap_power_up.connect(_set_minimap_power_up)
-	GlobalSignals.active_slowmotion_power_up.connect(_set_slowmotion_power_up)
-	GlobalSignals.active_speed_power_up.connect(_set_speed_power_up)
-	GlobalSignals.active_damage_power_up.connect(_set_damage_power_up)
-	GlobalSignals.active_heal_power_up.connect(_set_heal_power_up)
+	GlobalSignals.active_minimap_power_up.connect(screen_effects_manager.set_minimap_power_up)
+	GlobalSignals.active_slowmotion_power_up.connect(screen_effects_manager.set_slowmotion_power_up)
+	GlobalSignals.active_speed_power_up.connect(screen_effects_manager.set_speed_power_up)
+	GlobalSignals.active_damage_power_up.connect(screen_effects_manager.set_damage_power_up)
+	GlobalSignals.active_heal_power_up.connect(screen_effects_manager.set_heal_power_up)
 
 	if level_generator != null:
 		await level_generator.generate()
 	spawn_player()
 	init_camera()
 	gui_manager.generate_ui()
-
-
-# TODO : animation of heal and after visible = false, enable not needed
-func _set_heal_power_up(enable: bool):
-	pass
-
-func _set_damage_power_up(enable: bool):
-	pass
-
-func _set_speed_power_up(enable: bool):
-	colorect_redialdistortion.visible = enable
-
-func _set_slowmotion_power_up(enable: bool):
-	colorect_distortion.visible = enable
-
-# TODO : display entiere minimap with arrival room
-func _set_minimap_power_up(enable: bool):
-	colorect_chromatic.visible = enable
 
 
 # NOTE: Should we put an autoload function or keep it as a signal ? (https://github.com/godotengine/godot-proposals/issues/1827)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dehrj4li0rlsb"]
 
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="1_e2fmf"]
-[ext_resource type="Script" path="res://scripts/Blood.gd" id="2_pnjbn"]
+[ext_resource type="Script" path="res://scripts/Particles/Blood.gd" id="2_hb72f"]
 
 [node name="BloodParticles" type="CPUParticles2D"]
 z_index = 5
@@ -16,7 +16,7 @@ initial_velocity_max = 290.0
 scale_amount_min = 0.01
 scale_amount_max = 0.1
 color = Color(0.870588, 0, 0, 1)
-script = ExtResource("2_pnjbn")
+script = ExtResource("2_hb72f")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.15

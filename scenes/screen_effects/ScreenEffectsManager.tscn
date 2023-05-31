@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://dojy4bytupqgt"]
+
+[ext_resource type="Script" path="res://scripts/ScreenEffects/ScreenEffectsManager.gd" id="1_rfbnb"]
+[ext_resource type="Script" path="res://scripts/ScreenEffects/ShadersManager.gd" id="2_2wp0k"]
+[ext_resource type="Shader" path="res://scripts/shaders/ChromaticAberationShader.gdshader" id="3_tvjr5"]
+[ext_resource type="Shader" path="res://scripts/shaders/DistortionShader.gdshader" id="4_dicm2"]
+[ext_resource type="Shader" path="res://scripts/shaders/RadialDistortionShader.gdshader" id="5_6ytj8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uwrjn"]
+shader = ExtResource("3_tvjr5")
+shader_parameter/offset = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dk61l"]
+shader = ExtResource("4_dicm2")
+shader_parameter/temperatureRange = 0.5
+shader_parameter/hotColor = Color(0, 0.619608, 0, 0.807843)
+shader_parameter/heatAmplitude = 0.15
+shader_parameter/heatPeriod = 20.0
+shader_parameter/heatPhaseShift = 5.0
+shader_parameter/heatUpperLimit = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpj7u"]
+shader = ExtResource("5_6ytj8")
+shader_parameter/aspect = 0.5
+shader_parameter/distortion = 0.33
+shader_parameter/radius = 1.0
+shader_parameter/alpha = 1.0
+
+[node name="ScreenEffectsManager" type="CanvasLayer"]
+script = ExtResource("1_rfbnb")
+
+[node name="ShadersManager" type="Node2D" parent="." node_paths=PackedStringArray("colorect_chromatic", "colorect_distortion", "colorect_redial_distortion")]
+script = ExtResource("2_2wp0k")
+colorect_chromatic = NodePath("../ScreenEffectsControl/ChromaticColorRect")
+colorect_distortion = NodePath("../ScreenEffectsControl/DistortionColorRect")
+colorect_redial_distortion = NodePath("../ScreenEffectsControl/RadialDistortionColorRect")
+
+[node name="ScreenEffectsControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChromaticColorRect" type="ColorRect" parent="ScreenEffectsControl"]
+visible = false
+material = SubResource("ShaderMaterial_uwrjn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DistortionColorRect" type="ColorRect" parent="ScreenEffectsControl"]
+visible = false
+material = SubResource("ShaderMaterial_dk61l")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RadialDistortionColorRect" type="ColorRect" parent="ScreenEffectsControl"]
+visible = false
+material = SubResource("ShaderMaterial_qpj7u")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

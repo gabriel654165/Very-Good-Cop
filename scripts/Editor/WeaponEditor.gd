@@ -27,6 +27,8 @@ var number_of_frag_projectile : int = 3
 
 var ammo_size : int = 6
 var ammo_reloading_time : float = 1
+var shot_shell_particle_scene : PackedScene
+var shot_shell_texture : Texture2D
 
 var enable : bool = true
 var shooting_cooldown : float = 0.5
@@ -43,7 +45,7 @@ func _ready():
 	weapon = self.get_child(0) as Weapon
 	if weapon == null:
 		return
-	set_variables(weapon)
+	set_variables(weapon, true, true, true)
 	saved_property_list = _get_property_list()
 
 func _process(delta):
@@ -60,7 +62,7 @@ func set_projectile(new_projectile: PackedScene):
 	self.Projectile = new_projectile
 	weapon.Projectile = new_projectile
 
-func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_nodes: bool = true):
+func set_variables(new_weapon: Weapon, update_projectile: bool = true, update_nodes: bool = true, update_shot_shell_particles: bool = false):
 	if weapon == null:
 		weapon = new_weapon
 	
@@ -70,7 +72,7 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.current_points_to_use_special_power = self.current_points_to_use_special_power
 	weapon.can_use_power = self.can_use_power
 	
-	if upadte_projectile:
+	if update_projectile:
 		weapon.projectile_scene = self.projectile_scene
 	weapon.projectile_speed = self.projectile_speed
 	weapon.projectile_damages = self.projectile_damages
@@ -88,6 +90,9 @@ func set_variables(new_weapon: Weapon, upadte_projectile: bool = true, update_no
 	weapon.ammo_size = self.ammo_size
 	weapon._current_loader_bullets_number = self.ammo_size
 	weapon.ammo_reloading_time = self.ammo_reloading_time
+	#if update_shot_shell_particles:
+	#	weapon.shot_shell_particle_scene = self.shot_shell_particle_scene
+	weapon.shot_shell_texture = self.shot_shell_texture
 	
 	weapon.enable = self.enable
 	weapon.shooting_cooldown.wait_time = self.shooting_cooldown
@@ -141,6 +146,10 @@ func _get(property):
 		return ammo_size
 	if property == 'ammo/ammo_reloading_time':
 		return ammo_reloading_time
+	if property == 'ammo/shot_shell_particle_scene':
+		return shot_shell_particle_scene
+	if property == 'ammo/shot_shell_texture':
+		return shot_shell_texture
 	
 	if property == 'weapon/enable':
 		return enable
@@ -200,6 +209,10 @@ func _set(property, value) -> bool :
 		ammo_size = value
 	if property == 'ammo/ammo_reloading_time':
 		ammo_reloading_time = value
+	if property == 'ammo/shot_shell_particle_scene':
+		shot_shell_particle_scene = value
+	if property == 'ammo/shot_shell_texture':
+		shot_shell_texture = value
 	
 	if property == 'weapon/enable':
 		enable = value
@@ -283,12 +296,18 @@ func _get_property_list() -> Array:
 		'type': TYPE_INT,
 	}])
 	
-	var props_loader = [{
+	var props_ammo = [{
 		'name': 'ammo/ammo_size',
 		'type': TYPE_INT,
 	},{
 		'name': 'ammo/ammo_reloading_time',
 		'type': TYPE_FLOAT,
+	}, {
+		'name': 'ammo/shot_shell_particle_scene',
+		'type': TYPE_OBJECT,
+	}, {
+		'name': 'ammo/shot_shell_texture',
+		'type': TYPE_OBJECT,
 	}]
 	
 	var props_weapon = [{
@@ -321,7 +340,7 @@ func _get_property_list() -> Array:
 	props.append_array(props_power)
 	props.append_array(props_projectile)
 	props.append_array(props_frag_projectiles)
-	props.append_array(props_loader)
+	props.append_array(props_ammo)
 	props.append_array(props_weapon)
 	
 	return props

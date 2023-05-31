@@ -1,44 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6dn7k434dv0o"]
+[gd_scene load_steps=8 format=3 uid="uid://b6dn7k434dv0o"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_ko1u3"]
 [ext_resource type="PackedScene" uid="uid://bsqpnn0rfxvic" path="res://scenes/ui/Gui.tscn" id="2_u64xw"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_68121"]
 [ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_ddmq2"]
-[ext_resource type="Shader" path="res://scripts/shaders/ChromaticAberationShader.gdshader" id="6_yrb5d"]
-[ext_resource type="Shader" path="res://scripts/shaders/DistortionShader.gdshader" id="8_2a5w7"]
-[ext_resource type="Shader" path="res://scripts/shaders/RadialDistortionShader.gdshader" id="8_nvdpu"]
+[ext_resource type="PackedScene" uid="uid://dojy4bytupqgt" path="res://scenes/screen_effects/ScreenEffectsManager.tscn" id="5_uu481"]
 [ext_resource type="PackedScene" uid="uid://xxld75mg1fqf" path="res://scenes/characters/player.tscn" id="9_ho3lm"]
 [ext_resource type="Script" path="res://scripts/Sounds/MusicPlaylists.gd" id="10_6o4ha"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwqu6"]
-shader = ExtResource("6_yrb5d")
-shader_parameter/offset = 15.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wi0c"]
-shader = ExtResource("8_2a5w7")
-shader_parameter/temperatureRange = 0.5
-shader_parameter/hotColor = Color(0, 0.619608, 0, 0.807843)
-shader_parameter/heatAmplitude = 0.15
-shader_parameter/heatPeriod = 20.0
-shader_parameter/heatPhaseShift = 5.0
-shader_parameter/heatUpperLimit = 10.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_82iwn"]
-shader = ExtResource("8_nvdpu")
-shader_parameter/aspect = 0.5
-shader_parameter/distortion = 0.33
-shader_parameter/radius = 1.0
-shader_parameter/alpha = 1.0
-
-[node name="MainScene" type="Node2D" node_paths=PackedStringArray("player", "colorect_chromatic", "colorect_redialdistortion", "colorect_distortion")]
+[node name="MainScene" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_ko1u3")
 gui_manager_scene = ExtResource("2_u64xw")
+screen_effects_manager_scene = ExtResource("5_uu481")
 projectile_manager_scene = ExtResource("3_68121")
 level_generator_scene = ExtResource("4_ddmq2")
 player = NodePath("Player")
-colorect_chromatic = NodePath("MainCamera/CanvasLayerEffects/ChromaticColorRect")
-colorect_redialdistortion = NodePath("MainCamera/CanvasLayerEffects/RadialDistortionColorRect")
-colorect_distortion = NodePath("MainCamera/CanvasLayerEffects/DistortionColorRect")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 visibility_layer = 3
@@ -54,39 +30,6 @@ drag_right_margin = 0.3
 drag_bottom_margin = 0.15
 editor_draw_limits = true
 editor_draw_drag_margin = true
-
-[node name="CanvasLayerEffects" type="CanvasLayer" parent="MainCamera"]
-
-[node name="ChromaticColorRect" type="ColorRect" parent="MainCamera/CanvasLayerEffects"]
-visible = false
-material = SubResource("ShaderMaterial_jwqu6")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DistortionColorRect" type="ColorRect" parent="MainCamera/CanvasLayerEffects"]
-visible = false
-material = SubResource("ShaderMaterial_2wi0c")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RadialDistortionColorRect" type="ColorRect" parent="MainCamera/CanvasLayerEffects"]
-visible = false
-material = SubResource("ShaderMaterial_82iwn")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="MusicPlaylistsPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Music"

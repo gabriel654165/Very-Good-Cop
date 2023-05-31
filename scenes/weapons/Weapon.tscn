@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c477b1thhwo0i"]
+[gd_scene load_steps=12 format=3 uid="uid://c477b1thhwo0i"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_x1vvy"]
 [ext_resource type="PackedScene" uid="uid://cpjhdsrfevptf" path="res://scenes/projectiles/Bullet.tscn" id="2_j2en7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="4_oyirm"]
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="5_sv8ut"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="6_8js0n"]
+[ext_resource type="PackedScene" uid="uid://c8blxsvtsphcf" path="res://scenes/particles/ShotShellParticle.tscn" id="7_1qqsf"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
 length = 0.001
@@ -102,6 +103,8 @@ projectile/projectile_should_pierce_walls = false
 projectile/projectile_should_frag = false
 ammo/ammo_size = 1
 ammo/ammo_reloading_time = 1.0
+ammo/shot_shell_particle_scene = ExtResource("7_1qqsf")
+ammo/shot_shell_texture = null
 weapon/enable = true
 weapon/shooting_cooldown = 0.5
 weapon/balls_by_burt = 1
@@ -113,6 +116,7 @@ weapon/auto_lock_target = false
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("3_djx0w")
+shot_shell_particle_scene = ExtResource("7_1qqsf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 visible = false
