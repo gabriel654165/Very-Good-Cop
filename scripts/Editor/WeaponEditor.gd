@@ -45,7 +45,7 @@ func _ready():
 	weapon = self.get_child(0) as Weapon
 	if weapon == null:
 		return
-	set_variables(weapon, true, true, true)
+	set_variables(weapon)
 	saved_property_list = _get_property_list()
 
 func _process(delta):
@@ -62,7 +62,7 @@ func set_projectile(new_projectile: PackedScene):
 	self.Projectile = new_projectile
 	weapon.Projectile = new_projectile
 
-func set_variables(new_weapon: Weapon, update_projectile: bool = true, update_nodes: bool = true, update_shot_shell_particles: bool = false):
+func set_variables(new_weapon: Weapon, update_projectile: bool = true, update_nodes: bool = true):
 	if weapon == null:
 		weapon = new_weapon
 	
@@ -90,8 +90,6 @@ func set_variables(new_weapon: Weapon, update_projectile: bool = true, update_no
 	weapon.ammo_size = self.ammo_size
 	weapon._current_loader_bullets_number = self.ammo_size
 	weapon.ammo_reloading_time = self.ammo_reloading_time
-	#if update_shot_shell_particles:
-	#	weapon.shot_shell_particle_scene = self.shot_shell_particle_scene
 	weapon.shot_shell_texture = self.shot_shell_texture
 	
 	weapon.enable = self.enable

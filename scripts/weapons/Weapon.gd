@@ -1,11 +1,12 @@
 extends Node2D
 class_name Weapon
 
-# not in editor
+@export var shot_shell_particle_scene : PackedScene
+
 var shooter_actor : Node
 var shooting_sound : AudioStream
 var reloading_sound : AudioStream
-# not in editor
+
 
 var weapon_name : String = ''
 
@@ -33,9 +34,6 @@ var number_of_frag_projectile : int = 3
 var ammo_size : int = 6
 var _current_loader_bullets_number : int = 0
 var ammo_reloading_time : float = 1
-# not in editor
-@export var shot_shell_particle_scene : PackedScene
-# not in editor
 var shot_shell_texture : Texture2D
 
 var enable : bool = true
