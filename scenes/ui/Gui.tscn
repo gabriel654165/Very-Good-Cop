@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://byeald88viaao"]
+[gd_scene load_steps=28 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -15,8 +15,58 @@
 [ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
+[ext_resource type="Script" path="res://scripts/ui/MinimapManager.gd" id="16_j85sm"]
 [ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
+[ext_resource type="PackedScene" uid="uid://cyf6mbde6v2d" path="res://scenes/ui/MinimapRoomItem.tscn" id="17_dnidm"]
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="17_eyt6o"]
+[ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="19_msbxx"]
+[ext_resource type="Shader" path="res://scripts/shaders/ColorCanvasItemShader.gdshader" id="19_yho6x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5bu2"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0, 0, 0, 0.482353)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwmqb"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_n4ume"]
+resource_name = "full_screen_minimap"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AspectRatioContainer:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(300, 300), Vector2(1920, 900)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AspectRatioContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1542, 0), Vector2(0, 80)]
+}
+
+[sub_resource type="Animation" id="Animation_lv6q2"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_all3u"]
+_data = {
+"RESET": SubResource("Animation_lv6q2"),
+"full_screen_minimap": SubResource("Animation_n4ume")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
 shader = ExtResource("16_wdi1s")
@@ -86,6 +136,16 @@ script = ExtResource("13_xqfji")
 weapon_panel_gui = ExtResource("14_nrxer")
 panels_container = NodePath("../PanelsContainer/HBoxBottomContainer")
 
+[node name="MinimapManager" type="Node2D" parent="." node_paths=PackedStringArray("minimap_gui", "panel_container", "rooms_grid_container", "animation_player", "player_marker")]
+script = ExtResource("16_j85sm")
+minimap_gui = NodePath("../PanelsContainer/MinimapControl")
+canvas_room_scene = ExtResource("17_dnidm")
+panel_container = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer")
+rooms_grid_container = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/GridContainer")
+room_material_color = Color(1, 1, 1, 0.501961)
+animation_player = NodePath("../PanelsContainer/MinimapControl/AnimationPlayer")
+player_marker = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/PlayerMarker")
+
 [node name="PanelsContainer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -114,6 +174,89 @@ offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+
+[node name="MinimapControl" type="Control" parent="PanelsContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_eyt6o")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl"]
+custom_minimum_size = Vector2(378, 378)
+layout_mode = 1
+offset_left = 1542.0
+offset_right = 1920.0
+offset_bottom = 378.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer"]
+layout_mode = 2
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_q5bu2")
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="LeftMagrin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 9
+
+[node name="PlayerMarker" type="Sprite2D" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/GridContainer"]
+material = SubResource("ShaderMaterial_dwmqb")
+position = Vector2(117, 114)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("19_msbxx")
+
+[node name="BottomMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="RightMagrin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="BottomMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="RightMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PanelsContainer/MinimapControl"]
+libraries = {
+"": SubResource("AnimationLibrary_all3u")
+}
 
 [node name="PauseControl" type="Control" parent="PanelsContainer"]
 layout_mode = 1

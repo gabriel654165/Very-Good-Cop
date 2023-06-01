@@ -15,3 +15,5 @@ signal enemy_died(enemy: Node2D, points: int)
 signal level_generated(player_position: Vector2)
 
 signal sound_emitted(source: Node2D, location: Vector2, intensity: float)
+
+signal map_updated()

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyf6mbde6v2d"]
+
+[ext_resource type="Shader" path="res://scripts/shaders/ColorCanvasItemShader.gdshader" id="1_3kilo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3xk1"]
+shader = ExtResource("1_3kilo")
+shader_parameter/color = Color(1, 1, 1, 0.498039)
+
+[node name="MinimapRoomItem" type="ColorRect"]
+material = SubResource("ShaderMaterial_w3xk1")
+clip_contents = true
+custom_minimum_size = Vector2(22, 22)
+offset_right = 22.0
+offset_bottom = 22.0
+size_flags_horizontal = 3
+size_flags_vertical = 3

@@ -14,6 +14,9 @@ class_name GuiManager
 @onready var panel_timer_manager = $PanelTimerManager
 @onready var weapon_panel_manager = $WeaponPanelManager
 
+@onready var minimap_manager = $MinimapManager
+
 func generate_ui():
 	health_ui_manager.set_active(true)
 	cursor_manager.set_active(true)
+	minimap_manager.set_active(true)

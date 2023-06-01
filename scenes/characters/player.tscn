@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0x250onoqdno"]
+[gd_scene load_steps=17 format=3 uid="uid://d0x250onoqdno"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="2_xaulr"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://x0amqpcim4nu" path="res://scenes/weapons/MiniUzi.tscn" id="7_at8c2"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
 [ext_resource type="PackedScene" uid="uid://cekv24mq8jxv" path="res://scenes/weapons/Shotgun.tscn" id="8_q5dp1"]
-[ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/weapons/throwed_weapon.tscn" id="9_8nmes"]
 [ext_resource type="Texture2D" uid="uid://dtk16fqh5mb82" path="res://assets/character/Police-HM-2.png" id="11_q2lq8"]
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="14_bgmhi"]
 
@@ -41,7 +40,6 @@ weapon_list = {
 }
 speed = 2.5
 grappling_hook_scene = ExtResource("5_wxswb")
-projectile_weapon_scene = ExtResource("9_8nmes")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1

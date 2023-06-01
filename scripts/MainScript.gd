@@ -30,6 +30,8 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.panel_points_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.panel_kills_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
+	
+	GlobalSignals.map_updated.connect(gui_manager.minimap_manager.update)
 
 	if level_generator != null:
 		await level_generator.generate()
@@ -37,6 +39,8 @@ func _ready():
 		minimap.player_ref = player
 		minimap.load_map(level_generator.dungeon_layout.duplicate())
 		add_child(minimap)
+		
+		gui_manager.minimap_manager.minimap_inst = minimap
 
 	spawn_player()
 	init_camera()
