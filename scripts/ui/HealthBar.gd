@@ -13,13 +13,14 @@ func set_max_health(value: float):
 	heal_over.max_value = value
 	heal_under.max_value = value
 
+# Repeated juice_ functions, but I don't think abstraction would be clean here
+
 func juice_rotation():
-	var juice_tween = get_tree().create_tween().set_trans(Tween.TRANS_BOUNCE)
+	var juice_tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD)
 
 	juice_tween.stop()
-
-	juice_tween.tween_property(self, "rotation", 0, 0.001)
-
+	rotation = 0
+	
 	var test := randf_range(-0.25, 0.25)
 
 	juice_tween.tween_property(self, "rotation", test, 0.08)
@@ -30,12 +31,9 @@ func juice_scale():
 	var juice_tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD)
 
 	juice_tween.stop()
+	scale = Vector2(1,1)
 
-	juice_tween.tween_property(self, "scale", Vector2(1,1), 0.001)
-
-	var test := Vector2(1.3, 1.3)
-
-	juice_tween.tween_property(self, "scale", test, 0.08)
+	juice_tween.tween_property(self, "scale", Vector2(1.3, 1.3), 0.08)
 	juice_tween.tween_property(self, "scale", Vector2(1,1), 0.08)
 	juice_tween.play()
 
