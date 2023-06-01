@@ -15,6 +15,8 @@ var container_width : int = 10
 var container_heigth : int = 10
 var is_zoomed : bool = false
 
+var room_size : Vector2 = Vector2(22., 22.)
+
 func set_active(state: bool):
 	if minimap_gui == null || minimap_inst == null:
 		return
@@ -29,6 +31,7 @@ func instantiate_canvas_room(is_room: bool):
 	var shader_color : Variant = canvas_room_inst.get_material().get_shader_parameter("color")
 	var new_material : ShaderMaterial = canvas_room_inst.material.duplicate()
 	
+	room_size = canvas_room_inst.size
 	canvas_room_inst.material = new_material
 	rooms_grid_container.add_child(canvas_room_inst)
 	canvas_room_inst.update_minimum_size()
@@ -57,6 +60,8 @@ func _process(delta):
 	player_marker.position = minimap_inst.get_player_pos() * grid_scale# + rooms_grid_container.get_rect().size / 2
 	#player_marker.position = (player_marker.position - minimap_inst.get_player_pos()) * grid_scale# + rooms_grid_container.get_rect().size / 2
 	#player_marker.position *= -1
+	
+	player_marker.position *= rooms_grid_container.position + rooms_grid_container.get_rect().size
 	
 	#player_marker.position = minimap_inst.get_player_pos()
 	print("player_marker.position = ", player_marker.position)
