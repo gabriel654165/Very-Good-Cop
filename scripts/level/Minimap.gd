@@ -75,7 +75,7 @@ func get_full_minimap() -> Array:
 	return full_map
 
 func get_player_pos() -> Vector2:
-	return LevelGenerator.world_to_local_positon(player_ref.global_position)
+	return LevelGenerator.world_to_precise_local_positon(player_ref.global_position)
 	#return player_ref.global_position
 
 func _process(delta):

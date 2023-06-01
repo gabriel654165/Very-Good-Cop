@@ -49,6 +49,10 @@ static func world_to_local_positon(pos:Vector2) -> Vector2:
 	var start_pos:Vector2 = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
 	return ((pos / RoomCenterOffset) + start_pos).round()
 
+static func world_to_precise_local_positon(pos:Vector2) -> Vector2:
+	var start_pos:Vector2 = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
+	return ((pos / RoomCenterOffset) + start_pos)
+
 
 func local_to_world_position(pos:Vector2i) -> Vector2i:
 	return (pos - StartPos) * RoomCenterOffset

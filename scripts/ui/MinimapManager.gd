@@ -14,7 +14,8 @@ var active : bool
 var container_width : int = 10
 var container_heigth : int = 10
 var is_zoomed : bool = false
-
+var offset_x : int
+var offset_y : int
 var room_size : Vector2 = Vector2(22., 22.)
 
 func set_active(state: bool):
@@ -54,14 +55,25 @@ func instantiate_canvas_room(is_room: bool):
 #	print("new size = ", room_size)
 #	return room_size
 
+var size_room_y
+var size_room_x
+
+
 func _process(delta):
+	size_room_x = rooms_grid_container.size.x / minimap_inst.get_width()
+	size_room_y = rooms_grid_container.size.y / minimap_inst.get_heigth()
+	var grid_scale = get_viewport_rect().size / rooms_grid_container.get_rect().size
 	
-	var grid_scale = rooms_grid_container.get_rect().size / get_viewport_rect().size
-	player_marker.position = minimap_inst.get_player_pos() * grid_scale# + rooms_grid_container.get_rect().size / 2
+	var lol := Vector2(minimap_inst.get_player_pos().x - offset_x, minimap_inst.get_player_pos().y - offset_y)
+	player_marker.position = lol * Vector2(size_room_x, size_room_y)
+	player_marker.position.x +=  size_room_x / 2
+	player_marker.position.y +=  size_room_y / 2
+	
+	# + rooms_grid_container.get_rect().size / 2
 	#player_marker.position = (player_marker.position - minimap_inst.get_player_pos()) * grid_scale# + rooms_grid_container.get_rect().size / 2
 	#player_marker.position *= -1
-	
-	player_marker.position *= rooms_grid_container.position + rooms_grid_container.get_rect().size
+
+#	player_marker.position *= rooms_grid_container.position + rooms_grid_container.get_rect().size
 	
 	#player_marker.position = minimap_inst.get_player_pos()
 	print("player_marker.position = ", player_marker.position)
@@ -74,8 +86,8 @@ func generate_ui():
 	
 	var map : Array = minimap_inst.get_minimap()
 	var full_map : Array = minimap_inst.get_full_minimap()
-	var offset_x = minimap_inst.get_first_room_index_x()
-	var offset_y = minimap_inst.get_first_room_index_y()
+	offset_x =  minimap_inst.get_first_room_index_x()
+	offset_y =  minimap_inst.get_first_room_index_y()
 	
 	minimap_gui.visible = true
 	rooms_grid_container.columns = minimap_inst.get_width()

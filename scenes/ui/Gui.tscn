@@ -30,6 +30,9 @@ shader_parameter/color = Color(0, 0, 0, 0.482353)
 shader = ExtResource("19_yho6x")
 shader_parameter/color = Color(1, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_lv6q2"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_n4ume"]
 resource_name = "full_screen_minimap"
 length = 0.5
@@ -58,9 +61,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1542, 0), Vector2(0, 80)]
 }
-
-[sub_resource type="Animation" id="Animation_lv6q2"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_all3u"]
 _data = {
