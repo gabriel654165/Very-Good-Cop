@@ -295,9 +295,12 @@ grow_vertical = 2
 
 [node name="ExplosionParticles" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport" instance=ExtResource("4_iykil")]
 visibility_layer = 2
+z_index = 0
 position = Vector2(150, 150)
-amount = 25
+amount = 100
 speed_scale = 0.75
+explosiveness = 0.08
+lifetime_randomness = 1.0
 scale_amount_min = 5.0
 scale_amount_max = 15.0
 

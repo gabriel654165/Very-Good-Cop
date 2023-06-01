@@ -110,3 +110,4 @@ reload_level_test={
 [physics]
 
 common/physics_ticks_per_second=120
+common/max_physics_steps_per_frame=15

@@ -36,10 +36,11 @@ func next_track(play_it:=false):
 	put_track(next_track, play_it)
 
 
-func change_playlist(playlist:String, play_it:=false, first_track:=0):
+func change_playlist(playlist:String, play_it:=false, random:=false):
 	assert(GlobalVariables.playlists.has(playlist), "Unknown playlist " + playlist)
 
 	current_playlist = playlist
+	var first_track : int =  0 if not random else randi() % GlobalVariables.playlists[current_playlist].size()
 	put_track(first_track, play_it)
 
 

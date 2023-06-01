@@ -23,18 +23,17 @@ func juice_rotation():
 	
 	var test := randf_range(-0.25, 0.25)
 
-	juice_tween.tween_property(self, "rotation", test, 0.08)
-	juice_tween.tween_property(self, "rotation", 0, 0.08)
+	juice_tween.tween_property(self, "rotation", test, 0.05)
+	juice_tween.tween_property(self, "rotation", 0, 0.05)
 	juice_tween.play()
 
 func juice_scale():
 	var juice_tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD)
 
 	juice_tween.stop()
-	scale = Vector2(1,1)
 
-	juice_tween.tween_property(self, "scale", Vector2(1.3, 1.3), 0.08)
-	juice_tween.tween_property(self, "scale", Vector2(1,1), 0.08)
+	juice_tween.tween_property(self, "scale", Vector2(1.4, 1.4), 0.05)
+	juice_tween.tween_property(self, "scale", Vector2(1,1), 0.05)
 	juice_tween.play()
 
 func update_health_value(amount: float):

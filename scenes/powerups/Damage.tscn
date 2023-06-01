@@ -187,12 +187,12 @@ label_settings = SubResource("LabelSettings_2whmw")
 horizontal_alignment = 1
 
 [node name="KeyReleaseTexture" type="TextureRect" parent="Control/SpamSpaceContainer"]
-visible = false
 layout_mode = 2
 texture = ExtResource("9_0wixl")
 stretch_mode = 5
 
 [node name="KeyPressedTexture" type="TextureRect" parent="Control/SpamSpaceContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("10_qjyoo")
 stretch_mode = 5
