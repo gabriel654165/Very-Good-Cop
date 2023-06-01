@@ -1,9 +1,12 @@
 extends Node2D
 class_name Weapon
 
-@export var shooter_actor : Node
-@export var shooting_sound : AudioStream
-@export var reloading_sound : AudioStream
+@export var shot_shell_particle_scene : PackedScene
+
+var shooter_actor : Node
+var shooting_sound : AudioStream
+var reloading_sound : AudioStream
+
 
 var weapon_name : String = ''
 
@@ -31,6 +34,7 @@ var number_of_frag_projectile : int = 3
 var ammo_size : int = 6
 var _current_loader_bullets_number : int = 0
 var ammo_reloading_time : float = 1
+var shot_shell_texture : Texture2D
 
 var enable : bool = true
 #changer ces deux pareamètre par fréquence & amplitude (3 balles (fréqeunce) en 1s(amplitude))
@@ -68,7 +72,7 @@ func shoot():
 	if !enable:
 		return
 #	var shot := false
-	var projectile_instance : Projectile = null
+	var has_shoot : bool = false
 	if (shooting_cooldown.is_stopped() or should_disable_cooldown()) and Projectile != null and _current_loader_bullets_number >= 0:
 		shooting_cooldown.start()
 		for n in balls_by_burt:
@@ -81,18 +85,34 @@ func shoot():
 			
 			if n != 0:
 				await get_tree().create_timer(frequence_of_burt).timeout
-#			shot = true
-			projectile_instance = projectile_scene.instantiate()
-			var direction = fire_direction.global_position - fire_position.global_position
-			set_projectile_variables(projectile_instance)
 			
-			direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
-			emit_signals(shooter_actor, projectile_instance, direction)
+			var direction = fire_direction.global_position - fire_position.global_position
+			has_shoot = instantiate_projectile(direction)
+			instantiate_shot_shell()
 			recoil_shooter(direction)
-
 			animation.play("muzzle_flash")
-		if projectile_instance != null:
+			
+		if has_shoot:
 			GlobalSignals.play_sound.emit(shooting_sound, 0, 1, global_position)
+
+
+func instantiate_projectile(direction: Vector2) -> bool:
+	var projectile_instance = projectile_scene.instantiate()
+	set_projectile_variables(projectile_instance)
+	direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
+	emit_signals(shooter_actor, projectile_instance, direction)
+	return true
+
+func instantiate_shot_shell():
+	if shot_shell_texture == null:
+		return
+	var shot_shell_inst = shot_shell_particle_scene.instantiate()
+	get_tree().current_scene.add_child(shot_shell_inst)
+	shot_shell_inst.global_position = self.global_position
+	shot_shell_inst.global_rotation = self.global_rotation
+	shot_shell_inst.set_texture(shot_shell_texture)
+	shot_shell_inst.emitting = true
+
 
 func should_disable_cooldown() -> bool:
 	if special_power == null:

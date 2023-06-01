@@ -71,6 +71,7 @@ func spawn_powerups(position:Vector2):
 		preload("res://scenes/powerups/Speed.tscn"),
 		preload("res://scenes/powerups/Damage.tscn"),
 		preload("res://scenes/powerups/Heal.tscn"),
+		preload("res://scenes/powerups/MinimapExtend.tscn"),
 	]
 	var power_up = power_ups.pick_random().instantiate()
 	add_child(power_up)

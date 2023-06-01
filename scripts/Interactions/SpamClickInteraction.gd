@@ -12,11 +12,9 @@ func _ready():
 	timer.wait_time = time_to_complete
 
 func _process(delta):
-	#if !is_active:
 	if !is_active || is_triggered:
 		return
 	if current_nb_click >= total_nb_click:
-		print("interaction : spam click = TRUE")
 		is_triggered = true
 
 func _input(event):
@@ -24,7 +22,6 @@ func _input(event):
 	if !is_active || is_triggered:
 		return
 	if event is InputEventKey and event.keycode == key_code and event.pressed:
-		print(current_nb_click)
 		current_nb_click += 1
 		if !started_clicking:
 			started_clicking = true

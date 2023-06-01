@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://cm0fqcrxuvdy0"]
+
+[ext_resource type="Shader" path="res://scripts/shaders/PixelisedShader.gdshader" id="1_i8vio"]
+[ext_resource type="PackedScene" uid="uid://c1dioapnrpyg4" path="res://scenes/particles/SquareBloodParticles.tscn" id="5_bgix0"]
+[ext_resource type="PackedScene" uid="uid://dehrj4li0rlsb" path="res://scenes/particles/CircleBloodParticles.tscn" id="6_6hh5g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0wup"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3b43u"]
+shader = ExtResource("1_i8vio")
+shader_parameter/pixelSize = 4
+
+[node name="BloodPixelised" type="Control"]
+visibility_layer = 2
+z_index = 1
+material = SubResource("ShaderMaterial_i0wup")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -952.0
+offset_bottom = -448.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visibility_layer = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+
+[node name="PixelizedSubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294967294
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/PixelizedSubViewport"]
+
+[node name="ColorRect-Pixels" type="ColorRect" parent="SubViewportContainer/PixelizedSubViewport/CanvasLayer"]
+visibility_layer = 2
+material = SubResource("ShaderMaterial_3b43u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SquareBloodParticles" parent="SubViewportContainer/PixelizedSubViewport" instance=ExtResource("5_bgix0")]
+position = Vector2(100, 100)
+amount = 3
+spread = 70.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+
+[node name="CircleBloodParticles" parent="SubViewportContainer/PixelizedSubViewport" instance=ExtResource("6_6hh5g")]
+visible = false
+visibility_layer = 2
+position = Vector2(100, 100)
+scale_amount_min = 0.02

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://xdkaf1s14ef6"]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+z_index = 40
+emitting = false
+amount = 7
+lifetime = 0.12
+one_shot = true
+speed_scale = 0.75
+explosiveness = 1.0
+lifetime_randomness = 0.5
+spread = 60.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 320.0
+scale_amount_min = 1.5
+scale_amount_max = 3.5
+color = Color(0.501961, 0.501961, 0.501961, 1)
