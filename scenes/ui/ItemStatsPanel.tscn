@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=3 uid="uid://rrwoshph15c5"]
+
+[ext_resource type="Script" path="res://scripts/ui/ItemStatsPanel.gd" id="1_8cseu"]
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_q0j7m"]
+[ext_resource type="PackedScene" uid="uid://khytb6gq0ut" path="res://scenes/ui/PropertyStatContainer.tscn" id="3_uoa8b"]
+
+[node name="ItemStatsPanel" type="PanelContainer" node_paths=PackedStringArray("properties_stats_panel", "ammo_stats_panel", "projectiles_stats_panel", "powers_stats_panel", "properties_stats_container", "ammo_stats_container", "projectiles_stats_container", "powers_stats_container")]
+theme = ExtResource("1_q0j7m")
+script = ExtResource("1_8cseu")
+properties_stats_panel = NodePath("VBoxContainer/ProprietiesPanelContainer")
+ammo_stats_panel = NodePath("VBoxContainer/AmmoPanelContainer")
+projectiles_stats_panel = NodePath("VBoxContainer/ProjectilesPanelContainer")
+powers_stats_panel = NodePath("VBoxContainer/PowersPanelContainer")
+properties_stats_container = NodePath("VBoxContainer/ProprietiesPanelContainer/VBoxContainer/PropertiesGridContainer")
+ammo_stats_container = NodePath("VBoxContainer/AmmoPanelContainer/VBoxContainer/AmmoGridContainer")
+projectiles_stats_container = NodePath("VBoxContainer/ProjectilesPanelContainer/VBoxContainer/ProjectilesGridContainer")
+powers_stats_container = NodePath("VBoxContainer/PowersPanelContainer/VBoxContainer/PowersGridContainer")
+property_stat_container_scene = ExtResource("3_uoa8b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProprietiesPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ProprietiesPanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/ProprietiesPanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 30
+text = "Proprieties"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PropertiesGridContainer" type="GridContainer" parent="VBoxContainer/ProprietiesPanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="AmmoPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/AmmoPanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/AmmoPanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 30
+text = "Ammo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AmmoGridContainer" type="GridContainer" parent="VBoxContainer/AmmoPanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="ProjectilesPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ProjectilesPanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/ProjectilesPanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 30
+text = "Projectiles"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProjectilesGridContainer" type="GridContainer" parent="VBoxContainer/ProjectilesPanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="PowersPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PowersPanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/PowersPanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 30
+text = "Powers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PowersGridContainer" type="GridContainer" parent="VBoxContainer/PowersPanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 15

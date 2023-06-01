@@ -4,10 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="2_plfkm"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_u5xh8"]
 [ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_hawec"]
-[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="5_h1th4"]
+[ext_resource type="PackedScene" uid="uid://xxld75mg1fqf" path="res://scenes/characters/player.tscn" id="5_h1th4"]
 [ext_resource type="Script" path="res://scripts/Sounds/MusicPlaylists.gd" id="6_acyjm"]
 
-[node name="TopNode" type="Node2D"]
+[node name="TopNode" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_cprlw")
 gui_manager_scene = ExtResource("2_plfkm")
 projectile_manager_scene = ExtResource("3_u5xh8")
@@ -18,8 +20,6 @@ position = Vector2(233, 190)
 zoom = Vector2(1.75, 1.75)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 drag_left_margin = 0.3
 drag_top_margin = 0.15
 drag_right_margin = 0.3

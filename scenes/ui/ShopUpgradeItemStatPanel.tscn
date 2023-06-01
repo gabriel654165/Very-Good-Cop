@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdx282nh2kvp0"]
+
+[ext_resource type="Texture2D" uid="uid://dowkkdr2nl48i" path="res://assets/UI/icons/HUD_ammo01.png" id="1_sw5ef"]
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_ujm2k"]
+[ext_resource type="Script" path="res://scripts/ui/ShopUpgradeItemStatPanel.gd" id="2_m6aj2"]
+
+[node name="UpgradeItemStatPanel" type="PanelContainer" node_paths=PackedStringArray("icon_texture", "name_label", "level_label", "max_level_container", "upgrade_button", "price_label")]
+theme = ExtResource("1_ujm2k")
+script = ExtResource("2_m6aj2")
+icon_texture = NodePath("SpecialPowers-List/PanelIconContainer/Icon")
+name_label = NodePath("SpecialPowers-List/PropertyNameLabel")
+level_label = NodePath("SpecialPowers-List/LevelLabel")
+max_level_container = NodePath("SpecialPowers-List/SpecialPower-Item5/MaxLevelContainer")
+upgrade_button = NodePath("SpecialPowers-List/SpecialPower-Item5/UpgradeButton")
+price_label = NodePath("SpecialPowers-List/SpecialPower-Item5/PriceLabel")
+
+[node name="SpecialPowers-List" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="SpecialPowers-List"]
+layout_mode = 2
+
+[node name="PanelIconContainer" type="PanelContainer" parent="SpecialPowers-List"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Icon" type="TextureRect" parent="SpecialPowers-List/PanelIconContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_sw5ef")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="PropertyNameLabel" type="Label" parent="SpecialPowers-List"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Damages"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="SpecialPowers-List"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="SpecialPowers-List"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "x/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterMargin" type="AspectRatioContainer" parent="SpecialPowers-List"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpecialPower-Item5" type="VBoxContainer" parent="SpecialPowers-List"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="TopMargin" type="AspectRatioContainer" parent="SpecialPowers-List/SpecialPower-Item5"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="MaxLevelContainer" type="VBoxContainer" parent="SpecialPowers-List/SpecialPower-Item5"]
+visible = false
+layout_mode = 2
+
+[node name="MaxLevelPanel" type="PanelContainer" parent="SpecialPowers-List/SpecialPower-Item5/MaxLevelContainer"]
+layout_mode = 2
+
+[node name="MaxLevelLabel" type="Label" parent="SpecialPowers-List/SpecialPower-Item5/MaxLevelContainer/MaxLevelPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Max Level"
+
+[node name="TopMargin2" type="AspectRatioContainer" parent="SpecialPowers-List/SpecialPower-Item5/MaxLevelContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="UpgradeButton" type="Button" parent="SpecialPowers-List/SpecialPower-Item5"]
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Upgrade"
+
+[node name="PriceLabel" type="Label" parent="SpecialPowers-List/SpecialPower-Item5"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "200$"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftMargin2" type="AspectRatioContainer" parent="SpecialPowers-List"]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="SpecialPowers-List/SpecialPower-Item5/UpgradeButton" to="." method="_on_upgrade_button_mouse_entered"]
+[connection signal="mouse_exited" from="SpecialPowers-List/SpecialPower-Item5/UpgradeButton" to="." method="_on_upgrade_button_mouse_exited"]
+[connection signal="pressed" from="SpecialPowers-List/SpecialPower-Item5/UpgradeButton" to="." method="_on_upgrade_button_pressed"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dax7vp5f68pwo"]
+
+[ext_resource type="Script" path="res://scripts/weapons/SpecialPowers/CatchingCable.gd" id="1_rvv6p"]
+[ext_resource type="PackedScene" uid="uid://cjli835xwy0bb" path="res://scenes/projectiles/CatchingCable.tscn" id="2_v62io"]
+
+[node name="CatchingCable" type="Node2D"]
+script = ExtResource("1_rvv6p")
+catching_cable_scene = ExtResource("2_v62io")

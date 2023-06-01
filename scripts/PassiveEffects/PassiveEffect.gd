@@ -41,8 +41,8 @@ func add_passive_effect(character: Character):
 		value_save = character.speed
 		character.speed += value_effect
 	if type == TYPE.DAMAGE:
-		value_save = character.weapon_manager.bullet_damages
-		character.weapon_manager.bullet_damages = value_effect
+		value_save = character.weapon_manager.projectile_damages
+		character.weapon_manager.projectile_damages = value_effect
 	
 	if type == TYPE.SLOW_MOTION:
 		pass
@@ -54,7 +54,7 @@ func remove_passive_effect(character: Character):
 	if type == TYPE.SPEED:
 		character.speed = value_save
 	if type == TYPE.DAMAGE:
-		character.weapon_manager.bullet_damages = value_save
+		character.weapon_manager.projectile_damages = value_save
 	
 	if type == TYPE.SLOW_MOTION:
 		pass

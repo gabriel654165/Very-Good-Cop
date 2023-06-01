@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://c46ciaasvkpi4"]
+
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_4lnpf"]
+[ext_resource type="Script" path="res://scripts/ui/ItemDescriptionPanel.gd" id="1_j8sor"]
+
+[node name="DescriptionPanel" type="PanelContainer" node_paths=PackedStringArray("description_label")]
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("1_4lnpf")
+script = ExtResource("1_j8sor")
+description_label = NodePath("VBoxContainer/Description")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 25
+text = "The Glock 17 is a short recoil–operated, locked-breech semi-automatic pistol that uses a modified Browning cam-lock system adapted from the Hi-Power pistol."
+autowrap_mode = 2

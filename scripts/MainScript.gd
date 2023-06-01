@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export var gui_manager_scene : PackedScene
 @export var projectile_manager_scene : PackedScene
@@ -13,7 +13,12 @@ extends Node2D
 
 
 func _ready():
+	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
+	
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
+	GlobalSignals.player_fired.connect(gui_manager.weapon_panel_manager.handle_player_fired)
+	GlobalSignals.player_reloading.connect(gui_manager.weapon_panel_manager.handle_player_reload)
+	GlobalSignals.player_use_special_power.connect(gui_manager.weapon_panel_manager.handle_use_special_power)
 
 	GlobalSignals.play_sound.connect(_do_play_sound)
 
