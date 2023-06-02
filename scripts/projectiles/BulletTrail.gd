@@ -2,13 +2,7 @@ extends Line2D
 class_name ShootingTrail
 
 @export var trail_length = 5
-
 @export var bullet_instance : Node
-
-
-func _ready():
-	if bullet_instance == null:
-		print("bullet_instance null")
 
 func _process(delta):
 	if bullet_instance == null:

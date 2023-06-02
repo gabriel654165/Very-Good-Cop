@@ -71,7 +71,7 @@ func _ready():
 func shoot():
 	if !enable:
 		return
-#	var shot := false
+	
 	var has_shoot : bool = false
 	if (shooting_cooldown.is_stopped() or should_disable_cooldown()) and Projectile != null and _current_loader_bullets_number >= 0:
 		shooting_cooldown.start()
