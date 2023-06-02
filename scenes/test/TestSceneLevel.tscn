@@ -14,7 +14,7 @@ level_generator_scene = ExtResource("4_hawec")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(233, 190)
-zoom = Vector2(0.4, 0.4)
+zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 drag_horizontal_enabled = true

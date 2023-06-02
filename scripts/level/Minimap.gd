@@ -4,6 +4,14 @@ class_name Minimap
 var map : Array
 var full_map : Array
 var player_ref : Player
+var enemies_list_ref : Array[Enemy]
+var powerups_list_ref : Array[PassiveEffect]
+
+
+func init(player: Node, top_node: Node):
+	player_ref = player
+	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Enemy, enemies_list_ref, top_node)
+	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is PassiveEffect, powerups_list_ref, top_node)
 
 
 func load_map(m:Array):
@@ -59,24 +67,59 @@ func get_width() -> int:
 		full_map_no_empty_line.map(func(row): return row.find(true)).min() \
 	) + 1
 
-
 func get_heigth() -> int:
 	var full_map_no_empty_line = full_map.filter(func(line): return line.any(func(room): return room))
 	return full_map_no_empty_line.size()
-
 
 
 func get_minimap() -> Array:
 	return map
 	#return map.filter(func(line): return line.any(func(room): return room))
 
-
 func get_full_minimap() -> Array:
 	return full_map
 
+
 func get_player_pos() -> Vector2:
 	return LevelGenerator.world_to_precise_local_positon(player_ref.global_position)
-	#return player_ref.global_position
+
+func get_current_room_pos() -> Vector2:
+	return LevelGenerator.world_to_local_positon(player_ref.global_position)
+
+
+func get_item_pos_in_map(item_list_ref: Array, map: Array, item_ref: Node = null) -> Array[Vector2]:
+	var items_pos_list : Array[Vector2] = []
+	for item in item_list_ref:
+		if item == null:
+			continue
+		var item_room := LevelGenerator.world_to_local_positon(item.global_position)
+		if !map[item_room.y][item_room.x]:
+			continue
+		if item_ref != null:
+			var item_ref_room := LevelGenerator.world_to_local_positon(item_ref.global_position)
+			if item_room.x != item_ref_room.x or item_room.y != item_ref_room.y:
+				continue
+		items_pos_list.append(LevelGenerator.world_to_precise_local_positon(item.global_position))
+	return items_pos_list
+
+func get_room_enemies_pos_list() -> Array[Vector2]:
+	return get_item_pos_in_map(enemies_list_ref, map, player_ref)
+
+func get_room_powerups_pos_list() -> Array[Vector2]:
+	return get_item_pos_in_map(powerups_list_ref, map, player_ref)
+
+func get_full_map_enemies_pos_list() -> Array[Vector2]:
+	return get_item_pos_in_map(enemies_list_ref, full_map)
+
+func get_full_map_powerups_pos_list() -> Array[Vector2]:
+	return get_item_pos_in_map(powerups_list_ref, full_map)
+
+func get_map_enemies_pos_list() -> Array[Vector2]:
+	return get_item_pos_in_map(enemies_list_ref, map)
+
+func get_map_powerups_pos_list() -> Array[Vector2]:
+	return get_item_pos_in_map(powerups_list_ref, map)
+
 
 func _process(delta):
 	assert(player_ref != null)

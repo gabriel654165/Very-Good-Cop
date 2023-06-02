@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://76fiuu4xbqy4"]
+[gd_scene load_steps=31 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -19,23 +19,29 @@
 [ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
 [ext_resource type="PackedScene" uid="uid://cyf6mbde6v2d" path="res://scenes/ui/MinimapRoomItem.tscn" id="17_dnidm"]
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="17_eyt6o"]
-[ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="19_msbxx"]
 [ext_resource type="Shader" path="res://scripts/shaders/ColorCanvasItemShader.gdshader" id="19_yho6x"]
+[ext_resource type="PackedScene" uid="uid://bpmvs7nrxex28" path="res://scenes/ui/MinimapPowerupMarker.tscn" id="20_7gmvy"]
+[ext_resource type="PackedScene" uid="uid://bc2pg066tc1b8" path="res://scenes/ui/MinimapPlayerMarker.tscn" id="20_jcqsb"]
+[ext_resource type="PackedScene" uid="uid://45sw7cn3b37b" path="res://scenes/ui/MinimapEnemyMarker.tscn" id="21_w74aj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5bu2"]
 shader = ExtResource("19_yho6x")
-shader_parameter/color = Color(0, 0, 0, 0.482353)
+shader_parameter/color = Color(0.145098, 0.145098, 0.145098, 0.470588)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwmqb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_is1sa"]
 shader = ExtResource("19_yho6x")
-shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/color = Color(0.145098, 0.145098, 0.145098, 0.470588)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftsun"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0.145098, 0.145098, 0.145098, 0.470588)
 
 [sub_resource type="Animation" id="Animation_lv6q2"]
 length = 0.001
 
 [sub_resource type="Animation" id="Animation_n4ume"]
 resource_name = "full_screen_minimap"
-length = 0.5
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -44,7 +50,7 @@ tracks/0/path = NodePath("AspectRatioContainer:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(300, 300), Vector2(1920, 900)]
@@ -56,10 +62,70 @@ tracks/1/path = NodePath("AspectRatioContainer:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1542, 0), Vector2(0, 80)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../MinimapManager:room_material_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.117647, 0.117647, 0.117647, 0.627451), Color(0.117647, 0.117647, 0.117647, 0.588235)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../MinimapManager:player_material_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 0.498039)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../MinimapManager:powerup_material_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0, 0.00392157), Color(1, 1, 0, 0.498039)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../MinimapManager:enemy_material_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 0.498039)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../MinimapManager:background_material_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.145098, 0.145098, 0.145098, 0.470588), Color(0.145098, 0.145098, 0.145098, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_all3u"]
@@ -136,15 +202,27 @@ script = ExtResource("13_xqfji")
 weapon_panel_gui = ExtResource("14_nrxer")
 panels_container = NodePath("../PanelsContainer/HBoxBottomContainer")
 
-[node name="MinimapManager" type="Node2D" parent="." node_paths=PackedStringArray("minimap_gui", "panel_container", "rooms_grid_container", "animation_player", "player_marker")]
+[node name="MinimapManager" type="Node2D" parent="." node_paths=PackedStringArray("minimap_gui", "panel_container", "rooms_grid_container", "animation_player", "left_items_container", "left_enemies_label", "left_powerups_label", "view_label_container", "view_label")]
 script = ExtResource("16_j85sm")
 minimap_gui = NodePath("../PanelsContainer/MinimapControl")
 canvas_room_scene = ExtResource("17_dnidm")
 panel_container = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer")
 rooms_grid_container = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/GridContainer")
-room_material_color = Color(1, 1, 1, 0.501961)
+background_material_color = Color(0.145098, 0.145098, 0.145098, 0.470588)
+room_material_color = Color(0.117647, 0.117647, 0.117647, 0.627451)
+player_material_color = Color(0, 0, 0, 0.00392157)
+enemy_material_color = Color(0, 0, 0, 0.00392157)
+powerup_material_color = Color(1, 1, 0, 0.00392157)
 animation_player = NodePath("../PanelsContainer/MinimapControl/AnimationPlayer")
-player_marker = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/GridContainer/PlayerMarker")
+player_marker_scene = ExtResource("20_jcqsb")
+enemy_marker_scene = ExtResource("21_w74aj")
+powerup_marker_scene = ExtResource("20_7gmvy")
+markers_minimum_scale = 0.025
+left_items_container = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer")
+left_enemies_label = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel/VBoxContainer/LabelValue")
+left_powerups_label = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel/VBoxContainer/LabelValue")
+view_label_container = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer")
+view_label = NodePath("../PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer/SwitchViewLabel")
 
 [node name="PanelsContainer" type="Control" parent="."]
 layout_mode = 3
@@ -231,12 +309,6 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 9
 
-[node name="PlayerMarker" type="Sprite2D" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/GridContainer"]
-material = SubResource("ShaderMaterial_dwmqb")
-position = Vector2(117, 114)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("19_msbxx")
-
 [node name="BottomMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
@@ -246,8 +318,90 @@ custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="BottomMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+
+[node name="ViewContainer" type="HBoxContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftArrowLabel" type="Label" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SwitchViewLabel" type="Label" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "switch view"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightArrowLabel" type="Label" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftItemsContainer" type="HBoxContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EnemiesLeftPanel" type="PanelContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer"]
+material = SubResource("ShaderMaterial_is1sa")
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Enemies left :"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LabelValue" type="Label" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PowerupsLeftPanel" type="PanelContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer"]
+material = SubResource("ShaderMaterial_ftsun")
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Items left :"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LabelValue" type="Label" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="RightMargin" type="AspectRatioContainer" parent="PanelsContainer/MinimapControl/AspectRatioContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)

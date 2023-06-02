@@ -67,15 +67,6 @@ func _unhandled_input(event):
 		throw_grappling()
 	if event.is_action_pressed("activate_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
 		weapon_manager.weapon.special_power.use_special_power()
-	
-	#switch weapon
-	if event.is_action_pressed("test"):
-		index_weapon_selected += 1
-		if index_weapon_selected > weapon_list.size():
-			index_weapon_selected = 1
-		print("weapon index : ", index_weapon_selected)
-		unassign_weapon()
-		assign_weapon(index_weapon_selected)
 
 func assign_knife():
 	knife = GlobalVariables.all_knife_scene_list[GlobalVariables.index_knife_selected].packed_scene.instantiate()

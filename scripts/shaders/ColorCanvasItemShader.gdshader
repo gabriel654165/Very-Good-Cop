@@ -11,4 +11,7 @@ void fragment() {
 		COLOR.rgb += color.rgb * color.a;
 		COLOR.a -= color.a;
 	}
+	if (color.a == 0.) {
+		COLOR.a = 0.;
+	}
 }
