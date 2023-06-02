@@ -3,9 +3,6 @@ class_name ThrowedWeapon
 
 var time_stunning : float = 3
 
-#func _ready():
-#	print("THROWED WEAPON\n")
-
 func handle_collision(collision: KinematicCollision2D):
 	if !collision:
 		return
@@ -21,3 +18,5 @@ func handle_collision(collision: KinematicCollision2D):
 func stop():
 	speed = 0
 	direction = Vector2.ZERO
+	if animation_player != null:
+		animation_player.stop()

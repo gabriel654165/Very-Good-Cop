@@ -1,21 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://rqu4qacdo8oa"]
+[gd_scene load_steps=4 format=3 uid="uid://bcs1erw2idhma"]
 
-[ext_resource type="Texture2D" path="res://assets/PNG/dead_body.png" id="1_ugcvw"]
-[ext_resource type="PackedScene" uid="uid://dw2q1tptf7tp4" path="res://scenes/effects/blood.tscn" id="2_xgxk0"]
+[ext_resource type="Script" path="res://scripts/Character/DeadCorpse.gd" id="1_vgoal"]
+[ext_resource type="PackedScene" uid="uid://c1dioapnrpyg4" path="res://scenes/particles/SquareBloodParticles.tscn" id="2_ffqos"]
+[ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_npdwg"]
 
 [node name="Corpse" type="Node2D"]
-z_index = 3
+z_index = 1
+script = ExtResource("1_vgoal")
+
+[node name="SquareBloodParticles" parent="." instance=ExtResource("2_ffqos")]
+visible = false
+z_index = 0
+amount = 30
+emission_shape = 1
+emission_sphere_radius = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 3
-position = Vector2(30, 0)
-rotation = 1.5708
-scale = Vector2(0.065, 0.065)
-texture = ExtResource("1_ugcvw")
-
-[node name="CPUParticles2D" parent="." instance=ExtResource("2_xgxk0")]
-z_index = 4
-amount = 20
-spread = 80.0
-scale_amount_min = 5.0
-scale_amount_max = 10.0
+z_index = 1
+texture = ExtResource("2_npdwg")
+region_enabled = true
+region_rect = Rect2(75, 729, 43, 26)

@@ -231,7 +231,6 @@ func find_farthest_cell_from(pos:Vector2i) -> Vector2i:
 	var cellvd = CellVisitDistance.new()
 	cellvd.cell = pos
 	var farthest_cellvd = find_farthest_cell_with_cellvisitdistance(cellvd, true)
-	#print("Player will have to pass by " + str(farthest_cellvd.distance) + " rooms")
 	return farthest_cellvd.cell 
 
 
@@ -275,8 +274,8 @@ static func load_all_rooms_from(path :String):
 
 	if !path.ends_with("/"):
 		path += "/"
-	
-	
+
+
 	assert(dir != null, "Cannot open " + path)
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
@@ -316,7 +315,6 @@ static func load_room(room:PackedScene, file_name:String):
 		GlobalVariables.rooms_repository[doors_bitflags] = new_room_array 
 	else:
 		GlobalVariables.rooms_repository[doors_bitflags].append(room_data)
-	#print("Loaded room: " + file_name)
 
 
 static func room_nodes_to_door_bitflags(room_nodes:PackedStringArray) -> int:

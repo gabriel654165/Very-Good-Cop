@@ -3,9 +3,9 @@ class_name ChangeCanvasVisibility
 @export var canvas : CanvasItem
 @export var visibility : bool
 
-func set_active(b:bool):
-	super.set_active(b)
-	if !b:
+func set_active(state:bool):
+	super.set_active(state)
+	if !state:
 		canvas.visible = !visibility
 	
 

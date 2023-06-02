@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx37tptpyigj7"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/BulletTrail.gd" id="1_puthu"]
+
+[node name="ShootingTrail" type="Line2D"]
+z_index = 10
+rotation = -1.5708
+width = 2.0
+script = ExtResource("1_puthu")

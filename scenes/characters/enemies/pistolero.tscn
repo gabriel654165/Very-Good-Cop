@@ -1,7 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cewhfxsma7527"]
+[gd_scene load_steps=15 format=3 uid="uid://bsg7wbhktsf6b"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
+[ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="2_5lu21"]
 [ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_kdey6"]
+[ext_resource type="PackedScene" uid="uid://bcs1erw2idhma" path="res://scenes/effects/corpse.tscn" id="3_j3lui"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_onhbj"]
 [ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_vv8m0"]
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_hf2va"]
@@ -9,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_ar7hp"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="9_5t7aw"]
 [ext_resource type="Script" path="res://scripts/AI/States/GoToAndLookAround.gd" id="9_ngk2c"]
-[ext_resource type="PackedScene" uid="uid://r7n15xjnkw6m" path="res://scenes/weapons/Glock.tscn" id="10_2hggd"]
+[ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="10_5xgn2"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/HearingSensor.gd" id="10_mwn3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
@@ -18,6 +20,8 @@ size = Vector2(30, 16)
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
 script = ExtResource("1_ef1gd")
 hearing_range = 300.0
+blood_effect_scene = ExtResource("2_5lu21")
+corpse_scene = ExtResource("3_j3lui")
 speed = 10.0
 weapon_manager = NodePath("WeaponManager")
 
@@ -66,18 +70,10 @@ position = Vector2(4, 0)
 [node name="VisionSensor" type="Node2D" parent="."]
 script = ExtResource("9_5t7aw")
 
-[node name="WeaponManager" parent="." instance=ExtResource("10_2hggd")]
-properties/weapon_name = ""
-properties/special_power_unlocked = false
-properties/level = 0
-power/can_use_power = false
-bullet/bullet_speed = 10
-bullet/bullet_damages = 6
-bullet/bullet_impact_force = 2.0
-loader/reloading_cooldown = 1.0
-weapon/recoil_force = 2.0
-
 [node name="WeaponPosition" type="Marker2D" parent="."]
+
+[node name="WeaponManager" parent="." instance=ExtResource("10_5xgn2")]
+projectile/projectile_speed = 10
 
 [node name="HearingSensor" type="Node2D" parent="."]
 script = ExtResource("10_mwn3l")

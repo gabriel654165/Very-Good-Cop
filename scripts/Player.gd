@@ -1,15 +1,15 @@
 extends Character
 class_name Player
 
-@export var index_weapon_selected : int = 1
-@export var weapon_list : Dictionary
-
 var move_direction : Vector2 = Vector2.ZERO
 @onready var sound_shoot_vfx: CPUParticles2D = $ShootVFX
 
 func _ready():
-	await assign_weapon(index_weapon_selected)
-	assign_knife()
+	# Test : skipping the choose weapons panel and take the global
+	assign_weapons()
+
+func assign_weapons():
+	GlobalFunctions.set_distance_weapon_properties(weapon_manager, GlobalVariables.index_distance_weapon_selected)
 
 func _physics_process(delta):
 	if self.action_disabled:
@@ -62,14 +62,15 @@ func _unhandled_input(event):
 	if event.is_action_pressed("stab"):
 		stab()
 	if event.is_action_pressed("throw_weapon") and !weapon_throwed and weapon_manager.weapon != null:
+		#changer l'animation
 		throw_weapon()
 	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
 		throw_grappling()
-	if event.is_action_pressed("activate_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
+	if event.is_action_pressed("use_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
 		weapon_manager.weapon.special_power.use_special_power()
 
 func assign_knife():
-	knife = GlobalVariables.all_knife_scene_list[GlobalVariables.index_knife_selected].packed_scene.instantiate()
+	knife = GlobalVariables.all_knife_scene_list[GlobalVariables.index_melee_weapon_selected].packed_scene.instantiate()
 	add_child(knife)
 	knife.global_position = global_position
 
@@ -77,40 +78,11 @@ func set_active_assigned_weapon():
 	weapon_throwed = false
 	weapon_manager.enable = true
 	#weapon_manager.weapon.sprite.visible = true
-
-func assign_weapon(index: int):
-	weapon_manager = await find_weapon(index_weapon_selected)
-	if weapon_manager == null:
-		return
-	weapon_manager.set_position(weapon_position.position)
-	self.add_child(weapon_manager)
-	weapon_manager.set_variables(weapon_manager.weapon)
-
-func unassign_weapon():
-	if weapon_manager == null:
-		return
-	weapon_manager.queue_free()
-
-func find_weapon(weapon_index: int) -> Object :
-	var current_index : int = 1 
-	var weapon_scene : Object = null 
-	
-	if weapon_list == null or weapon_list.size() <= 0:
-		return null
-	
-	for key_weapon in weapon_list.keys():
-		if current_index == weapon_index:
-			weapon_scene = weapon_list[key_weapon]
-		current_index += 1
-	
-	if weapon_scene == null:
-		return null
-	
-	var weapon_manager : Node2D = await weapon_scene.instantiate()
-	return weapon_manager
+	#changer l'animation
 
 func handle_enemy_died(enemy: Node2D, points: int):
-	if weapon_manager.weapon.special_power_unlocked:
+	var index : int = GlobalVariables.index_distance_weapon_selected
+	if GlobalVariables.player_distance_weapon_list[index].special_power_unlocked:
 		weapon_manager.weapon.add_charge_power_points(points)
 
 func handle_hit(damager: Node2D, damages):

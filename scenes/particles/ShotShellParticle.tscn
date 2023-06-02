@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8blxsvtsphcf"]
+
+[ext_resource type="Texture2D" uid="uid://b4xnappd27ebq" path="res://assets/weapons/sprites/projectiles/bullet_1.png" id="1_rwm7t"]
+[ext_resource type="Script" path="res://scripts/Particles/ShotShell.gd" id="2_p4u2y"]
+
+[node name="ShotShellParticle" type="CPUParticles2D"]
+visibility_layer = 3
+z_index = 1
+emitting = false
+amount = 1
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_rwm7t")
+direction = Vector2(-0.5, 0.5)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angle_min = -150.0
+angle_max = -50.0
+script = ExtResource("2_p4u2y")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

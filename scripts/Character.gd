@@ -5,21 +5,16 @@ class_name Character
 @onready var weapon_position = $WeaponPosition
 @onready var throw_object_position = $ThrowObjectPosition
 
-#movement
 @export var action_disabled : bool = false
 @export var speed : float = 6
 var force : Vector2 = Vector2.ZERO
 
-#if player, don't show / private
 @export var weapon_manager : Node2D = null
 @export var knife : Knife = null
 
 #if enemy don't show
 @export var grappling_hook_scene : PackedScene
 @export var projectile_weapon_scene : PackedScene
-
-#var has_bulletproof_vest : bool = true
-#var bulletproof_vest : Node2D = null
 
 var weapon_throwed : bool = false
 var hook_deployed : bool = false

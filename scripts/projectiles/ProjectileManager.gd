@@ -1,6 +1,7 @@
 extends Node2D
 class_name ProjectileManager
 
+
 #signal callback
 func handle_fired_projectile_spawned(projectile_owner: Node2D, projectile: Projectile, position: Vector2, direction: Vector2):
 	add_child(projectile)
@@ -21,7 +22,11 @@ func handle_grappling_cable_drag(projectile_owner: Node2D, hook: GrapplingHook, 
 	var distance = (projectile_owner.global_position - projectile_position).length()
 	var duration = distance / drag_speed
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
-	await tween.tween_property(projectile_owner, "global_position", projectile_position, duration).finished
+
+	# Small position safety
+	var reduced_position = projectile_position - (projectile_position - projectile_owner.global_position).normalized() * distance * 0.025
+
+	await tween.tween_property(projectile_owner, "global_position", reduced_position, duration).finished
 	hook.queue_free()
 	if projectile_owner is Player: #or Character
 		projectile_owner.hook_deployed = false
