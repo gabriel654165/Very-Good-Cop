@@ -1,15 +1,16 @@
-extends Control
+extends Node2D
 
 @export var gui_manager_scene : PackedScene
+@export var screen_effects_manager_scene : PackedScene
 @export var projectile_manager_scene : PackedScene
 @export var level_generator_scene : PackedScene
+@export var player : Player
 
-@onready var gui_manager : GuiManager = add_manager(gui_manager_scene)
-@onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene)
-@onready var level_generator: LevelGenerator = add_manager(level_generator_scene)
-
-@onready var camera : Camera2D = $Camera2D
-@onready var player : Player = $Player
+@onready var camera : Camera2D = $MainCamera
+@onready var gui_manager : GuiManager = add_manager(gui_manager_scene, self, func(x):pass)
+@onready var screen_effects_manager : ScreenEffectManager = add_manager(screen_effects_manager_scene, camera, func(x):pass)
+@onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene, self, func(x):pass)
+@onready var level_generator: LevelGenerator = add_manager(level_generator_scene, self, func(x):pass)
 
 
 func _ready():
@@ -36,6 +37,12 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.panel_points_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.panel_kills_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
+	
+	GlobalSignals.active_minimap_power_up.connect(screen_effects_manager.set_minimap_power_up)
+	GlobalSignals.active_slowmotion_power_up.connect(screen_effects_manager.set_slowmotion_power_up)
+	GlobalSignals.active_speed_power_up.connect(screen_effects_manager.set_speed_power_up)
+	GlobalSignals.active_damage_power_up.connect(screen_effects_manager.set_damage_power_up)
+	GlobalSignals.active_heal_power_up.connect(screen_effects_manager.set_heal_power_up)
 
 	if level_generator != null:
 		await level_generator.generate()
@@ -56,20 +63,22 @@ func _do_play_sound(sound:AudioStream, volume_db: float = 0.0, pitch_scale: floa
 	audio_stream_player.play()
 	
 	audio_stream_player.finished.connect(audio_stream_player.queue_free)
-	
+
 
 func spawn_player():
 	if level_generator != null:
-		player.position = level_generator.local_to_world_position(level_generator.entrance_pos)
+		player.global_position = level_generator.local_to_world_position(level_generator.entrance_pos)
+
 
 func init_camera():
 	camera.global_position = player.global_position
 
-func add_manager(packed_manager:PackedScene, init_func:Callable=func(x):pass):
+
+func add_manager(packed_manager:PackedScene, parent: Node, init_func:Callable=func(x):pass):
 	if packed_manager == null:
 		return
 	var manager = packed_manager.instantiate()
-	add_child(manager)
+	parent.add_child(manager)
 	
 	init_func.call(manager)
 

@@ -1,12 +1,12 @@
 extends StaticBody2D
 
-@onready var health := $Health as Health
-@onready var animation := $Explosion/Animation as AnimationPlayer
-@onready var particle_player := $ExplosionParticle/Animation as AnimationPlayer
-@onready var explosion_area := $ExplosionArea as Area2D
-
+@export var particle_animation : AnimationPlayer
+@export var shader_animation : AnimationPlayer
 @export var damage := 35.0
 @export var impact_force := 20.0
+
+@onready var health := $Health as Health
+@onready var explosion_area := $ExplosionArea as Area2D
 
 func handle_hit(damager: Node2D, damage):
 	if health.is_dead():
@@ -22,9 +22,8 @@ func destroy_instance():
 	queue_free()
 
 func explode():
-	animation.play("explosion")
-
-	particle_player.play("explosion_praticle")
+	particle_animation.play("barrel_explosion_particles")
+	shader_animation.play("shockwave_shader_animation")
 
 	var bodies := explosion_area.get_overlapping_bodies()
 

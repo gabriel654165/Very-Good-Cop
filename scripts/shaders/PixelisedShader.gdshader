@@ -3,8 +3,6 @@ render_mode blend_premul_alpha,unshaded;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
-uniform sampler2D diffuse;
-
 uniform int pixelSize : hint_range(2, 16, 2) = 4;
 
 void fragment() 
@@ -21,11 +19,10 @@ void fragment()
 	float y = cellSizeY * floor(UV.y / cellSizeY);
 	
 	vec4 texCol = texture(SCREEN_TEXTURE, vec2(x, y)).rgba;
-    COLOR.rgba = texCol;
+    COLOR.rgb = texCol.rgb;
+	
 	if (texCol.r==0.0 && texCol.g==0.0 && texCol.b==0.0) {
 	    texCol.a=0.0;
 	}
-	COLOR.a=texCol.a;
-	
-	//COLOR = texture(SCREEN_TEXTURE, vec2(x, y));
+	COLOR.a = texCol.a;
 }
