@@ -8,7 +8,7 @@ extends Node2D
 
 @onready var camera : Camera2D = $MainCamera
 @onready var gui_manager : GuiManager = add_manager(gui_manager_scene, self, func(x):pass)
-@onready var screen_effects_manager : ScreenEffectsManager = add_manager(screen_effects_manager_scene, camera, func(x):pass)
+@onready var screen_effects_manager : ScreenEffectManager = add_manager(screen_effects_manager_scene, camera, func(x):pass)
 @onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene, self, func(x):pass)
 @onready var level_generator: LevelGenerator = add_manager(level_generator_scene, self, func(x):pass)
 
