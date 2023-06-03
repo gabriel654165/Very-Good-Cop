@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_5e57m"]
 [ext_resource type="PackedScene" uid="uid://bsqpnn0rfxvic" path="res://scenes/ui/Gui.tscn" id="2_knftv"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_eolho"]
-[ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_uv201"]
+[ext_resource type="PackedScene" uid="uid://dji2wpedam34s" path="res://scenes/characters/player.tscn" id="3_uv201"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_gyb4h"]
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="7_r514s"]
 [ext_resource type="PackedScene" uid="uid://bx8cma3ns1wpg" path="res://scenes/characters/enemies/kamikaz.tscn" id="8_iwdro"]

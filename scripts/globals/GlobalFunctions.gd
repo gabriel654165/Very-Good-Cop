@@ -126,6 +126,7 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 			weapon_editor.special_power = special_power_instance
 			
 			weapon_editor.weapon.side_sprite.texture = GlobalVariables.all_distance_weapon_list[current_index].gui_texture
+			weapon_editor.shot_shell_texture = GlobalVariables.all_distance_weapon_list[current_index].shot_shells_texture
 			
 			weapon_editor.shooting_cooldown = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.shooting_cooldown_lvl, "shooting_cooldown", weapon_editor.shooting_cooldown)
 			weapon_editor.balls_by_burt = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.balls_by_burt_lvl, "balls_by_burt", weapon_editor.balls_by_burt)

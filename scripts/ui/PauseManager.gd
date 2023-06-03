@@ -2,7 +2,7 @@ extends Node
 class_name PauseManager
 
 @export var active : bool = false
-@export var aim_blur_intensity : float = 0.5
+@export var aim_blur_intensity : float = 1.0
 @export var time_to_blur : float = 0.5
 
 @export var pop_up_text_scene : PackedScene

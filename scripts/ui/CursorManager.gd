@@ -116,12 +116,6 @@ func hit_marker_action():
 	if cursor.is_attack_gui:
 		cursor.active_mode_hit_marker_gui()
 
-func _input(event):
-#debug
-	if event.is_action_pressed("change_cursor_type_test"):
-		mouse_visible = !mouse_visible
-		cursor.set_active_mouse(!mouse_visible)
-
 func smooth_clamp_cursor_position(target: Vector2):
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(GlobalVariables, "cursor_position", target, 0.1)
