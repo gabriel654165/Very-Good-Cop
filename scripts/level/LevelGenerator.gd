@@ -44,7 +44,6 @@ var exit_pos: Vector2i
 
 
 
-
 static func world_to_local_positon(pos:Vector2) -> Vector2:
 	var start_pos:Vector2 = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
 	return ((pos / RoomCenterOffset) + start_pos).round()
@@ -190,9 +189,11 @@ func spawn_dungeon_rooms():
 		var chosen_room:RoomData = GlobalVariables.rooms_repository[doors_id].pick_random()
 
 		var instantiated_room:Node2D = chosen_room.factory.instantiate()
-
+		
 		if room == entrance_pos or room == exit_pos:
 			instantiated_room.should_spawn_stuff = false
+			if instantiated_room.get_node("EndLevelInteraction") != null:
+				instantiated_room.get_node("EndLevelInteraction").visible = true if room == exit_pos else false
 		instantiated_room.position = relative_pos
 
 		var door := preload("res://scenes/objects/door.tscn")

@@ -131,7 +131,7 @@ func instantiate_canvas_room(is_room: bool) -> CanvasItem:
 
 
 func load_rooms():
-	var map : Array = minimap_inst.get_minimap() if !display_full_map else minimap_inst.get_full_minimap()
+	var map : Array = minimap_inst.map if !display_full_map else minimap_inst.full_map
 	
 	offset_x =  minimap_inst.get_first_room_index_x()
 	offset_y =  minimap_inst.get_first_room_index_y()
@@ -149,6 +149,7 @@ func load_rooms():
 
 func generate_ui():
 	minimap_gui.visible = true
+	unload_grid_childs("MinimapPlayerMarker")
 	player_marker = player_marker_scene.instantiate()
 	rooms_grid_container.add_child(player_marker)
 	unload_grid_childs("MinimapRoomItem")

@@ -189,5 +189,7 @@ func free_item_panel_list(item_panel_list: Array):
 func _on_quit_button_pressed():
 	get_tree().quit()
 
+#TODO : SAVE HERE
 func _on_continue_button_pressed():
+	GlobalVariables.level += 1
 	get_tree().reload_current_scene()

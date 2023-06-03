@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://8d43ouf4cfql"]
+[gd_scene load_steps=11 format=3 uid="uid://8d43ouf4cfql"]
 
 [ext_resource type="Script" path="res://scripts/level/rooms/Room.gd" id="1_8apbc"]
 [ext_resource type="Texture2D" uid="uid://dw70vdas1wntp" path="res://assets/tilemaps/hm_2_tilesets/ground.png" id="2_1v0ng"]
 [ext_resource type="Texture2D" uid="uid://cc8g1xx8pqkq1" path="res://assets/tilemaps/hm_clone_tilesets/tile_tileset/walls_tileset.png" id="3_f8hc0"]
 [ext_resource type="PackedScene" uid="uid://cxjxhq5autr58" path="res://scenes/objects/ExplosiveBarrel.tscn" id="4_j5rd8"]
+[ext_resource type="PackedScene" uid="uid://ck3ud2aox6ojh" path="res://scenes/interactions/EndLevelInteraction.tscn" id="5_osrpn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtx8k"]
 texture = ExtResource("2_1v0ng")
@@ -1117,3 +1118,8 @@ scale = Vector2(0.5, 0.5)
 [node name="ExplosiveBarrel3" parent="." instance=ExtResource("4_j5rd8")]
 position = Vector2(-101, 156)
 scale = Vector2(0.5, 0.5)
+
+[node name="EndLevelInteraction" parent="." instance=ExtResource("5_osrpn")]
+visible = false
+position = Vector2(234, 0)
+rotation = 1.5708

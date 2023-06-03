@@ -4,12 +4,16 @@ class_name Minimap
 var map : Array
 var full_map : Array
 var player_ref : Player
+var entrance_room_pos : Vector2i = Vector2i.ZERO
+var exit_room_pos : Vector2i = Vector2i.ZERO
 var enemies_list_ref : Array[Enemy]
 var powerups_list_ref : Array[PassiveEffect]
 
 
-func init(player: Node, top_node: Node):
+func init(player: Node, level_generator_instance: LevelGenerator, top_node: Node):
 	player_ref = player
+	entrance_room_pos = level_generator_instance.entrance_pos
+	exit_room_pos = level_generator_instance.exit_pos
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Enemy, enemies_list_ref, top_node)
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is PassiveEffect, powerups_list_ref, top_node)
 
@@ -72,20 +76,12 @@ func get_heigth() -> int:
 	return full_map_no_empty_line.size()
 
 
-func get_minimap() -> Array:
-	return map
-	#return map.filter(func(line): return line.any(func(room): return room))
-
-func get_full_minimap() -> Array:
-	return full_map
-
 
 func get_player_pos() -> Vector2:
 	return LevelGenerator.world_to_precise_local_positon(player_ref.global_position)
 
 func get_current_room_pos() -> Vector2:
 	return LevelGenerator.world_to_local_positon(player_ref.global_position)
-
 
 func get_item_pos_in_map(item_list_ref: Array, map: Array, item_ref: Node = null) -> Array[Vector2]:
 	var items_pos_list : Array[Vector2] = []
