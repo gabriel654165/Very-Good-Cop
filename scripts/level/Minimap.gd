@@ -76,12 +76,6 @@ func get_heigth() -> int:
 	return full_map_no_empty_line.size()
 
 
-func get_minimap() -> Array:
-	return map
-
-func get_full_minimap() -> Array:
-	return full_map
-
 
 func get_player_pos() -> Vector2:
 	return LevelGenerator.world_to_precise_local_positon(player_ref.global_position)

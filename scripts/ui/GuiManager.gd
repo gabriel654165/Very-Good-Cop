@@ -24,7 +24,7 @@ func generate_ui():
 	minimap_manager.set_active(true)
 	pause_manager.set_active(false)
 	weapon_shop_manager.set_active(false)
-	choose_weapon_manager.set_active(false)
+	choose_weapon_manager.set_active(true)
 
 
 func set_active_gui_panels(state: bool):
