@@ -13,6 +13,9 @@ const FOLLOW_TARGET = "Follow Target"
 const SHOOT = "Shoot To Target"
 const GOTO_LOOK_AROUND = "GoToAndLookAround"
 
+# Kamikaz specifics states
+const EXPLODE = "Explode"
+
 signal state_changed(new_state: AIState)
 
 func init(enemy: Enemy, new_weapon: Weapon, speed: float):

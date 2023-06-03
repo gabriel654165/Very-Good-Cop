@@ -13,4 +13,4 @@ func handle_hit(damager: Node2D, damages):
 		if GlobalVariables.level < 30:
 			fsm.transition_to(GOTO_PLAYER_AND_EXPLODE)
 		else:
-			fsm.transition_to(GOTO_PLAYER_AND_EXPLODE)
+			fsm.transition_to(GOTO_PLAYER_AND_GRAB)

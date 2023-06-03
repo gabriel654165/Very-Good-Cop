@@ -8,11 +8,11 @@
 [ext_resource type="Script" path="res://scripts/AI/States/FollowPlayer.gd" id="6_m7sqt"]
 [ext_resource type="Script" path="res://scripts/AI/States/Shoot.gd" id="7_d6pp7"]
 [ext_resource type="Script" path="res://scripts/AI/States/GoToAndLookAround.gd" id="8_d00hg"]
-[ext_resource type="Script" path="res://scripts/AI/States/HearedAt.gd" id="9_ntefd"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="10_ouxff"]
 [ext_resource type="Script" path="res://scripts/AI/States/GoToPlayerAndExplode.gd" id="10_sqq5i"]
-[ext_resource type="PackedScene" uid="uid://b6i5jh7uk237l" path="res://scenes/weapons/GrenadeLauncher.tscn" id="11_er80t"]
+[ext_resource type="Script" path="res://scripts/AI/States/Kamikaz_Death.gd" id="11_516po"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/HearingSensor.gd" id="12_4xjvt"]
+[ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_0gg3x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(30, 16)
@@ -60,13 +60,13 @@ script = ExtResource("7_d6pp7")
 [node name="GoToAndLookAround" type="Node" parent="StateMachine"]
 script = ExtResource("8_d00hg")
 
-[node name="HearedAt" type="Node" parent="StateMachine"]
-script = ExtResource("9_ntefd")
-
 [node name="GoToPlayerAndExplode" type="Node" parent="StateMachine"]
 script = ExtResource("10_sqq5i")
 
-[node name="TimerBeforeExplode" type="Timer" parent="StateMachine/GoToPlayerAndExplode"]
+[node name="Explode" type="Node" parent="StateMachine"]
+script = ExtResource("11_516po")
+
+[node name="TimerBeforeExplode" type="Timer" parent="StateMachine/Explode"]
 one_shot = true
 
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
@@ -95,6 +95,4 @@ collision_mask = 7
 shape = SubResource("CircleShape2D_5x6xs")
 debug_color = Color(0.929412, 0.231373, 0.341176, 0.419608)
 
-[node name="TimerBeforeExplode" type="Timer" parent="."]
-
-[connection signal="timeout" from="StateMachine/GoToPlayerAndExplode/TimerBeforeExplode" to="StateMachine/GoToPlayerAndExplode" method="_on_timer_before_explode_timeout"]
+[connection signal="timeout" from="StateMachine/Explode/TimerBeforeExplode" to="StateMachine/Explode" method="_on_timer_before_explode_timeout"]

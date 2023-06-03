@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://8xoniem4oare"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_5e57m"]
-[ext_resource type="PackedScene" uid="uid://byeald88viaao" path="res://scenes/ui/Gui.tscn" id="2_knftv"]
+[ext_resource type="PackedScene" uid="uid://bsqpnn0rfxvic" path="res://scenes/ui/Gui.tscn" id="2_knftv"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_eolho"]
 [ext_resource type="PackedScene" uid="uid://d0x250onoqdno" path="res://scenes/characters/player.tscn" id="3_uv201"]
 [ext_resource type="Script" path="res://scripts/weapons/WeaponManager.gd" id="6_gyb4h"]
@@ -17,8 +17,13 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.809091)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="Test-2" type="Node2D"]
-position = Vector2(564, 170)
+[node name="Test-2" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 564.0
+offset_top = 170.0
+offset_right = 564.0
+offset_bottom = 170.0
 script = ExtResource("1_5e57m")
 gui_manager_scene = ExtResource("2_knftv")
 projectile_manager_scene = ExtResource("3_eolho")
