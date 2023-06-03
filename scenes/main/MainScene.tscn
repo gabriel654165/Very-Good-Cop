@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6dn7k434dv0o"]
+[gd_scene load_steps=8 format=3 uid="uid://dnbsbcujcolvf"]
 
 [ext_resource type="Script" path="res://scripts/MainScript.gd" id="1_ko1u3"]
-[ext_resource type="PackedScene" uid="uid://bsqpnn0rfxvic" path="res://scenes/ui/Gui.tscn" id="2_u64xw"]
+[ext_resource type="PackedScene" uid="uid://76fiuu4xbqy4" path="res://scenes/ui/Gui.tscn" id="2_u64xw"]
 [ext_resource type="PackedScene" uid="uid://bdeu33kkwcib2" path="res://scenes/weapons/ProjectileManager.tscn" id="3_68121"]
 [ext_resource type="PackedScene" uid="uid://biavqqyprp31" path="res://scenes/level/LevelGenerator.tscn" id="4_ddmq2"]
 [ext_resource type="PackedScene" uid="uid://dojy4bytupqgt" path="res://scenes/screen_effects/ScreenEffectsManager.tscn" id="5_uu481"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bsqpnn0rfxvic"]
+[gd_scene load_steps=39 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -16,15 +16,131 @@
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponShopManager.gd" id="16_1slr4"]
+[ext_resource type="Script" path="res://scripts/ui/MinimapManager.gd" id="16_j85sm"]
 [ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
+[ext_resource type="PackedScene" uid="uid://cyf6mbde6v2d" path="res://scenes/ui/MinimapRoomItem.tscn" id="17_dnidm"]
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="17_eyt6o"]
 [ext_resource type="Script" path="res://scripts/ui/ChooseWeaponManager.gd" id="17_r1vvb"]
+[ext_resource type="Shader" path="res://scripts/shaders/ColorCanvasItemShader.gdshader" id="19_yho6x"]
 [ext_resource type="PackedScene" uid="uid://cln3tm4tpayb6" path="res://scenes/ui/ItemPreviewPanel.tscn" id="20_2od0h"]
+[ext_resource type="PackedScene" uid="uid://bpmvs7nrxex28" path="res://scenes/ui/MinimapPowerupMarker.tscn" id="20_7gmvy"]
+[ext_resource type="PackedScene" uid="uid://bc2pg066tc1b8" path="res://scenes/ui/MinimapPlayerMarker.tscn" id="20_jcqsb"]
 [ext_resource type="PackedScene" uid="uid://dfrnw0kq0ry4j" path="res://scenes/ui/ShopItemContainer.tscn" id="20_n36a6"]
 [ext_resource type="PackedScene" uid="uid://c46ciaasvkpi4" path="res://scenes/ui/ItemDescriptionPanel.tscn" id="21_3i6ap"]
 [ext_resource type="PackedScene" uid="uid://3bjanvfpb1pa" path="res://scenes/ui/PlayerBankAccountPanel.tscn" id="21_cdjol"]
+[ext_resource type="PackedScene" uid="uid://45sw7cn3b37b" path="res://scenes/ui/MinimapEnemyMarker.tscn" id="21_w74aj"]
 [ext_resource type="PackedScene" uid="uid://cq5wv7kjj7me4" path="res://scenes/ui/ChooseWeaponItemPanel.tscn" id="23_8p1eu"]
 [ext_resource type="PackedScene" uid="uid://rrwoshph15c5" path="res://scenes/ui/ItemStatsPanel.tscn" id="24_hkhpj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5bu2"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0.145098, 0.145098, 0.145098, 0.470588)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_is1sa"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0.145098, 0.145098, 0.145098, 0.470588)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftsun"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0.145098, 0.145098, 0.145098, 0.470588)
+
+[sub_resource type="Animation" id="Animation_lv6q2"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_n4ume"]
+resource_name = "full_screen_minimap"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AspectRatioContainer:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(300, 300), Vector2(1920, 900)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AspectRatioContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1542, 0), Vector2(0, 80)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../MinimapManager:room_material_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.117647, 0.117647, 0.117647, 0.627451), Color(0.117647, 0.117647, 0.117647, 0.588235)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../MinimapManager:player_material_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 0.498039)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../MinimapManager:powerup_material_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0, 0.00392157), Color(1, 1, 0, 0.498039)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../MinimapManager:enemy_material_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 0.498039)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../MinimapManager:background_material_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.145098, 0.145098, 0.145098, 0.470588), Color(0.145098, 0.145098, 0.145098, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_all3u"]
+_data = {
+"RESET": SubResource("Animation_lv6q2"),
+"full_screen_minimap": SubResource("Animation_n4ume")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
 shader = ExtResource("16_wdi1s")
@@ -96,6 +212,28 @@ script = ExtResource("13_xqfji")
 weapon_panel_gui = ExtResource("14_nrxer")
 panels_container = NodePath("../GuiControl/HBoxBottomContainer")
 
+[node name="MinimapManager" type="Node2D" parent="." node_paths=PackedStringArray("minimap_gui", "panel_container", "rooms_grid_container", "animation_player", "left_items_container", "left_enemies_label", "left_powerups_label", "view_label_container", "view_label")]
+script = ExtResource("16_j85sm")
+minimap_gui = NodePath("../GuiControl/MinimapControl")
+canvas_room_scene = ExtResource("17_dnidm")
+panel_container = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer")
+rooms_grid_container = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/GridContainer")
+background_material_color = Color(0.145098, 0.145098, 0.145098, 0.470588)
+room_material_color = Color(0.117647, 0.117647, 0.117647, 0.627451)
+player_material_color = Color(0, 0, 0, 0.00392157)
+enemy_material_color = Color(0, 0, 0, 0.00392157)
+powerup_material_color = Color(1, 1, 0, 0.00392157)
+animation_player = NodePath("../GuiControl/MinimapControl/AnimationPlayer")
+player_marker_scene = ExtResource("20_jcqsb")
+enemy_marker_scene = ExtResource("21_w74aj")
+powerup_marker_scene = ExtResource("20_7gmvy")
+markers_minimum_scale = 0.025
+left_items_container = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer")
+left_enemies_label = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel/VBoxContainer/LabelValue")
+left_powerups_label = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel/VBoxContainer/LabelValue")
+view_label_container = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer")
+view_label = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer/SwitchViewLabel")
+
 [node name="WeaponShopManager" type="Node2D" parent="." node_paths=PackedStringArray("weapon_shop_gui", "shop_container", "weapon_tab_container", "player_infos_container", "player_infos_container_parent", "hover_container", "hover_panel_parent", "buttons_container", "color_rect", "distance_weapon_list_parent", "melee_weapon_list_parent", "equipment_list_parent")]
 script = ExtResource("16_1slr4")
 aim_blur_intensity = 3.0
@@ -156,6 +294,166 @@ offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+
+[node name="MinimapControl" type="Control" parent="GuiControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_eyt6o")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="GuiControl/MinimapControl"]
+custom_minimum_size = Vector2(378, 378)
+layout_mode = 1
+offset_left = 1542.0
+offset_right = 1920.0
+offset_bottom = 378.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer"]
+layout_mode = 2
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpMargin" type="AspectRatioContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_q5bu2")
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="LeftMagrin" type="AspectRatioContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpMargin" type="AspectRatioContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 9
+
+[node name="BottomMargin" type="AspectRatioContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="RightMagrin" type="AspectRatioContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="BottomMargin" type="AspectRatioContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ViewContainer" type="HBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftArrowLabel" type="Label" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SwitchViewLabel" type="Label" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "switch view"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightArrowLabel" type="Label" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/ViewContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftItemsContainer" type="HBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EnemiesLeftPanel" type="PanelContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer"]
+material = SubResource("ShaderMaterial_is1sa")
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Enemies left :"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LabelValue" type="Label" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PowerupsLeftPanel" type="PanelContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer"]
+material = SubResource("ShaderMaterial_ftsun")
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Items left :"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LabelValue" type="Label" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="RightMargin" type="AspectRatioContainer" parent="GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GuiControl/MinimapControl"]
+libraries = {
+"": SubResource("AnimationLibrary_all3u")
+}
 
 [node name="PauseControl" type="Control" parent="GuiControl"]
 visible = false

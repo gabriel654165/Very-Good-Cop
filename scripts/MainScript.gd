@@ -12,6 +12,7 @@ extends Node2D
 @onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene, self, func(x):pass)
 @onready var level_generator: LevelGenerator = add_manager(level_generator_scene, self, func(x):pass)
 
+@onready var minimap : Minimap = Minimap.new()
 
 func _ready():
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
@@ -39,13 +40,23 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
 	
 	GlobalSignals.active_minimap_power_up.connect(screen_effects_manager.set_minimap_power_up)
+	GlobalSignals.active_minimap_power_up.connect(gui_manager.minimap_manager.handle_minimap_power_up)
 	GlobalSignals.active_slowmotion_power_up.connect(screen_effects_manager.set_slowmotion_power_up)
 	GlobalSignals.active_speed_power_up.connect(screen_effects_manager.set_speed_power_up)
 	GlobalSignals.active_damage_power_up.connect(screen_effects_manager.set_damage_power_up)
 	GlobalSignals.active_heal_power_up.connect(screen_effects_manager.set_heal_power_up)
 
+	GlobalSignals.map_updated.connect(gui_manager.minimap_manager.update)
+
 	if level_generator != null:
 		await level_generator.generate()
+
+		minimap.init(player, self)
+		minimap.load_map(level_generator.dungeon_layout.duplicate())
+		add_child(minimap)
+		
+		gui_manager.minimap_manager.minimap_inst = minimap
+
 	spawn_player()
 	init_camera()
 	gui_manager.generate_ui()
