@@ -189,6 +189,7 @@ func spawn_dungeon_rooms():
 		var chosen_room:RoomData = GlobalVariables.rooms_repository[doors_id].pick_random()
 
 		var instantiated_room:Node2D = chosen_room.factory.instantiate()
+		
 		if room == entrance_pos or room == exit_pos:
 			instantiated_room.should_spawn_stuff = false
 			if instantiated_room.get_node("EndLevelInteraction") != null:
