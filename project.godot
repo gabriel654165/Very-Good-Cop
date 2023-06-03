@@ -111,3 +111,7 @@ switch_minimap_view={
 [physics]
 
 common/physics_ticks_per_second=120
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

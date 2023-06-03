@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://cqra38cu512t2"]
+[gd_scene load_steps=20 format=3 uid="uid://cqra38cu512t2"]
 
 [ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_wfer1"]
 [ext_resource type="Texture2D" uid="uid://dbqgrulo02vsb" path="res://assets/Powerups/Piments.png" id="2_oi0fc"]
-[ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="2_u3np5"]
 [ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="3_8a6bf"]
 [ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="4_lkd46"]
 [ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="5_b182e"]
@@ -106,7 +105,6 @@ texture = ExtResource("2_oi0fc")
 [node name="UsedSprite" type="Sprite2D" parent="."]
 visible = false
 rotation = -0.75037
-texture = ExtResource("2_u3np5")
 
 [node name="CharacterCollisionInteraction" type="Node2D" parent="."]
 script = ExtResource("3_8a6bf")

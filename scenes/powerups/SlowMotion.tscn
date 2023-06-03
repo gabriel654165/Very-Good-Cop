@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://drnc1dk61iwql"]
+[gd_scene load_steps=20 format=3 uid="uid://drnc1dk61iwql"]
 
 [ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_eyvvh"]
-[ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="2_5y8iq"]
-[ext_resource type="Texture2D" uid="uid://nyk6qxgsi43u" path="res://assets/PNG/Default size/barrelGreen_side.png" id="2_ua3k7"]
+[ext_resource type="Texture2D" uid="uid://ds7y2moqwsh2r" path="res://assets/Powerups/weed.PNG" id="2_f7do0"]
 [ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="3_py8dy"]
 [ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="4_elvs3"]
 [ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="5_7khkc"]
@@ -101,12 +100,11 @@ used_sprite = NodePath("UsedSprite")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -0.375185
-texture = ExtResource("2_ua3k7")
+texture = ExtResource("2_f7do0")
 
 [node name="UsedSprite" type="Sprite2D" parent="."]
 visible = false
 rotation = -0.75037
-texture = ExtResource("2_5y8iq")
 
 [node name="CharacterCollisionInteraction" type="Node2D" parent="."]
 script = ExtResource("3_py8dy")

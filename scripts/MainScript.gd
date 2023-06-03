@@ -51,7 +51,7 @@ func _ready():
 	if level_generator != null:
 		await level_generator.generate()
 
-		minimap.init(player, self)
+		minimap.init(player, level_generator, self)
 		minimap.load_map(level_generator.dungeon_layout.duplicate())
 		add_child(minimap)
 		

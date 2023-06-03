@@ -149,6 +149,7 @@ func load_rooms():
 
 func generate_ui():
 	minimap_gui.visible = true
+	unload_grid_childs("MinimapPlayerMarker")
 	player_marker = player_marker_scene.instantiate()
 	rooms_grid_container.add_child(player_marker)
 	unload_grid_childs("MinimapRoomItem")
