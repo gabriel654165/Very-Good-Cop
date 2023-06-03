@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://76fiuu4xbqy4"]
+[gd_scene load_steps=39 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -15,15 +15,22 @@
 [ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
-[ext_resource type="Script" path="res://scripts/ui/MinimapManager.gd" id="16_j85sm"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponShopManager.gd" id="16_1slr4"]
+[ext_resource type="Script" path="res://scripts/ui/MinimapManager.gd" id="16_j85sm"]
 [ext_resource type="Shader" path="res://scripts/shaders/BlurShader.gdshader" id="16_wdi1s"]
 [ext_resource type="PackedScene" uid="uid://cyf6mbde6v2d" path="res://scenes/ui/MinimapRoomItem.tscn" id="17_dnidm"]
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="17_eyt6o"]
+[ext_resource type="Script" path="res://scripts/ui/ChooseWeaponManager.gd" id="17_r1vvb"]
 [ext_resource type="Shader" path="res://scripts/shaders/ColorCanvasItemShader.gdshader" id="19_yho6x"]
+[ext_resource type="PackedScene" uid="uid://cln3tm4tpayb6" path="res://scenes/ui/ItemPreviewPanel.tscn" id="20_2od0h"]
 [ext_resource type="PackedScene" uid="uid://bpmvs7nrxex28" path="res://scenes/ui/MinimapPowerupMarker.tscn" id="20_7gmvy"]
 [ext_resource type="PackedScene" uid="uid://bc2pg066tc1b8" path="res://scenes/ui/MinimapPlayerMarker.tscn" id="20_jcqsb"]
+[ext_resource type="PackedScene" uid="uid://dfrnw0kq0ry4j" path="res://scenes/ui/ShopItemContainer.tscn" id="20_n36a6"]
+[ext_resource type="PackedScene" uid="uid://c46ciaasvkpi4" path="res://scenes/ui/ItemDescriptionPanel.tscn" id="21_3i6ap"]
+[ext_resource type="PackedScene" uid="uid://3bjanvfpb1pa" path="res://scenes/ui/PlayerBankAccountPanel.tscn" id="21_cdjol"]
 [ext_resource type="PackedScene" uid="uid://45sw7cn3b37b" path="res://scenes/ui/MinimapEnemyMarker.tscn" id="21_w74aj"]
+[ext_resource type="PackedScene" uid="uid://cq5wv7kjj7me4" path="res://scenes/ui/ChooseWeaponItemPanel.tscn" id="23_8p1eu"]
+[ext_resource type="PackedScene" uid="uid://rrwoshph15c5" path="res://scenes/ui/ItemStatsPanel.tscn" id="24_hkhpj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5bu2"]
 shader = ExtResource("19_yho6x")
@@ -134,14 +141,6 @@ _data = {
 "RESET": SubResource("Animation_lv6q2"),
 "full_screen_minimap": SubResource("Animation_n4ume")
 }
-
-[ext_resource type="Script" path="res://scripts/ui/ChooseWeaponManager.gd" id="17_r1vvb"]
-[ext_resource type="PackedScene" uid="uid://cln3tm4tpayb6" path="res://scenes/ui/ItemPreviewPanel.tscn" id="20_2od0h"]
-[ext_resource type="PackedScene" uid="uid://dfrnw0kq0ry4j" path="res://scenes/ui/ShopItemContainer.tscn" id="20_n36a6"]
-[ext_resource type="PackedScene" uid="uid://c46ciaasvkpi4" path="res://scenes/ui/ItemDescriptionPanel.tscn" id="21_3i6ap"]
-[ext_resource type="PackedScene" uid="uid://3bjanvfpb1pa" path="res://scenes/ui/PlayerBankAccountPanel.tscn" id="21_cdjol"]
-[ext_resource type="PackedScene" uid="uid://cq5wv7kjj7me4" path="res://scenes/ui/ChooseWeaponItemPanel.tscn" id="23_8p1eu"]
-[ext_resource type="PackedScene" uid="uid://rrwoshph15c5" path="res://scenes/ui/ItemStatsPanel.tscn" id="24_hkhpj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi0er"]
 shader = ExtResource("16_wdi1s")
@@ -297,6 +296,7 @@ grow_vertical = 0
 alignment = 1
 
 [node name="MinimapControl" type="Control" parent="GuiControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

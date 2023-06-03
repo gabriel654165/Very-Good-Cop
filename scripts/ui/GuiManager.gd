@@ -26,6 +26,7 @@ func generate_ui():
 	weapon_shop_manager.set_active(false)
 	choose_weapon_manager.set_active(true)
 
+
 func set_active_gui_panels(state: bool):
 	panel_points_manager.panel.visible = state
 	panel_kills_manager.panel.visible = state

@@ -78,9 +78,9 @@ func get_marker_scale() -> Vector2:
 		scale_factor = Vector2(markers_minimum_scale, markers_minimum_scale)
 	return scale_factor
 
-func unload_grid_childs(marker_name: String):
+func unload_grid_childs(obj_name: String):
 	for child in rooms_grid_container.get_children():
-		if child.name.contains(marker_name):
+		if child.name.contains(obj_name):
 			child.queue_free()
 
 func load_markers(marker_scene, marker_list_pos, scale, material_color):
@@ -151,6 +151,7 @@ func generate_ui():
 	minimap_gui.visible = true
 	player_marker = player_marker_scene.instantiate()
 	rooms_grid_container.add_child(player_marker)
+	unload_grid_childs("MinimapRoomItem")
 	load_rooms()
 	update_ui_view_label()
 
@@ -176,6 +177,11 @@ func update_ui_left_items_labels():
 	var powerups_left = minimap_inst.get_room_powerups_pos_list().size() if view_by_room else minimap_inst.get_full_map_powerups_pos_list().size()
 	left_enemies_label.text = str(enemies_left)
 	left_powerups_label.text = str(powerups_left)
+
+
+func handle_minimap_power_up(enable: bool):
+	display_full_map = enable
+	update()
 
 
 func _unhandled_input(event):
