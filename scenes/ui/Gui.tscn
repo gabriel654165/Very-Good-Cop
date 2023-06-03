@@ -296,6 +296,7 @@ grow_vertical = 0
 alignment = 1
 
 [node name="MinimapControl" type="Control" parent="GuiControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
