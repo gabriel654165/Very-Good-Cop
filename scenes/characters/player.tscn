@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xxld75mg1fqf"]
+[gd_scene load_steps=17 format=3 uid="uid://xxld75mg1fqf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
@@ -21,6 +21,60 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.388732)
 colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 0)
 
+[sub_resource type="Animation" id="Animation_aqyjo"]
+resource_name = "glock_animation_player"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(741, 382, 34, 13), Rect2(786, 382, 35, 13), Rect2(831, 382, 36, 13), Rect2(876, 382, 35, 13), Rect2(921, 382, 34, 13)]
+}
+
+[sub_resource type="Animation" id="Animation_80211"]
+resource_name = "mini_uzi_animation_player"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_han7x"]
+resource_name = "shotgun_animation_player"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(559, 380, 30, 17), Rect2(603, 380, 30, 17), Rect2(647, 381, 30, 16), Rect2(693, 380, 30, 17)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmmxi"]
+_data = {
+"glock_animation_player": SubResource("Animation_aqyjo"),
+"mini_uzi_animation_player": SubResource("Animation_80211"),
+"shotgun_animation_player": SubResource("Animation_han7x")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager", "knife") groups=["character", "player"]]
 z_index = 2
 position = Vector2(233, 190)
@@ -36,7 +90,7 @@ z_index = 1
 position = Vector2(-3, 0)
 texture = ExtResource("11_q2lq8")
 region_enabled = true
-region_rect = Rect2(451, 457, 30, 17)
+region_rect = Rect2(741, 382, 34, 13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, 0)
@@ -56,7 +110,6 @@ position = Vector2(15, 0)
 script = ExtResource("8_jhep5")
 
 [node name="WeaponManager" parent="." instance=ExtResource("13_18ulw")]
-ammo/shot_shell_particle_scene = null
 
 [node name="Knife" parent="." instance=ExtResource("8_nt46u")]
 
@@ -75,3 +128,10 @@ scale_amount_min = 2.0
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_ggetg")
 color_ramp = SubResource("Gradient_werjm")
+
+[node name="WeaponAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kmmxi")
+}
+
+[node name="LegsAnimationPlayer" type="AnimationPlayer" parent="."]

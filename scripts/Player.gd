@@ -3,13 +3,22 @@ class_name Player
 
 var move_direction : Vector2 = Vector2.ZERO
 @onready var sound_shoot_vfx: CPUParticles2D = $ShootVFX
+@onready var weapon_animation_player = $WeaponAnimationPlayer
+@onready var legs_animation_player = $LegsAnimationPlayer
 
 func _ready():
 	# Test : skipping the choose weapons panel and take the global
 	assign_weapons()
 
+
 func assign_weapons():
 	GlobalFunctions.set_distance_weapon_properties(weapon_manager, GlobalVariables.index_distance_weapon_selected)
+	set_weapon_animation()
+
+func set_weapon_animation():
+	var animation_name := GlobalVariables.get_distance_weapon_animation(GlobalVariables.index_distance_weapon_selected)
+	weapon_animation_player.play(animation_name + "_player")
+
 
 func _physics_process(delta):
 	if self.action_disabled:

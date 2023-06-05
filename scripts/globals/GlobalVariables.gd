@@ -151,9 +151,30 @@ func level_stat(min_value, max_value, number_of_levels: int):
 	number_of_levels= number_of_levels,
 }
 
+
+func get_distance_weapon_animation(weapon_index: int) -> String:
+	var animation_name : String = ""
+	var dic_index : int = 0
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		if dic_index == weapon_index:
+			animation_name = weapon_dictionnary.animation
+			break
+		dic_index += 1
+	return animation_name
+
+func get_animations_array() -> Array[String]:
+	var animation_array : Array[String] = []
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		animation_array.append(weapon_dictionnary.animation)
+	return animation_array
+
+
 var all_distance_weapon_list = [
 	{
 		name="glock",
+		animation="glock_animation",
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -203,6 +224,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="shotgun",
+		animation="shotgun_animation",
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_shotgun.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_2.png"),
@@ -252,6 +274,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="mini_uzi",
+		animation="mini_uzi_animation",
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Uzi.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -301,6 +324,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="riffle",
+		animation="riffle_animation",
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr__Aka.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -350,6 +374,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="machine_gun",
+		animation="machine_gun_animation",
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Mg.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -399,6 +424,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="grenade_launcher",
+		animation="grenade_launcher_animation",
 		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_grenade_launcher.png"),
 		shot_shells_texture=null,
@@ -448,6 +474,7 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="sniper",
+		animation="sniper_animation",
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_sniper.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),

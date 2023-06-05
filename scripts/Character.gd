@@ -12,7 +12,6 @@ var force : Vector2 = Vector2.ZERO
 @export var weapon_manager : Node2D = null
 @export var knife : Knife = null
 
-#if enemy don't show
 @export var grappling_hook_scene : PackedScene
 @export var projectile_weapon_scene : PackedScene
 
@@ -61,4 +60,3 @@ func spawnSprite(position: Vector2, sprite: Sprite2D) -> Node2D:
 	get_tree().current_scene.add_child(spriteDeadEnemy)
 	spriteDeadEnemy.global_position = position
 	return spriteDeadEnemy as Node2D
-
