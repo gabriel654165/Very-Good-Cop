@@ -23,7 +23,7 @@ hearing_range = 300.0
 blood_effect_scene = ExtResource("2_5lu21")
 corpse_scene = ExtResource("3_j3lui")
 speed = 10.0
-weapon_manager = NodePath("WeaponManager")
+weapon_manager = NodePath("WeaponPosition/WeaponManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -71,8 +71,9 @@ position = Vector2(4, 0)
 script = ExtResource("9_5t7aw")
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
+position = Vector2(16, 0)
 
-[node name="WeaponManager" parent="." instance=ExtResource("10_5xgn2")]
+[node name="WeaponManager" parent="WeaponPosition" instance=ExtResource("10_5xgn2")]
 projectile/projectile_speed = 10
 
 [node name="HearingSensor" type="Node2D" parent="."]

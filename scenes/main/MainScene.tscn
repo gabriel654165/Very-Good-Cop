@@ -19,7 +19,7 @@ player = NodePath("Player")
 [node name="MainCamera" type="Camera2D" parent="."]
 visibility_layer = 3
 position = Vector2(233, 190)
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 drag_horizontal_enabled = true

@@ -5,6 +5,7 @@ var move_direction : Vector2 = Vector2.ZERO
 @onready var sound_shoot_vfx: CPUParticles2D = $ShootVFX
 @onready var weapon_animation_player = $WeaponAnimationPlayer
 @onready var legs_animation_player = $LegsAnimationPlayer
+@onready var legs_sprite := $LegsSprite2D
 
 func _ready():
 	# Test : skipping the choose weapons panel and take the global
@@ -13,11 +14,30 @@ func _ready():
 
 func assign_weapons():
 	GlobalFunctions.set_distance_weapon_properties(weapon_manager, GlobalVariables.index_distance_weapon_selected)
+	set_weapon_position()
 	set_weapon_animation()
+
+
+func set_weapon_position():
+	var position := GlobalVariables.get_distance_weapon_position(GlobalVariables.index_distance_weapon_selected)
+	weapon_position.position = position
 
 func set_weapon_animation():
 	var animation_name := GlobalVariables.get_distance_weapon_animation(GlobalVariables.index_distance_weapon_selected)
 	weapon_animation_player.play(animation_name + "_player")
+
+#callback signal player shoot / voir pour les enemis
+func play_shoot_animation(projectile_owner: Node2D):
+	if projectile_owner is Player:
+		var animation_name := GlobalVariables.get_distance_weapon_animation(GlobalVariables.index_distance_weapon_selected)
+		weapon_animation_player.play(animation_name + "_player_shoot")
+
+func manage_animation():
+	if move_direction == Vector2.ZERO:
+		legs_animation_player.stop()
+	else:
+		legs_animation_player.play("runing_player")
+	legs_sprite.global_rotation = move_direction.angle()
 
 
 func _physics_process(delta):
@@ -25,6 +45,7 @@ func _physics_process(delta):
 		return
 	manage_movement(delta)
 	manage_rotation()
+	manage_animation()
 
 
 func manage_movement(delta: float):
@@ -35,7 +56,7 @@ func manage_movement(delta: float):
 	if self.force != Vector2.ZERO:
 		velocity += self.force
 		self.force = Vector2.ZERO
-		
+	
 	if move_direction != Vector2.ZERO:
 		velocity += move_direction.normalized() * GlobalFunctions.get_speed(delta, speed)
 	velocity *= 100

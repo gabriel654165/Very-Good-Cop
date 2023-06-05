@@ -17,6 +17,8 @@ extends Node2D
 func _ready():
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
 	
+	#only for player
+	GlobalSignals.weapon_shoot.connect(player.play_shoot_animation)
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
 	GlobalSignals.player_fired.connect(gui_manager.weapon_panel_manager.handle_player_fired)
 	GlobalSignals.player_reloading.connect(gui_manager.weapon_panel_manager.handle_player_reload)

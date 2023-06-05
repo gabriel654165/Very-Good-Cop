@@ -1,17 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://xxld75mg1fqf"]
+[gd_scene load_steps=31 format=3 uid="uid://xxld75mg1fqf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
+[ext_resource type="Texture2D" uid="uid://6aw20cp5oifq" path="res://assets/character/Police-Remade-HM-2.png" id="4_fhji1"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
 [ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
 [ext_resource type="PackedScene" uid="uid://cxsu4atm07u3i" path="res://scenes/weapons/Knife.tscn" id="8_nt46u"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="10_5l0q5"]
-[ext_resource type="Texture2D" uid="uid://dtk16fqh5mb82" path="res://assets/character/Police-HM-2.png" id="11_q2lq8"]
 [ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_18ulw"]
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="14_bgmhi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
-size = Vector2(28, 18)
+size = Vector2(24, 14)
 
 [sub_resource type="Curve" id="Curve_ggetg"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -20,6 +20,55 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_werjm"]
 offsets = PackedFloat32Array(0, 0.388732)
 colors = PackedColorArray(1, 1, 1, 0.654902, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_h3pqk"]
+resource_name = "runing_player"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegsSprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(424, 536, 12, 14), Rect2(420, 568, 19, 15), Rect2(419, 601, 22, 15), Rect2(416, 635, 27, 15), Rect2(419, 667, 22, 15), Rect2(420, 700, 19, 15), Rect2(424, 734, 12, 14), Rect2(424, 734, 12, 14), Rect2(420, 700, 19, 15), Rect2(419, 667, 22, 15), Rect2(416, 635, 27, 15), Rect2(419, 667, 22, 15), Rect2(424, 536, 12, 14)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegsSprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_celd1"]
+_data = {
+"runing_player": SubResource("Animation_h3pqk")
+}
+
+[sub_resource type="Animation" id="Animation_lal7e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_aqyjo"]
 resource_name = "glock_animation_player"
@@ -31,14 +80,27 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Rect2(741, 382, 34, 13), Rect2(786, 382, 35, 13), Rect2(831, 382, 36, 13), Rect2(876, 382, 35, 13), Rect2(921, 382, 34, 13)]
+"values": [Rect2(1001, 6, 34, 13), Rect2(1001, 32, 35, 13), Rect2(1000, 59, 36, 13), Rect2(1001, 84, 35, 13), Rect2(1001, 110, 34, 13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(10, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_80211"]
-resource_name = "mini_uzi_animation_player"
+[sub_resource type="Animation" id="Animation_utmsm"]
+resource_name = "glock_animation_player_shoot"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,14 +108,41 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(1043, 32, 40, 13), Rect2(1042, 59, 43, 13)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponAnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["glock_animation_player", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(12, 0), Vector2(13, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_han7x"]
-resource_name = "shotgun_animation_player"
+[sub_resource type="Animation" id="Animation_cheus"]
+resource_name = "grenade_launcher_animation_player"
+length = 1.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -62,17 +151,437 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Rect2(559, 380, 30, 17), Rect2(603, 380, 30, 17), Rect2(647, 381, 30, 16), Rect2(693, 380, 30, 17)]
+"values": [Rect2(1002, 765, 33, 17), Rect2(1002, 787, 33, 17), Rect2(1003, 809, 33, 17), Rect2(1003, 831, 33, 17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(8, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8rmt5"]
+resource_name = "machine_gun_animation_player"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(1000, 671, 39, 17), Rect2(1001, 694, 37, 17), Rect2(1002, 716, 37, 17), Rect2(1002, 738, 38, 17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(11, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_80211"]
+resource_name = "mini_uzi_animation_player"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(1114, 3, 36, 13), Rect2(1114, 29, 37, 13), Rect2(1113, 56, 38, 13), Rect2(1114, 81, 37, 13), Rect2(1114, 107, 36, 13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(11, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y0rql"]
+resource_name = "mini_uzi_animation_player_shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(1161, 30, 42, 13), Rect2(1160, 57, 44, 13)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponAnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["mini_uzi_animation_player", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(14, 0), Vector2(15, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_en6bb"]
+resource_name = "riffle_animation_player"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(997, 374, 36, 17), Rect2(997, 398, 36, 17), Rect2(998, 422, 36, 17), Rect2(997, 445, 36, 17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(10, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sqgyl"]
+resource_name = "riffle_animation_player_shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Rect2(1044, 398, 43, 17)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponAnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["riffle_animation_player", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(14, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_han7x"]
+resource_name = "shotgun_animation_player"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(997, 269, 30, 17), Rect2(997, 293, 29, 17), Rect2(998, 317, 29, 17), Rect2(997, 340, 30, 17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(6, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e1muy"]
+resource_name = "shotgun_animation_player_shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(1044, 293, 37, 17), Rect2(1045, 317, 39, 17)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponAnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["shotgun_animation_player", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(10, 0), Vector2(11, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wc02a"]
+resource_name = "sniper_animation_player"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(999, 574, 43, 17), Rect2(999, 598, 41, 17), Rect2(1000, 621, 41, 17), Rect2(1000, 644, 43, 17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(13, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qk3ii"]
+resource_name = "machine_gun_animation_player_shoot"
+length = 0.2
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponAnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["machine_gun_animation_player", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(1047, 671, 48, 17), Rect2(1048, 694, 46, 17)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(15, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fx813"]
+resource_name = "grenade_launcher_animation_player_shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(1049, 787, 40, 17), Rect2(1050, 809, 43, 17), Rect2(1050, 831, 44, 17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(12, 0), Vector2(14, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponAnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["grenade_launcher_animation_player", -1, 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tflu8"]
+resource_name = "sniper_animation_player_shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(1046, 598, 52, 17), Rect2(1047, 621, 55, 17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(18, 0), Vector2(20, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponAnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["sniper_animation_player", -1, 1.0, false],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kmmxi"]
 _data = {
+"RESET": SubResource("Animation_lal7e"),
 "glock_animation_player": SubResource("Animation_aqyjo"),
+"glock_animation_player_shoot": SubResource("Animation_utmsm"),
+"grenade_launcher_animation_player": SubResource("Animation_cheus"),
+"grenade_launcher_animation_player_shoot": SubResource("Animation_fx813"),
+"machine_gun_animation_player": SubResource("Animation_8rmt5"),
+"machine_gun_animation_player_shoot": SubResource("Animation_qk3ii"),
 "mini_uzi_animation_player": SubResource("Animation_80211"),
-"shotgun_animation_player": SubResource("Animation_han7x")
+"mini_uzi_animation_player_shoot": SubResource("Animation_y0rql"),
+"riffle_animation_player": SubResource("Animation_en6bb"),
+"riffle_animation_player_shoot": SubResource("Animation_sqgyl"),
+"shotgun_animation_player": SubResource("Animation_han7x"),
+"shotgun_animation_player_shoot": SubResource("Animation_e1muy"),
+"sniper_animation_player": SubResource("Animation_wc02a"),
+"sniper_animation_player_shoot": SubResource("Animation_tflu8")
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager", "knife") groups=["character", "player"]]
@@ -80,36 +589,41 @@ z_index = 2
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
 speed = 3.5
-weapon_manager = NodePath("WeaponManager")
+weapon_manager = NodePath("WeaponPosition/WeaponManager")
 knife = NodePath("Knife")
 grappling_hook_scene = ExtResource("5_wxswb")
 projectile_weapon_scene = ExtResource("10_5l0q5")
 
+[node name="LegsSprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("4_fhji1")
+region_enabled = true
+region_rect = Rect2(424, 536, 12, 14)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(-3, 0)
-texture = ExtResource("11_q2lq8")
+position = Vector2(-2, 0)
+texture = ExtResource("4_fhji1")
+offset = Vector2(10, 0)
 region_enabled = true
-region_rect = Rect2(741, 382, 34, 13)
+region_rect = Rect2(1046, 598, 52, 17)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 0)
+position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_dfd5l")
 
 [node name="Health" parent="." instance=ExtResource("4_yibkt")]
 
-[node name="WeaponPosition" type="Marker2D" parent="."]
-position = Vector2(-4, 0)
-
-[node name="ThrowObjectPosition" type="Marker2D" parent="."]
-position = Vector2(15, 0)
-
-[node name="BulletproofVest" type="Node2D" parent="."]
-
 [node name="DetectableTarget" type="Node2D" parent="."]
 script = ExtResource("8_jhep5")
 
-[node name="WeaponManager" parent="." instance=ExtResource("13_18ulw")]
+[node name="ThrowObjectPosition" type="Marker2D" parent="."]
+position = Vector2(12, 0)
+
+[node name="WeaponPosition" type="Marker2D" parent="."]
+position = Vector2(31, 1)
+
+[node name="WeaponManager" parent="WeaponPosition" instance=ExtResource("13_18ulw")]
 
 [node name="Knife" parent="." instance=ExtResource("8_nt46u")]
 
@@ -129,9 +643,12 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_ggetg")
 color_ramp = SubResource("Gradient_werjm")
 
+[node name="LegsAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_celd1")
+}
+
 [node name="WeaponAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kmmxi")
 }
-
-[node name="LegsAnimationPlayer" type="AnimationPlayer" parent="."]

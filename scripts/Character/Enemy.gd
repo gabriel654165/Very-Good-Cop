@@ -40,9 +40,8 @@ var patrol_points: Array = []
 var is_dead: bool
 
 func _ready():
-	weapon_manager = get_node("WeaponManager")
-	weapon_manager.weapon.global_position = weapon_position.global_position
-
+	if weapon_manager == null:
+		return
 	weapon_manager.weapon.projectile_damages = weapon_manager.projectile_damages + GlobalVariables.level * 1.75 
 	fsm.init(self, weapon_manager.weapon, speed * 10)
 
