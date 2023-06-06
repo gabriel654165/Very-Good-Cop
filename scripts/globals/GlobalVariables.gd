@@ -172,6 +172,7 @@ func get_distance_weapon_animation_by_name(weapon_name: String) -> String:
 			break
 	return animation_name
 
+
 func get_distance_weapon_position_by_index(weapon_index: int) -> Vector2:
 	var weapon_position := Vector2.ZERO
 	var dic_index : int = 0
@@ -191,6 +192,7 @@ func get_distance_weapon_position_by_name(weapon_name: String) -> Vector2:
 			weapon_position = weapon_dictionnary.weapon_position
 			break
 	return weapon_position
+
 
 var all_distance_weapon_list = [
 	{
