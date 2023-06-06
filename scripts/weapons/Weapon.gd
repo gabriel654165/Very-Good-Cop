@@ -90,7 +90,6 @@ func shoot():
 			has_shoot = instantiate_projectile(direction)
 			instantiate_shot_shell()
 			recoil_shooter(direction)
-			#animation.play("muzzle_flash")
 			
 		if has_shoot:
 			GlobalSignals.play_sound.emit(shooting_sound, 0, 1, global_position)

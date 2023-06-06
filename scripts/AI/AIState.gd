@@ -33,7 +33,7 @@ func physics_update(_delta: float) -> void:
 		move()
 
 func move() -> void:
-	var current_agent_position: Vector2 = enemy.global_transform.origin
+	var current_agent_position: Vector2 = state_machine._enemy.global_transform.origin
 	var next_path_position: Vector2 = state_machine.navigation_agent.get_next_path_position()
 
 	var new_velocity: Vector2 = next_path_position - current_agent_position
@@ -41,4 +41,4 @@ func move() -> void:
 	new_velocity = new_velocity * state_machine._movement_speed
 
 	state_machine.navigation_agent.set_velocity(new_velocity)
-	enemy.global_rotation = new_velocity.angle()
+	state_machine._enemy.global_rotation = new_velocity.angle()
