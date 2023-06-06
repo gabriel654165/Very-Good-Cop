@@ -62,5 +62,3 @@ func display_corpse():
 		sprite_police.visible = true
 		sprite_police.region_rect = array_tiles_police[randi()%array_tiles_police.size()]
 	
-	#sprite.global_position.x = rect.size.x	
-	

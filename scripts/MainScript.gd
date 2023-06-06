@@ -14,21 +14,10 @@ extends Node2D
 
 @onready var minimap : Minimap = Minimap.new()
 
-func handle_character_shoot(projectile_owner: Node2D):
-	var animation_name : String = ""
-	if projectile_owner is Player:
-		animation_name = GlobalVariables.get_distance_weapon_animation_by_index(GlobalVariables.index_distance_weapon_selected)
-		animation_name += "_player_shoot"
-	elif projectile_owner is Enemy:
-		animation_name = GlobalVariables.get_distance_weapon_animation_by_name(projectile_owner.weapon_manager.weapon_name)
-		animation_name += "_enemy_shoot"
-	projectile_owner.weapon_animation.play(animation_name)
 
 func _ready():
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
 	
-	#maybe animation manager
-	GlobalSignals.weapon_shoot.connect(self.handle_character_shoot)
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
 	GlobalSignals.player_fired.connect(gui_manager.weapon_panel_manager.handle_player_fired)
 	GlobalSignals.player_reloading.connect(gui_manager.weapon_panel_manager.handle_player_reload)

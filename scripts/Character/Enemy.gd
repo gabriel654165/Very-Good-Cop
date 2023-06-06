@@ -36,27 +36,19 @@ var patrol_points: Array = []
 
 
 func _ready():
+	GlobalSignals.weapon_shoot.connect(self.handle_character_shoot)
 	if weapon_manager == null:
 		return
 	weapon_manager.weapon.projectile_damages = weapon_manager.projectile_damages + GlobalVariables.level * 1.75 
 	fsm.init(self, weapon_manager.weapon, speed * 10)
 	set_weapon_position(self)
-	set_weapon_animation(self)
+	set_body_animation(self)
 
-
-func manage_animation():
-	var move_direction := global_transform.x.normalized()
-	
-	if velocity == Vector2.ZERO:
-		legs_animation.stop()
-	else:
-		legs_animation.play("running_enemy")
-	legs_sprite.global_rotation = move_direction.angle()
 
 func _physics_process(delta):
 	if action_disabled:
 		return
-	manage_animation()
+	manage_animation(global_transform.x.normalized())
 
 
 func set_speed(new_speed: float):

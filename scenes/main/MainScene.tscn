@@ -36,6 +36,7 @@ bus = &"Music"
 script = ExtResource("10_6o4ha")
 
 [node name="Player" parent="." instance=ExtResource("9_ho3lm")]
+action_disabled = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../MainCamera")
