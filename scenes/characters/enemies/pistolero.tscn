@@ -555,19 +555,7 @@ _data = {
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_ef1gd")
-patrol_type = null
-patrol_wait = null
-distance_to_shoot = 110.0
-pursue_look_angle = null
-pursue_look_interval = null
-pursue_find_time = null
-pursue_move_distance = null
-pursue_wait_before_look_around = null
-vision_cone_angle = null
-vision_cone_range = null
 hearing_range = 300.0
-point_value = null
-action_disabled = null
 speed = 10.0
 grappling_hook_scene = ExtResource("2_dcfht")
 projectile_weapon_scene = ExtResource("3_4uakv")

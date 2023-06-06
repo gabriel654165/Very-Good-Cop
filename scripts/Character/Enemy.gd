@@ -16,7 +16,7 @@ enum PatrolType {
 @export var patrol_type: PatrolType = PatrolType.Sequence
 @export var patrol_wait: float = 3
 
-@export var distance_to_shoot: float = 70
+@export var distance_to_shoot: float = 110
 
 @export var pursue_look_angle: float = 45
 @export var pursue_look_interval: float = 1.3
