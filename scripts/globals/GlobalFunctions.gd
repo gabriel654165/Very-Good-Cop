@@ -23,7 +23,7 @@ func get_speed(delta: float, speed: float) -> float:
 	return speed * (delta * 60)
 
 
-func is_inside_float(aim_val: float, src_val: float, offset: float) -> bool:
+func is_inside_range(aim_val: float, src_val: float, offset: float) -> bool:
 	var max : float = aim_val + offset
 	var min : float = aim_val - offset
 	
