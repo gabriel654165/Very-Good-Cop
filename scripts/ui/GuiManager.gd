@@ -18,7 +18,11 @@ class_name GuiManager
 
 @onready var minimap_manager = $MinimapManager
 
+var player_ref : Player
+
 func generate_ui():
+	cursor_manager.player = player_ref
+	
 	health_ui_manager.set_active(true)
 	cursor_manager.set_active(true)
 	minimap_manager.set_active(true)

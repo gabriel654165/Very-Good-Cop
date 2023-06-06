@@ -23,7 +23,18 @@ func get_speed(delta: float, speed: float) -> float:
 	return speed * (delta * 60)
 
 
-func is_inside_vector_2(aim_pos: Vector2, src_pos: Vector2, offset: Vector2):
+func is_inside_float(aim_val: float, src_val: float, offset: float) -> bool:
+	var max : float = aim_val + offset
+	var min : float = aim_val - offset
+	
+	var is_inf_than_max : bool = src_val < max
+	var is_sup_than_min : bool = src_val > min
+	
+	if is_inf_than_max and is_sup_than_min:
+		return true
+	return false
+
+func is_inside_vector_2(aim_pos: Vector2, src_pos: Vector2, offset: Vector2) -> bool:
 	var upper_y : float = aim_pos.y + offset.y
 	var down_y : float = aim_pos.y - offset.y
 	var upper_x : float = aim_pos.x + offset.x

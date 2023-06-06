@@ -3,9 +3,6 @@ class_name Player
 
 var move_direction : Vector2 = Vector2.ZERO
 @onready var sound_shoot_vfx: CPUParticles2D = $ShootVFX
-@onready var weapon_animation_player = $WeaponAnimationPlayer
-@onready var legs_animation_player = $LegsAnimationPlayer
-@onready var legs_sprite := $LegsSprite2D
 
 func _ready():
 	# Test : skipping the choose weapons panel and take the global
@@ -14,29 +11,15 @@ func _ready():
 
 func assign_weapons():
 	GlobalFunctions.set_distance_weapon_properties(weapon_manager, GlobalVariables.index_distance_weapon_selected)
-	set_weapon_position()
-	set_weapon_animation()
+	set_weapon_position(self)
+	set_weapon_animation(self)
 
-
-func set_weapon_position():
-	var position := GlobalVariables.get_distance_weapon_position(GlobalVariables.index_distance_weapon_selected)
-	weapon_position.position = position
-
-func set_weapon_animation():
-	var animation_name := GlobalVariables.get_distance_weapon_animation(GlobalVariables.index_distance_weapon_selected)
-	weapon_animation_player.play(animation_name + "_player")
-
-#callback signal player shoot / voir pour les enemis
-func play_shoot_animation(projectile_owner: Node2D):
-	if projectile_owner is Player:
-		var animation_name := GlobalVariables.get_distance_weapon_animation(GlobalVariables.index_distance_weapon_selected)
-		weapon_animation_player.play(animation_name + "_player_shoot")
 
 func manage_animation():
 	if move_direction == Vector2.ZERO:
-		legs_animation_player.stop()
+		legs_animation.stop()
 	else:
-		legs_animation_player.play("runing_player")
+		legs_animation.play("running_player")
 	legs_sprite.global_rotation = move_direction.angle()
 
 
@@ -117,3 +100,10 @@ func handle_enemy_died(enemy: Node2D, points: int):
 
 func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
+	if health.is_dead() and !is_dead:
+		is_dead = true
+		var corpse_inst = instanciate_corpse(self.global_position, get_tree().current_scene, damager)
+		GlobalSignals.game_over.emit()
+		queue_free()
+	else:
+		instanciate_blood_effect(self.global_position, get_tree().current_scene, damager)

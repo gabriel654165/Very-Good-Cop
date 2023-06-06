@@ -9,7 +9,7 @@ func update(_delta: float) -> void:
 		var new_velocity: Vector2 = (_target.global_position - current_position).normalized()
 		state_machine._enemy.global_rotation = new_velocity.angle()
 
-		if state_machine.get_parent().global_transform.origin.distance_to(_target.global_transform.origin) > state_machine._enemy.distance_to_shoot + 40:
+		if state_machine.get_parent().global_transform.origin.distance_to(_target.global_transform.origin) > state_machine._enemy.distance_to_shoot:
 			state_machine.transition_to(state_machine.FOLLOW_TARGET, { target = _target })
 	
 	if state_machine._weapon != null && _target != null:

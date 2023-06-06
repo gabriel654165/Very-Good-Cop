@@ -14,15 +14,27 @@ extends Node2D
 
 @onready var minimap : Minimap = Minimap.new()
 
+func handle_character_shoot(projectile_owner: Node2D):
+	var animation_name : String = ""
+	if projectile_owner is Player:
+		animation_name = GlobalVariables.get_distance_weapon_animation_by_index(GlobalVariables.index_distance_weapon_selected)
+		animation_name += "_player_shoot"
+	elif projectile_owner is Enemy:
+		animation_name = GlobalVariables.get_distance_weapon_animation_by_name(projectile_owner.weapon_manager.weapon_name)
+		animation_name += "_enemy_shoot"
+	projectile_owner.weapon_animation.play(animation_name)
+
 func _ready():
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
 	
-	#only for player
-	GlobalSignals.weapon_shoot.connect(player.play_shoot_animation)
+	#maybe animation manager
+	GlobalSignals.weapon_shoot.connect(self.handle_character_shoot)
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
 	GlobalSignals.player_fired.connect(gui_manager.weapon_panel_manager.handle_player_fired)
 	GlobalSignals.player_reloading.connect(gui_manager.weapon_panel_manager.handle_player_reload)
 	GlobalSignals.player_use_special_power.connect(gui_manager.weapon_panel_manager.handle_use_special_power)
+	#mettre un call a gui_manager.game_over_manager ?
+	#GlobalSignals.game_over.connect(get_tree().reload_current_scene())
 
 	GlobalSignals.play_sound.connect(_do_play_sound)
 
@@ -61,7 +73,10 @@ func _ready():
 
 	spawn_player()
 	init_camera()
-	gui_manager.generate_ui()
+	
+	if gui_manager != null:
+		gui_manager.player_ref = player
+		gui_manager.generate_ui()
 
 
 # NOTE: Should we put an autoload function or keep it as a signal ? (https://github.com/godotengine/godot-proposals/issues/1827)

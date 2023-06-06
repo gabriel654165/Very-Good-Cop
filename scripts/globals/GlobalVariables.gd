@@ -12,7 +12,7 @@ var every_room: Array = []
 var rooms_repository: Array = []
 
 # VAR TO SAVE
-var level : int = 1
+var level : int = 5
 var money : int = 500
 
 var grappling_hook_level : int = 1
@@ -152,7 +152,7 @@ func level_stat(min_value, max_value, number_of_levels: int):
 }
 
 
-func get_distance_weapon_animation(weapon_index: int) -> String:
+func get_distance_weapon_animation_by_index(weapon_index: int) -> String:
 	var animation_name : String = ""
 	var dic_index : int = 0
 	
@@ -163,7 +163,16 @@ func get_distance_weapon_animation(weapon_index: int) -> String:
 		dic_index += 1
 	return animation_name
 
-func get_distance_weapon_position(weapon_index: int) -> Vector2:
+func get_distance_weapon_animation_by_name(weapon_name: String) -> String:
+	var animation_name : String = ""
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		if weapon_name == weapon_dictionnary.name:
+			animation_name = weapon_dictionnary.animation
+			break
+	return animation_name
+
+func get_distance_weapon_position_by_index(weapon_index: int) -> Vector2:
 	var weapon_position := Vector2.ZERO
 	var dic_index : int = 0
 	
@@ -174,13 +183,14 @@ func get_distance_weapon_position(weapon_index: int) -> Vector2:
 		dic_index += 1
 	return weapon_position
 
-func get_animations_array() -> Array[String]:
-	var animation_array : Array[String] = []
+func get_distance_weapon_position_by_name(weapon_name: String) -> Vector2:
+	var weapon_position := Vector2.ZERO
 	
 	for weapon_dictionnary in all_distance_weapon_list:
-		animation_array.append(weapon_dictionnary.animation)
-	return animation_array
-
+		if weapon_name == weapon_dictionnary.name:
+			weapon_position = weapon_dictionnary.weapon_position
+			break
+	return weapon_position
 
 var all_distance_weapon_list = [
 	{

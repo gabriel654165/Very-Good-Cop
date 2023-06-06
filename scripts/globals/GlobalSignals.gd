@@ -5,6 +5,7 @@ signal assign_player_weapons()
 signal player_fired()
 signal player_reloading(ammo_reloading_time: float)
 signal player_use_special_power()
+signal game_over()
 
 signal weapon_shoot(projectile_owner: Node2D)
 signal projectile_fired_spawn(projectile_owner: Node2D, projectile: Projectile, position: Vector2, direction: Vector2)

@@ -59,7 +59,6 @@ var special_power : SpecialPower
 func _ready():
 	if get_parent() != null:
 		shooter_actor = get_parent().get_parent().get_parent()
-		print("shooter_actor name = ", shooter_actor)
 	randomize()
 	
 	# TODO: To remove @gabriel
