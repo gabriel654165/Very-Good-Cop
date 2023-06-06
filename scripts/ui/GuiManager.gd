@@ -28,7 +28,6 @@ func generate_ui():
 	cursor_manager.set_active(true)
 	game_over_manager.set_active(false)
 	minimap_manager.set_active(true)
-	game_over_manager.set_active(false)
 	pause_manager.set_active(false)
 	weapon_shop_manager.set_active(false)
 	choose_weapon_manager.set_active(true)
