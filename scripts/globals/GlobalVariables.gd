@@ -12,7 +12,7 @@ var every_room: Array = []
 var rooms_repository: Array = []
 
 # VAR TO SAVE
-var level : int = 1
+var level : int = 5
 var money : int = 500
 
 var grappling_hook_level : int = 1
@@ -57,7 +57,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'mini_uzi',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
@@ -74,7 +74,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'riffle',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= 0,
@@ -151,9 +151,54 @@ func level_stat(min_value, max_value, number_of_levels: int):
 	number_of_levels= number_of_levels,
 }
 
+
+func get_distance_weapon_animation_by_index(weapon_index: int) -> String:
+	var animation_name : String = ""
+	var dic_index : int = 0
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		if dic_index == weapon_index:
+			animation_name = weapon_dictionnary.animation
+			break
+		dic_index += 1
+	return animation_name
+
+func get_distance_weapon_animation_by_name(weapon_name: String) -> String:
+	var animation_name : String = ""
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		if weapon_name == weapon_dictionnary.name:
+			animation_name = weapon_dictionnary.animation
+			break
+	return animation_name
+
+
+func get_distance_weapon_position_by_index(weapon_index: int) -> Vector2:
+	var weapon_position := Vector2.ZERO
+	var dic_index : int = 0
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		if dic_index == weapon_index:
+			weapon_position = weapon_dictionnary.weapon_position
+			break
+		dic_index += 1
+	return weapon_position
+
+func get_distance_weapon_position_by_name(weapon_name: String) -> Vector2:
+	var weapon_position := Vector2.ZERO
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		if weapon_name == weapon_dictionnary.name:
+			weapon_position = weapon_dictionnary.weapon_position
+			break
+	return weapon_position
+
+
 var all_distance_weapon_list = [
 	{
 		name="glock",
+		animation="glock_animation",
+		weapon_position=Vector2(25, -2),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -203,6 +248,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="shotgun",
+		animation="shotgun_animation",
+		weapon_position=Vector2(18, 0),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_shotgun.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_2.png"),
@@ -252,6 +299,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="mini_uzi",
+		animation="mini_uzi_animation",
+		weapon_position=Vector2(29, -4),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Uzi.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -301,6 +350,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="riffle",
+		animation="riffle_animation",
+		weapon_position=Vector2(26, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr__Aka.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -350,6 +401,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="machine_gun",
+		animation="machine_gun_animation",
+		weapon_position=Vector2(27, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Mg.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -399,6 +452,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="grenade_launcher",
+		animation="grenade_launcher_animation",
+		weapon_position=Vector2(22, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_grenade_launcher.png"),
 		shot_shells_texture=null,
@@ -448,6 +503,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="sniper",
+		animation="sniper_animation",
+		weapon_position=Vector2(31, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_sniper.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),

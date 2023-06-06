@@ -17,15 +17,22 @@ func set_target(movement_target: Node2D):
 	state_machine.navigation_agent.target_position = movement_target.global_transform.origin
 
 func set_movement_target(movement_target: Vector2):
-	state_machine.navigation_agent.target_position = movement_target	
+	state_machine.navigation_agent.target_position = movement_target
 
 func physics_update(_delta: float) -> void:
-	move()
+	var is_at_distance : bool = GlobalFunctions.is_inside_range(enemy.distance_to_shoot, state_machine.navigation_agent.distance_to_target(), 2.0)
+	
+	if (state_machine.state is Patrol) and state_machine.navigation_agent.is_navigation_finished():
+		state_machine.navigation_agent.set_velocity(Vector2.ZERO)
+	elif (state_machine.state is Patrol) and !state_machine.navigation_agent.is_navigation_finished():
+		move()
+	
+	if ((state_machine.state is FollowPlayer) or (state_machine.state is Shoot)) and is_at_distance:
+		state_machine.navigation_agent.set_velocity(Vector2.ZERO)
+	elif ((state_machine.state is FollowPlayer) or (state_machine.state is Shoot)) and !is_at_distance:
+		move()
 
 func move() -> void:
-	if state_machine.navigation_agent.is_navigation_finished():
-		return
-
 	var current_agent_position: Vector2 = state_machine._enemy.global_transform.origin
 	var next_path_position: Vector2 = state_machine.navigation_agent.get_next_path_position()
 

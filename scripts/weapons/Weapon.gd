@@ -58,7 +58,7 @@ var special_power : SpecialPower
 
 func _ready():
 	if get_parent() != null:
-		shooter_actor = get_parent().get_parent()
+		shooter_actor = get_parent().get_parent().get_parent()
 	randomize()
 	
 	# TODO: To remove @gabriel
@@ -90,7 +90,6 @@ func shoot():
 			has_shoot = instantiate_projectile(direction)
 			instantiate_shot_shell()
 			recoil_shooter(direction)
-			animation.play("muzzle_flash")
 			
 		if has_shoot:
 			GlobalSignals.play_sound.emit(shooting_sound, 0, 1, global_position)
@@ -138,6 +137,9 @@ func _random_range(angle: Vector2) -> float:
 	return range
 
 func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vector2):
+	
+	GlobalSignals.weapon_shoot.emit(actor)
+	
 	if actor is Player:
 		GlobalSignals.player_fired.emit()
 		GlobalSignals.sound_emitted.emit(actor, actor.global_position, sound_intensity)

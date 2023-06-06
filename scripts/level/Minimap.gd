@@ -78,10 +78,12 @@ func get_heigth() -> int:
 
 
 func get_player_pos() -> Vector2:
-	return LevelGenerator.world_to_precise_local_positon(player_ref.global_position)
+	var pos : Vector2 = LevelGenerator.world_to_precise_local_positon(player_ref.global_position) if player_ref != null else Vector2.ZERO
+	return pos
 
 func get_current_room_pos() -> Vector2:
-	return LevelGenerator.world_to_local_positon(player_ref.global_position)
+	var pos : Vector2 = LevelGenerator.world_to_local_positon(player_ref.global_position) if player_ref != null else Vector2.ZERO
+	return pos
 
 func get_item_pos_in_map(item_list_ref: Array, map: Array, item_ref: Node = null) -> Array[Vector2]:
 	var items_pos_list : Array[Vector2] = []
@@ -98,11 +100,15 @@ func get_item_pos_in_map(item_list_ref: Array, map: Array, item_ref: Node = null
 		items_pos_list.append(LevelGenerator.world_to_precise_local_positon(item.global_position))
 	return items_pos_list
 
-func get_room_enemies_pos_list() -> Array[Vector2]:
-	return get_item_pos_in_map(enemies_list_ref, map, player_ref)
+func get_room_enemies_pos_list() -> Array:
+	if player_ref != null:
+		return get_item_pos_in_map(enemies_list_ref, map, player_ref)
+	return []
 
-func get_room_powerups_pos_list() -> Array[Vector2]:
-	return get_item_pos_in_map(powerups_list_ref, map, player_ref)
+func get_room_powerups_pos_list() -> Array:
+	if player_ref != null:
+		return get_item_pos_in_map(powerups_list_ref, map, player_ref)
+	return []
 
 func get_full_map_enemies_pos_list() -> Array[Vector2]:
 	return get_item_pos_in_map(enemies_list_ref, full_map)
@@ -118,7 +124,8 @@ func get_map_powerups_pos_list() -> Array[Vector2]:
 
 
 func _process(delta):
-	assert(player_ref != null)
+	if player_ref == null:
+		return
 	assert(!map.is_empty())
 
 	var current_room := LevelGenerator.world_to_local_positon(player_ref.global_position)
