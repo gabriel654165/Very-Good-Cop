@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://du5bgkaruktlc"]
+[gd_scene load_steps=13 format=3 uid="uid://du5bgkaruktlc"]
 
 [ext_resource type="Script" path="res://scripts/level/rooms/Room.gd" id="1_6ycqu"]
 [ext_resource type="Texture2D" uid="uid://dw70vdas1wntp" path="res://assets/tilemaps/hm_2_tilesets/ground.png" id="2_jp4km"]
@@ -2159,6 +2159,8 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vtx8k")
 sources/1 = SubResource("TileSetAtlasSource_w1g5x")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtkm7"]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8udlg"]
 texture = ExtResource("4_6mt31")
 0:0/0 = 0
@@ -2257,6 +2259,7 @@ texture = ExtResource("4_6mt31")
 [sub_resource type="TileSet" id="TileSet_wlxgn"]
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_8udlg")
+sources/0 = SubResource("TileSetAtlasSource_vtkm7")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r7ni0"]
 vertices = PackedVector2Array(187.317, 17.2206, 183, -28, 246, -28, 244, 17, -13, 18, 248, 250, -246, 246, -246, 33, -246, -35, -248, -246, -10, -245, -12, -71, 51, -26, 21.5572, -72.147, 23, -249, 252, -247, 247, -27, -264, 32, -264, -32, -11, -25)
