@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://76fiuu4xbqy4"]
+[gd_scene load_steps=50 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -31,6 +31,11 @@
 [ext_resource type="PackedScene" uid="uid://45sw7cn3b37b" path="res://scenes/ui/MinimapEnemyMarker.tscn" id="21_w74aj"]
 [ext_resource type="PackedScene" uid="uid://cq5wv7kjj7me4" path="res://scenes/ui/ChooseWeaponItemPanel.tscn" id="23_8p1eu"]
 [ext_resource type="PackedScene" uid="uid://rrwoshph15c5" path="res://scenes/ui/ItemStatsPanel.tscn" id="24_hkhpj"]
+[ext_resource type="Script" path="res://scripts/ui/GameOverManager.gd" id="29_tthju"]
+[ext_resource type="Texture2D" uid="uid://chafbrkhdkskw" path="res://assets/weapons/sprites/weapons/Colt.png" id="33_p816j"]
+[ext_resource type="Texture2D" uid="uid://t0fsw6bmbs45" path="res://assets/UI/Minimap/PoliceCap.png" id="35_rfcsd"]
+[ext_resource type="Texture2D" uid="uid://c6bu82lhw3wa1" path="res://assets/UI/icons/skull_icon.png" id="35_u8ntm"]
+[ext_resource type="Texture2D" uid="uid://b4jmkicvhyi3d" path="res://assets/UI/Minimap/Sombrero.png" id="36_5t6ke"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5bu2"]
 shader = ExtResource("19_yho6x")
@@ -147,6 +152,274 @@ shader = ExtResource("16_wdi1s")
 shader_parameter/has_target = false
 shader_parameter/target = Vector2(0.5, 0.5)
 shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xjad"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0, 0, 0, 0.00392157)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05w1y"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0, 0, 0, 0.00392157)
+
+[sub_resource type="Animation" id="Animation_ixqmg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonsContainer/QuitButton:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ButtonsContainer/ResartButton:material:shader_parameter/color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRectBlack:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2gj1f"]
+resource_name = "game_over_off"
+length = 2.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkullControl/Skull:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.6, 0.6), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GunsControl/DoubleGun:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.6, 0.6), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunsControl/DoubleGun2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1.3, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.6, 0.6), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunsControl/DoubleGun3:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 1.6, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.6, 0.6), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CenterContainer/VBoxContainer/GameOverLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": ["GAME OVER", ""]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../GameOverManager")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ButtonsContainer/QuitButton:material:shader_parameter/color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ButtonsContainer/ResartButton:material:shader_parameter/color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c6q7u"]
+resource_name = "game_over_on"
+length = 3.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkullControl/Skull:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.6, 0.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GunsControl/DoubleGun:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunsControl/DoubleGun2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 1.3, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunsControl/DoubleGun3:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6, 1.6, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CenterContainer/VBoxContainer/GameOverLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": ["", "GAME OVER"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/path = NodePath("ButtonsContainer:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ButtonsContainer/QuitButton:material:shader_parameter/color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0.00392157)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ButtonsContainer/ResartButton:material:shader_parameter/color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(3, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0.00392157)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ColorRectBlack:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5hfsx"]
+_data = {
+"RESET": SubResource("Animation_ixqmg"),
+"game_over_off": SubResource("Animation_2gj1f"),
+"game_over_on": SubResource("Animation_c6q7u")
+}
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_cf1if")
@@ -265,6 +538,12 @@ color_rect = NodePath("../GuiControl/ChooseWeaponControl/ColorRect")
 distance_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/DistanceWeaponGridContainer")
 melee_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/MeleeWeaponGridContainer")
 choose_weapon_item_panel_scene = ExtResource("23_8p1eu")
+
+[node name="GameOverManager" type="Node2D" parent="." node_paths=PackedStringArray("game_over_gui", "animation_player", "buttons_container")]
+script = ExtResource("29_tthju")
+game_over_gui = NodePath("../GuiControl/GameOverControl")
+animation_player = NodePath("../GuiControl/GameOverControl/AnimationPlayer")
+buttons_container = NodePath("../GuiControl/GameOverControl/ButtonsContainer")
 
 [node name="GuiControl" type="Control" parent="."]
 layout_mode = 3
@@ -1389,6 +1668,282 @@ text = "Start mission"
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
+[node name="GameOverControl" type="Control" parent="GuiControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_eyt6o")
+
+[node name="ColorRectBlack" type="ColorRect" parent="GuiControl/GameOverControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GunsControl" type="Control" parent="GuiControl/GameOverControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+
+[node name="DoubleGun" type="Control" parent="GuiControl/GameOverControl/GunsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 540)
+
+[node name="TextureRect3" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 940.0
+offset_top = 554.0
+offset_right = 1340.0
+offset_bottom = 954.0
+rotation = -0.785398
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 565.0
+offset_top = 554.0
+offset_right = 965.0
+offset_bottom = 954.0
+rotation = 0.785398
+pivot_offset = Vector2(400, 0)
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="DoubleGun2" type="Control" parent="GuiControl/GameOverControl/GunsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 540)
+
+[node name="TextureRect3" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun2"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 940.0
+offset_top = 554.0
+offset_right = 1340.0
+offset_bottom = 954.0
+rotation = -0.523599
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun2"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 565.0
+offset_top = 554.0
+offset_right = 965.0
+offset_bottom = 954.0
+rotation = 0.523599
+pivot_offset = Vector2(400, 0)
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="DoubleGun3" type="Control" parent="GuiControl/GameOverControl/GunsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 540)
+
+[node name="TextureRect3" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun3"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 940.0
+offset_top = 554.0
+offset_right = 1340.0
+offset_bottom = 954.0
+rotation = -0.261799
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun3"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 565.0
+offset_top = 554.0
+offset_right = 965.0
+offset_bottom = 954.0
+rotation = 0.261799
+pivot_offset = Vector2(400, 0)
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="SkullControl" type="Control" parent="GuiControl/GameOverControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Skull" type="TextureRect" parent="GuiControl/GameOverControl/SkullControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(250, 250)
+texture = ExtResource("35_u8ntm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PoliceCap" type="TextureRect" parent="GuiControl/GameOverControl/SkullControl"]
+visible = false
+layout_mode = 0
+offset_left = -206.0
+offset_top = -357.0
+offset_right = 194.0
+offset_bottom = -57.0
+texture = ExtResource("35_rfcsd")
+expand_mode = 1
+
+[node name="Sombrero" type="TextureRect" parent="GuiControl/GameOverControl/SkullControl"]
+visible = false
+layout_mode = 0
+offset_left = -304.0
+offset_top = -459.0
+offset_right = 296.0
+offset_bottom = -59.0
+texture = ExtResource("36_5t6ke")
+expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="GuiControl/GameOverControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/GameOverControl/CenterContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+
+[node name="MarginTop" type="AspectRatioContainer" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0.235294, 1)
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginMiddle2" type="AspectRatioContainer" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 300)
+layout_mode = 2
+texture = ExtResource("35_rfcsd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SkullTextureRect2" type="TextureRect" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+texture = ExtResource("35_u8ntm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginBottom" type="AspectRatioContainer" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="GuiControl/GameOverControl"]
+layout_mode = 2
+offset_left = 510.0
+offset_top = 839.0
+offset_right = 1410.0
+offset_bottom = 939.0
+pivot_offset = Vector2(450, 50)
+
+[node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/GameOverControl/ButtonsContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="GuiControl/GameOverControl/ButtonsContainer"]
+material = SubResource("ShaderMaterial_5xjad")
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="GuiControl/GameOverControl/ButtonsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ResartButton" type="Button" parent="GuiControl/GameOverControl/ButtonsContainer"]
+material = SubResource("ShaderMaterial_05w1y")
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Replay"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="GuiControl/GameOverControl/ButtonsContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GuiControl/GameOverControl"]
+libraries = {
+"": SubResource("AnimationLibrary_5hfsx")
+}
+
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/ResumeButton" to="PauseManager" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/OptionButton" to="PauseManager" method="_on_option_button_pressed"]
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/QuitButton" to="PauseManager" method="_on_quit_button_pressed"]
@@ -1396,3 +1951,5 @@ layout_mode = 2
 [connection signal="pressed" from="GuiControl/WeaponShopControl/ButtonsContainer/Buttons-Container/ContinueButton" to="WeaponShopManager" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="GuiControl/ChooseWeaponControl/BaseContainer/Button-Container/QuitButton" to="ChooseWeaponManager" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="GuiControl/ChooseWeaponControl/BaseContainer/Button-Container/StartButton" to="ChooseWeaponManager" method="_on_start_button_pressed"]
+[connection signal="pressed" from="GuiControl/GameOverControl/ButtonsContainer/QuitButton" to="GameOverManager" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="GuiControl/GameOverControl/ButtonsContainer/ResartButton" to="GameOverManager" method="_on_resart_button_pressed"]

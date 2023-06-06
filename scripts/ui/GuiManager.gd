@@ -17,6 +17,7 @@ class_name GuiManager
 @onready var weapon_panel_manager = $WeaponPanelManager
 
 @onready var minimap_manager = $MinimapManager
+@onready var game_over_manager = $GameOverManager
 
 var player_ref : Player
 
@@ -25,6 +26,7 @@ func generate_ui():
 	
 	health_ui_manager.set_active(true)
 	cursor_manager.set_active(true)
+	game_over_manager.set_active(false)
 	minimap_manager.set_active(true)
 	pause_manager.set_active(false)
 	weapon_shop_manager.set_active(false)

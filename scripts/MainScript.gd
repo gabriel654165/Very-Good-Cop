@@ -22,7 +22,7 @@ func _ready():
 	GlobalSignals.player_fired.connect(gui_manager.weapon_panel_manager.handle_player_fired)
 	GlobalSignals.player_reloading.connect(gui_manager.weapon_panel_manager.handle_player_reload)
 	GlobalSignals.player_use_special_power.connect(gui_manager.weapon_panel_manager.handle_use_special_power)
-	#GlobalSignals.game_over.connect(gui_manager.game_over_manager.generate_ui)
+	
 	GlobalSignals.play_sound.connect(_do_play_sound)
 
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
@@ -48,6 +48,7 @@ func _ready():
 	GlobalSignals.active_heal_power_up.connect(screen_effects_manager.set_heal_power_up)
 
 	GlobalSignals.map_updated.connect(gui_manager.minimap_manager.update)
+	GlobalSignals.game_over.connect(gui_manager.game_over_manager.generate_ui)
 
 	if level_generator != null:
 		await level_generator.generate()
