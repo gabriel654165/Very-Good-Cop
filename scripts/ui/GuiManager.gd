@@ -10,6 +10,7 @@ class_name GuiManager
 
 @onready var pop_up_health_manager = $PopUpHealthManager
 @onready var pop_up_points_manager = $PopUpPointsManager
+@onready var pop_up_interaction_manager = $PopUpInteractionManager
 
 @onready var panel_points_manager = $PanelPointsManager
 @onready var panel_kills_manager = $PanelKillsManager

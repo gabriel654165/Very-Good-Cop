@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://76fiuu4xbqy4"]
+[gd_scene load_steps=51 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/ui/PopUpHealthManager.gd" id="8_armf7"]
 [ext_resource type="Script" path="res://scripts/ui/TextPointsManager.gd" id="9_dkbyk"]
 [ext_resource type="PackedScene" uid="uid://c3enp3a1fg70f" path="res://scenes/ui/PanelGui.tscn" id="10_0fs0q"]
+[ext_resource type="Script" path="res://scripts/ui/PopUpInteractionManager.gd" id="10_1jj2h"]
 [ext_resource type="Script" path="res://scripts/ui/PanelKillsManager.gd" id="11_f3jk1"]
 [ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
@@ -461,6 +462,9 @@ life_time = 0.5
 text_scale = Vector2(1.5, 1.3)
 velocity_mov = Vector2(0, -70)
 velocity_scale = Vector2(1.5, 1.5)
+
+[node name="PopUpInteractionManager" type="Node2D" parent="."]
+script = ExtResource("10_1jj2h")
 
 [node name="PanelPointsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
 script = ExtResource("9_dkbyk")

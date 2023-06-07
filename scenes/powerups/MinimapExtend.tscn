@@ -1,93 +1,20 @@
-[gd_scene load_steps=21 format=3 uid="uid://f5ss6qpst7vm"]
+[gd_scene load_steps=14 format=3 uid="uid://f5ss6qpst7vm"]
 
 [ext_resource type="Script" path="res://scripts/Editor/PassiveEffectEditor.gd" id="1_kh4lq"]
 [ext_resource type="Texture2D" uid="uid://deorjrl3ucct8" path="res://assets/PNG/Obstacles/barrelGreen_up.png" id="2_dix8l"]
 [ext_resource type="Texture2D" uid="uid://caotrwqhvywfq" path="res://assets/PNG/Obstacles/barrelRed_up.png" id="3_ep4md"]
 [ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="4_rqi5n"]
 [ext_resource type="Script" path="res://scripts/PassiveEffects/PassiveEffect.gd" id="5_7jelh"]
-[ext_resource type="FontFile" uid="uid://sph0kotu777o" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/m5x7.ttf" id="6_spp8o"]
+[ext_resource type="PackedScene" uid="uid://dnrwg6uymyr1g" path="res://scenes/ui/InteractionPressKey.tscn" id="6_8j6r0"]
 [ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="7_sibb4"]
-[ext_resource type="Texture2D" uid="uid://cy6kk1oet8gky" path="res://assets/UI/keyboards/Classic/Dark/Single PNGs/E.png" id="7_vn3jx"]
-[ext_resource type="Texture2D" uid="uid://y2nb74avm8qd" path="res://assets/UI/keyboards/Classic/Dark/Single PNGs/PressedKeys/E.png" id="8_h88bw"]
+[ext_resource type="PackedScene" uid="uid://cddg6ra4gu82t" path="res://scenes/ui/InteractionSpamKey.tscn" id="7_yfjgf"]
 [ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="8_m37fj"]
-[ext_resource type="Texture2D" uid="uid://dmd8ukbpjt3w2" path="res://assets/UI/keyboards/Classic/Dark/Single PNGs/SPACE.png" id="9_augyl"]
 [ext_resource type="Script" path="res://scripts/Interactions/ActiveProcessorInteraction.gd" id="9_nsk57"]
-[ext_resource type="Texture2D" uid="uid://dwinbhf25ws4p" path="res://assets/UI/keyboards/Classic/Dark/Single PNGs/PressedKeys/SpaceAlternative.png" id="10_nu2t8"]
 [ext_resource type="Script" path="res://scripts/Interactions/ChangeVisibility.gd" id="10_uffry"]
 [ext_resource type="Script" path="res://scripts/Interactions/SpamClickInteraction.gd" id="11_mlsfj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdnqi"]
 radius = 28.2312
-
-[sub_resource type="LabelSettings" id="LabelSettings_w2sm1"]
-font = ExtResource("6_spp8o")
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_8l2xd"]
-resource_name = "canvas_textures_press_key"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("KeyReleaseTexture:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("KeyPressedTexture:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_r8p5l"]
-resource_name = "canvas_textures_spam_key"
-length = 0.35
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("KeyReleaseTexture:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("KeyPressedTexture:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nswnj"]
-_data = {
-"canvas_textures_press_key": SubResource("Animation_8l2xd"),
-"canvas_textures_spam_key": SubResource("Animation_r8p5l")
-}
 
 [node name="MinimapExtendPowerUp" type="Node2D"]
 script = ExtResource("1_kh4lq")
@@ -110,7 +37,7 @@ texture = ExtResource("3_ep4md")
 
 [node name="CharacterCollisionInteraction" type="Node2D" parent="."]
 script = ExtResource("4_rqi5n")
-for_who = 3
+for_who = 1
 is_active = true
 
 [node name="Area2D" type="Area2D" parent="CharacterCollisionInteraction"]
@@ -122,93 +49,6 @@ shape = SubResource("CircleShape2D_tdnqi")
 rotation = -0.375185
 script = ExtResource("5_7jelh")
 for_who = 1
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -50.0
-offset_right = 150.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PressEContainer" type="HBoxContainer" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -106.5
-offset_right = 106.5
-offset_bottom = 16.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="PressE" type="Label" parent="Control/PressEContainer"]
-layout_mode = 2
-text = "Engage with pills"
-label_settings = SubResource("LabelSettings_w2sm1")
-horizontal_alignment = 1
-
-[node name="KeyReleaseTexture" type="TextureRect" parent="Control/PressEContainer"]
-layout_mode = 2
-texture = ExtResource("7_vn3jx")
-stretch_mode = 5
-
-[node name="KeyPressedTexture" type="TextureRect" parent="Control/PressEContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("8_h88bw")
-stretch_mode = 5
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/PressEContainer"]
-autoplay = "canvas_textures_press_key"
-libraries = {
-"": SubResource("AnimationLibrary_nswnj")
-}
-
-[node name="SpamSpaceContainer" type="HBoxContainer" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -106.5
-offset_right = 106.5
-offset_bottom = 16.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="SpamSpaceFirstPart" type="Label" parent="Control/SpamSpaceContainer"]
-layout_mode = 2
-text = "¡¡¡ Spam"
-label_settings = SubResource("LabelSettings_w2sm1")
-horizontal_alignment = 1
-
-[node name="KeyReleaseTexture" type="TextureRect" parent="Control/SpamSpaceContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("9_augyl")
-stretch_mode = 5
-
-[node name="KeyPressedTexture" type="TextureRect" parent="Control/SpamSpaceContainer"]
-layout_mode = 2
-texture = ExtResource("10_nu2t8")
-stretch_mode = 5
-
-[node name="SpamSpaceSecondPart" type="Label" parent="Control/SpamSpaceContainer"]
-layout_mode = 2
-text = "cabron !!!"
-label_settings = SubResource("LabelSettings_w2sm1")
-horizontal_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/SpamSpaceContainer"]
-autoplay = "canvas_textures_spam_key"
-libraries = {
-"": SubResource("AnimationLibrary_nswnj")
-}
 
 [node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
 rotation = -0.375185
@@ -226,10 +66,11 @@ is_active = true
 [node name="ActivateProcessorInteraction" type="Node2D" parent="PressKeyAndCollide" node_paths=PackedStringArray("interaction_processor")]
 script = ExtResource("9_nsk57")
 interaction_processor = NodePath("../../SpamClickAndCollide")
+for_who = 1
 
-[node name="ChangeCanvasVisibility" type="Node" parent="PressKeyAndCollide" node_paths=PackedStringArray("canvas")]
+[node name="ChangeCanvasVisibility" type="Node" parent="PressKeyAndCollide"]
 script = ExtResource("10_uffry")
-canvas = NodePath("../../Control/PressEContainer")
+interaction_gui_scene = ExtResource("6_8j6r0")
 visibility = true
 for_who = 1
 is_active = true
@@ -251,12 +92,11 @@ for_who = 1
 wait_time = 10.0
 one_shot = true
 
-[node name="ChangeCanvasVisibility" type="Node" parent="SpamClickAndCollide" node_paths=PackedStringArray("canvas")]
+[node name="ChangeCanvasVisibility" type="Node" parent="SpamClickAndCollide"]
 script = ExtResource("10_uffry")
-canvas = NodePath("../../Control/SpamSpaceContainer")
+interaction_gui_scene = ExtResource("7_yfjgf")
 visibility = true
 for_who = 1
 
-[connection signal="body_entered" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_entered"]
 [connection signal="body_exited" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_exited"]
 [connection signal="timeout" from="SpamClickAndCollide/SpamClickInteraction/Timer" to="SpamClickAndCollide/SpamClickInteraction" method="_on_timer_timeout"]

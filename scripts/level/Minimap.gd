@@ -91,6 +91,7 @@ func get_item_pos_in_map(item_list_ref: Array, map: Array, item_ref: Node = null
 		if item == null:
 			continue
 		var item_room := LevelGenerator.world_to_local_positon(item.global_position)
+		#sometimes crash : Invalid get index '9' (on base: 'Array').
 		if !map[item_room.y][item_room.x]:
 			continue
 		if item_ref != null:
