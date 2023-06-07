@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnrwg6uymyr1g"]
+
+[ext_resource type="FontFile" uid="uid://sph0kotu777o" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/m5x7.ttf" id="1_ega51"]
+[ext_resource type="Texture2D" uid="uid://cy6kk1oet8gky" path="res://assets/UI/keyboards/Classic/Dark/Single PNGs/E.png" id="2_ickii"]
+[ext_resource type="Texture2D" uid="uid://y2nb74avm8qd" path="res://assets/UI/keyboards/Classic/Dark/Single PNGs/PressedKeys/E.png" id="3_fyk3g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w2sm1"]
+font = ExtResource("1_ega51")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_8l2xd"]
+resource_name = "canvas_textures_press_key"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KeyReleaseTexture:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KeyPressedTexture:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_r8p5l"]
+resource_name = "canvas_textures_spam_key"
+length = 0.35
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KeyReleaseTexture:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KeyPressedTexture:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nswnj"]
+_data = {
+"canvas_textures_press_key": SubResource("Animation_8l2xd"),
+"canvas_textures_spam_key": SubResource("Animation_r8p5l")
+}
+
+[node name="InteractionPressKey" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PressEContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.5
+offset_right = 106.5
+offset_bottom = 16.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="PressE" type="Label" parent="PressEContainer"]
+layout_mode = 2
+text = "Interact"
+label_settings = SubResource("LabelSettings_w2sm1")
+horizontal_alignment = 1
+
+[node name="KeyReleaseTexture" type="TextureRect" parent="PressEContainer"]
+layout_mode = 2
+texture = ExtResource("2_ickii")
+stretch_mode = 5
+
+[node name="KeyPressedTexture" type="TextureRect" parent="PressEContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_fyk3g")
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PressEContainer"]
+autoplay = "canvas_textures_press_key"
+libraries = {
+"": SubResource("AnimationLibrary_nswnj")
+}

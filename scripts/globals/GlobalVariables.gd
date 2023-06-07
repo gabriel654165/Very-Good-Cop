@@ -12,8 +12,8 @@ var every_room: Array = []
 var rooms_repository: Array = []
 
 # VAR TO SAVE
-var level : int = 50
-var money : int = 500
+var level : int = 1
+var money : int = 0
 
 var grappling_hook_level : int = 1
 
@@ -28,7 +28,7 @@ var player_distance_weapon_list = [
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
-		precision_lvl= 6,
+		precision_lvl= 0,
 		recoil_force_lvl= 0,
 		ammo_size_lvl= 0,
 		ammo_reloading_time_lvl= 0,

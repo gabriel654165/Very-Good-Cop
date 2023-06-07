@@ -40,6 +40,8 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.panel_kills_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
 	
+	GlobalSignals.interaction_computed.connect(gui_manager.pop_up_interaction_manager.handle_interaction_computed)
+	
 	GlobalSignals.active_minimap_power_up.connect(screen_effects_manager.set_minimap_power_up)
 	GlobalSignals.active_minimap_power_up.connect(gui_manager.minimap_manager.handle_minimap_power_up)
 	GlobalSignals.active_slowmotion_power_up.connect(screen_effects_manager.set_slowmotion_power_up)
