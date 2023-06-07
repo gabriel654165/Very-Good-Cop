@@ -96,7 +96,7 @@ shape = SubResource("RectangleShape2D_nne61")
 
 [node name="CharacterCollisionInteraction" type="Node2D" parent="."]
 script = ExtResource("2_ndrnv")
-for_who = 3
+for_who = 1
 is_active = true
 
 [node name="Area2D" type="Area2D" parent="CharacterCollisionInteraction"]
@@ -109,6 +109,7 @@ shape = SubResource("RectangleShape2D_471wm")
 [node name="EndLevelInteraction" type="Node2D" parent="."]
 rotation = -0.375185
 script = ExtResource("3_r7fmc")
+for_who = 1
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

@@ -108,7 +108,7 @@ rotation = -0.75037
 
 [node name="CharacterCollisionInteraction" type="Node2D" parent="."]
 script = ExtResource("3_bu3c0")
-for_who = 3
+for_who = 1
 is_active = true
 
 [node name="Area2D" type="Area2D" parent="CharacterCollisionInteraction"]
@@ -224,6 +224,7 @@ is_active = true
 [node name="ActivateProcessorInteraction" type="Node2D" parent="PressKeyAndCollide" node_paths=PackedStringArray("interaction_processor")]
 script = ExtResource("7_n7hyo")
 interaction_processor = NodePath("../../SpamClickAndCollide")
+for_who = 1
 
 [node name="ChangeCanvasVisibility" type="Node" parent="PressKeyAndCollide" node_paths=PackedStringArray("canvas")]
 script = ExtResource("7_01auj")

@@ -108,6 +108,7 @@ rotation = -0.75037
 
 [node name="CharacterCollisionInteraction" type="Node2D" parent="."]
 script = ExtResource("3_8a6bf")
+for_who = 1
 is_active = true
 
 [node name="Area2D" type="Area2D" parent="CharacterCollisionInteraction"]
