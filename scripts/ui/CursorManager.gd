@@ -12,6 +12,7 @@ class_name CursorManager
 
 var enemy_list : Array[Enemy] = []
 var cursor : Cursor
+var player : Player
 
 func _ready():
 	if cursor_ui == null:
@@ -49,9 +50,9 @@ func _process(delta):
 		GlobalVariables.cursor_position = get_viewport().get_mouse_position() - cursor_offset
 	var is_on_enemy_tmp = is_on_enemy()
 	
-	var player = GlobalFunctions.find_object_on_condition(func(elem: Node): return elem is Player, get_tree().root)
-	if player.weapon_manager != null:
-		auto_lock = player.weapon_manager.weapon.auto_lock_target
+	if player != null:
+		if player.weapon_manager != null:
+			auto_lock = player.weapon_manager.weapon.auto_lock_target
 	
 	if auto_lock:
 		var target = find_nearest_target()
@@ -115,12 +116,6 @@ func is_on_enemy() -> bool:
 func hit_marker_action():
 	if cursor.is_attack_gui:
 		cursor.active_mode_hit_marker_gui()
-
-func _input(event):
-#debug
-	if event.is_action_pressed("change_cursor_type_test"):
-		mouse_visible = !mouse_visible
-		cursor.set_active_mouse(!mouse_visible)
 
 func smooth_clamp_cursor_position(target: Vector2):
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)

@@ -11,7 +11,6 @@ class_name PopUpHealthManager
 @export var velocity_scale : Vector2 = Vector2(1.5, 1.5)
 
 func handle_character_health_changed(health: Health, value: float):
-	#print("health changed on : ", health.get_parent().name)
 	var parent = health.get_parent()
 	
 	if parent == null:

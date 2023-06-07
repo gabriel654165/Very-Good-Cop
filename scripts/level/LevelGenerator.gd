@@ -42,6 +42,16 @@ var entrance_pos: Vector2i
 var exit_pos: Vector2i
 
 
+
+
+static func world_to_local_positon(pos:Vector2) -> Vector2:
+	var start_pos:Vector2 = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
+	return ((pos / RoomCenterOffset) + start_pos).round()
+
+static func world_to_precise_local_positon(pos:Vector2) -> Vector2:
+	var start_pos:Vector2 = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
+	return ((pos / RoomCenterOffset) + start_pos)
+
 func local_to_world_position(pos:Vector2i) -> Vector2i:
 	return (pos - StartPos) * RoomCenterOffset
 
@@ -179,10 +189,14 @@ func spawn_dungeon_rooms():
 		var chosen_room:RoomData = GlobalVariables.rooms_repository[doors_id].pick_random()
 
 		var instantiated_room:Node2D = chosen_room.factory.instantiate()
-
 		
 		if room == entrance_pos or room == exit_pos:
 			instantiated_room.should_spawn_stuff = false
+			var end_level_interaction := instantiated_room.get_node("EndLevelInteraction")
+			if end_level_interaction != null:
+				end_level_interaction.visible = true if room == exit_pos else false
+				end_level_interaction.get_node("PressKeyAndCollide").set_active(true if room == exit_pos else false)
+				end_level_interaction.get_node("StaticBody2D/CollisionShape2D").disabled = false if room == exit_pos else true
 		instantiated_room.position = relative_pos
 
 		var door := preload("res://scenes/objects/door.tscn")

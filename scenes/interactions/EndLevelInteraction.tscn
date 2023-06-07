@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://ck3ud2aox6ojh"]
+
+[ext_resource type="Texture2D" uid="uid://dwairrcc6nq45" path="res://assets/Interactions/computers/computer_14.png" id="1_g3v0o"]
+[ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="2_ndrnv"]
+[ext_resource type="Script" path="res://scripts/Interactions/EndLevelInteraction.gd" id="3_r7fmc"]
+[ext_resource type="PackedScene" uid="uid://dnrwg6uymyr1g" path="res://scenes/ui/InteractionPressKey.tscn" id="6_14c3l"]
+[ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="7_x1760"]
+[ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="8_bte31"]
+[ext_resource type="Script" path="res://scripts/Interactions/ChangeVisibility.gd" id="9_tvyrs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nne61"]
+size = Vector2(74, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_471wm"]
+size = Vector2(62, 40)
+
+[node name="EndLevelInteraction" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_nne61")
+disabled = true
+
+[node name="CharacterCollisionInteraction" type="Node2D" parent="."]
+script = ExtResource("2_ndrnv")
+for_who = 1
+is_active = true
+
+[node name="Area2D" type="Area2D" parent="CharacterCollisionInteraction"]
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterCollisionInteraction/Area2D"]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_471wm")
+
+[node name="EndLevelInteraction" type="Node2D" parent="."]
+rotation = -0.375185
+script = ExtResource("3_r7fmc")
+for_who = 1
+
+[node name="PressKeyAndCollide" type="Node2D" parent="."]
+rotation = -0.375185
+script = ExtResource("7_x1760")
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction"), NodePath("ChangeCanvasVisibility")])
+
+[node name="KeyPressedInteraction" type="Node2D" parent="PressKeyAndCollide"]
+script = ExtResource("8_bte31")
+keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="ChangeCanvasVisibility" type="Node" parent="PressKeyAndCollide"]
+script = ExtResource("9_tvyrs")
+interaction_gui_scene = ExtResource("6_14c3l")
+visibility = true
+for_who = 1
+is_active = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_g3v0o")
+
+[connection signal="body_exited" from="CharacterCollisionInteraction/Area2D" to="CharacterCollisionInteraction" method="_on_body_exited"]

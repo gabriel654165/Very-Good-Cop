@@ -61,7 +61,6 @@ func explode():
 	shader_animation.play("shockwave_shader_animation")
 	particle_animation.play("grenade_explosion_particles")
 	bodies = explosion_area.get_overlapping_bodies()
-	#print("Explosion on : ", bodies, "\n")
 	for body in bodies:
 		if body == null:
 			continue

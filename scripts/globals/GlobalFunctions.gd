@@ -23,7 +23,18 @@ func get_speed(delta: float, speed: float) -> float:
 	return speed * (delta * 60)
 
 
-func is_inside_vector_2(aim_pos: Vector2, src_pos: Vector2, offset: Vector2):
+func is_inside_range(aim_val: float, src_val: float, offset: float) -> bool:
+	var max : float = aim_val + offset
+	var min : float = aim_val - offset
+	
+	var is_inf_than_max : bool = src_val < max
+	var is_sup_than_min : bool = src_val > min
+	
+	if is_inf_than_max and is_sup_than_min:
+		return true
+	return false
+
+func is_inside_vector_2(aim_pos: Vector2, src_pos: Vector2, offset: Vector2) -> bool:
 	var upper_y : float = aim_pos.y + offset.y
 	var down_y : float = aim_pos.y - offset.y
 	var upper_x : float = aim_pos.x + offset.x
@@ -145,6 +156,46 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 		current_index += 1
 	weapon_editor.set_variables(weapon_editor.weapon)
 
+
+func reset_distance_weapon_levels():
+	for weapon in GlobalVariables.player_distance_weapon_list:
+		if weapon.name != "glock":
+			weapon.unlocked = false
+		weapon.special_power_unlocked = false
+		weapon.shooting_cooldown_lvl= 0 if weapon.shooting_cooldown_lvl != -1 else -1
+		weapon.balls_by_burt_lvl= 0 if weapon.balls_by_burt_lvl != -1 else -1
+		weapon.frequence_of_burt_lvl= 0 if weapon.frequence_of_burt_lvl != -1 else -1
+		weapon.precision_lvl= 0 if weapon.precision_lvl != -1 else -1
+		weapon.recoil_force_lvl= 0 if weapon.recoil_force_lvl != -1 else -1
+		weapon.ammo_size_lvl= 0 if weapon.ammo_size_lvl != -1 else -1
+		weapon.ammo_reloading_time_lvl= 0 if weapon.ammo_reloading_time_lvl != -1 else -1
+		weapon.projectile_speed_lvl= 0 if weapon.projectile_speed_lvl != -1 else -1
+		weapon.projectile_damages_lvl= 0 if weapon.projectile_damages_lvl != -1 else -1
+		weapon.projectile_impact_force_lvl= 0 if weapon.projectile_impact_force_lvl != -1 else -1
+		weapon.projectile_bouncing_lvl= 0 if weapon.projectile_bouncing_lvl != -1 else -1
+		weapon.points_to_use_special_power_lvl= 0 if weapon.points_to_use_special_power_lvl != -1 else -1
+		weapon.auto_lock_target_lvl= 0 if weapon.auto_lock_target_lvl != -1 else -1
+
+
+func reset_melee_weapon_levels():
+	for weapon in GlobalVariables.player_melee_weapon_list:
+		if weapon.name != "knife":
+			weapon.unlocked = false
+		weapon.special_power_unlocked = false
+		weapon.attack_cooldown_lvl= 0 if weapon.attack_cooldown_lvl != -1 else -1
+		weapon.attack_distance_lvl= 0 if weapon.attack_distance_lvl != -1 else -1
+		weapon.damages_lvl= 0 if weapon.damages_lvl != -1 else -1
+		weapon.can_throw_lvl= 0 if weapon.can_throw_lvl != -1 else -1
+		weapon.points_to_use_special_power_lvl=  0 if weapon.points_to_use_special_power_lvl != -1 else -1
+
+
+func reset_equipment_levels():
+	for equipment in GlobalVariables.player_equipment_list:
+		equipment.unlocked = false
+		equipment.health_bonus_lvl= 0 if equipment.health_bonus_lvl != -1 else -1
+		equipment.speed_bonus_lvl= 0 if equipment.speed_bonus_lvl != -1 else -1
+
+
 func save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.WRITE, GlobalVariables.encryption_key)
 	
@@ -163,7 +214,7 @@ func save():
 	
 	save_file.store_string(JSON.stringify(json_save))
 	save_file.close()
-	
+
 
 func load_save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.READ, GlobalVariables.encryption_key)

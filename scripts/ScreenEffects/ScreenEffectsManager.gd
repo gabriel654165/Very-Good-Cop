@@ -1,5 +1,5 @@
 extends CanvasLayer
-class_name ScreenEffectsManager
+class_name ScreenEffectManager
 
 @onready var shaders_manager : ShadersManager = $ShadersManager
 
