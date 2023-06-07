@@ -312,10 +312,10 @@ tracks/0/path = NodePath("SkullControl/Skull:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.6, 1.6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.6, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(0.6, 0.6)]
+"values": [Vector2(1e-05, 1e-05), Vector2(1e-05, 1e-05), Vector2(0.6, 0.6)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -324,7 +324,7 @@ tracks/1/path = NodePath("GunsControl/DoubleGun:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.6, 1, 2.2),
+"times": PackedFloat32Array(0, 1, 2.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
@@ -336,7 +336,7 @@ tracks/2/path = NodePath("GunsControl/DoubleGun2:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.6, 1.3, 2.4),
+"times": PackedFloat32Array(0, 1.3, 2.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
@@ -348,7 +348,7 @@ tracks/3/path = NodePath("GunsControl/DoubleGun3:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.6, 1.6, 2.6),
+"times": PackedFloat32Array(0, 1.6, 2.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
@@ -360,10 +360,10 @@ tracks/4/path = NodePath("CenterContainer/VBoxContainer/GameOverLabel:text")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.6, 3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": ["", "GAME OVER"]
+"values": ["", "", "GAME OVER"]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -384,10 +384,10 @@ tracks/6/path = NodePath("ButtonsContainer/QuitButton:material:shader_parameter/
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(3, 3.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 3, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0.00392157)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0.00392157)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -396,10 +396,10 @@ tracks/7/path = NodePath("ButtonsContainer/ResartButton:material:shader_paramete
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(3, 3.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 3, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0.00392157)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0.00392157)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
