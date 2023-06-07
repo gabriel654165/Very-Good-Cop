@@ -177,7 +177,6 @@ particle_animation = NodePath("ExplosionControl/SubViewportContainer/PixelizedSu
 shader_animation = NodePath("ShockWaveControl/AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 texture = SubResource("PlaceholderTexture2D_r55sq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
