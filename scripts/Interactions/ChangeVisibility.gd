@@ -1,7 +1,6 @@
 extends Interaction
 class_name ChangeCanvasVisibility
 
-#@export var canvas : CanvasItem
 @export var interaction_gui_scene : PackedScene
 @export var visibility : bool
 

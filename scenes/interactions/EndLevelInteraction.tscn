@@ -40,12 +40,10 @@ rotation = -0.375185
 script = ExtResource("3_r7fmc")
 for_who = 1
 
-[node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
+[node name="PressKeyAndCollide" type="Node2D" parent="."]
 rotation = -0.375185
 script = ExtResource("7_x1760")
 interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction"), NodePath("ChangeCanvasVisibility")])
-collision_interaction = NodePath("../CharacterCollisionInteraction")
-next_interaction = NodePath("../EndLevelInteraction")
 
 [node name="KeyPressedInteraction" type="Node2D" parent="PressKeyAndCollide"]
 script = ExtResource("8_bte31")
