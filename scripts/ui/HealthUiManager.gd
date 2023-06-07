@@ -81,6 +81,7 @@ func handle_character_health_changed(health: Health, value: float):
 	for health_obj in health_obj_list:
 		if health_obj == health:
 			health_ui_list[index].update_health_value(value)
+			break
 		index += 1
 
 func handle_character_max_health_changed(health: Health, value: float):
@@ -88,5 +89,6 @@ func handle_character_max_health_changed(health: Health, value: float):
 	for health_obj in health_obj_list:
 		if health_obj == health:
 			health_ui_list[index].update_max_health_value(value)
+			break
 		index += 1
 

@@ -204,7 +204,7 @@ func spawn_dungeon_rooms():
 			spawn_child_object(instantiated_room, door, LeftDoorPosition, Vector2.DOWN.angle())
 		if door_bitflag_has_door(doors_id, BottomDoor):
 			spawn_child_object(instantiated_room, door, BottomDoorPosition)
-		
+
 		add_child(instantiated_room)
 
 
@@ -214,6 +214,7 @@ func spawn_child_object(parent:Node2D, packed_object:PackedScene, local_position
 	obj.position = local_position
 	if rotation != null and obj.has_method("rotate"):
 		obj.rotate(rotation)
+
 
 #
 # Find farthest cell from another cell

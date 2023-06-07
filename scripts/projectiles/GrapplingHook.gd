@@ -7,6 +7,13 @@ class_name GrapplingHook
 
 @export var max_distance := 350
 
+func _move_and_collide(delta: float):
+	if direction != Vector2.ZERO:
+		velocity = direction * GlobalFunctions.get_speed(speed * 75, delta)
+		var collision = move_and_collide(velocity * delta)
+		handle_collision(collision)
+
+
 func _specific_process(delta):
 	if projectile_owner != null:
 		line_cable.set_point_position(0, to_local(global_position))

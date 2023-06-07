@@ -235,8 +235,6 @@ grow_vertical = 2
 [node name="ExplosionParticles" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport" instance=ExtResource("3_hqxlf")]
 visibility_layer = 2
 position = Vector2(150, 150)
-amount = 25
-speed_scale = 0.75
 scale_amount_min = 4.0
 scale_amount_max = 16.0
 

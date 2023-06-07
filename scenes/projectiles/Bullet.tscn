@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpjhdsrfevptf"]
+[gd_scene load_steps=10 format=3 uid="uid://cactlkcpude5w"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/Bullet.gd" id="1_h2y4q"]
-[ext_resource type="PackedScene" uid="uid://xdkaf1s14ef6" path="res://scenes/particles/BulletImpactFragments.tscn" id="2_o5550"]
+[ext_resource type="PackedScene" path="res://scenes/particles/BulletImpactFragments.tscn" id="2_o5550"]
 [ext_resource type="Texture2D" uid="uid://cntb7fb243sp0" path="res://assets/Spritesheet/sheet_tanks.png" id="3_k8ssp"]
-[ext_resource type="PackedScene" uid="uid://dx37tptpyigj7" path="res://scenes/effects/ShootingTrail.tscn" id="4_g53l3"]
+[ext_resource type="PackedScene" path="res://scenes/effects/ShootingTrail.tscn" id="4_g53l3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxpfh"]
 size = Vector2(12, 24)
@@ -20,7 +20,8 @@ offsets = PackedFloat32Array(0, 0.511568, 0.681234, 0.876607)
 colors = PackedColorArray(1, 1, 1, 1, 0.818595, 0.818595, 0.818595, 1, 0.660775, 0.660775, 0.660775, 1, 0.479043, 0.479043, 0.479043, 1)
 
 [sub_resource type="Gradient" id="Gradient_jf3ll"]
-offsets = PackedFloat32Array(0, 0.910026, 0.956298, 1)
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.954545, 0.978788, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 0.686138, 0.641023, 1, 1, 0.537255, 0.945098, 1, 1, 0.278431, 1)
 
 [node name="Bullet" type="CharacterBody2D"]
@@ -30,13 +31,14 @@ scale = Vector2(0.359327, 0.360007)
 collision_layer = 2
 script = ExtResource("1_h2y4q")
 speed = 10
-damages = 5
+damages = 2
 bullet_impact_fragments_scene = ExtResource("2_o5550")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_oxpfh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("3_k8ssp")
 region_enabled = true
 region_rect = Rect2(188, 345, 12, 25)
@@ -81,7 +83,8 @@ spread = 20.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 350.0
 initial_velocity_max = 350.0
-scale_amount_max = 3.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_2tekx")
 
 [node name="RedParticles" type="Node2D" parent="."]
@@ -158,8 +161,8 @@ scale_amount_max = 3.0
 [node name="ShootingTrail" parent="." node_paths=PackedStringArray("bullet_instance") instance=ExtResource("4_g53l3")]
 z_index = -1
 width = 10.0
+default_color = Color(0.941176, 1, 0.647059, 1)
 gradient = SubResource("Gradient_jf3ll")
-trail_length = 20
 bullet_instance = NodePath("..")
 
 [connection signal="timeout" from="LifeCycleTimer" to="." method="_on_life_cycle_timer_timeout"]

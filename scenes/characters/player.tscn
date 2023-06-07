@@ -1,14 +1,14 @@
 [gd_scene load_steps=35 format=3 uid="uid://xxld75mg1fqf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
+[ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="2_d13uj"]
+[ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="3_orjl3"]
 [ext_resource type="Texture2D" uid="uid://6aw20cp5oifq" path="res://assets/character/Police-Remade-HM-2.png" id="4_fhji1"]
-[ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="4_vhd6q"]
+[ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="4_j66v4"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
-[ext_resource type="PackedScene" uid="uid://bcs1erw2idhma" path="res://scenes/effects/corpse.tscn" id="5_cpj8x"]
-[ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="5_wxswb"]
+[ext_resource type="PackedScene" uid="uid://bcs1erw2idhma" path="res://scenes/effects/corpse.tscn" id="5_jws7k"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
 [ext_resource type="PackedScene" uid="uid://cxsu4atm07u3i" path="res://scenes/weapons/Knife.tscn" id="8_nt46u"]
-[ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="10_5l0q5"]
 [ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_18ulw"]
 [ext_resource type="Texture2D" uid="uid://v171tsxmatal" path="res://assets/PNG/circle.png" id="14_bgmhi"]
 
@@ -851,13 +851,14 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["character", "player"]]
-z_index = 2
+z_index = 3
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
-grappling_hook_scene = ExtResource("5_wxswb")
-projectile_weapon_scene = ExtResource("10_5l0q5")
-blood_effect_scene = ExtResource("4_vhd6q")
-corpse_scene = ExtResource("5_cpj8x")
+speed = 3.5
+grappling_hook_scene = ExtResource("2_d13uj")
+projectile_weapon_scene = ExtResource("3_orjl3")
+blood_effect_scene = ExtResource("4_j66v4")
+corpse_scene = ExtResource("5_jws7k")
 
 [node name="LegsSprite2D" type="Sprite2D" parent="."]
 z_index = 1
