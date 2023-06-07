@@ -465,7 +465,6 @@ velocity_scale = Vector2(1.5, 1.5)
 
 [node name="PopUpInteractionManager" type="Node2D" parent="."]
 script = ExtResource("10_1jj2h")
-pop_up_text_scene = ExtResource("7_bnyiq")
 
 [node name="PanelPointsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
 script = ExtResource("9_dkbyk")
