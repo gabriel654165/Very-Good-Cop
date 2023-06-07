@@ -195,7 +195,7 @@ _data = {
 }
 
 [node name="Grenade" type="CharacterBody2D" node_paths=PackedStringArray("shader_animation", "particle_animation", "animation_player")]
-z_index = 40
+z_index = 2
 collision_layer = 0
 script = ExtResource("1_b6dp5")
 shader_animation = NodePath("ShockWaveControl/AnimationPlayer")

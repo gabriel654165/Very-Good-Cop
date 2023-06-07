@@ -851,7 +851,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["character", "player"]]
-z_index = 2
+z_index = 3
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
 speed = 3.5
