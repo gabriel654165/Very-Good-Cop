@@ -854,7 +854,6 @@ _data = {
 z_index = 2
 position = Vector2(233, 190)
 script = ExtResource("1_vctbk")
-speed = 3.5
 grappling_hook_scene = ExtResource("5_wxswb")
 projectile_weapon_scene = ExtResource("10_5l0q5")
 blood_effect_scene = ExtResource("4_vhd6q")
