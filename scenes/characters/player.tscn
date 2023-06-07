@@ -872,7 +872,7 @@ position = Vector2(-2, 0)
 texture = ExtResource("4_fhji1")
 offset = Vector2(10, 0)
 region_enabled = true
-region_rect = Rect2(500, 554, 13, 24)
+region_rect = Rect2(1001, 6, 34, 13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 0)
@@ -884,7 +884,7 @@ shape = SubResource("RectangleShape2D_dfd5l")
 script = ExtResource("8_jhep5")
 
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
-position = Vector2(12, 0)
+position = Vector2(19, 1)
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(31, 1)
