@@ -36,13 +36,15 @@ var patrol_points: Array = []
 
 
 func _ready():
-	GlobalSignals.weapon_shoot.connect(self.handle_character_shoot)
+	GlobalSignals.weapon_shoot.connect(self.handle_shoot)
+	GlobalSignals.weapon_stab.connect(self.handle_stab)
+	GlobalSignals.throwed_distance_weapon.connect(self.handle_throwed_distance_weapon)
 	if weapon_manager == null:
 		return
 	weapon_manager.weapon.projectile_damages = weapon_manager.projectile_damages + GlobalVariables.level * 1.75 
 	fsm.init(self, weapon_manager.weapon, speed * 10)
-	set_weapon_position(self)
-	set_body_animation(self)
+	set_weapon_position()
+	set_body_animation()
 
 
 func _physics_process(delta):

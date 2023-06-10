@@ -15,11 +15,11 @@ class_name Character
 @export var speed : float = 6
 var force : Vector2 = Vector2.ZERO
 
-
 @export var grappling_hook_scene : PackedScene
 @export var projectile_weapon_scene : PackedScene
 
-var weapon_throwed : bool = false
+var distance_weapon_throwed : bool = false
+var melee_weapon_throwed : bool = false
 var hook_deployed : bool = false
 
 @export var blood_effect_scene : PackedScene
@@ -28,33 +28,39 @@ var hook_deployed : bool = false
 var is_dead : bool = false
 
 
-func stab():
-	if knife != null:
-		knife.stab()
-
-
 func throw_grappling():
 	hook_deployed = true
 	throwProjectile(grappling_hook_scene, throw_object_position.global_position)
 
 
-func throw_weapon():
+func throw_melee_weapon():
+	if knife != null:
+		throwProjectile(projectile_weapon_scene, throw_object_position.global_position, ProjectileTypes.Type.MELEE_WEAPON, knife.side_sprite)
+		knife.enable = false
+		melee_weapon_throwed = true
+
+func throw_distance_weapon():
 	if weapon_manager.weapon != null:
-		throwProjectile(projectile_weapon_scene, throw_object_position.global_position, weapon_manager.weapon.side_sprite)
+		throwProjectile(projectile_weapon_scene, throw_object_position.global_position, ProjectileTypes.Type.DISTANCE_WEAPON, weapon_manager.weapon.side_sprite)
 		weapon_manager.enable = false
 		weapon_manager.weapon.enable = false
-		weapon_throwed = true
+		distance_weapon_throwed = true
 
-func recover_weapon():
-	weapon_throwed = false
-	weapon_manager.enable = true
-	weapon_manager.weapon.enable = true
-	set_body_animation(self)
+func recover_weapon(weapon_type: ProjectileTypes.Type):
+	if weapon_type == ProjectileTypes.Type.DISTANCE_WEAPON:
+		distance_weapon_throwed = false
+		weapon_manager.enable = true
+		weapon_manager.weapon.enable = true
+	elif weapon_type == ProjectileTypes.Type.MELEE_WEAPON:
+		melee_weapon_throwed = false
+		knife.enable = true
+	set_body_animation()
 
 
-func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2, sprite: Sprite2D = null):
-	var projectile_instance = projectile_weapon.instantiate()
+func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2, type: ProjectileTypes.Type = ProjectileTypes.Type.PROJECTILE_WEAPON, sprite: Sprite2D = null):
+	var projectile_instance := projectile_weapon.instantiate()
 	var direction = throw_position - global_position
+	projectile_instance.set_projectile_type(type)
 	if projectile_instance.has_method("set_sprite") && sprite != null:
 		projectile_instance.set_sprite(sprite)
 	GlobalSignals.projectile_fired_spawn.emit(self, projectile_instance, throw_position, direction)
@@ -71,53 +77,65 @@ func apply_force(character: Character, direction: Vector2, force: float):
 	character.force = direction * force
 
 
-func handle_character_shoot(projectile_owner: Node2D):
-	var animation_name : String = ""
-	if projectile_owner is Player:
-		animation_name = GlobalVariables.get_distance_weapon_animation_by_index(GlobalVariables.index_distance_weapon_selected)
-		animation_name += "_player_shoot"
-	elif projectile_owner is Enemy:
-		animation_name = GlobalVariables.get_distance_weapon_animation_by_name(projectile_owner.weapon_manager.weapon_name)
-		animation_name += "_enemy_shoot"
-	projectile_owner.body_animation.play(animation_name)
-
-
-func play_animation(name: String, player: AnimationPlayer):
+func play_animation(name: String, animation_player: AnimationPlayer, suffix: String = ""):
 	if self is Player:
-		player.play(name + "_player")
+		animation_player.play(name + "_player" + suffix)
 	if self is Enemy:
-		player.play(name + "_enemy")
+		animation_player.play(name + "_enemy" + suffix)
+
+
+func handle_stab(actor: Node):
+	if knife != null:
+		var animation_name : String = ""
+		if actor is Player and self is Player:
+			animation_name = GlobalFunctions.get_melee_weapon_animation_by_index(GlobalVariables.index_melee_weapon_selected)
+			play_animation(animation_name, actor.body_animation)
+		elif actor is Enemy and self is Enemy:
+			animation_name = GlobalFunctions.get_melee_weapon_animation_by_name(actor.knife.weapon_name)
+			play_animation(animation_name, actor.body_animation)
+
+func handle_shoot(actor: Node):
+	var animation_name : String = ""
+	if actor is Player and self is Player:
+		animation_name = GlobalFunctions.get_distance_weapon_animation_by_index(GlobalVariables.index_distance_weapon_selected)
+		play_animation(animation_name, actor.body_animation, "_shoot")
+	elif actor is Enemy and self is Enemy:
+		animation_name = GlobalFunctions.get_distance_weapon_animation_by_name(actor.weapon_manager.weapon_name)
+		play_animation(animation_name, actor.body_animation, "_shoot")
+
+func handle_throwed_distance_weapon(actor: Node):
+	if actor is Player and self is Player:
+		play_animation("idle_animation", actor.body_animation)
+	if actor is Enemy and self is Enemy:
+		play_animation("idle_animation", actor.body_animation)
+
 
 func manage_animation(move_direction: Vector2):
 	if move_direction == Vector2.ZERO or velocity == Vector2.ZERO:
 		legs_animation.stop()
-		if weapon_throwed or weapon_manager == null:
-			play_animation("idle_animation", body_animation)
 	else:
 		play_animation("running_animation", legs_animation)
-		if weapon_throwed or weapon_manager == null:
-			play_animation("running_animation", body_animation)
 	legs_sprite.global_rotation = move_direction.angle()
 
-
-func set_weapon_position(character: Character):
-	var weapon_pos : Vector2 = Vector2.ZERO
-	if character is Player:
-		weapon_pos = GlobalVariables.get_distance_weapon_position_by_index(GlobalVariables.index_distance_weapon_selected)
-	elif character is Enemy:
-		weapon_pos = GlobalVariables.get_distance_weapon_position_by_name(character.weapon_manager.weapon_name)
-	character.weapon_position.position = weapon_pos
-
-
-func set_body_animation(character: Character):
+func set_body_animation():
+	if distance_weapon_throwed:
+		play_animation("idle_animation", self.body_animation)
+		return
 	var animation_name : String = ""
-	if character is Player:
-		animation_name = GlobalVariables.get_distance_weapon_animation_by_index(GlobalVariables.index_distance_weapon_selected)
-		animation_name += "_player"
-	elif character is Enemy:
-		animation_name = GlobalVariables.get_distance_weapon_animation_by_name(character.weapon_manager.weapon_name)
-		animation_name += "_enemy"
-	character.body_animation.play(animation_name)
+	if self is Player:
+		animation_name = GlobalFunctions.get_distance_weapon_animation_by_index(GlobalVariables.index_distance_weapon_selected)
+	elif self is Enemy:
+		animation_name = GlobalFunctions.get_distance_weapon_animation_by_name(self.weapon_manager.weapon_name)
+	play_animation(animation_name, self.body_animation)
+
+
+func set_weapon_position():
+	var weapon_pos : Vector2 = Vector2.ZERO
+	if self is Player:
+		weapon_pos = GlobalVariables.get_distance_weapon_position_by_index(GlobalVariables.index_distance_weapon_selected)
+	elif self is Enemy:
+		weapon_pos = GlobalVariables.get_distance_weapon_position_by_name(self.weapon_manager.weapon_name)
+	self.weapon_position.position = weapon_pos
 
 
 func instanciate_corpse(position: Vector2, parent: Node, damager: Node2D) -> Node:

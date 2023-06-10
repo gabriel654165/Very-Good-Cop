@@ -37,13 +37,15 @@ size = Vector2(34, 10)
 [sub_resource type="CircleShape2D" id="CircleShape2D_fd32i"]
 radius = 28.2312
 
-[node name="ThrowedWeapon" type="CharacterBody2D" node_paths=PackedStringArray("animation_player")]
+[node name="ThrowedWeapon" type="CharacterBody2D" node_paths=PackedStringArray("recover_weapon_interaction", "animation_player")]
 rotation = -1.5708
 collision_layer = 2
 script = ExtResource("1_nv3td")
+recover_weapon_interaction = NodePath("GrabWeapon/AddWeaponInteraction")
 speed = 7
 damages = 5
 impact_force = 0.0
+should_bounce = true
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

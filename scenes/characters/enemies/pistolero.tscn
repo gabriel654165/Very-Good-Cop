@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bsg7wbhktsf6b"]
+[gd_scene load_steps=32 format=3 uid="uid://bsg7wbhktsf6b"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="2_5lu21"]
@@ -200,6 +200,60 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_y4x8w"]
+resource_name = "knife_animation_enemy"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(292, 507, 21, 24), Rect2(341, 251, 25, 28), Rect2(342, 297, 17, 40), Rect2(342, 343, 14, 40), Rect2(339, 389, 17, 36), Rect2(342, 435, 20, 27), Rect2(292, 507, 21, 24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(4, 1), Vector2(5, 2), Vector2(2, 8), Vector2(0, 8), Vector2(0, 6.5), Vector2(3, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_body_animation"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_54s40"]
@@ -544,6 +598,7 @@ _data = {
 "glock_animation_enemy": SubResource("Animation_0kg7s"),
 "glock_animation_enemy_shoot": SubResource("Animation_icck1"),
 "idle_animation_enemy": SubResource("Animation_lqfbc"),
+"knife_animation_enemy": SubResource("Animation_y4x8w"),
 "mini_uzi_animation_enemy": SubResource("Animation_54s40"),
 "mini_uzi_animation_enemy_shoot": SubResource("Animation_kmgde"),
 "riffle_animation_enemy": SubResource("Animation_0ardv"),
@@ -566,14 +621,17 @@ corpse_scene = ExtResource("3_j3lui")
 [node name="LegsSprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture = ExtResource("2_kdey6")
+flip_h = true
 region_enabled = true
-region_rect = Rect2(670, 572, 12, 14)
+region_rect = Rect2(666, 737, 19, 15)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("2_kdey6")
+flip_v = true
 region_enabled = true
-region_rect = Rect2(616, 835, 39, 17)
+region_rect = Rect2(439, 424, 13, 24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dfd5l")
@@ -618,6 +676,7 @@ script = ExtResource("10_mwn3l")
 position = Vector2(4, 0)
 
 [node name="Knife" parent="." instance=ExtResource("15_4ikyy")]
+weapon_name = "knife"
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2(16, 0)

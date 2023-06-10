@@ -138,7 +138,7 @@ func _random_range(angle: Vector2) -> float:
 
 func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vector2):
 	
-	GlobalSignals.weapon_shoot.emit(actor)
+	GlobalSignals.weapon_shoot.emit(shooter_actor)
 	
 	if actor is Player:
 		GlobalSignals.player_fired.emit()
