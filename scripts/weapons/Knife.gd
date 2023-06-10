@@ -54,7 +54,6 @@ func update_properties():
 func _on_body_entered(new_body):
 	if self.get_parent() == new_body:
 		return
-	#print("new_body = ", new_body)
 	if new_body is Character:
 		close_fight_bodies.append(new_body)
 

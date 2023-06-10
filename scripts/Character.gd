@@ -113,14 +113,8 @@ func handle_throwed_distance_weapon(actor: Node):
 func manage_animation(move_direction: Vector2):
 	if move_direction == Vector2.ZERO or velocity == Vector2.ZERO:
 		legs_animation.stop()
-		# Signal when throwed weapon
-		#if (distance_weapon_throwed or weapon_manager == null):
-		#	play_animation("idle_animation", body_animation)
 	else:
 		play_animation("running_animation", legs_animation)
-		# Signal when throwed weapon
-		#if distance_weapon_throwed or weapon_manager == null:
-		#	play_animation("running_animation", body_animation)
 	legs_sprite.global_rotation = move_direction.angle()
 
 func set_body_animation():
