@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxsu4atm07u3i"]
+[gd_scene load_steps=4 format=3 uid="uid://cxsu4atm07u3i"]
 
 [ext_resource type="Script" path="res://scripts/weapons/Knife.gd" id="1_8jdbo"]
+[ext_resource type="Texture2D" uid="uid://vgo68yb1w5p4" path="res://assets/weapons/sprites/weapons/police_baton.png" id="2_6rqcl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hsgyb"]
-radius = 60.0083
+radius = 29.0689
 
 [node name="Knife" type="Area2D"]
 script = ExtResource("1_8jdbo")
@@ -11,5 +12,14 @@ script = ExtResource("1_8jdbo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hsgyb")
 
-[connection signal="body_entered" from="." to="." method="_on_close_fight_area_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_close_fight_area_body_exited"]
+[node name="SideSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_6rqcl")
+region_rect = Rect2(130, 310, 14, 8)
+
+[node name="AttackCoolDown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

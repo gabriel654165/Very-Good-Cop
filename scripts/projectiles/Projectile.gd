@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Projectile
 
+@export var projectile_type : ProjectileTypes.Type = ProjectileTypes.Type.PROJECTILE_WEAPON
 @export var speed : int = 4
 @export var damages : int = 20
 @export var size : float = 1
@@ -23,7 +24,7 @@ var current_piercing_force : int = 0
 
 func _init():
 	scale = scale * size
-	
+
 
 func _physics_process(delta):
 	_move_and_collide(delta)
@@ -52,18 +53,26 @@ func handle_collision(collision: KinematicCollision2D):
 func destroy_instance():
 	queue_free()
 
+
 func set_sprite(sprite: Sprite2D):
 	if self.sprite == null:
 		self.sprite = get_node("Sprite2D")
 	self.sprite.texture = sprite.texture
 	self.sprite.apply_scale(sprite.transform.get_scale())
 
+
 func set_direction(direction: Vector2):
 	self.direction = direction
 	rotation += direction.angle()
 
+
 func set_projectile_owner(projectile_owner: Node2D):
 	self.projectile_owner = projectile_owner
+
+
+func set_projectile_type(weapon_type: ProjectileTypes.Type):
+	projectile_type = weapon_type
+
 
 func stop():
 	speed = 0

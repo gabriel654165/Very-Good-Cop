@@ -94,6 +94,39 @@ func print_func_time(fn:Callable, message:=fn.get_method()):
 	prints(message, "in", Time.get_unix_time_from_system() - t, "seconds")
 
 
+func get_melee_weapon_animation_by_index(weapon_index: int) -> String:
+	return get_weapon_animation_by_index(GlobalVariables.all_melee_weapon_list, weapon_index)
+
+func get_melee_weapon_animation_by_name(weapon_name: String) -> String:
+	return get_weapon_animation_by_name(GlobalVariables.all_melee_weapon_list, weapon_name)
+
+func get_distance_weapon_animation_by_index(weapon_index: int) -> String:
+	return get_weapon_animation_by_index(GlobalVariables.all_distance_weapon_list, weapon_index)
+
+func get_distance_weapon_animation_by_name(weapon_name: String) -> String:
+	return get_weapon_animation_by_name(GlobalVariables.all_distance_weapon_list, weapon_name)
+
+func get_weapon_animation_by_index(weapon_list: Array, weapon_index: int) -> String:
+	var animation_name : String = ""
+	var dic_index : int = 0
+	
+	for weapon_dictionnary in weapon_list:
+		if dic_index == weapon_index:
+			animation_name = weapon_dictionnary.animation
+			break
+		dic_index += 1
+	return animation_name
+
+func get_weapon_animation_by_name(weapon_list: Array, weapon_name: String) -> String:
+	var animation_name : String = ""
+	
+	for weapon_dictionnary in weapon_list:
+		if weapon_name == weapon_dictionnary.name:
+			animation_name = weapon_dictionnary.animation
+			break
+	return animation_name
+
+
 func linear_ratio(min_val, max_val, total_lvl, current_lvl, error_value_case):
 	if current_lvl == 0:
 		return min_val
@@ -122,6 +155,7 @@ func get_property_by_level(weapon_stats, weapon_property_level, propriety_name, 
 				return boolean_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_property_level, weapon_default_value)
 			return linear_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_property_level, weapon_default_value)
 	return weapon_default_value
+
 
 func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
 	var current_index : int = 0
@@ -155,6 +189,21 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 			break
 		current_index += 1
 	weapon_editor.set_variables(weapon_editor.weapon)
+
+func set_melee_weapon_properties(melee_weapon: Knife, weapon_index: int):
+	var current_index : int = 0
+	
+	for weapon_properties_levels in GlobalVariables.player_melee_weapon_list:
+		if current_index == weapon_index:
+			melee_weapon.weapon_name = weapon_properties_levels.name
+			melee_weapon.attack_cooldown = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.attack_cooldown_lvl, "attack_cooldown", melee_weapon.attack_cooldown)
+			melee_weapon.attack_distance = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.attack_distance_lvl, "attack_distance", melee_weapon.attack_distance)
+			melee_weapon.damages = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.damages_lvl, "damages", melee_weapon.damages)
+			melee_weapon.can_throw = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.can_throw_lvl, "can_throw", melee_weapon.can_throw)
+			melee_weapon.points_to_use_special_power = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.points_to_use_special_power_lvl, "points_to_use_special_power", melee_weapon.points_to_use_special_power)
+			break
+		current_index += 1
+	melee_weapon.update_properties()
 
 
 func reset_distance_weapon_levels():

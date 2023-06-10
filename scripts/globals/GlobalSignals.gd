@@ -6,7 +6,10 @@ signal player_fired()
 signal player_reloading(ammo_reloading_time: float)
 signal player_use_special_power()
 
-signal weapon_shoot(projectile_owner: Node2D)
+signal weapon_stab(actor: Node)
+signal weapon_shoot(actor: Node)
+signal throwed_distance_weapon(actor: Node)
+
 signal projectile_fired_spawn(projectile_owner: Node2D, projectile: Projectile, position: Vector2, direction: Vector2)
 signal projectile_launched_spawn(projectile_owner: Node2D, grenade: Grenade, position: Vector2, direction: Vector2, landing_position: Vector2)
 signal grappling_cable_drag(projectile_owner: Node2D, hook: GrapplingHook, projectile_position: Vector2, drag_speed: int)
