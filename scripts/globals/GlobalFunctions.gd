@@ -229,7 +229,7 @@ func reset_distance_weapon_levels():
 
 func reset_melee_weapon_levels():
 	for weapon in GlobalVariables.player_melee_weapon_list:
-		if weapon.name != "knife":
+		if weapon.name != "police_baton":
 			weapon.unlocked = false
 		weapon.special_power_unlocked = false
 		weapon.attack_cooldown_lvl= 0 if weapon.attack_cooldown_lvl != -1 else -1
