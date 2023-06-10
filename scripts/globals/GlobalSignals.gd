@@ -21,6 +21,7 @@ signal character_health_changed(health: Health, value: float)
 signal character_max_health_changed(health: Health, value: float)
 
 signal enemy_died(enemy: Node2D, points: int)
+signal power_up_taken(power_up: PassiveEffect)
 
 signal interaction_computed(interaction_obj: Node, active: bool, interaction_gui_scene: PackedScene)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://76fiuu4xbqy4"]
+[gd_scene load_steps=53 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/ui/PopUpInteractionManager.gd" id="10_1jj2h"]
 [ext_resource type="Script" path="res://scripts/ui/PanelKillsManager.gd" id="11_f3jk1"]
 [ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
+[ext_resource type="Script" path="res://scripts/ui/PanelPowerUpsManager.gd" id="13_8keg5"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponShopManager.gd" id="16_1slr4"]
@@ -33,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://cq5wv7kjj7me4" path="res://scenes/ui/ChooseWeaponItemPanel.tscn" id="23_8p1eu"]
 [ext_resource type="PackedScene" uid="uid://rrwoshph15c5" path="res://scenes/ui/ItemStatsPanel.tscn" id="24_hkhpj"]
 [ext_resource type="Script" path="res://scripts/ui/GameOverManager.gd" id="29_tthju"]
+[ext_resource type="Script" path="res://scripts/ui/RecapLevelManager.gd" id="30_23poo"]
 [ext_resource type="Texture2D" uid="uid://chafbrkhdkskw" path="res://assets/weapons/sprites/weapons/Colt.png" id="33_p816j"]
 [ext_resource type="Texture2D" uid="uid://t0fsw6bmbs45" path="res://assets/UI/Minimap/PoliceCap.png" id="35_rfcsd"]
 [ext_resource type="Texture2D" uid="uid://c6bu82lhw3wa1" path="res://assets/UI/icons/skull_icon.png" id="35_u8ntm"]
@@ -67,7 +69,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(300, 300), Vector2(1920, 900)]
+"values": [Vector2(300, 300), Vector2(1920, 830)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -472,6 +474,12 @@ panel_gui = ExtResource("10_0fs0q")
 title_panel = "Points"
 panels_container = NodePath("../GuiControl/HBoxUpperContainer")
 
+[node name="PanelPowerUpsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
+script = ExtResource("13_8keg5")
+panel_gui = ExtResource("10_0fs0q")
+title_panel = "Packages"
+panels_container = NodePath("../GuiControl/HBoxUpperContainer")
+
 [node name="PanelKillsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
 script = ExtResource("11_f3jk1")
 panel_gui = ExtResource("10_0fs0q")
@@ -542,6 +550,26 @@ color_rect = NodePath("../GuiControl/ChooseWeaponControl/ColorRect")
 distance_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/DistanceWeaponGridContainer")
 melee_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/MeleeWeaponGridContainer")
 choose_weapon_item_panel_scene = ExtResource("23_8p1eu")
+
+[node name="RecapLevelManager" type="Node2D" parent="." node_paths=PackedStringArray("recap_level_gui", "color_rect", "level_value_label", "label_time_spent", "label_prompt_time_spent", "label_rooms_cleared", "label_prompt_rooms_cleared", "label_kills_done", "label_prompt_kills_done", "label_combos_done", "label_prompt_combos_done", "label_power_up_taken", "label_prompt_power_up_taken", "label_money_to_earn", "skip_button", "continue_button")]
+script = ExtResource("30_23poo")
+aim_blur_intensity = 3.0
+recap_level_gui = NodePath("../GuiControl/RecapPointsControl")
+color_rect = NodePath("../GuiControl/RecapPointsControl/ColorRect")
+level_value_label = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/LevelContainer/LevelValueLabel")
+label_time_spent = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer/TimeValueLabel")
+label_prompt_time_spent = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer/PromptTimeLabel")
+label_rooms_cleared = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer/RoomsValueLabel")
+label_prompt_rooms_cleared = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer/PromptRoomsLabel")
+label_kills_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer/KillsValueLabel")
+label_prompt_kills_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer/PromptKillsLabel")
+label_combos_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer/CombosValueLabel")
+label_prompt_combos_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer/PromptCombosLabel")
+label_power_up_taken = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer/GangPackagesValueLabel")
+label_prompt_power_up_taken = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer/PromptGangPackagesLabel")
+label_money_to_earn = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer/MoneyValueLabel")
+skip_button = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer/SkipButton")
+continue_button = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer/ContinueButton")
 
 [node name="GameOverManager" type="Node2D" parent="." node_paths=PackedStringArray("game_over_gui", "animation_player", "buttons_container")]
 script = ExtResource("29_tthju")
@@ -1672,6 +1700,385 @@ text = "Start mission"
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
+[node name="RecapPointsControl" type="Control" parent="GuiControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_eyt6o")
+
+[node name="ColorRect" type="ColorRect" parent="GuiControl/RecapPointsControl"]
+material = SubResource("ShaderMaterial_hi0er")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MiddleMargin8" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="LevelContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/LevelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "LEVEL"
+
+[node name="MarginMiddle" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/LevelContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="LevelValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/LevelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="MiddleMargin7" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="TimeContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptTimeLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="TimeTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " TIME"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="TimeValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="TimeValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " SECONDS"
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="RoomsContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptRoomsLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="RoomsTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " ROOMS CLEARED"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="RoomsValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="RoomsValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " ROOMS"
+
+[node name="MiddleMargin2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="KillsContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptKillsLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="KillsTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " KILLS"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="KillsValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="KillsValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " GANGSTER(S)"
+
+[node name="MiddleMargin3" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="CombosContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="PromptCombosLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="CombosTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " COMBOS MULTIPLICATOR"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="CombosValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="CombosValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " COMBOS"
+
+[node name="MiddleMargin4" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="GangPackagesContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptGangPackagesLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="GangPackagesTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " GANG PACKAGES TAKEN"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="GangPackagesValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="GangPackagesDescriptionValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " PACKAGE(S)"
+
+[node name="BigMiddleMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="TotalMoneyContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MoneyTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "TOTAL MONEY"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 75
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="MoneyValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "$ "
+
+[node name="MoneyValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="MiddleMargin5" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+
+[node name="SkipButton" type="Button" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "skip"
+
+[node name="LeftMargin2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "continue"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+
+[node name="MiddleMargin6" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="RightMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
 [node name="GameOverControl" type="Control" parent="GuiControl"]
 visible = false
 layout_mode = 1
@@ -1955,5 +2362,7 @@ libraries = {
 [connection signal="pressed" from="GuiControl/WeaponShopControl/ButtonsContainer/Buttons-Container/ContinueButton" to="WeaponShopManager" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="GuiControl/ChooseWeaponControl/BaseContainer/Button-Container/QuitButton" to="ChooseWeaponManager" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="GuiControl/ChooseWeaponControl/BaseContainer/Button-Container/StartButton" to="ChooseWeaponManager" method="_on_start_button_pressed"]
+[connection signal="pressed" from="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer/SkipButton" to="RecapLevelManager" method="_on_skip_button_pressed"]
+[connection signal="pressed" from="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer/ContinueButton" to="RecapLevelManager" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="GuiControl/GameOverControl/ButtonsContainer/QuitButton" to="GameOverManager" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="GuiControl/GameOverControl/ButtonsContainer/ResartButton" to="GameOverManager" method="_on_resart_button_pressed"]

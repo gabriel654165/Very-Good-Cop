@@ -100,6 +100,7 @@ func start_resume_animation() -> bool:
 	return true
 
 func _unhandled_input(event):
+	return
 	if event.is_action_pressed("echap"):
 		if disable_pause:
 			return

@@ -8,5 +8,5 @@ func trigger(actor: Node):
 	if gui_manager == null:
 		return
 	
-	gui_manager.weapon_shop_manager.set_active(true)
+	gui_manager.recap_level_manager.set_active(true)
 	set_active(false)

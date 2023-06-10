@@ -35,6 +35,8 @@ func trigger(actor: Node):
 
 
 func add_passive_effect(character: Character):
+	GlobalSignals.power_up_taken.emit(self)
+	
 	if type == TYPE.HEAL:
 		character.health.heal(value_effect)
 		GlobalSignals.active_heal_power_up.emit(true)
