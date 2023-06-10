@@ -165,6 +165,7 @@ func get_distance_weapon_position_by_name(weapon_name: String) -> Vector2:
 			break
 	return weapon_position
 
+
 func level_stat(min_value, max_value, number_of_levels: int):
 	return {
 	min_value= min_value,
@@ -551,7 +552,7 @@ var player_melee_weapon_list = [
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
-		can_throw_lvl=0,
+		can_throw_lvl=1,
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'brass_knuckles',
@@ -627,7 +628,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'skate',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -677,7 +678,7 @@ var player_melee_weapon_list = [
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
-		can_throw_lvl=0,
+		can_throw_lvl=1,
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'red_lightsaber_toy',
@@ -696,7 +697,7 @@ var all_melee_weapon_list = [
 	{
 		name= 'police_baton',
 		animation="police_baton_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/police_baton.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/police_baton.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -718,7 +719,7 @@ var all_melee_weapon_list = [
 	},{
 		name="knife",
 		animation="knife_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_Knife.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_Knife.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -741,7 +742,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'brass_knuckles',
 		animation="brass_knuckles_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_brass_knuckles.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_brass_knuckles.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -764,7 +765,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'baseball_bat',
 		animation="baseball_bat_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_Baseball_Bat.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_Baseball_Bat.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -787,7 +788,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'golf_club',
 		animation="golf_club_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/golf_club.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/golf_club.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -810,7 +811,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'pocket_chain_saw',
 		animation="pocket_chain_saw_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/pocket_chain_saw.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/pocket_chain_saw.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -833,7 +834,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'pan',
 		animation="pan_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/pan.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/pan.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -856,7 +857,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'tequilla',
 		animation="tequilla_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/tequilla.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/tequilla.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -879,7 +880,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'heineken',
 		animation="heineken_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/henekein.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/henekein.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -902,7 +903,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'machete',
 		animation="machete_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_machete.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_machete.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -925,7 +926,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'skate',
 		animation="skate_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/skate.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/skate.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -948,7 +949,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'axe',
 		animation="axe_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/axe.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/axe.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -971,7 +972,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'shovel',
 		animation="shovel_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_shovel.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_shovel.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -994,7 +995,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'katana',
 		animation="katana_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/katana.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/katana.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -1017,7 +1018,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'sword',
 		animation="sword_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_sword.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_sword.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -1040,7 +1041,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'blue_lightsaber_toy',
 		animation="blue_lightsaber_toy_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_blue_lightsaber_toy.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_blue_lightsaber_toy.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -1063,7 +1064,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'red_lightsaber_toy',
 		animation="red_lightsaber_toy_animation",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_red_lightsaber_toy.png"),
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_red_lightsaber_toy.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",

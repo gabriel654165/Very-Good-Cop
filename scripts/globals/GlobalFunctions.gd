@@ -196,6 +196,7 @@ func set_melee_weapon_properties(melee_weapon: Knife, weapon_index: int):
 	for weapon_properties_levels in GlobalVariables.player_melee_weapon_list:
 		if current_index == weapon_index:
 			melee_weapon.weapon_name = weapon_properties_levels.name
+			melee_weapon.side_sprite.texture = GlobalVariables.all_melee_weapon_list[current_index].gui_texture
 			melee_weapon.attack_cooldown = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.attack_cooldown_lvl, "attack_cooldown", melee_weapon.attack_cooldown)
 			melee_weapon.attack_distance = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.attack_distance_lvl, "attack_distance", melee_weapon.attack_distance)
 			melee_weapon.damages = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.damages_lvl, "damages", melee_weapon.damages)
