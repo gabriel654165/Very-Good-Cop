@@ -4,8 +4,8 @@ extends Node2D
 @export var screen_effects_manager_scene : PackedScene
 @export var projectile_manager_scene : PackedScene
 @export var level_generator_scene : PackedScene
-@export var player : Player
 
+@onready var player : Player = $Player
 @onready var camera : Camera2D = $MainCamera
 @onready var gui_manager : GuiManager = add_manager(gui_manager_scene, self, func(x):pass)
 @onready var screen_effects_manager : ScreenEffectManager = add_manager(screen_effects_manager_scene, camera, func(x):pass)
@@ -13,6 +13,7 @@ extends Node2D
 @onready var level_generator: LevelGenerator = add_manager(level_generator_scene, self, func(x):pass)
 
 @onready var minimap : Minimap = Minimap.new()
+@onready var level_difficulty : LevelDifficulty = LevelDifficulty.new()
 
 
 func _ready():
@@ -40,6 +41,8 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.panel_kills_manager.handle_enemy_died)
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
 	
+	GlobalSignals.power_up_taken.connect(gui_manager.panel_power_ups_manager.handle_power_up_taken)
+	
 	GlobalSignals.interaction_computed.connect(gui_manager.pop_up_interaction_manager.handle_interaction_computed)
 	
 	GlobalSignals.active_minimap_power_up.connect(screen_effects_manager.set_minimap_power_up)
@@ -50,6 +53,7 @@ func _ready():
 	GlobalSignals.active_heal_power_up.connect(screen_effects_manager.set_heal_power_up)
 
 	GlobalSignals.map_updated.connect(gui_manager.minimap_manager.update)
+	GlobalSignals.map_updated.connect(level_difficulty.update_difficulty)
 	GlobalSignals.game_over.connect(gui_manager.game_over_manager.generate_ui)
 
 	if level_generator != null:
@@ -59,7 +63,11 @@ func _ready():
 		minimap.load_map(level_generator.dungeon_layout.duplicate())
 		add_child(minimap)
 		
+		level_difficulty.init(player, minimap)
+		add_child(level_difficulty)
+		
 		gui_manager.minimap_manager.minimap_inst = minimap
+		gui_manager.recap_level_manager.level_difficulty_inst = level_difficulty
 
 	spawn_player()
 	init_camera()

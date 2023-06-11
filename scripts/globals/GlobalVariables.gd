@@ -24,7 +24,7 @@ var player_distance_weapon_list = [
 	{
 		name= 'glock',
 		unlocked = true,
-		special_power_unlocked = false,
+		special_power_unlocked = true,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
@@ -711,7 +711,8 @@ var all_melee_weapon_list = [
 			damages= level_stat(7, 50, 10),
 			type= "property"
 		}, {
-			can_throw= level_stat(false, true, 1)
+			can_throw= level_stat(false, true, 1),
+			type= "projectile",
 		}, {
 			points_to_use_special_power= level_stat(300, 100, 3),
 			type= "power",

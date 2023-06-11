@@ -192,11 +192,11 @@ func spawn_dungeon_rooms():
 		
 		if room == entrance_pos or room == exit_pos:
 			instantiated_room.should_spawn_stuff = false
+		if instantiated_room.has_node("EndLevelInteraction"):
 			var end_level_interaction := instantiated_room.get_node("EndLevelInteraction")
-			if end_level_interaction != null:
-				end_level_interaction.visible = true if room == exit_pos else false
-				end_level_interaction.get_node("PressKeyAndCollide").set_active(true if room == exit_pos else false)
-				end_level_interaction.get_node("StaticBody2D/CollisionShape2D").disabled = false if room == exit_pos else true
+			end_level_interaction.visible = true if room == exit_pos else false
+			end_level_interaction.get_node("PressKeyAndCollide").set_active(true if room == exit_pos else false)
+			end_level_interaction.get_node("StaticBody2D/CollisionShape2D").disabled = false if room == exit_pos else true
 		instantiated_room.position = relative_pos
 
 		var door := preload("res://scenes/objects/door.tscn")
