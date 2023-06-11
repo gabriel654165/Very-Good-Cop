@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var player : Player = $Player
 @onready var camera : Camera2D = $MainCamera
+@onready var music_playlists_player : MusicPlaylistsPlayer = $MusicPlaylistsPlayer
 @onready var gui_manager : GuiManager = add_manager(gui_manager_scene, self, func(x):pass)
 @onready var screen_effects_manager : ScreenEffectManager = add_manager(screen_effects_manager_scene, camera, func(x):pass)
 @onready var projectile_manager : ProjectileManager = add_manager(projectile_manager_scene, self, func(x):pass)
@@ -14,7 +15,6 @@ extends Node2D
 
 @onready var minimap : Minimap = Minimap.new()
 @onready var level_difficulty : LevelDifficulty = LevelDifficulty.new()
-
 
 func _ready():
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
@@ -76,6 +76,10 @@ func _ready():
 	if gui_manager != null:
 		gui_manager.player_ref = player
 		gui_manager.generate_ui()
+	
+	if music_playlists_player != null:
+		gui_manager.pause_manager.music_playlists_player = music_playlists_player
+	
 
 
 # NOTE: Should we put an autoload function or keep it as a signal ? (https://github.com/godotengine/godot-proposals/issues/1827)
