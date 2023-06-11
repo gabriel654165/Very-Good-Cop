@@ -5,8 +5,6 @@ var player_ref : Player
 var minimap_ref : Minimap
 var average_level_time : float = 0.
 
-#time for 1 enemy in room : 10s
-#time for 2 enemy in room : 10s * 2
 var time_for_one_enemy : float = 5.
 var time_for_one_room : float = 3.
 
