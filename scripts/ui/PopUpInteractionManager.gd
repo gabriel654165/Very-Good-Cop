@@ -1,8 +1,6 @@
 extends Node2D
 class_name PopUpInteractionManager
 
-@export var pop_up_text_scene : PackedScene
-
 @export var text_scale : Vector2 = Vector2(2, 2)
 @export var interaction_offset : Vector2 = Vector2(5, -60)
 

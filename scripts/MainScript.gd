@@ -42,6 +42,7 @@ func _ready():
 	GlobalSignals.enemy_died.connect(gui_manager.weapon_panel_manager.handle_enemy_died)
 	
 	GlobalSignals.power_up_taken.connect(gui_manager.panel_power_ups_manager.handle_power_up_taken)
+	GlobalSignals.power_up_taken.connect(gui_manager.pop_up_power_up_manager.handle_power_up_taken)
 	
 	GlobalSignals.interaction_computed.connect(gui_manager.pop_up_interaction_manager.handle_interaction_computed)
 	
