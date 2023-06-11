@@ -648,8 +648,8 @@ max_speed = 250.0
 debug_enabled = true
 
 [node name="Health" parent="." instance=ExtResource("3_onhbj")]
-max_health = 60
-health = 60
+max_health = 30
+health = 30
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_vv8m0")

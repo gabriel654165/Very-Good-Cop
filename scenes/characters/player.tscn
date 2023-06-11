@@ -1890,6 +1890,8 @@ position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_dfd5l")
 
 [node name="Health" parent="." instance=ExtResource("4_yibkt")]
+max_health = 30
+health = 30
 
 [node name="DetectableTarget" type="Node2D" parent="."]
 script = ExtResource("8_jhep5")

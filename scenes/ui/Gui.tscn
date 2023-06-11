@@ -551,7 +551,7 @@ distance_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer
 melee_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/MeleeWeaponGridContainer")
 choose_weapon_item_panel_scene = ExtResource("23_8p1eu")
 
-[node name="RecapLevelManager" type="Node2D" parent="." node_paths=PackedStringArray("recap_level_gui", "color_rect", "level_value_label", "label_time_spent", "label_prompt_time_spent", "label_rooms_cleared", "label_prompt_rooms_cleared", "label_kills_done", "label_prompt_kills_done", "label_combos_done", "label_prompt_combos_done", "label_power_up_taken", "label_prompt_power_up_taken", "label_money_to_earn", "skip_button", "continue_button")]
+[node name="RecapLevelManager" type="Node2D" parent="." node_paths=PackedStringArray("recap_level_gui", "color_rect", "level_value_label", "label_time_spent", "label_prompt_time_spent", "label_rooms_cleared", "label_prompt_rooms_cleared", "label_kills_done", "label_prompt_kills_done", "label_power_up_taken", "label_prompt_power_up_taken", "label_money_to_earn", "skip_button", "continue_button")]
 script = ExtResource("30_23poo")
 aim_blur_intensity = 3.0
 recap_level_gui = NodePath("../GuiControl/RecapPointsControl")
@@ -563,8 +563,6 @@ label_rooms_cleared = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/V
 label_prompt_rooms_cleared = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer/PromptRoomsLabel")
 label_kills_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer/KillsValueLabel")
 label_prompt_kills_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer/PromptKillsLabel")
-label_combos_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer/CombosValueLabel")
-label_prompt_combos_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer/PromptCombosLabel")
 label_power_up_taken = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer/GangPackagesValueLabel")
 label_prompt_power_up_taken = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer/PromptGangPackagesLabel")
 label_money_to_earn = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer/MoneyValueLabel")
