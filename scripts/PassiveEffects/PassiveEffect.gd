@@ -47,6 +47,8 @@ func add_passive_effect(character: Character):
 	if type == TYPE.DAMAGE:
 		value_save = character.weapon_manager.projectile_damages
 		character.weapon_manager.projectile_damages = value_effect
+		character.weapon_manager.weapon.projectile_damages = value_effect
+		character.weapon_manager.set_variables(character.weapon_manager.weapon)
 		GlobalSignals.active_damage_power_up.emit(true)
 	if type == TYPE.SLOW_MOTION:
 		Engine.time_scale = 0.4
@@ -61,6 +63,8 @@ func remove_passive_effect(character: Character):
 		GlobalSignals.active_speed_power_up.emit(false)
 	if type == TYPE.DAMAGE:
 		character.weapon_manager.projectile_damages = value_save
+		character.weapon_manager.weapon.projectile_damages = value_save
+		character.weapon_manager.set_variables(character.weapon_manager.weapon)
 		GlobalSignals.active_damage_power_up.emit(false)
 	if type == TYPE.SLOW_MOTION:
 		Engine.time_scale = 1
