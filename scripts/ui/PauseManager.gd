@@ -15,6 +15,10 @@ class_name PauseManager
 @export var option_choose_playlist_label : Label
 @export var option_choose_music_label : Label
 
+@export var windows_resolution_label : Label
+@export var screen_mode_state_label : Label
+@export var screen_mode_checkbutton : CheckButton
+
 @export var pause_gui : Node = null
 @export var base_panel : Node = null
 @export var option_panel : Node = null
@@ -68,6 +72,8 @@ func generate_ui():
 	tween.tween_property(self, "current_blur_intensity", aim_blur_intensity, time_to_blur)
 	update_playlist_name()
 	update_track_name()
+	update_window_mode_ui()
+	update_window_resolution_ui()
 
 
 func unload_ui():
@@ -95,6 +101,17 @@ func update_playlist_name():
 func update_track_name():
 	var current_track_name : String = GlobalVariables.playlists_track_names[music_playlists_player.current_playlist][music_playlists_player.current_track]
 	option_choose_music_label.text = current_track_name
+
+
+func update_window_mode_ui():
+	var window_mode = DisplayServer.window_get_mode()
+	
+	if window_mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		screen_mode_state_label.text = "(fullscreen)"
+		screen_mode_checkbutton.button_pressed = true
+	elif window_mode == DisplayServer.WINDOW_MODE_WINDOWED:
+		screen_mode_state_label.text = "(windowed)"
+		screen_mode_checkbutton.button_pressed = false
 
 
 func instanciate_pop_up_text(content: String, duration: float, velocity_scale: Vector2) -> Timer:
@@ -192,3 +209,12 @@ func _on_switch_music_left_button_pressed():
 func _on_switch_music_right_button_pressed():
 	music_playlists_player.next_track(true)
 	update_track_name()
+
+
+func _on_screen_mode_check_button_toggled(button_pressed: bool):
+	if button_pressed:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		update_window_mode_ui()
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		update_window_mode_ui()
