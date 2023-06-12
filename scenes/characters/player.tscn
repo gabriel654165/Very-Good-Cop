@@ -1,13 +1,12 @@
-[gd_scene load_steps=53 format=3 uid="uid://xxld75mg1fqf"]
+[gd_scene load_steps=52 format=3 uid="uid://rvl465nagvgf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="2_d13uj"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="3_orjl3"]
-[ext_resource type="Texture2D" uid="uid://6aw20cp5oifq" path="res://assets/character/Police-Remade-HM-2.png" id="4_fhji1"]
+[ext_resource type="Texture2D" uid="uid://c8ueprhg8f87n" path="res://assets/character/Police-Remade-HM-2.png" id="4_fhji1"]
 [ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="4_j66v4"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="4_yibkt"]
 [ext_resource type="PackedScene" uid="uid://bcs1erw2idhma" path="res://scenes/effects/corpse.tscn" id="5_jws7k"]
-[ext_resource type="Texture2D" uid="uid://qh0psfk6s6wg" path="res://assets/character/Police-Remade-2-HM-2.png" id="7_1706x"]
 [ext_resource type="Script" path="res://scripts/AI/DetectableTarget.gd" id="8_jhep5"]
 [ext_resource type="PackedScene" uid="uid://cxsu4atm07u3i" path="res://scenes/weapons/Knife.tscn" id="8_nt46u"]
 [ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_18ulw"]
@@ -1987,7 +1986,7 @@ region_rect = Rect2(420, 700, 19, 15)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 position = Vector2(-2, 0)
-texture = ExtResource("7_1706x")
+texture = ExtResource("4_fhji1")
 offset = Vector2(10, 0)
 flip_v = true
 region_enabled = true
