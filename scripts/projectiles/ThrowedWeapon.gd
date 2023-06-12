@@ -27,7 +27,6 @@ func handle_specific_collision(object: Object):
 		stop()
 	
 	if object.has_method("stunned"):
-		print("object ", object.name, " stunned for x sec")
 		object.stunned(time_stunning)
 		stop()
 	
