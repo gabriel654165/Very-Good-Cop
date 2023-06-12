@@ -1,7 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bx8cma3ns1wpg"]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://scripts/Character/Kamikaz.gd" id="1_tmx5x"]
+[ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="2_adam7"]
 [ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_s1m15"]
+[ext_resource type="PackedScene" uid="uid://bcs1erw2idhma" path="res://scenes/effects/corpse.tscn" id="3_4xyqx"]
 [ext_resource type="PackedScene" uid="uid://coihelcbse8fx" path="res://scenes/stats/health.tscn" id="3_c8fjn"]
 [ext_resource type="Script" path="res://scripts/AI/AIStateMachine.gd" id="4_tuv5c"]
 [ext_resource type="Script" path="res://scripts/AI/States/Patrol.gd" id="5_v0cbm"]
@@ -10,9 +12,10 @@
 [ext_resource type="Script" path="res://scripts/AI/States/GoToAndLookAround.gd" id="8_d00hg"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/VisionSensor.gd" id="10_ouxff"]
 [ext_resource type="Script" path="res://scripts/AI/States/GoToPlayerAndExplode.gd" id="10_sqq5i"]
-[ext_resource type="Script" path="res://scripts/AI/States/Kamikaz_Death.gd" id="11_516po"]
+[ext_resource type="Script" path="res://scripts/AI/States/KamikazDeath.gd" id="11_516po"]
 [ext_resource type="Script" path="res://scripts/AI/Sensors/HearingSensor.gd" id="12_4xjvt"]
-[ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_0gg3x"]
+[ext_resource type="PackedScene" uid="uid://c477b1thhwo0i" path="res://scenes/weapons/Weapon.tscn" id="13_ut8i1"]
+[ext_resource type="PackedScene" uid="uid://cvdae5oociat5" path="res://scenes/projectiles/Grenade.tscn" id="14_wk7x2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
 size = Vector2(30, 16)
@@ -20,9 +23,10 @@ size = Vector2(30, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5x6xs"]
 radius = 90.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("weapon_manager") groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_tmx5x")
-weapon_manager = NodePath("")
+blood_effect_scene = ExtResource("2_adam7")
+corpse_scene = ExtResource("3_4xyqx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -63,24 +67,19 @@ script = ExtResource("8_d00hg")
 [node name="GoToPlayerAndExplode" type="Node" parent="StateMachine"]
 script = ExtResource("10_sqq5i")
 
+[node name="TimerBeforeExplode" type="Timer" parent="StateMachine/GoToPlayerAndExplode"]
+one_shot = true
+
 [node name="Explode" type="Node" parent="StateMachine"]
 script = ExtResource("11_516po")
 
 [node name="TimerBeforeExplode" type="Timer" parent="StateMachine/Explode"]
-one_shot = true
 
 [node name="ThrowObjectPosition" type="Marker2D" parent="."]
 position = Vector2(4, 0)
 
 [node name="VisionSensor" type="Node2D" parent="."]
 script = ExtResource("10_ouxff")
-
-[node name="WeaponManager" parent="." instance=ExtResource("11_er80t")]
-properties/special_power_unlocked = false
-power/can_use_power = false
-bullet/bullet_speed = 3
-weapon/shooting_cooldown = 1.0
-weapon/number_of_balls_by_burt = 1
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
 
@@ -95,4 +94,12 @@ collision_mask = 7
 shape = SubResource("CircleShape2D_5x6xs")
 debug_color = Color(0.929412, 0.231373, 0.341176, 0.419608)
 
+[node name="WeaponManager" parent="." instance=ExtResource("13_ut8i1")]
+properties/weapon_name = "grenadeLauncher"
+projectile/projectile = ExtResource("14_wk7x2")
+projectile/projectile_speed = 3
+ammo/ammo_size = 5
+weapon/shooting_cooldown = 1.0
+
+[connection signal="timeout" from="StateMachine/GoToPlayerAndExplode/TimerBeforeExplode" to="StateMachine/GoToPlayerAndExplode" method="_on_timer_before_explode_timeout"]
 [connection signal="timeout" from="StateMachine/Explode/TimerBeforeExplode" to="StateMachine/Explode" method="_on_timer_before_explode_timeout"]
