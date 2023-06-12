@@ -56,7 +56,6 @@ position = Vector2(15, 0)
 script = ExtResource("8_jhep5")
 
 [node name="WeaponManager" parent="." instance=ExtResource("13_18ulw")]
-ammo/shot_shell_particle_scene = null
 
 [node name="Knife" parent="." instance=ExtResource("8_nt46u")]
 

@@ -3,17 +3,16 @@ class_name FollowPlayer
 
 var _target: Node2D = null;
 
-var direction: Vector2
 var _last_target_pos: Vector2
 var _last_target_move_direction = Vector2()
 
 func update(_delta: float) -> void:
 	if _target != null:
 		set_movement_target(_target.global_transform.origin)
-		if state_machine._enemy.global_transform.origin.distance_to(_target.global_transform.origin) <= state_machine._enemy.distance_to_shoot + 40:
+		if state_machine._enemy.global_transform.origin.distance_to(_target.global_transform.origin) <= state_machine._enemy.distance_to_shoot + 40 and vision_sensor.current_target != null:
 			state_machine.transition_to(state_machine.SHOOT, { target = _target })
 	else:
-		if state_machine._enemy.global_transform.origin.distance_to(_last_target_pos) <= 20:
+		if state_machine._enemy.global_transform.origin.distance_to(_last_target_pos) <= state_machine.navigation_agent.target_desired_distance:
 			state_machine.transition_to(state_machine.GOTO_LOOK_AROUND, {
 				target_pos = state_machine._enemy.global_transform.origin + _last_target_move_direction * state_machine._enemy.pursue_move_distance,
 				goto_time = state_machine._enemy.pursue_find_time,

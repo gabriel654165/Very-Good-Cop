@@ -20,8 +20,6 @@ func _ready():
 	add_child(wait_rotation_timer)
 
 func enter(_msg := {}) -> void:
-	if !vision_sensor.can_see_target.is_connected(_on_see_target):
-		vision_sensor.can_see_target.connect(_on_see_target)
 	if !state_machine.navigation_agent.navigation_finished.is_connected(_on_navigation_finished):
 		state_machine.navigation_agent.navigation_finished.connect(_on_navigation_finished)
 
@@ -42,18 +40,18 @@ func enter(_msg := {}) -> void:
 	wait_rotation_timer.wait_time = rotation_time
 
 func exit() -> void:
-	vision_sensor.can_see_target.disconnect(_on_see_target)
 	state_machine.navigation_agent.navigation_finished.disconnect(_on_navigation_finished)
 	find_timer.stop()
 	wait_rotation_timer.stop()
 	stop_tween()
 
+func update(_delta: float) -> void:
+	if vision_sensor.current_target != null:
+		state_machine.transition_to(state_machine.FOLLOW_TARGET, { target = vision_sensor.current_target })
+
 #signals
 func _on_navigation_finished():
 	wait_rotation_timer.start()
-
-func _on_see_target(target: DetectableTarget):
-	state_machine.transition_to(state_machine.FOLLOW_TARGET, { target = target })
 
 func _on_pursuit_time_timeout():
 	wait_rotation_timer.start()
@@ -64,13 +62,10 @@ func _on_wait_point_timeout():
 	tween = get_tree().create_tween()
 	var initial_degree = state_machine._enemy.rotation_degrees
 	tween.tween_property(state_machine._enemy, "rotation_degrees", initial_degree + state_machine._enemy.pursue_look_angle, 1)
-	tween.tween_interval(state_machine._enemy.pursue_look_interval)
 	tween.tween_property(state_machine._enemy, "rotation_degrees", initial_degree - (state_machine._enemy.pursue_look_angle * 2), 1)
-	tween.tween_interval(state_machine._enemy.pursue_look_interval)
 	tween.tween_property(state_machine._enemy, "rotation_degrees", initial_degree + state_machine._enemy.pursue_look_angle, 1)
-	tween.tween_interval(state_machine._enemy.pursue_look_interval)	
 	tween.tween_callback(func(): state_machine.transition_to(state_machine.PATROL))
-	
+
 func stop_tween():
 	if tween != null:
 		tween.stop()

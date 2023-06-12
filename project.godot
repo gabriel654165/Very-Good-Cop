@@ -106,7 +106,7 @@ switch_minimap_view={
 
 [navigation]
 
-2d/default_edge_connection_margin=10
+2d/default_edge_connection_margin=8
 
 [physics]
 
