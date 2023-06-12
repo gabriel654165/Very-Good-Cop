@@ -6,7 +6,6 @@ enum PatrolType {
 	RandomTarget
 }
 
-@onready var fsm: AIStateMachine = $StateMachine
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 @onready var vision_sensor: VisionSensor = $VisionSensor
 @onready var hearing_sensor: HearingSensor = $HearingSensor
@@ -14,23 +13,23 @@ enum PatrolType {
 @onready var state_machine := $StateMachine as AIStateMachine
 
 @export var patrol_type: PatrolType = PatrolType.Sequence
-@export var patrol_wait: float = 3
+@export var patrol_wait: float = 3.0
 
-@export var distance_to_shoot: float = 70
+@export var distance_to_shoot: float = 110.0
 
-@export var pursue_look_angle: float = 45
+@export var pursue_look_angle: float = 45.0
 @export var pursue_look_interval: float = 1.3
-@export var pursue_find_time: float = 3
-@export var pursue_move_distance: float = 500
-@export var pursue_wait_before_look_around: float = 3
+@export var pursue_find_time: float = 3.0
+@export var pursue_move_distance: float = 500.0
+@export var pursue_wait_before_look_around: float = 3.0
 
-@export var vision_cone_angle: float = 60
-@export var vision_cone_range: float = 200
+@export var vision_cone_angle: float = 80.0
+@export var vision_cone_range: float = 250.0
 @export_flags_2d_physics var vision_layers
 
-@export var hearing_range: float = 20
+@export var hearing_range: float = 170
 
-@export var point_value: float = 100
+@export var point_value: float = 100.0
 @export var blood_effect_scene : PackedScene
 @export var corpse_scene : PackedScene
 
@@ -44,7 +43,13 @@ func _ready():
 	weapon_manager.weapon.global_position = weapon_position.global_position
 
 	weapon_manager.weapon.projectile_damages = weapon_manager.projectile_damages + GlobalVariables.level * 1.75 
-	fsm.init(self, weapon_manager.weapon, speed * 10)
+	state_machine.init(self, weapon_manager.weapon, speed * 10)
+	
+	patrol_wait = decrease_per_level_smoothly(patrol_wait, 30, 1, 1)
+	vision_cone_angle = increase_per_level_smoothly(vision_cone_angle, 1, 1, 150)
+	vision_cone_range = increase_per_level_smoothly(vision_cone_range, 1, 2, 400)
+	hearing_range = increase_per_level_smoothly(hearing_range, 1, 2, 400)
+	pursue_look_angle = increase_per_level_smoothly(pursue_look_angle, 5, 1, 60)
 
 func _process(delta):
 	if action_disabled:
@@ -52,7 +57,7 @@ func _process(delta):
 
 func set_speed(new_speed: float):
 	speed = new_speed
-	fsm._movement_speed = speed * 10
+	state_machine._movement_speed = speed * 10
 
 func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
@@ -89,3 +94,19 @@ func instanciate_blood_effect(position: Vector2, parent: Node, damager: Node2D):
 		inst.get_node("SubViewportContainer/PixelizedSubViewport/SquareBloodParticles").set_rotation(new_velocity.angle())
 		inst.get_node("SubViewportContainer/PixelizedSubViewport/CircleBloodParticles").set_rotation(new_velocity.angle())
 	inst.global_position = position - inst.size / 2
+
+func _on_behind_area_body_entered(body: Node2D):
+	if body.is_in_group("player"):
+		state_machine.transition_to(state_machine.PATROL)
+
+func decrease_per_level_smoothly(current: float, how_many_level: int, number_to_decrease: float, min: float):
+	var temp := current - (GlobalVariables.level * number_to_decrease/how_many_level)
+	if temp <= min:
+		return min
+	return temp
+
+func increase_per_level_smoothly(current: float, how_many_level: int, number_to_increase: float, max: float):
+	var temp := current + (GlobalVariables.level * number_to_increase/how_many_level)
+	if temp >= max:
+		return max
+	return temp
