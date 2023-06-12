@@ -66,11 +66,29 @@ func throwProjectile(projectile_weapon: PackedScene, throw_position: Vector2, ty
 	GlobalSignals.projectile_fired_spawn.emit(self, projectile_instance, throw_position, direction)
 
 
+func stop_all_processes(node: Node, state: bool):
+	for child in node.get_children():
+		if child is AnimationPlayer or child is Sprite2D:
+			continue
+		if child.get_child_count() > 0:
+			stop_all_processes(child, state)
+		GlobalFunctions.disable_all_process(child, state)
+	GlobalFunctions.disable_all_process(self, state)
+	return
+
+
 func stunned(time_to_sleep: float):
-	var save_speed = speed
-	speed = 0
+	body_animation.play("stunned_animation")
+	if self is Player:
+		action_disabled = true
+	else:
+		stop_all_processes(self, true)
 	await get_tree().create_timer(time_to_sleep).timeout
-	speed = save_speed
+	if self is Player:
+		action_disabled = false
+	else:
+		stop_all_processes(self, false)
+	body_animation.play("stand_up_animation")
 
 
 func apply_force(character: Character, direction: Vector2, force: float):

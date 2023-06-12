@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bsg7wbhktsf6b"]
+[gd_scene load_steps=34 format=3 uid="uid://bsg7wbhktsf6b"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="2_5lu21"]
@@ -593,6 +593,100 @@ tracks/3/keys = {
 "values": [Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ciwpi"]
+resource_name = "stand_up_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegsSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(126, 749, 51, 28), Rect2(133, 787, 43, 32), Rect2(139, 832, 35, 24), Rect2(694, 54, 28, 22), Rect2(761, 53, 20, 24), Rect2(827, 53, 13, 24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_body_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ovx3i"]
+resource_name = "stunned_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(827, 53, 13, 24), Rect2(761, 53, 20, 24), Rect2(694, 54, 28, 22), Rect2(139, 832, 35, 24), Rect2(133, 787, 43, 32), Rect2(126, 749, 51, 28)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LegsSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4eojc"]
 _data = {
 "glock_animation_enemy": SubResource("Animation_0kg7s"),
@@ -605,7 +699,9 @@ _data = {
 "riffle_animation_enemy_shoot": SubResource("Animation_4054g"),
 "running_animation_enemy": SubResource("Animation_wu0k7"),
 "shotgun_animation_enemy": SubResource("Animation_8ym10"),
-"shotgun_animation_enemy_shoot": SubResource("Animation_vjs1y")
+"shotgun_animation_enemy_shoot": SubResource("Animation_vjs1y"),
+"stand_up_animation": SubResource("Animation_ciwpi"),
+"stunned_animation": SubResource("Animation_ovx3i")
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
@@ -627,11 +723,11 @@ region_rect = Rect2(666, 737, 19, 15)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-scale = Vector2(0.9, 0.9)
 texture = ExtResource("2_kdey6")
+offset = Vector2(8, 0)
 flip_v = true
 region_enabled = true
-region_rect = Rect2(439, 424, 13, 24)
+region_rect = Rect2(483, 793, 35, 13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dfd5l")

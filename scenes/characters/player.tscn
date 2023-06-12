@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://xxld75mg1fqf"]
+[gd_scene load_steps=53 format=3 uid="uid://xxld75mg1fqf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
 [ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="2_d13uj"]
@@ -71,6 +71,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(10, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(493, 339, 44, 32)]
 }
 
 [sub_resource type="Animation" id="Animation_g3bvi"]
@@ -1823,6 +1835,100 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_g2yji"]
+resource_name = "stunned_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegsSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(753, 343, 13, 24), Rect2(690, 343, 20, 24), Rect2(628, 344, 28, 22), Rect2(560, 343, 36, 24), Rect2(493, 339, 44, 32), Rect2(427, 342, 50, 25)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dgh6p"]
+resource_name = "stand_up_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegsSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(427, 342, 50, 25), Rect2(493, 339, 44, 32), Rect2(560, 343, 36, 24), Rect2(628, 344, 28, 22), Rect2(690, 343, 20, 24), Rect2(753, 343, 13, 24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_body_animation"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kmmxi"]
 _data = {
 "RESET": SubResource("Animation_lal7e"),
@@ -1855,6 +1961,8 @@ _data = {
 "skate_animation_player": SubResource("Animation_b0yjw"),
 "sniper_animation_player": SubResource("Animation_wc02a"),
 "sniper_animation_player_shoot": SubResource("Animation_tflu8"),
+"stand_up_animation": SubResource("Animation_dgh6p"),
+"stunned_animation": SubResource("Animation_g2yji"),
 "sword_animation_player": SubResource("Animation_7vyg7"),
 "tequilla_animation_player": SubResource("Animation_bmetd")
 }
@@ -1883,7 +1991,7 @@ texture = ExtResource("7_1706x")
 offset = Vector2(10, 0)
 flip_v = true
 region_enabled = true
-region_rect = Rect2(1001, 6, 34, 13)
+region_rect = Rect2(493, 339, 44, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 0)

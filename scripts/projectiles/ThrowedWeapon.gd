@@ -4,7 +4,7 @@ class_name ThrowedWeapon
 @export var should_spin : bool = true
 @export var recover_weapon_interaction : AddWeaponInteraction = null
 
-var time_stunning : float = 3
+var time_stunning : float = 2
 
 
 func _ready():
@@ -27,6 +27,7 @@ func handle_specific_collision(object: Object):
 		stop()
 	
 	if object.has_method("stunned"):
+		print("object ", object.name, " stunned for x sec")
 		object.stunned(time_stunning)
 		stop()
 	
