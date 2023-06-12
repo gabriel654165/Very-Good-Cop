@@ -73,7 +73,6 @@ func generate_ui():
 	update_playlist_name()
 	update_track_name()
 	update_window_mode_ui()
-	update_window_resolution_ui()
 
 
 func unload_ui():
@@ -218,3 +217,15 @@ func _on_screen_mode_check_button_toggled(button_pressed: bool):
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		update_window_mode_ui()
+
+
+func _on_general_vol_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
+
+
+func _on_music_vol_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value)
+
+
+func _on_game_vol_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sounds"), value)

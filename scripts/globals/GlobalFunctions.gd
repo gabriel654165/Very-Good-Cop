@@ -71,17 +71,30 @@ func find_object_on_condition(condition: Callable, parent: Node) -> Node:
 	return object
 
 
+func disable_all_process(node: Node, disable: bool):
+	node.set_process(!disable)
+	node.set_physics_process(!disable)
+	node.set_process_internal(!disable)
+	node.set_process_unhandled_input(!disable)
+	node.set_process_unhandled_key_input(!disable)
+
+
 func disable_all_game_objects(state: bool):
 	var index : int = 1
-	var characters_in_scene : Array = []
+	var objects_in_scene : Array = []
 
-	append_in_array_on_condition(func(elem: Node): return elem is Character, characters_in_scene, get_tree().root)
+	append_in_array_on_condition(func(elem: Node): return (elem is Character or elem is Projectile or elem is CPUParticles2D), objects_in_scene, get_tree().root)
 	
-	for character in characters_in_scene:
-		if character != null:
-			character.action_disabled = state
+	for obj in objects_in_scene:
+		if obj != null:
+			if obj is Player and "action_disabled" in obj:
+				obj.action_disabled = state
+				continue
+			for child in obj.get_children():
+				disable_all_process(child, state)
+			disable_all_process(obj, state)
 		else:
-			characters_in_scene.remove_at(index)
+			objects_in_scene.remove_at(index)
 			continue
 		index += 1
 

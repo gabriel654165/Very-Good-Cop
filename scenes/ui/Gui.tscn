@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://76fiuu4xbqy4"]
+[gd_scene load_steps=69 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -168,6 +168,18 @@ shader = ExtResource("16_wdi1s")
 shader_parameter/has_target = false
 shader_parameter/target = Vector2(0.5, 0.5)
 shader_parameter/intensity = 1.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tlm42"]
+color = Color(0.364706, 0.364706, 0.364706, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_gpp7b"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1nby5"]
+color = Color(1, 1, 1, 1)
+thickness = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5xjad"]
 shader = ExtResource("19_yho6x")
@@ -442,14 +454,8 @@ script = ExtResource("1_cf1if")
 
 [node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("choose_music_container", "option_choose_playlist_label", "option_choose_music_label", "windows_resolution_label", "screen_mode_state_label", "screen_mode_checkbutton", "pause_gui", "base_panel", "option_panel", "color_rect")]
 script = ExtResource("2_lu52o")
-active = null
 aim_blur_intensity = 2.0
-time_to_blur = null
 pop_up_text_scene = ExtResource("7_bnyiq")
-pop_up_contents = null
-resume_pop_up_duration = null
-resume_pop_up_scale = null
-resume_pop_up_velocity_scale = null
 choose_music_container = NodePath("../GuiControl/PauseControl/ChooseMusicContainer")
 option_choose_playlist_label = NodePath("../GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer/ChoosePlaylistLabel")
 option_choose_music_label = NodePath("../GuiControl/PauseControl/ChooseMusicContainer/SubChooseMusicContainer/ChooseMusicLabel")
@@ -796,6 +802,7 @@ libraries = {
 }
 
 [node name="PauseControl" type="Control" parent="GuiControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -822,7 +829,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BasePanelContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer"]
-visible = false
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -843,6 +849,7 @@ theme_override_font_sizes/font_size = 60
 text = "Quit game"
 
 [node name="OptionTabContainer" type="TabContainer" parent="GuiControl/PauseControl/PauseContainer"]
+visible = false
 custom_minimum_size = Vector2(1300, 800)
 layout_mode = 2
 theme = ExtResource("17_eyt6o")
@@ -885,10 +892,15 @@ text = "General volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GeneralVolumeContainer"]
+[node name="GeneralVolSlider" type="HSlider" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GeneralVolumeContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 8
-alignment = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_tlm42")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_gpp7b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_1nby5")
+min_value = -80.0
+max_value = 0.0
+rounded = true
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
@@ -904,9 +916,15 @@ text = "Music volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/MusicVolumeContainer"]
+[node name="MusicVolSlider" type="HSlider" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-alignment = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_tlm42")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_gpp7b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_1nby5")
+min_value = -80.0
+max_value = 0.0
+rounded = true
 
 [node name="GameVolumeContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
@@ -922,9 +940,15 @@ text = "Game volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GameVolumeContainer"]
+[node name="GameVolSlider" type="HSlider" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GameVolumeContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-alignment = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_tlm42")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_gpp7b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_1nby5")
+min_value = -80.0
+max_value = 0.0
+rounded = true
 
 [node name="FullScreenContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
@@ -1332,7 +1356,6 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="ChooseMusicContainer" type="VBoxContainer" parent="GuiControl/PauseControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2676,6 +2699,9 @@ libraries = {
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/ResumeButton" to="PauseManager" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/OptionButton" to="PauseManager" method="_on_option_button_pressed"]
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/QuitButton" to="PauseManager" method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GeneralVolumeContainer/GeneralVolSlider" to="PauseManager" method="_on_general_vol_slider_value_changed"]
+[connection signal="value_changed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/MusicVolumeContainer/MusicVolSlider" to="PauseManager" method="_on_music_vol_slider_value_changed"]
+[connection signal="value_changed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GameVolumeContainer/GameVolSlider" to="PauseManager" method="_on_game_vol_slider_value_changed"]
 [connection signal="toggled" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/FullScreenContainer/HBoxContainer/ScreenModeCheckButton" to="PauseManager" method="_on_screen_mode_check_button_toggled"]
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer/SwitchPlaylistLeftButton" to="PauseManager" method="_on_switch_playlist_left_button_pressed"]
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer/SwitchPlaylistRightButton" to="PauseManager" method="_on_switch_playlist_right_button_pressed"]

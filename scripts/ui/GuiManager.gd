@@ -45,4 +45,3 @@ func set_active_gui_panels(state: bool):
 	panel_power_ups_manager.panel.visible = state
 	weapon_panel_manager.set_active_panels(state)
 	minimap_manager.set_active(state)
-
