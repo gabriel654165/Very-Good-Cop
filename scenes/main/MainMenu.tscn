@@ -1,0 +1,199 @@
+[gd_scene load_steps=11 format=3 uid="uid://c5n7fexsfn3lw"]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_icdyr"]
+[ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_qjqgx"]
+[ext_resource type="Texture2D" uid="uid://c6bu82lhw3wa1" path="res://assets/UI/icons/skull_icon.png" id="2_oos42"]
+[ext_resource type="Shader" path="res://scripts/shaders/PixelisedShader.gdshader" id="4_goq8g"]
+[ext_resource type="Texture2D" uid="uid://klghaaupu3bl" path="res://assets/wallpaper/MexicoDroneView2.jpg" id="5_j5fk7"]
+[ext_resource type="Texture2D" uid="uid://dshqs6yvqcro0" path="res://assets/wallpaper/MexicanFlag.png" id="9_q1xmp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0e77s"]
+shader = ExtResource("4_goq8g")
+shader_parameter/pixelSize = 16
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fuj02"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.752941)
+thickness = 75
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_oiaaa"]
+color = Color(0.741176, 0, 0.258824, 1)
+thickness = 75
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_6vdec"]
+color = Color(0.905882, 0, 0.164706, 1)
+thickness = 75
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_icdyr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qjqgx")
+
+[node name="WallPaperFlag" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = -120.0
+offset_top = -57.0
+offset_right = 4152.0
+offset_bottom = 2791.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_q1xmp")
+
+[node name="WallPaperPostalCard" type="TextureRect" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 1980.0
+offset_bottom = 1485.0
+texture = ExtResource("5_j5fk7")
+
+[node name="PixelizedColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_0e77s")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="TopMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="TitleContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/VBoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture = ExtResource("2_oos42")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Very" type="Label" parent="CanvasLayer/Control/VBoxContainer/TitleContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.0823529, 0.239216, 0.129412, 1)
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 150
+text = " Very"
+horizontal_alignment = 1
+
+[node name="Good" type="Label" parent="CanvasLayer/Control/VBoxContainer/TitleContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 150
+text = " Good "
+horizontal_alignment = 1
+
+[node name="Cop" type="Label" parent="CanvasLayer/Control/VBoxContainer/TitleContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.686275, 0.0392157, 0.0941176, 1)
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 150
+text = "Cop "
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/VBoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture = ExtResource("2_oos42")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="PlayContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/PlayContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.733333)
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxLine_fuj02")
+theme_override_styles/hover = SubResource("StyleBoxLine_oiaaa")
+theme_override_styles/pressed = SubResource("StyleBoxLine_6vdec")
+text = "Play new game"
+
+[node name="MiddleMargin2" type="AspectRatioContainer" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="TrainingContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TrainingButton" type="Button" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/TrainingContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.733333)
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxLine_fuj02")
+theme_override_styles/hover = SubResource("StyleBoxLine_oiaaa")
+theme_override_styles/pressed = SubResource("StyleBoxLine_6vdec")
+text = "Training room"
+
+[node name="MiddleMargin3" type="AspectRatioContainer" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="QuitContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/QuitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.733333)
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxLine_fuj02")
+theme_override_styles/hover = SubResource("StyleBoxLine_oiaaa")
+theme_override_styles/pressed = SubResource("StyleBoxLine_6vdec")
+text = "Quit game"
+
+[node name="MiddleMargin4" type="AspectRatioContainer" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[connection signal="button_up" from="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/PlayContainer/PlayButton" to="." method="_on_play_button_up"]
+[connection signal="button_up" from="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/TrainingContainer/TrainingButton" to="." method="_on_training_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/QuitContainer/QuitButton" to="." method="_on_quit_button_up"]
