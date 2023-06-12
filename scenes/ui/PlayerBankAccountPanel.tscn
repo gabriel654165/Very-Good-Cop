@@ -57,6 +57,7 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="AccountLog-PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/AccountLog-PanelContainer"]
@@ -161,6 +162,5 @@ theme_override_font_sizes/font_size = 20
 text = "450$"
 
 [node name="BottomMargin" type="AspectRatioContainer" parent="VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2

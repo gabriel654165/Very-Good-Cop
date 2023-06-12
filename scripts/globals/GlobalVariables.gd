@@ -25,7 +25,7 @@ var player_distance_weapon_list = [
 	{
 		name= 'glock',
 		unlocked = true,
-		special_power_unlocked = true,
+		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
@@ -41,7 +41,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'shotgun',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= 0,
@@ -58,7 +58,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'mini_uzi',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
@@ -75,7 +75,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'riffle',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= 0,
@@ -92,7 +92,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'machine_gun',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
@@ -109,7 +109,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name='grenade_launcher',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 10,
 		balls_by_burt_lvl= -1,
@@ -126,7 +126,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name='sniper',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
@@ -544,16 +544,16 @@ var player_melee_weapon_list = [
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
-		can_throw_lvl=1,
+		can_throw_lvl=0,
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'knife',
-		unlocked= true,
+		unlocked= false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
-		can_throw_lvl=1,
+		can_throw_lvl=0,
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'brass_knuckles',
@@ -566,7 +566,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'baseball_bat',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -575,7 +575,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'golf_club',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -584,7 +584,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'pocket_chain_saw',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -611,7 +611,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'heineken',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -620,7 +620,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'machete',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -629,7 +629,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'skate',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -638,7 +638,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'axe',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -656,7 +656,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'katana',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -674,12 +674,12 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'blue_lightsaber_toy',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
-		can_throw_lvl=1,
+		can_throw_lvl=0,
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'red_lightsaber_toy',
