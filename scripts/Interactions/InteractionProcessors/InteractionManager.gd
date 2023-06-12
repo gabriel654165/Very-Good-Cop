@@ -12,6 +12,8 @@ class_name InteractionManager
 
 func set_active(new_state: bool):
 	is_active = new_state
+	if interactions == null:
+		return
 	#for child which are in interactions
 	for child in self.get_children():
 		if child is Interaction and interactions.has(child as Interaction):
@@ -43,23 +45,20 @@ func _process(delta):
 		
 		if interaction.for_who == Interaction.TRIGGER_ACTOR.EVERYBODY or character_to_trigger_actor(body_touching) == interaction.for_who:
 			all_interactions_finished = all_interactions_finished && interaction.is_triggered
-	
-	#print("\nall_interactions_finished = ", all_interactions_finished, "\n")
+		else:
+			all_interactions_finished = false
 
 	if all_interactions_finished:
 		action(body_touching)
 		set_active(false)
 
 func action(actor: Character = null):
-	#print("\n---Do action : ", self.name)
 	if next_interaction != null:
 		next_interaction.set_active(true)
 		next_interaction.trigger(actor)
 
 func character_to_trigger_actor(body: Node) -> Interaction.TRIGGER_ACTOR :
 	var actor_type = Interaction.TRIGGER_ACTOR.NONE
-	#if body != null:
-	#	print("actor colliding name : ", body.name)
 	
 	if body is Player:
 		actor_type = Interaction.TRIGGER_ACTOR.PLAYER

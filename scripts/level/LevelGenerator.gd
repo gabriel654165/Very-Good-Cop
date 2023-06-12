@@ -44,7 +44,6 @@ var exit_pos: Vector2i
 
 
 
-
 static func world_to_local_positon(pos:Vector2) -> Vector2:
 	var start_pos:Vector2 = Vector2i(LevelCanvasSideSize/2, LevelCanvasSideSize/2)
 	return ((pos / RoomCenterOffset) + start_pos).round()
@@ -190,9 +189,14 @@ func spawn_dungeon_rooms():
 		var chosen_room:RoomData = GlobalVariables.rooms_repository[doors_id].pick_random()
 
 		var instantiated_room:Node2D = chosen_room.factory.instantiate()
-
+		
 		if room == entrance_pos or room == exit_pos:
 			instantiated_room.should_spawn_stuff = false
+		if instantiated_room.has_node("EndLevelInteraction"):
+			var end_level_interaction := instantiated_room.get_node("EndLevelInteraction")
+			end_level_interaction.visible = true if room == exit_pos else false
+			end_level_interaction.get_node("PressKeyAndCollide").set_active(true if room == exit_pos else false)
+			end_level_interaction.get_node("StaticBody2D/CollisionShape2D").disabled = false if room == exit_pos else true
 		instantiated_room.position = relative_pos
 
 		var door := preload("res://scenes/objects/door.tscn")
@@ -200,7 +204,7 @@ func spawn_dungeon_rooms():
 			spawn_child_object(instantiated_room, door, LeftDoorPosition, Vector2.DOWN.angle())
 		if door_bitflag_has_door(doors_id, BottomDoor):
 			spawn_child_object(instantiated_room, door, BottomDoorPosition)
-		
+
 		add_child(instantiated_room)
 
 
@@ -210,6 +214,7 @@ func spawn_child_object(parent:Node2D, packed_object:PackedScene, local_position
 	obj.position = local_position
 	if rotation != null and obj.has_method("rotate"):
 		obj.rotate(rotation)
+
 
 #
 # Find farthest cell from another cell

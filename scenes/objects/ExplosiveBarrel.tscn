@@ -1,16 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://cxjxhq5autr58"]
 
 [ext_resource type="Script" path="res://scripts/objects/ExplosiveBarrel.gd" id="1_o5qxv"]
+[ext_resource type="Texture2D" uid="uid://dbkqwtlbqkpf" path="res://assets/Interactions/explosive_barrels/barrel_explosive_red.png" id="2_gxrc8"]
 [ext_resource type="Script" path="res://scripts/Health.gd" id="2_hh2m6"]
 [ext_resource type="PackedScene" uid="uid://hcaid5opl6tx" path="res://scenes/particles/ExplosionParticles.tscn" id="3_hqxlf"]
 [ext_resource type="Shader" path="res://scripts/shaders/ShockWaveShader.gdshader" id="4_i7m5n"]
 [ext_resource type="Shader" path="res://scripts/shaders/PixelisedShader.gdshader" id="4_ibhi4"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r55sq"]
-size = Vector2(32, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1s42y"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_21hli"]
+radius = 21.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cjap6"]
 radius = 142.004
@@ -177,10 +175,11 @@ particle_animation = NodePath("ExplosionControl/SubViewportContainer/PixelizedSu
 shader_animation = NodePath("ShockWaveControl/AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_r55sq")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_gxrc8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_1s42y")
+shape = SubResource("CircleShape2D_21hli")
 
 [node name="ExplosionArea" type="Area2D" parent="."]
 
@@ -235,8 +234,6 @@ grow_vertical = 2
 [node name="ExplosionParticles" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport" instance=ExtResource("3_hqxlf")]
 visibility_layer = 2
 position = Vector2(150, 150)
-amount = 25
-speed_scale = 0.75
 scale_amount_min = 4.0
 scale_amount_max = 16.0
 

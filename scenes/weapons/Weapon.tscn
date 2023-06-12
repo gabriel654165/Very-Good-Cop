@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://c477b1thhwo0i"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_x1vvy"]
-[ext_resource type="PackedScene" uid="uid://cpjhdsrfevptf" path="res://scenes/projectiles/Bullet.tscn" id="2_j2en7"]
+[ext_resource type="PackedScene" uid="uid://cactlkcpude5w" path="res://scenes/projectiles/Bullet.tscn" id="2_j2en7"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="3_djx0w"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="4_oyirm"]
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="5_sv8ut"]
@@ -128,10 +128,9 @@ texture = ExtResource("5_sv8ut")
 region_rect = Rect2(130, 310, 14, 8)
 
 [node name="FirePosition" type="Marker2D" parent="Weapon"]
-position = Vector2(18, 4.48227e-05)
 
 [node name="FireDirection" type="Marker2D" parent="Weapon"]
-position = Vector2(20, 4.48227e-05)
+position = Vector2(3, 0)
 
 [node name="AttackCoolDown" type="Timer" parent="Weapon"]
 wait_time = 0.5
@@ -142,7 +141,7 @@ one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="Weapon"]
 visible = false
-position = Vector2(23, 0)
+position = Vector2(6, 0)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_8js0n")

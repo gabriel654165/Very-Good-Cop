@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dorctgk4vqfuy"]
+[gd_scene load_steps=13 format=3 uid="uid://dorctgk4vqfuy"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/ThrowedWeapon.gd" id="1_nv3td"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="2_nvgov"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/Interactions/AddWeaponInteraction.gd" id="4_d5v5b"]
 [ext_resource type="Script" path="res://scripts/Interactions/InteractionProcessors/InteractionManager.gd" id="5_ewv7s"]
 [ext_resource type="Script" path="res://scripts/Interactions/PressKeyInteraction.gd" id="6_micea"]
+[ext_resource type="Script" path="res://scripts/Interactions/ChangeVisibility.gd" id="7_kcw2m"]
+[ext_resource type="PackedScene" uid="uid://dnrwg6uymyr1g" path="res://scenes/ui/InteractionPressKey.tscn" id="8_wgcnf"]
 
 [sub_resource type="Animation" id="Animation_cd84c"]
 resource_name = "spining_sprite"
@@ -35,13 +37,15 @@ size = Vector2(34, 10)
 [sub_resource type="CircleShape2D" id="CircleShape2D_fd32i"]
 radius = 28.2312
 
-[node name="ThrowedWeapon" type="CharacterBody2D" node_paths=PackedStringArray("animation_player")]
+[node name="ThrowedWeapon" type="CharacterBody2D" node_paths=PackedStringArray("recover_weapon_interaction", "animation_player")]
 rotation = -1.5708
 collision_layer = 2
 script = ExtResource("1_nv3td")
+recover_weapon_interaction = NodePath("GrabWeapon/AddWeaponInteraction")
 speed = 7
 damages = 5
 impact_force = 0.0
+should_bounce = true
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -76,13 +80,20 @@ shape = SubResource("CircleShape2D_fd32i")
 [node name="PressKeyAndCollide" type="Node2D" parent="GrabWeapon" node_paths=PackedStringArray("collision_interaction", "next_interaction")]
 rotation = -0.375185
 script = ExtResource("5_ewv7s")
-interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction")])
+interactions_nps = Array[NodePath]([NodePath("KeyPressedInteraction"), NodePath("../CharacterCollisionInteraction"), NodePath("ChangeCanvasVisibility")])
 collision_interaction = NodePath("../CharacterCollisionInteraction")
 next_interaction = NodePath("../AddWeaponInteraction")
 
 [node name="KeyPressedInteraction" type="Node2D" parent="GrabWeapon/PressKeyAndCollide"]
 script = ExtResource("6_micea")
 keyCode = 69
+for_who = 1
+is_active = true
+
+[node name="ChangeCanvasVisibility" type="Node" parent="GrabWeapon/PressKeyAndCollide"]
+script = ExtResource("7_kcw2m")
+interaction_gui_scene = ExtResource("8_wgcnf")
+visibility = true
 for_who = 1
 is_active = true
 

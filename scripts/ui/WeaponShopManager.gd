@@ -34,13 +34,16 @@ var shop_item_distance_weapon_list : Array[ShopItemContainer] = []
 var shop_item_melee_weapon_list : Array[ShopItemContainer] = []
 var shop_item_equipment_list : Array[ShopItemContainer] = []
 
+
 func _ready():
 	gui_manager = get_parent() as GuiManager
+
 
 func _process(delta):
 	if (active and current_blur_intensity < aim_blur_intensity) or (!active and current_blur_intensity > 0):
 		color_rect.get_material().set_shader_parameter("intensity", current_blur_intensity)
-	
+
+
 func set_active(state: bool):
 	if weapon_shop_gui == null:
 		return
@@ -50,6 +53,7 @@ func set_active(state: bool):
 		generate_ui()
 	else:
 		unload_ui()
+
 
 func update():
 	for distance_weapon_item in shop_item_distance_weapon_list:
@@ -189,5 +193,7 @@ func free_item_panel_list(item_panel_list: Array):
 func _on_quit_button_pressed():
 	get_tree().quit()
 
+#TODO : SAVE HERE
 func _on_continue_button_pressed():
+	GlobalVariables.level += 1
 	get_tree().reload_current_scene()

@@ -4,12 +4,16 @@ class_name Minimap
 var map : Array
 var full_map : Array
 var player_ref : Player
+var entrance_room_pos : Vector2i = Vector2i.ZERO
+var exit_room_pos : Vector2i = Vector2i.ZERO
 var enemies_list_ref : Array[Enemy]
 var powerups_list_ref : Array[PassiveEffect]
 
 
-func init(player: Node, top_node: Node):
+func init(player: Node, level_generator_instance: LevelGenerator, top_node: Node):
 	player_ref = player
+	entrance_room_pos = level_generator_instance.entrance_pos
+	exit_room_pos = level_generator_instance.exit_pos
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is Enemy, enemies_list_ref, top_node)
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return elem is PassiveEffect, powerups_list_ref, top_node)
 
@@ -72,20 +76,14 @@ func get_heigth() -> int:
 	return full_map_no_empty_line.size()
 
 
-func get_minimap() -> Array:
-	return map
-	#return map.filter(func(line): return line.any(func(room): return room))
-
-func get_full_minimap() -> Array:
-	return full_map
-
 
 func get_player_pos() -> Vector2:
-	return LevelGenerator.world_to_precise_local_positon(player_ref.global_position)
+	var pos : Vector2 = LevelGenerator.world_to_precise_local_positon(player_ref.global_position) if player_ref != null else Vector2.ZERO
+	return pos
 
 func get_current_room_pos() -> Vector2:
-	return LevelGenerator.world_to_local_positon(player_ref.global_position)
-
+	var pos : Vector2 = LevelGenerator.world_to_local_positon(player_ref.global_position) if player_ref != null else Vector2.ZERO
+	return pos
 
 func get_item_pos_in_map(item_list_ref: Array, map: Array, item_ref: Node = null) -> Array[Vector2]:
 	var items_pos_list : Array[Vector2] = []
@@ -93,6 +91,7 @@ func get_item_pos_in_map(item_list_ref: Array, map: Array, item_ref: Node = null
 		if item == null:
 			continue
 		var item_room := LevelGenerator.world_to_local_positon(item.global_position)
+		#sometimes crash : Invalid get index '9' (on base: 'Array').
 		if !map[item_room.y][item_room.x]:
 			continue
 		if item_ref != null:
@@ -102,11 +101,15 @@ func get_item_pos_in_map(item_list_ref: Array, map: Array, item_ref: Node = null
 		items_pos_list.append(LevelGenerator.world_to_precise_local_positon(item.global_position))
 	return items_pos_list
 
-func get_room_enemies_pos_list() -> Array[Vector2]:
-	return get_item_pos_in_map(enemies_list_ref, map, player_ref)
+func get_room_enemies_pos_list() -> Array:
+	if player_ref != null:
+		return get_item_pos_in_map(enemies_list_ref, map, player_ref)
+	return []
 
-func get_room_powerups_pos_list() -> Array[Vector2]:
-	return get_item_pos_in_map(powerups_list_ref, map, player_ref)
+func get_room_powerups_pos_list() -> Array:
+	if player_ref != null:
+		return get_item_pos_in_map(powerups_list_ref, map, player_ref)
+	return []
 
 func get_full_map_enemies_pos_list() -> Array[Vector2]:
 	return get_item_pos_in_map(enemies_list_ref, full_map)
@@ -122,7 +125,8 @@ func get_map_powerups_pos_list() -> Array[Vector2]:
 
 
 func _process(delta):
-	assert(player_ref != null)
+	if player_ref == null:
+		return
 	assert(!map.is_empty())
 
 	var current_room := LevelGenerator.world_to_local_positon(player_ref.global_position)

@@ -35,14 +35,15 @@ enum PatrolType {
 
 var patrol_points: Array = []
 
-# is dead once only
-var is_dead: bool
 
 func _ready():
-	weapon_manager = get_node("WeaponManager")
-	weapon_manager.weapon.global_position = weapon_position.global_position
-
+	GlobalSignals.weapon_shoot.connect(self.handle_shoot)
+	GlobalSignals.weapon_stab.connect(self.handle_stab)
+	GlobalSignals.throwed_distance_weapon.connect(self.handle_throwed_distance_weapon)
+	if weapon_manager == null:
+		return
 	weapon_manager.weapon.projectile_damages = weapon_manager.projectile_damages + GlobalVariables.level * 1.75 
+
 	state_machine.init(self, weapon_manager.weapon, speed * 10)
 	
 	patrol_wait = decrease_per_level_smoothly(patrol_wait, 30, 1, 1)
@@ -51,17 +52,22 @@ func _ready():
 	hearing_range = increase_per_level_smoothly(hearing_range, 1, 2, 400)
 	pursue_look_angle = increase_per_level_smoothly(pursue_look_angle, 5, 1, 60)
 
-func _process(delta):
+	set_weapon_position()
+	set_body_animation()
+
+func _physics_process(delta):
 	if action_disabled:
 		return
+	manage_animation(global_transform.x.normalized())
+
 
 func set_speed(new_speed: float):
 	speed = new_speed
 	state_machine._movement_speed = speed * 10
 
+
 func handle_hit(damager: Node2D, damages):
 	health.hit(damages)
-	
 	#go to player if he shooting us
 	#todo: projectile_owner seems to be null on projectile
 	#find a way to know the damager owner
@@ -70,8 +76,8 @@ func handle_hit(damager: Node2D, damages):
 	})
 	if health.is_dead() and !is_dead:
 		is_dead = true
-		var sprite_dead_enemy = instanciate_corpse(self.global_position, get_tree().current_scene, damager)
-		GlobalSignals.enemy_died.emit(sprite_dead_enemy, point_value)
+		var corpse_inst = instanciate_corpse(self.global_position, get_tree().current_scene, damager)
+		GlobalSignals.enemy_died.emit(corpse_inst, point_value)
 		queue_free()
 	else:
 		instanciate_blood_effect(self.global_position, get_tree().current_scene, damager)

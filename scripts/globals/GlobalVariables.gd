@@ -5,6 +5,7 @@ var cursor_position : Vector2 = Vector2.ZERO
 var encryption_key := "https://youtu.be/OSkfONBg_QU?!?!".to_ascii_buffer();
 
 var playlists : Dictionary
+var playlists_track_names : Dictionary
 
 # Arrays of doors stored at their door bitflag index
 # Every door which only has a bottom door will be stored at index [0b0001] so index [1]
@@ -13,7 +14,7 @@ var rooms_repository: Array = []
 
 # VAR TO SAVE
 var level : int = 1
-var money : int = 500
+var money : int = 0
 
 var grappling_hook_level : int = 1
 
@@ -24,11 +25,11 @@ var player_distance_weapon_list = [
 	{
 		name= 'glock',
 		unlocked = true,
-		special_power_unlocked = false,
+		special_power_unlocked = true,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
-		precision_lvl= 6,
+		precision_lvl= 0,
 		recoil_force_lvl= 0,
 		ammo_size_lvl= 0,
 		ammo_reloading_time_lvl= 0,
@@ -57,7 +58,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'mini_uzi',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
@@ -74,7 +75,7 @@ var player_distance_weapon_list = [
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'riffle',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= 0,
@@ -144,6 +145,28 @@ var player_distance_weapon_list = [
 ]
 # !VAR TO SAVE
 
+
+func get_distance_weapon_position_by_index(weapon_index: int) -> Vector2:
+	var weapon_position := Vector2.ZERO
+	var dic_index : int = 0
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		if dic_index == weapon_index:
+			weapon_position = weapon_dictionnary.weapon_position
+			break
+		dic_index += 1
+	return weapon_position
+
+func get_distance_weapon_position_by_name(weapon_name: String) -> Vector2:
+	var weapon_position := Vector2.ZERO
+	
+	for weapon_dictionnary in all_distance_weapon_list:
+		if weapon_name == weapon_dictionnary.name:
+			weapon_position = weapon_dictionnary.weapon_position
+			break
+	return weapon_position
+
+
 func level_stat(min_value, max_value, number_of_levels: int):
 	return {
 	min_value= min_value,
@@ -154,6 +177,8 @@ func level_stat(min_value, max_value, number_of_levels: int):
 var all_distance_weapon_list = [
 	{
 		name="glock",
+		animation="glock_animation",
+		weapon_position=Vector2(25, -2),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -203,6 +228,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="shotgun",
+		animation="shotgun_animation",
+		weapon_position=Vector2(18, 0),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_shotgun.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_2.png"),
@@ -252,6 +279,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="mini_uzi",
+		animation="mini_uzi_animation",
+		weapon_position=Vector2(29, -4),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Uzi.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -301,6 +330,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="riffle",
+		animation="riffle_animation",
+		weapon_position=Vector2(26, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr__Aka.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -350,6 +381,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="machine_gun",
+		animation="machine_gun_animation",
+		weapon_position=Vector2(27, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Mg.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -399,6 +432,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="grenade_launcher",
+		animation="grenade_launcher_animation",
+		weapon_position=Vector2(22, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_grenade_launcher.png"),
 		shot_shells_texture=null,
@@ -448,6 +483,8 @@ var all_distance_weapon_list = [
 		}]
 	},{
 		name="sniper",
+		animation="sniper_animation",
+		weapon_position=Vector2(31, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_sniper.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -501,13 +538,22 @@ var all_distance_weapon_list = [
 # VAR TO SAVE
 var player_melee_weapon_list = [
 	{
+		name= 'police_baton',
+		unlocked = true,
+		special_power_unlocked = false,
+		attack_cooldown_lvl= 0,
+		attack_distance_lvl= 0,
+		damages_lvl=0,
+		can_throw_lvl=1,
+		points_to_use_special_power_lvl=0,
+	}, {
 		name= 'knife',
 		unlocked= true,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
-		can_throw_lvl=0,
+		can_throw_lvl=1,
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'brass_knuckles',
@@ -529,7 +575,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'golf_club',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -547,7 +593,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'pan',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -565,7 +611,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'heineken',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -574,7 +620,7 @@ var player_melee_weapon_list = [
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'machete',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -591,17 +637,8 @@ var player_melee_weapon_list = [
 		can_throw_lvl=-1,
 		points_to_use_special_power_lvl=0,
 	}, {
-		name= 'police_baton',
-		unlocked = false,
-		special_power_unlocked = false,
-		attack_cooldown_lvl= 0,
-		attack_distance_lvl= 0,
-		damages_lvl=0,
-		can_throw_lvl=0,
-		points_to_use_special_power_lvl=0,
-	}, {
 		name= 'axe',
-		unlocked = false,
+		unlocked = true,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -642,11 +679,11 @@ var player_melee_weapon_list = [
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
 		damages_lvl=0,
-		can_throw_lvl=0,
+		can_throw_lvl=1,
 		points_to_use_special_power_lvl=0,
 	}, {
 		name= 'red_lightsaber_toy',
-		unlocked = true,
+		unlocked = false,
 		special_power_unlocked = false,
 		attack_cooldown_lvl= 0,
 		attack_distance_lvl= 0,
@@ -659,8 +696,32 @@ var player_melee_weapon_list = [
 
 var all_melee_weapon_list = [
 	{
+		name= 'police_baton',
+		animation="police_baton_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/police_baton.png"),
+		special_power_name= "special_power_name",
+		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_description= "Coming soon",
+		stats= [{
+			attack_cooldown= level_stat(1.5, 0.5, 6),
+			type= "property",
+		}, {
+			attack_distance= level_stat(30, 30, 1),#always the same...
+			type= "property",
+		}, {
+			damages= level_stat(7, 50, 10),
+			type= "property"
+		}, {
+			can_throw= level_stat(false, true, 1),
+			type= "projectile",
+		}, {
+			points_to_use_special_power= level_stat(300, 100, 3),
+			type= "power",
+		}]
+	},{
 		name="knife",
-		gui_texture=load("res://assets/UI/icons/weapons/spr_Knife.png"),
+		animation="knife_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_Knife.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -668,10 +729,10 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(1, 0.1, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1, 1, 1),#always the same...
+			attack_distance= level_stat(30, 30, 1),#always the same...
 			type= "property",
 		}, {
-			damages= level_stat(7, 50, 15),
+			damages= level_stat(9, 50, 15),
 			type= "property",
 		}, {
 			can_throw= level_stat(false, true, 1),
@@ -682,7 +743,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'brass_knuckles',
-		gui_texture=load("res://assets/UI/icons/weapons/spr_brass_knuckles.png"),
+		animation="brass_knuckles_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_brass_knuckles.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -690,7 +752,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(1, 0.1, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(0.2, 0.2, 1),#always the same...
+			attack_distance= level_stat(25, 25, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(8, 30, 10),
@@ -704,7 +766,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'baseball_bat',
-		gui_texture=load("res://assets/UI/icons/weapons/spr_Baseball_Bat.png"),
+		animation="baseball_bat_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_Baseball_Bat.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -712,7 +775,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(1.5, 0.35, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.5, 1.5, 1),#always the same...
+			attack_distance= level_stat(35, 35, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(5, 40, 15),
@@ -726,7 +789,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'golf_club',
-		gui_texture=load("res://assets/UI/icons/weapons/golf_club.png"),
+		animation="golf_club_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/golf_club.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -734,7 +798,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(1.75, 0.5, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.75, 1.75, 1),#always the same...
+			attack_distance= level_stat(40, 40, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(5, 40, 15),
@@ -748,7 +812,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'pocket_chain_saw',
-		gui_texture=load("res://assets/UI/icons/weapons/pocket_chain_saw.png"),
+		animation="pocket_chain_saw_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/pocket_chain_saw.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -756,7 +821,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(5, 2.5, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(0.5, 0.5, 1),#always the same...
+			attack_distance= level_stat(30, 30, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(1, 10, 10),
@@ -770,7 +835,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'pan',
-		gui_texture=load("res://assets/UI/icons/weapons/pan.png"),
+		animation="pan_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/pan.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -778,7 +844,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(1.5, 0.5, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(0.5, 0.5, 1),#always the same...
+			attack_distance= level_stat(30, 30, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(2, 10, 5),
@@ -792,7 +858,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'tequilla',
-		gui_texture=load("res://assets/UI/icons/weapons/tequilla.png"),
+		animation="tequilla_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/tequilla.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -800,7 +867,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(2, 0.5, 3),
 			type= "property",
 		}, {
-			attack_distance= level_stat(0.5, 0.5, 1),#always the same...
+			attack_distance= level_stat(30, 30, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(3, 40, 15),
@@ -814,7 +881,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'heineken',
-		gui_texture=load("res://assets/UI/icons/weapons/henekein.png"),
+		animation="heineken_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/henekein.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -836,7 +904,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'machete',
-		gui_texture=load("res://assets/UI/icons/weapons/spr_machete.png"),
+		animation="machete_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_machete.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -844,7 +913,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(2, 0.5, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.25, 1.25, 1),#always the same...
+			attack_distance= level_stat(35, 35, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(10, 60, 15),
@@ -858,7 +927,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'skate',
-		gui_texture=load("res://assets/UI/icons/weapons/skate.png"),
+		animation="skate_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/skate.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -866,7 +936,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(1, 0.5, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(0.75, 0.75, 1),#always the same...
+			attack_distance= level_stat(30, 30, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(5, 35, 12),
@@ -879,29 +949,9 @@ var all_melee_weapon_list = [
 			type= "power",
 		}]
 	},{
-		name= 'police_baton',
-		gui_texture=load("res://assets/UI/icons/weapons/police_baton.png"),
-		special_power_name= "special_power_name",
-		special_power_preview="res://assets/previews/preview-resized.ogv",
-		special_power_description= "Coming soon",
-		stats= [{
-			attack_cooldown= level_stat(1.5, 0.5, 6),
-			type= "property",
-		}, {
-			attack_distance= level_stat(0.65, 0.65, 1),#always the same...
-			type= "property",
-		}, {
-			damages= level_stat(7, 50, 10),
-			type= "property"
-		}, {
-			can_throw= level_stat(false, true, 1)
-		}, {
-			points_to_use_special_power= level_stat(300, 100, 3),
-			type= "power",
-		}]
-	},{
 		name= 'axe',
-		gui_texture=load("res://assets/UI/icons/weapons/axe.png"),
+		animation="axe_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/axe.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -909,7 +959,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(3.5, 0.75, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.35, 1.35, 1),#always the same...
+			attack_distance= level_stat(35, 35, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(13, 70, 20),
@@ -923,7 +973,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'shovel',
-		gui_texture=load("res://assets/UI/icons/weapons/spr_shovel.png"),
+		animation="shovel_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_shovel.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -931,7 +982,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(3, 0.6, 6),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.4, 1.4, 1),#always the same...
+			attack_distance= level_stat(35, 35, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(7, 40, 12),
@@ -945,7 +996,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'katana',
-		gui_texture=load("res://assets/UI/icons/weapons/katana.png"),
+		animation="katana_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/katana.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -953,7 +1005,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(2, 0.1, 12),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.3, 1.3, 1),#always the same...
+			attack_distance= level_stat(35, 35, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(12, 100, 22),
@@ -967,7 +1019,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'sword',
-		gui_texture=load("res://assets/UI/icons/weapons/spr_sword.png"),
+		animation="sword_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_sword.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -975,7 +1028,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(3, 0.5, 12),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.1, 1.1, 1),#always the same...
+			attack_distance= level_stat(32, 32, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(15, 115, 22),
@@ -989,7 +1042,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'blue_lightsaber_toy',
-		gui_texture=load("res://assets/UI/icons/weapons/spr_blue_lightsaber_toy.png"),
+		animation="blue_lightsaber_toy_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_blue_lightsaber_toy.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -997,7 +1051,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(5, 0.1, 15),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.3, 1.3, 1),#always the same...
+			attack_distance= level_stat(35, 35, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(15, 150, 22),
@@ -1011,7 +1065,8 @@ var all_melee_weapon_list = [
 		}]
 	},{
 		name= 'red_lightsaber_toy',
-		gui_texture=load("res://assets/UI/icons/weapons/spr_red_lightsaber_toy.png"),
+		animation="red_lightsaber_toy_animation",
+		gui_texture=load("res://assets/weapons/sprites/weapons/spr_red_lightsaber_toy.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "Coming soon",
@@ -1019,7 +1074,7 @@ var all_melee_weapon_list = [
 			attack_cooldown= level_stat(5, 0.1, 15),
 			type= "property",
 		}, {
-			attack_distance= level_stat(1.3, 1.3, 1),#always the same...
+			attack_distance= level_stat(35, 35, 1),#always the same...
 			type= "property",
 		}, {
 			damages= level_stat(15, 150, 22),

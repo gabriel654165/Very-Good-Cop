@@ -23,7 +23,18 @@ func get_speed(delta: float, speed: float) -> float:
 	return speed * (delta * 60)
 
 
-func is_inside_vector_2(aim_pos: Vector2, src_pos: Vector2, offset: Vector2):
+func is_inside_range(aim_val: float, src_val: float, offset: float) -> bool:
+	var max : float = aim_val + offset
+	var min : float = aim_val - offset
+	
+	var is_inf_than_max : bool = src_val < max
+	var is_sup_than_min : bool = src_val > min
+	
+	if is_inf_than_max and is_sup_than_min:
+		return true
+	return false
+
+func is_inside_vector_2(aim_pos: Vector2, src_pos: Vector2, offset: Vector2) -> bool:
 	var upper_y : float = aim_pos.y + offset.y
 	var down_y : float = aim_pos.y - offset.y
 	var upper_x : float = aim_pos.x + offset.x
@@ -60,17 +71,30 @@ func find_object_on_condition(condition: Callable, parent: Node) -> Node:
 	return object
 
 
+func disable_all_process(node: Node, disable: bool):
+	node.set_process(!disable)
+	node.set_physics_process(!disable)
+	node.set_process_internal(!disable)
+	node.set_process_unhandled_input(!disable)
+	node.set_process_unhandled_key_input(!disable)
+
+
 func disable_all_game_objects(state: bool):
 	var index : int = 1
-	var characters_in_scene : Array = []
+	var objects_in_scene : Array = []
 
-	append_in_array_on_condition(func(elem: Node): return elem is Character, characters_in_scene, get_tree().root)
+	append_in_array_on_condition(func(elem: Node): return (elem is Character or elem is Projectile or elem is CPUParticles2D), objects_in_scene, get_tree().root)
 	
-	for character in characters_in_scene:
-		if character != null:
-			character.action_disabled = state
+	for obj in objects_in_scene:
+		if obj != null:
+			if obj is Player and "action_disabled" in obj:
+				obj.action_disabled = state
+				continue
+			for child in obj.get_children():
+				disable_all_process(child, state)
+			disable_all_process(obj, state)
 		else:
-			characters_in_scene.remove_at(index)
+			objects_in_scene.remove_at(index)
 			continue
 		index += 1
 
@@ -81,6 +105,39 @@ func print_func_time(fn:Callable, message:=fn.get_method()):
 	fn.call()
 	
 	prints(message, "in", Time.get_unix_time_from_system() - t, "seconds")
+
+
+func get_melee_weapon_animation_by_index(weapon_index: int) -> String:
+	return get_weapon_animation_by_index(GlobalVariables.all_melee_weapon_list, weapon_index)
+
+func get_melee_weapon_animation_by_name(weapon_name: String) -> String:
+	return get_weapon_animation_by_name(GlobalVariables.all_melee_weapon_list, weapon_name)
+
+func get_distance_weapon_animation_by_index(weapon_index: int) -> String:
+	return get_weapon_animation_by_index(GlobalVariables.all_distance_weapon_list, weapon_index)
+
+func get_distance_weapon_animation_by_name(weapon_name: String) -> String:
+	return get_weapon_animation_by_name(GlobalVariables.all_distance_weapon_list, weapon_name)
+
+func get_weapon_animation_by_index(weapon_list: Array, weapon_index: int) -> String:
+	var animation_name : String = ""
+	var dic_index : int = 0
+	
+	for weapon_dictionnary in weapon_list:
+		if dic_index == weapon_index:
+			animation_name = weapon_dictionnary.animation
+			break
+		dic_index += 1
+	return animation_name
+
+func get_weapon_animation_by_name(weapon_list: Array, weapon_name: String) -> String:
+	var animation_name : String = ""
+	
+	for weapon_dictionnary in weapon_list:
+		if weapon_name == weapon_dictionnary.name:
+			animation_name = weapon_dictionnary.animation
+			break
+	return animation_name
 
 
 func linear_ratio(min_val, max_val, total_lvl, current_lvl, error_value_case):
@@ -111,6 +168,7 @@ func get_property_by_level(weapon_stats, weapon_property_level, propriety_name, 
 				return boolean_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_property_level, weapon_default_value)
 			return linear_ratio(stat.min_value, stat.max_value, stat.number_of_levels, weapon_property_level, weapon_default_value)
 	return weapon_default_value
+
 
 func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: int):
 	var current_index : int = 0
@@ -145,6 +203,62 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 		current_index += 1
 	weapon_editor.set_variables(weapon_editor.weapon)
 
+func set_melee_weapon_properties(melee_weapon: Knife, weapon_index: int):
+	var current_index : int = 0
+	
+	for weapon_properties_levels in GlobalVariables.player_melee_weapon_list:
+		if current_index == weapon_index:
+			melee_weapon.weapon_name = weapon_properties_levels.name
+			melee_weapon.side_sprite.texture = GlobalVariables.all_melee_weapon_list[current_index].gui_texture
+			melee_weapon.attack_cooldown = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.attack_cooldown_lvl, "attack_cooldown", melee_weapon.attack_cooldown)
+			melee_weapon.attack_distance = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.attack_distance_lvl, "attack_distance", melee_weapon.attack_distance)
+			melee_weapon.damages = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.damages_lvl, "damages", melee_weapon.damages)
+			melee_weapon.can_throw = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.can_throw_lvl, "can_throw", melee_weapon.can_throw)
+			melee_weapon.points_to_use_special_power = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.points_to_use_special_power_lvl, "points_to_use_special_power", melee_weapon.points_to_use_special_power)
+			break
+		current_index += 1
+	melee_weapon.update_properties()
+
+
+func reset_distance_weapon_levels():
+	for weapon in GlobalVariables.player_distance_weapon_list:
+		if weapon.name != "glock":
+			weapon.unlocked = false
+		weapon.special_power_unlocked = false
+		weapon.shooting_cooldown_lvl= 0 if weapon.shooting_cooldown_lvl != -1 else -1
+		weapon.balls_by_burt_lvl= 0 if weapon.balls_by_burt_lvl != -1 else -1
+		weapon.frequence_of_burt_lvl= 0 if weapon.frequence_of_burt_lvl != -1 else -1
+		weapon.precision_lvl= 0 if weapon.precision_lvl != -1 else -1
+		weapon.recoil_force_lvl= 0 if weapon.recoil_force_lvl != -1 else -1
+		weapon.ammo_size_lvl= 0 if weapon.ammo_size_lvl != -1 else -1
+		weapon.ammo_reloading_time_lvl= 0 if weapon.ammo_reloading_time_lvl != -1 else -1
+		weapon.projectile_speed_lvl= 0 if weapon.projectile_speed_lvl != -1 else -1
+		weapon.projectile_damages_lvl= 0 if weapon.projectile_damages_lvl != -1 else -1
+		weapon.projectile_impact_force_lvl= 0 if weapon.projectile_impact_force_lvl != -1 else -1
+		weapon.projectile_bouncing_lvl= 0 if weapon.projectile_bouncing_lvl != -1 else -1
+		weapon.points_to_use_special_power_lvl= 0 if weapon.points_to_use_special_power_lvl != -1 else -1
+		weapon.auto_lock_target_lvl= 0 if weapon.auto_lock_target_lvl != -1 else -1
+
+
+func reset_melee_weapon_levels():
+	for weapon in GlobalVariables.player_melee_weapon_list:
+		if weapon.name != "police_baton":
+			weapon.unlocked = false
+		weapon.special_power_unlocked = false
+		weapon.attack_cooldown_lvl= 0 if weapon.attack_cooldown_lvl != -1 else -1
+		weapon.attack_distance_lvl= 0 if weapon.attack_distance_lvl != -1 else -1
+		weapon.damages_lvl= 0 if weapon.damages_lvl != -1 else -1
+		weapon.can_throw_lvl= 0 if weapon.can_throw_lvl != -1 else -1
+		weapon.points_to_use_special_power_lvl=  0 if weapon.points_to_use_special_power_lvl != -1 else -1
+
+
+func reset_equipment_levels():
+	for equipment in GlobalVariables.player_equipment_list:
+		equipment.unlocked = false
+		equipment.health_bonus_lvl= 0 if equipment.health_bonus_lvl != -1 else -1
+		equipment.speed_bonus_lvl= 0 if equipment.speed_bonus_lvl != -1 else -1
+
+
 func save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.WRITE, GlobalVariables.encryption_key)
 	
@@ -163,7 +277,7 @@ func save():
 	
 	save_file.store_string(JSON.stringify(json_save))
 	save_file.close()
-	
+
 
 func load_save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.READ, GlobalVariables.encryption_key)

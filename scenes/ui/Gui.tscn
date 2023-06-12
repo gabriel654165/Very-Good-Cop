@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bsqpnn0rfxvic"]
+[gd_scene load_steps=69 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -11,8 +11,11 @@
 [ext_resource type="Script" path="res://scripts/ui/PopUpHealthManager.gd" id="8_armf7"]
 [ext_resource type="Script" path="res://scripts/ui/TextPointsManager.gd" id="9_dkbyk"]
 [ext_resource type="PackedScene" uid="uid://c3enp3a1fg70f" path="res://scenes/ui/PanelGui.tscn" id="10_0fs0q"]
+[ext_resource type="Script" path="res://scripts/ui/PopUpInteractionManager.gd" id="10_1jj2h"]
+[ext_resource type="Script" path="res://scripts/ui/PopUpPowerUpManager.gd" id="11_3jshf"]
 [ext_resource type="Script" path="res://scripts/ui/PanelKillsManager.gd" id="11_f3jk1"]
 [ext_resource type="Script" path="res://scripts/ui/PanelTimerManager.gd" id="12_k7vmh"]
+[ext_resource type="Script" path="res://scripts/ui/PanelPowerUpsManager.gd" id="13_8keg5"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponPanelManager.gd" id="13_xqfji"]
 [ext_resource type="PackedScene" uid="uid://d23r1u15ts4op" path="res://scenes/ui/PanelWeaponGui.tscn" id="14_nrxer"]
 [ext_resource type="Script" path="res://scripts/ui/WeaponShopManager.gd" id="16_1slr4"]
@@ -31,6 +34,24 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/MinimapEnemyMarker.tscn" id="21_w74aj"]
 [ext_resource type="PackedScene" uid="uid://cq5wv7kjj7me4" path="res://scenes/ui/ChooseWeaponItemPanel.tscn" id="23_8p1eu"]
 [ext_resource type="PackedScene" uid="uid://rrwoshph15c5" path="res://scenes/ui/ItemStatsPanel.tscn" id="24_hkhpj"]
+[ext_resource type="Script" path="res://scripts/ui/GameOverManager.gd" id="29_tthju"]
+[ext_resource type="Script" path="res://scripts/ui/RecapLevelManager.gd" id="30_23poo"]
+[ext_resource type="Texture2D" uid="uid://chafbrkhdkskw" path="res://assets/weapons/sprites/weapons/Colt.png" id="33_p816j"]
+[ext_resource type="Texture2D" uid="uid://t0fsw6bmbs45" path="res://assets/UI/Minimap/PoliceCap.png" id="35_rfcsd"]
+[ext_resource type="Texture2D" uid="uid://c6bu82lhw3wa1" path="res://assets/UI/icons/skull_icon.png" id="35_u8ntm"]
+[ext_resource type="Texture2D" uid="uid://b4jmkicvhyi3d" path="res://assets/UI/Minimap/Sombrero.png" id="36_5t6ke"]
+[ext_resource type="Texture2D" uid="uid://8j6y5uerjhqk" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/ECHAP.png" id="37_dabow"]
+[ext_resource type="Texture2D" uid="uid://dqfw3h8syqoap" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/E.png" id="38_aoevk"]
+[ext_resource type="Texture2D" uid="uid://sxqh5pnacejg" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/TAB.png" id="38_xd6q1"]
+[ext_resource type="Texture2D" uid="uid://bti8u65tivus6" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/TABALTERNATIVE.png" id="39_w53kd"]
+[ext_resource type="Texture2D" uid="uid://bn83a3ilq0dci" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/X.png" id="39_xtvyi"]
+[ext_resource type="Texture2D" uid="uid://bfto3fwjsx4ua" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/C.png" id="40_nqb2e"]
+[ext_resource type="Texture2D" uid="uid://3damc3ojuvyx" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/SHIFTBIGGER.png" id="40_uvif2"]
+[ext_resource type="Texture2D" uid="uid://qsq4d5ttnxyb" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/F.png" id="41_b7cqv"]
+[ext_resource type="Texture2D" uid="uid://8jemv0qa8mvg" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/SHIFTALTERNATIVE.png" id="41_pkyd2"]
+[ext_resource type="Texture2D" uid="uid://duvlwcpfka8fg" path="res://assets/UI/keyboards/Jumbo/Dark/ZQSD.png" id="42_uh0ui"]
+[ext_resource type="Texture2D" uid="uid://d2sgimwcawf76" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/ARROWLEFT.png" id="46_dj8yt"]
+[ext_resource type="Texture2D" uid="uid://co2jici0jau71" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/ARROWRIGHT.png" id="47_nu4pr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5bu2"]
 shader = ExtResource("19_yho6x")
@@ -61,7 +82,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(300, 300), Vector2(1920, 900)]
+"values": [Vector2(300, 300), Vector2(1920, 830)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -148,13 +169,299 @@ shader_parameter/has_target = false
 shader_parameter/target = Vector2(0.5, 0.5)
 shader_parameter/intensity = 1.0
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tlm42"]
+color = Color(0.364706, 0.364706, 0.364706, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_gpp7b"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1nby5"]
+color = Color(1, 1, 1, 1)
+thickness = 10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xjad"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0, 0, 0, 0.00392157)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05w1y"]
+shader = ExtResource("19_yho6x")
+shader_parameter/color = Color(0, 0, 0, 0.00392157)
+
+[sub_resource type="Animation" id="Animation_ixqmg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonsContainer/QuitButton:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ButtonsContainer/ResartButton:material:shader_parameter/color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRectBlack:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2gj1f"]
+resource_name = "game_over_off"
+length = 2.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkullControl/Skull:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.6, 0.6), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GunsControl/DoubleGun:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.6, 0.6), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunsControl/DoubleGun2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1.3, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.6, 0.6), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunsControl/DoubleGun3:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 1.6, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.6, 0.6), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CenterContainer/VBoxContainer/GameOverLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": ["GAME OVER", ""]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../GameOverManager")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ButtonsContainer/QuitButton:material:shader_parameter/color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ButtonsContainer/ResartButton:material:shader_parameter/color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c6q7u"]
+resource_name = "game_over_on"
+length = 3.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkullControl/Skull:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1e-05, 1e-05), Vector2(0.6, 0.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GunsControl/DoubleGun:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunsControl/DoubleGun2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.3, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GunsControl/DoubleGun3:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.6, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0.6, 0.6)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CenterContainer/VBoxContainer/GameOverLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": ["", "", "GAME OVER"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/path = NodePath("ButtonsContainer:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ButtonsContainer/QuitButton:material:shader_parameter/color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 3, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0.00392157)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ButtonsContainer/ResartButton:material:shader_parameter/color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 3, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0.00392157)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ColorRectBlack:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5hfsx"]
+_data = {
+"RESET": SubResource("Animation_ixqmg"),
+"game_over_off": SubResource("Animation_2gj1f"),
+"game_over_on": SubResource("Animation_c6q7u")
+}
+
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_cf1if")
 
-[node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("pause_gui", "base_panel", "option_panel", "color_rect")]
+[node name="PauseManager" type="Node2D" parent="." node_paths=PackedStringArray("choose_music_container", "option_choose_playlist_label", "option_choose_music_label", "windows_resolution_label", "screen_mode_state_label", "screen_mode_checkbutton", "pause_gui", "base_panel", "option_panel", "color_rect")]
 script = ExtResource("2_lu52o")
 aim_blur_intensity = 2.0
 pop_up_text_scene = ExtResource("7_bnyiq")
+choose_music_container = NodePath("../GuiControl/PauseControl/ChooseMusicContainer")
+option_choose_playlist_label = NodePath("../GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer/ChoosePlaylistLabel")
+option_choose_music_label = NodePath("../GuiControl/PauseControl/ChooseMusicContainer/SubChooseMusicContainer/ChooseMusicLabel")
+windows_resolution_label = NodePath("")
+screen_mode_state_label = NodePath("../GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/FullScreenContainer/HBoxContainer/ScreenModeStateLabel")
+screen_mode_checkbutton = NodePath("../GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/FullScreenContainer/HBoxContainer/ScreenModeCheckButton")
 pause_gui = NodePath("../GuiControl/PauseControl")
 base_panel = NodePath("../GuiControl/PauseControl/PauseContainer/BasePanelContainer")
 option_panel = NodePath("../GuiControl/PauseControl/PauseContainer/OptionTabContainer")
@@ -189,10 +496,25 @@ text_scale = Vector2(1.5, 1.3)
 velocity_mov = Vector2(0, -70)
 velocity_scale = Vector2(1.5, 1.5)
 
+[node name="PopUpInteractionManager" type="Node2D" parent="."]
+script = ExtResource("10_1jj2h")
+
+[node name="PopUpPowerUpManager" type="Node2D" parent="."]
+script = ExtResource("11_3jshf")
+pop_up_text_scene = ExtResource("7_bnyiq")
+text_scale = Vector2(4, 4)
+velocity_scale = Vector2(6, 6)
+
 [node name="PanelPointsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
 script = ExtResource("9_dkbyk")
 panel_gui = ExtResource("10_0fs0q")
 title_panel = "Points"
+panels_container = NodePath("../GuiControl/HBoxUpperContainer")
+
+[node name="PanelPowerUpsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
+script = ExtResource("13_8keg5")
+panel_gui = ExtResource("10_0fs0q")
+title_panel = "Packages"
 panels_container = NodePath("../GuiControl/HBoxUpperContainer")
 
 [node name="PanelKillsManager" type="Node2D" parent="." node_paths=PackedStringArray("panels_container")]
@@ -265,6 +587,30 @@ color_rect = NodePath("../GuiControl/ChooseWeaponControl/ColorRect")
 distance_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/DistanceWeaponGridContainer")
 melee_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/MeleeWeaponGridContainer")
 choose_weapon_item_panel_scene = ExtResource("23_8p1eu")
+
+[node name="RecapLevelManager" type="Node2D" parent="." node_paths=PackedStringArray("recap_level_gui", "color_rect", "level_value_label", "label_time_spent", "label_prompt_time_spent", "label_rooms_cleared", "label_prompt_rooms_cleared", "label_kills_done", "label_prompt_kills_done", "label_power_up_taken", "label_prompt_power_up_taken", "label_money_to_earn", "skip_button", "continue_button")]
+script = ExtResource("30_23poo")
+aim_blur_intensity = 3.0
+recap_level_gui = NodePath("../GuiControl/RecapPointsControl")
+color_rect = NodePath("../GuiControl/RecapPointsControl/ColorRect")
+level_value_label = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/LevelContainer/LevelValueLabel")
+label_time_spent = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer/TimeValueLabel")
+label_prompt_time_spent = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer/PromptTimeLabel")
+label_rooms_cleared = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer/RoomsValueLabel")
+label_prompt_rooms_cleared = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer/PromptRoomsLabel")
+label_kills_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer/KillsValueLabel")
+label_prompt_kills_done = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer/PromptKillsLabel")
+label_power_up_taken = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer/GangPackagesValueLabel")
+label_prompt_power_up_taken = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer/PromptGangPackagesLabel")
+label_money_to_earn = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer/MoneyValueLabel")
+skip_button = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer/SkipButton")
+continue_button = NodePath("../GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer/ContinueButton")
+
+[node name="GameOverManager" type="Node2D" parent="." node_paths=PackedStringArray("game_over_gui", "animation_player", "buttons_container")]
+script = ExtResource("29_tthju")
+game_over_gui = NodePath("../GuiControl/GameOverControl")
+animation_player = NodePath("../GuiControl/GameOverControl/AnimationPlayer")
+buttons_container = NodePath("../GuiControl/GameOverControl/ButtonsContainer")
 
 [node name="GuiControl" type="Control" parent="."]
 layout_mode = 3
@@ -463,6 +809,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("17_eyt6o")
 
 [node name="ColorRect" type="ColorRect" parent="GuiControl/PauseControl"]
 material = SubResource("ShaderMaterial_hi0er")
@@ -482,275 +829,579 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BasePanelContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
-theme = ExtResource("17_eyt6o")
 theme_override_constants/separation = 20
 
 [node name="ResumeButton" type="Button" parent="GuiControl/PauseControl/PauseContainer/BasePanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 text = "Resume"
 
 [node name="OptionButton" type="Button" parent="GuiControl/PauseControl/PauseContainer/BasePanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 text = "Option"
 
 [node name="QuitButton" type="Button" parent="GuiControl/PauseControl/PauseContainer/BasePanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 60
 text = "Quit game"
 
 [node name="OptionTabContainer" type="TabContainer" parent="GuiControl/PauseControl/PauseContainer"]
 visible = false
-custom_minimum_size = Vector2(1000, 600)
+custom_minimum_size = Vector2(1300, 800)
 layout_mode = 2
 theme = ExtResource("17_eyt6o")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 
 [node name="General" type="TabBar" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -13.0
-offset_right = 125.0
-offset_bottom = 13.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/VBoxContainer"]
+[node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="GeneralVolumeContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GeneralVolumeContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
-text = "Coming soon..."
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "General volume"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GeneralVolSlider" type="HSlider" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GeneralVolumeContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_tlm42")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_gpp7b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_1nby5")
+min_value = -80.0
+max_value = 0.0
+rounded = true
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Music volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicVolSlider" type="HSlider" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_tlm42")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_gpp7b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_1nby5")
+min_value = -80.0
+max_value = 0.0
+rounded = true
+
+[node name="GameVolumeContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GameVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Game volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameVolSlider" type="HSlider" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GameVolumeContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_tlm42")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_gpp7b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_1nby5")
+min_value = -80.0
+max_value = 0.0
+rounded = true
+
+[node name="FullScreenContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/FullScreenContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Screen mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/FullScreenContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ScreenModeStateLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/FullScreenContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 40
+text = "(fullscreen)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScreenModeCheckButton" type="CheckButton" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/FullScreenContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = " "
+
+[node name="PlaylistContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Playlist"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SwitchPlaylistLeftButton" type="Button" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = " < "
+
+[node name="ChoosePlaylistLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "electro"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+uppercase = true
+
+[node name="SwitchPlaylistRightButton" type="Button" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = " > "
+
+[node name="BottomMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="MarginRight" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 
 [node name="Controls" type="TabBar" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -13.0
-offset_right = 125.0
-offset_bottom = 13.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer"]
+[node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="DirectionsContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
-text = "Coming soon..."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Graphic" type="TabBar" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Graphic"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -15.5
-offset_right = 125.0
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Graphic/VBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Graphic/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Resolution"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MenuButton" type="MenuButton" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Graphic/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "1920 x 1080"
-item_count = 8
-popup/item_0/text = "1280 x 1024"
-popup/item_0/id = 0
-popup/item_1/text = "1366 x 768"
-popup/item_1/id = 1
-popup/item_2/text = "1600 x 900"
-popup/item_2/id = 2
-popup/item_3/text = "1920 x 1080"
-popup/item_3/id = 3
-popup/item_4/text = "1920 x 1200"
-popup/item_4/id = 4
-popup/item_5/text = "2560 x 1440"
-popup/item_5/id = 5
-popup/item_6/text = "3440 x 1440"
-popup/item_6/id = 6
-popup/item_7/text = "3840 x 2160"
-popup/item_7/id = 7
-
-[node name="Audio" type="TabBar" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -85.5
-offset_right = 125.0
-offset_bottom = 85.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/DirectionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 30
-text = "General volume"
+theme_override_font_sizes/font_size = 40
+text = "Move"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/DirectionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (Z: up, S: down, Q: left, D: right)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/DirectionsContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture = ExtResource("42_uh0ui")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InteractionsContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/InteractionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Interations"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/InteractionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (weapon, powerup, end level)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/InteractionsContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("38_aoevk")
+stretch_mode = 5
+
+[node name="ThrowMeleeWeaponContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Throw Melee Weapon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (police baton, knife...)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("39_xtvyi")
+stretch_mode = 5
+
+[node name="ThrowDistWeaponContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Throw Distance Weapon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (glock, uzi...)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("40_nqb2e")
+stretch_mode = 5
+
+[node name="GraplingHookContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Throw Grappling Hook"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (when bought on the shop)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("41_b7cqv")
+stretch_mode = 5
+
+[node name="SpecialPowContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Use Special Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (when unlocked on the shop)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("40_uvif2")
+stretch_mode = 5
+
+[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "/"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("41_pkyd2")
+stretch_mode = 5
+
+[node name="FullMapContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Zoom Minimap"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (in & out)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("38_xd6q1")
+stretch_mode = 5
+
+[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "/"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("39_w53kd")
+stretch_mode = 5
+
+[node name="SwitchMapContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Switch Minimap View"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (room/level)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("46_dj8yt")
+stretch_mode = 5
+
+[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "&"
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("47_nu4pr")
+stretch_mode = 5
+
+[node name="PauseContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/PauseContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/PauseContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (on, off & back)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/PauseContainer"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 8
+texture = ExtResource("37_dabow")
+stretch_mode = 5
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
+[node name="BottomMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+
+[node name="MarginRight" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="ChooseMusicContainer" type="VBoxContainer" parent="GuiControl/PauseControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 617.0
+offset_top = 777.0
+offset_right = -603.0
+offset_bottom = -230.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/ChooseMusicContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 40
+text = "current song"
+horizontal_alignment = 1
+
+[node name="SubChooseMusicContainer" type="HBoxContainer" parent="GuiControl/PauseControl/ChooseMusicContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_vertical = 8
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer4"]
+[node name="SwitchMusicLeftButton" type="Button" parent="GuiControl/PauseControl/ChooseMusicContainer/SubChooseMusicContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Music volume"
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = " < "
+flat = true
+
+[node name="ChooseMusicLabel" type="Label" parent="GuiControl/PauseControl/ChooseMusicContainer/SubChooseMusicContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "music name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer4"]
+[node name="SwitchMusicRightButton" type="Button" parent="GuiControl/PauseControl/ChooseMusicContainer/SubChooseMusicContainer"]
 layout_mode = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Weapon volume"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpinBox" type="SpinBox" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Interaction volume"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpinBox" type="SpinBox" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer5"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Playlist"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MenuButton" type="MenuButton" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Audio/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "electro"
-item_count = 4
-popup/item_0/text = "electro"
-popup/item_0/id = 0
-popup/item_1/text = "drill"
-popup/item_1/id = 1
-popup/item_2/text = "jersey"
-popup/item_2/id = 2
-popup/item_3/text = "basic"
-popup/item_3/id = 3
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 60
+text = " > "
+flat = true
 
 [node name="WeaponShopControl" type="Control" parent="GuiControl"]
 visible = false
@@ -1389,10 +2040,678 @@ text = "Start mission"
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
+[node name="RecapPointsControl" type="Control" parent="GuiControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_eyt6o")
+
+[node name="ColorRect" type="ColorRect" parent="GuiControl/RecapPointsControl"]
+material = SubResource("ShaderMaterial_hi0er")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MiddleMargin8" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="LevelContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/LevelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "LEVEL"
+
+[node name="MarginMiddle" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/LevelContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="LevelValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/LevelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="MiddleMargin7" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="TimeContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptTimeLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="TimeTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " TIME"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="TimeValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="TimeValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " SECONDS"
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="RoomsContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptRoomsLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="RoomsTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " ROOMS CLEARED"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="RoomsValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="RoomsValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " ROOMS"
+
+[node name="MiddleMargin2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="KillsContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptKillsLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="KillsTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " KILLS"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="KillsValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="KillsValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " GANGSTER(S)"
+
+[node name="MiddleMargin3" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="CombosContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="PromptCombosLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="CombosTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " COMBOS MULTIPLICATOR"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="CombosValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="CombosValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " COMBOS"
+
+[node name="MiddleMargin4" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="GangPackagesContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptGangPackagesLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="GangPackagesTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " GANG PACKAGES TAKEN"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="GangPackagesValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="GangPackagesDescriptionValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = " PACKAGE(S)"
+
+[node name="BigMiddleMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="TotalMoneyContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MoneyTextLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "TOTAL MONEY"
+
+[node name="MarginRight2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 75
+text = "_________________________________________________________________________________________________"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="MarginLeft2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="MoneyValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "$ "
+
+[node name="MoneyValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="MiddleMargin5" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+
+[node name="SkipButton" type="Button" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "skip"
+
+[node name="LeftMargin2" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "continue"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+
+[node name="MiddleMargin6" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="RightMargin" type="AspectRatioContainer" parent="GuiControl/RecapPointsControl/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="GameOverControl" type="Control" parent="GuiControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_eyt6o")
+
+[node name="ColorRectBlack" type="ColorRect" parent="GuiControl/GameOverControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GunsControl" type="Control" parent="GuiControl/GameOverControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+
+[node name="DoubleGun" type="Control" parent="GuiControl/GameOverControl/GunsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 540)
+
+[node name="TextureRect3" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 940.0
+offset_top = 554.0
+offset_right = 1340.0
+offset_bottom = 954.0
+rotation = -0.785398
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 565.0
+offset_top = 554.0
+offset_right = 965.0
+offset_bottom = 954.0
+rotation = 0.785398
+pivot_offset = Vector2(400, 0)
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="DoubleGun2" type="Control" parent="GuiControl/GameOverControl/GunsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 540)
+
+[node name="TextureRect3" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun2"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 940.0
+offset_top = 554.0
+offset_right = 1340.0
+offset_bottom = 954.0
+rotation = -0.523599
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun2"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 565.0
+offset_top = 554.0
+offset_right = 965.0
+offset_bottom = 954.0
+rotation = 0.523599
+pivot_offset = Vector2(400, 0)
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="DoubleGun3" type="Control" parent="GuiControl/GameOverControl/GunsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 540)
+
+[node name="TextureRect3" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun3"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 940.0
+offset_top = 554.0
+offset_right = 1340.0
+offset_bottom = 954.0
+rotation = -0.261799
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="GuiControl/GameOverControl/GunsControl/DoubleGun3"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+offset_left = 565.0
+offset_top = 554.0
+offset_right = 965.0
+offset_bottom = 954.0
+rotation = 0.261799
+pivot_offset = Vector2(400, 0)
+texture = ExtResource("33_p816j")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="SkullControl" type="Control" parent="GuiControl/GameOverControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Skull" type="TextureRect" parent="GuiControl/GameOverControl/SkullControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(250, 250)
+texture = ExtResource("35_u8ntm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PoliceCap" type="TextureRect" parent="GuiControl/GameOverControl/SkullControl"]
+visible = false
+layout_mode = 0
+offset_left = -206.0
+offset_top = -357.0
+offset_right = 194.0
+offset_bottom = -57.0
+texture = ExtResource("35_rfcsd")
+expand_mode = 1
+
+[node name="Sombrero" type="TextureRect" parent="GuiControl/GameOverControl/SkullControl"]
+visible = false
+layout_mode = 0
+offset_left = -304.0
+offset_top = -459.0
+offset_right = 296.0
+offset_bottom = -59.0
+texture = ExtResource("36_5t6ke")
+expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="GuiControl/GameOverControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/GameOverControl/CenterContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+
+[node name="MarginTop" type="AspectRatioContainer" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0.235294, 1)
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginMiddle2" type="AspectRatioContainer" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 300)
+layout_mode = 2
+texture = ExtResource("35_rfcsd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SkullTextureRect2" type="TextureRect" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+texture = ExtResource("35_u8ntm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginBottom" type="AspectRatioContainer" parent="GuiControl/GameOverControl/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="GuiControl/GameOverControl"]
+layout_mode = 2
+offset_left = 510.0
+offset_top = 839.0
+offset_right = 1410.0
+offset_bottom = 939.0
+pivot_offset = Vector2(450, 50)
+
+[node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/GameOverControl/ButtonsContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="GuiControl/GameOverControl/ButtonsContainer"]
+material = SubResource("ShaderMaterial_5xjad")
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="GuiControl/GameOverControl/ButtonsContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ResartButton" type="Button" parent="GuiControl/GameOverControl/ButtonsContainer"]
+material = SubResource("ShaderMaterial_05w1y")
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Replay"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="GuiControl/GameOverControl/ButtonsContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GuiControl/GameOverControl"]
+libraries = {
+"": SubResource("AnimationLibrary_5hfsx")
+}
+
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/ResumeButton" to="PauseManager" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/OptionButton" to="PauseManager" method="_on_option_button_pressed"]
 [connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/BasePanelContainer/QuitButton" to="PauseManager" method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GeneralVolumeContainer/GeneralVolSlider" to="PauseManager" method="_on_general_vol_slider_value_changed"]
+[connection signal="value_changed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/MusicVolumeContainer/MusicVolSlider" to="PauseManager" method="_on_music_vol_slider_value_changed"]
+[connection signal="value_changed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/GameVolumeContainer/GameVolSlider" to="PauseManager" method="_on_game_vol_slider_value_changed"]
+[connection signal="toggled" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/FullScreenContainer/HBoxContainer/ScreenModeCheckButton" to="PauseManager" method="_on_screen_mode_check_button_toggled"]
+[connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer/SwitchPlaylistLeftButton" to="PauseManager" method="_on_switch_playlist_left_button_pressed"]
+[connection signal="pressed" from="GuiControl/PauseControl/PauseContainer/OptionTabContainer/General/HBoxContainer/VBoxContainer/PlaylistContainer/HBoxContainer/SwitchPlaylistRightButton" to="PauseManager" method="_on_switch_playlist_right_button_pressed"]
+[connection signal="pressed" from="GuiControl/PauseControl/ChooseMusicContainer/SubChooseMusicContainer/SwitchMusicLeftButton" to="PauseManager" method="_on_switch_music_left_button_pressed"]
+[connection signal="pressed" from="GuiControl/PauseControl/ChooseMusicContainer/SubChooseMusicContainer/SwitchMusicRightButton" to="PauseManager" method="_on_switch_music_right_button_pressed"]
 [connection signal="pressed" from="GuiControl/WeaponShopControl/ButtonsContainer/Buttons-Container/QuitButton" to="WeaponShopManager" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="GuiControl/WeaponShopControl/ButtonsContainer/Buttons-Container/ContinueButton" to="WeaponShopManager" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="GuiControl/ChooseWeaponControl/BaseContainer/Button-Container/QuitButton" to="ChooseWeaponManager" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="GuiControl/ChooseWeaponControl/BaseContainer/Button-Container/StartButton" to="ChooseWeaponManager" method="_on_start_button_pressed"]
+[connection signal="pressed" from="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer/SkipButton" to="RecapLevelManager" method="_on_skip_button_pressed"]
+[connection signal="pressed" from="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/ButtonsContainer/ContinueButton" to="RecapLevelManager" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="GuiControl/GameOverControl/ButtonsContainer/QuitButton" to="GameOverManager" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="GuiControl/GameOverControl/ButtonsContainer/ResartButton" to="GameOverManager" method="_on_resart_button_pressed"]

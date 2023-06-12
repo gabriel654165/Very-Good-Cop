@@ -1,5 +1,4 @@
 extends AudioStreamPlayer
-
 class_name MusicPlaylistsPlayer
 
 # TODO: Might make it work with saves later on
@@ -36,14 +35,15 @@ func next_track(play_it:=false):
 	put_track(next_track, play_it)
 
 
-func change_playlist(playlist:String, play_it:=false, first_track:=0):
+func change_playlist(playlist:String, play_it:=false, random:=false):
 	assert(GlobalVariables.playlists.has(playlist), "Unknown playlist " + playlist)
 
 	current_playlist = playlist
+	var first_track : int =  0 if not random else randi() % GlobalVariables.playlists[current_playlist].size()
 	put_track(first_track, play_it)
 
 
-static func get_musics_from_folder(path:String) -> Array[AudioStream]:
+static func get_musics_from_folder(path:String, playlist_track_names: Array) -> Array[AudioStream]:
 	var dir = DirAccess.open(path)
 	var res : Array[AudioStream]
 
@@ -70,10 +70,11 @@ static func get_musics_from_folder(path:String) -> Array[AudioStream]:
 		else:
 			file_name = dir.get_next()
 			continue
-
+		
 		var file_bytes := FileAccess.get_file_as_bytes(full_path)
 		new_stream.data = file_bytes
 		res.append(new_stream)
+		playlist_track_names.append(file_name.rsplit(".", true, 1)[0])
 		file_name = dir.get_next()
 
 	return res
@@ -88,7 +89,9 @@ static func load_all_playlists_from(path:String):
 	while file_name != "":
 		var full_path = path + file_name
 		if dir.current_is_dir():
-			GlobalVariables.playlists[file_name] = get_musics_from_folder(full_path)
+			var playlist_track_names : Array[String] = []
+			GlobalVariables.playlists[file_name] = get_musics_from_folder(full_path, playlist_track_names)
+			GlobalVariables.playlists_track_names[file_name] = playlist_track_names
 		file_name = dir.get_next()
 
 

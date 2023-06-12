@@ -195,6 +195,7 @@ _data = {
 }
 
 [node name="Grenade" type="CharacterBody2D" node_paths=PackedStringArray("shader_animation", "particle_animation", "animation_player")]
+z_index = 2
 collision_layer = 0
 script = ExtResource("1_b6dp5")
 shader_animation = NodePath("ShockWaveControl/AnimationPlayer")
@@ -295,9 +296,12 @@ grow_vertical = 2
 
 [node name="ExplosionParticles" parent="ExplosionControl/SubViewportContainer/PixelizedSubViewport" instance=ExtResource("4_iykil")]
 visibility_layer = 2
+z_index = 2
 position = Vector2(150, 150)
-amount = 25
+amount = 100
 speed_scale = 0.75
+explosiveness = 0.08
+lifetime_randomness = 1.0
 scale_amount_min = 5.0
 scale_amount_max = 15.0
 

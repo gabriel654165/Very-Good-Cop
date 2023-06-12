@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcs1erw2idhma"]
+[gd_scene load_steps=5 format=3 uid="uid://bcs1erw2idhma"]
 
 [ext_resource type="Script" path="res://scripts/Character/DeadCorpse.gd" id="1_vgoal"]
 [ext_resource type="PackedScene" uid="uid://c1dioapnrpyg4" path="res://scenes/particles/SquareBloodParticles.tscn" id="2_ffqos"]
 [ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_npdwg"]
+[ext_resource type="Texture2D" uid="uid://6aw20cp5oifq" path="res://assets/character/Police-Remade-HM-2.png" id="4_s76ci"]
 
 [node name="Corpse" type="Node2D"]
 z_index = 1
@@ -15,8 +16,16 @@ amount = 30
 emission_shape = 1
 emission_sphere_radius = 10.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SpriteCartel1" type="Sprite2D" parent="."]
+visible = false
 z_index = 1
 texture = ExtResource("2_npdwg")
 region_enabled = true
 region_rect = Rect2(75, 729, 43, 26)
+
+[node name="SpritePolice" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+texture = ExtResource("4_s76ci")
+region_enabled = true
+region_rect = Rect2(929, 189, 52, 21)

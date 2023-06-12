@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://pri50oynb5h4"]
+[gd_scene load_steps=10 format=3 uid="uid://pri50oynb5h4"]
 
 [ext_resource type="Script" path="res://scripts/level/rooms/Room.gd" id="2_82gax"]
 [ext_resource type="Texture2D" uid="uid://dw70vdas1wntp" path="res://assets/tilemaps/hm_2_tilesets/ground.png" id="2_hjqnj"]
 [ext_resource type="Texture2D" uid="uid://cc8g1xx8pqkq1" path="res://assets/tilemaps/hm_clone_tilesets/tile_tileset/walls_tileset.png" id="3_6oeqj"]
+[ext_resource type="PackedScene" uid="uid://ck3ud2aox6ojh" path="res://scenes/interactions/EndLevelInteraction.tscn" id="4_3u0kw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtx8k"]
 texture = ExtResource("2_hjqnj")
@@ -1112,3 +1113,8 @@ position = Vector2(50, 117)
 
 [node name="A3" type="Node2D" parent="RoomConfig/PowerUpPoints"]
 position = Vector2(258, -27)
+
+[node name="EndLevelInteraction" parent="." instance=ExtResource("4_3u0kw")]
+visible = false
+position = Vector2(-234, 0)
+rotation = -1.5708
