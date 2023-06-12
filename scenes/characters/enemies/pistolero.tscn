@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bsg7wbhktsf6b"]
+[gd_scene load_steps=35 format=3 uid="uid://bsg7wbhktsf6b"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="2_5lu21"]
@@ -53,6 +53,9 @@ tracks/1/keys = {
 _data = {
 "running_animation_enemy": SubResource("Animation_hsyrc")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkif0"]
+radius = 60.0
 
 [sub_resource type="Animation" id="Animation_0kg7s"]
 resource_name = "glock_animation_enemy"
@@ -706,17 +709,13 @@ _data = {
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 z_index = 3
-[sub_resource type="CircleShape2D" id="CircleShape2D_rkif0"]
-radius = 60.0
-
-[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_ef1gd")
+pursue_look_interval = 1.5
+vision_layers = 255
 hearing_range = 300.0
 speed = 10.0
 grappling_hook_scene = ExtResource("2_dcfht")
 projectile_weapon_scene = ExtResource("3_4uakv")
-pursue_look_interval = 1.5
-vision_layers = 255
 blood_effect_scene = ExtResource("2_5lu21")
 corpse_scene = ExtResource("3_j3lui")
 
@@ -800,9 +799,9 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BehindArea"]
 shape = SubResource("CircleShape2D_rkif0")
 
-[connection signal="body_entered" from="BehindArea" to="." method="_on_behind_area_body_entered"]
-
 [node name="BodyAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_4eojc")
 }
+
+[connection signal="body_entered" from="BehindArea" to="." method="_on_behind_area_body_entered"]
