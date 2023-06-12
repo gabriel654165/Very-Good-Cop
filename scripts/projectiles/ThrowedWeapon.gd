@@ -4,7 +4,7 @@ class_name ThrowedWeapon
 @export var should_spin : bool = true
 @export var recover_weapon_interaction : AddWeaponInteraction = null
 
-var time_stunning : float = 3
+var time_stunning : float = 2
 
 
 func _ready():
