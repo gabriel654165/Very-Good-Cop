@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://76fiuu4xbqy4"]
+[gd_scene load_steps=70 format=3 uid="uid://76fiuu4xbqy4"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthUiManager.gd" id="1_c8amb"]
 [ext_resource type="Script" path="res://scripts/ui/GuiManager.gd" id="1_cf1if"]
@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://t0fsw6bmbs45" path="res://assets/UI/Minimap/PoliceCap.png" id="35_rfcsd"]
 [ext_resource type="Texture2D" uid="uid://c6bu82lhw3wa1" path="res://assets/UI/icons/skull_icon.png" id="35_u8ntm"]
 [ext_resource type="Texture2D" uid="uid://b4jmkicvhyi3d" path="res://assets/UI/Minimap/Sombrero.png" id="36_5t6ke"]
+[ext_resource type="Texture2D" uid="uid://ksmuq6xbu8d8" path="res://assets/UI/keyboards/mouse-click.png" id="37_80gqr"]
 [ext_resource type="Texture2D" uid="uid://8j6y5uerjhqk" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/ECHAP.png" id="37_dabow"]
 [ext_resource type="Texture2D" uid="uid://dqfw3h8syqoap" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/E.png" id="38_aoevk"]
 [ext_resource type="Texture2D" uid="uid://sxqh5pnacejg" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/TAB.png" id="38_xd6q1"]
@@ -1032,7 +1033,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1040,25 +1041,107 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="UpMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="UpMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="DirectionsContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 650)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ShootingContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/DirectionsContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ShootingContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Shoot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ShootingContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (distance weapon attack)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ShootingContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture = ExtResource("37_80gqr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ShootingContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="StabContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/StabContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "Stab"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/StabContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
+theme_override_font_sizes/font_size = 35
+text = " (melee weapon attack)"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/StabContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture = ExtResource("37_80gqr")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="MiddleMargin2" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="DirectionsContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/DirectionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1066,7 +1149,7 @@ text = "Move"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/DirectionsContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/DirectionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1074,20 +1157,24 @@ theme_override_font_sizes/font_size = 35
 text = " (Z: up, S: down, Q: left, D: right)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/DirectionsContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/DirectionsContainer"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 texture = ExtResource("42_uh0ui")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="InteractionsContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="MiddleMargin3" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="InteractionsContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/InteractionsContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/InteractionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1095,7 +1182,7 @@ text = "Interations"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/InteractionsContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/InteractionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1103,19 +1190,23 @@ theme_override_font_sizes/font_size = 35
 text = " (weapon, powerup, end level)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/InteractionsContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/InteractionsContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("38_aoevk")
 stretch_mode = 5
 
-[node name="ThrowMeleeWeaponContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="MiddleMargin4" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="ThrowMeleeWeaponContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1123,7 +1214,7 @@ text = "Throw Melee Weapon"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1131,19 +1222,23 @@ theme_override_font_sizes/font_size = 35
 text = " (police baton, knife...)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowMeleeWeaponContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("39_xtvyi")
 stretch_mode = 5
 
-[node name="ThrowDistWeaponContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="MiddleMargin5" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="ThrowDistWeaponContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1151,7 +1246,7 @@ text = "Throw Distance Weapon"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1159,19 +1254,23 @@ theme_override_font_sizes/font_size = 35
 text = " (glock, uzi...)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowDistWeaponContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("40_nqb2e")
 stretch_mode = 5
 
-[node name="GraplingHookContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="MiddleMargin6" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="GraplingHookContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GraplingHookContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1179,7 +1278,7 @@ text = "Throw Grappling Hook"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GraplingHookContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1187,19 +1286,23 @@ theme_override_font_sizes/font_size = 35
 text = " (when bought on the shop)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GraplingHookContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("41_b7cqv")
 stretch_mode = 5
 
-[node name="SpecialPowContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="MiddleMargin7" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="SpecialPowContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SpecialPowContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1207,7 +1310,7 @@ text = "Use Special Power"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SpecialPowContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1215,13 +1318,13 @@ theme_override_font_sizes/font_size = 35
 text = " (when unlocked on the shop)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SpecialPowContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("40_uvif2")
 stretch_mode = 5
 
-[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SpecialPowContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1229,19 +1332,23 @@ text = "/"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SpecialPowContainer"]
+[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SpecialPowContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("41_pkyd2")
 stretch_mode = 5
 
-[node name="FullMapContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="MiddleMargin8" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="FullMapContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/FullMapContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1249,7 +1356,7 @@ text = "Zoom Minimap"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/FullMapContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1257,13 +1364,13 @@ theme_override_font_sizes/font_size = 35
 text = " (in & out)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/FullMapContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("38_xd6q1")
 stretch_mode = 5
 
-[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/FullMapContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1271,19 +1378,23 @@ text = "/"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/FullMapContainer"]
+[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/FullMapContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("39_w53kd")
 stretch_mode = 5
 
-[node name="SwitchMapContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="MiddleMargin9" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="SwitchMapContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SwitchMapContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1291,7 +1402,7 @@ text = "Switch Minimap View"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SwitchMapContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1299,32 +1410,36 @@ theme_override_font_sizes/font_size = 35
 text = " (room/level)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SwitchMapContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("46_dj8yt")
 stretch_mode = 5
 
-[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+[node name="SeparationLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SwitchMapContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
 text = "&"
 horizontal_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/SwitchMapContainer"]
+[node name="TextureRect2" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/SwitchMapContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("47_nu4pr")
 stretch_mode = 5
 
-[node name="PauseContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="MiddleMargin10" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="PauseContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/PauseContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/PauseContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
@@ -1332,7 +1447,7 @@ text = "Pause"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/PauseContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/PauseContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
@@ -1340,19 +1455,23 @@ theme_override_font_sizes/font_size = 35
 text = " (on, off & back)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer/PauseContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/PauseContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("37_dabow")
 stretch_mode = 5
 
-[node name="BottomMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer/VBoxContainer"]
+[node name="BottomMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="MarginRight" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/HBoxContainer"]
+[node name="MarginRight" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="BottomMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="ChooseMusicContainer" type="VBoxContainer" parent="GuiControl/PauseControl"]

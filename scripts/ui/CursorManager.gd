@@ -113,9 +113,11 @@ func is_on_enemy() -> bool:
 		index += 1
 	return false
 
+
 func hit_marker_action():
 	if cursor.is_attack_gui:
 		cursor.active_mode_hit_marker_gui()
+
 
 func smooth_clamp_cursor_position(target: Vector2):
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)

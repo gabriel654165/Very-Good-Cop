@@ -247,6 +247,7 @@ _data = {
 }
 
 [node name="Cursor" type="Node2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_yjxk1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

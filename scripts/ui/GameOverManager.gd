@@ -36,13 +36,7 @@ func restart():
 	get_tree().reload_current_scene()
 
 func _on_resart_button_pressed():
-	GlobalVariables.level = 0
-	GlobalVariables.money = 0
-	GlobalVariables.index_distance_weapon_selected = 0
-	GlobalVariables.index_melee_weapon_selected = 0
-	GlobalFunctions.reset_distance_weapon_levels()
-	GlobalFunctions.reset_melee_weapon_levels()
-	GlobalFunctions.reset_equipment_levels()
+	GlobalFunctions.reset_player_levels()
 	animation_player.play("game_over_off")
 
 func _on_quit_button_pressed():

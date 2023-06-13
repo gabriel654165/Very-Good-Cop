@@ -220,6 +220,16 @@ func set_melee_weapon_properties(melee_weapon: Knife, weapon_index: int):
 	melee_weapon.update_properties()
 
 
+func reset_player_levels():
+	GlobalVariables.level = 1
+	GlobalVariables.money = 0
+	GlobalVariables.index_distance_weapon_selected = 0
+	GlobalVariables.index_melee_weapon_selected = 0
+	GlobalFunctions.reset_distance_weapon_levels()
+	GlobalFunctions.reset_melee_weapon_levels()
+	GlobalFunctions.reset_equipment_levels()
+
+
 func reset_distance_weapon_levels():
 	for weapon in GlobalVariables.player_distance_weapon_list:
 		if weapon.name != "glock":

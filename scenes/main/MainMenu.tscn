@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5n7fexsfn3lw"]
+[gd_scene load_steps=14 format=3 uid="uid://c5n7fexsfn3lw"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_icdyr"]
 [ext_resource type="Theme" uid="uid://yqkvsb5q7pab" path="res://assets/UI/ui_panels/pixel_1_all/pixel_ui_theme/PixelTheme.tres" id="1_qjqgx"]
 [ext_resource type="Texture2D" uid="uid://c6bu82lhw3wa1" path="res://assets/UI/icons/skull_icon.png" id="2_oos42"]
+[ext_resource type="Script" path="res://scripts/ui/CursorManager.gd" id="3_ldvw7"]
 [ext_resource type="Shader" path="res://scripts/shaders/PixelisedShader.gdshader" id="4_goq8g"]
+[ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="4_x0u2q"]
 [ext_resource type="Texture2D" uid="uid://klghaaupu3bl" path="res://assets/wallpaper/MexicoDroneView2.jpg" id="5_j5fk7"]
+[ext_resource type="Script" path="res://scripts/Sounds/MusicPlaylists.gd" id="7_uljcf"]
 [ext_resource type="Texture2D" uid="uid://dshqs6yvqcro0" path="res://assets/wallpaper/MexicanFlag.png" id="9_q1xmp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0e77s"]
@@ -30,7 +33,19 @@ thickness = 75
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_icdyr")
 
+[node name="MusicPlaylistsPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+script = ExtResource("7_uljcf")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CursorManager" type="Node2D" parent="CanvasLayer"]
+position = Vector2(-540, 154)
+script = ExtResource("3_ldvw7")
+cursor_ui = ExtResource("4_x0u2q")
+scale_sprite = Vector2(2, 2)
+auto_lock_offset = Vector2(155, 150)
+mouse_visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -42,6 +57,7 @@ grow_vertical = 2
 theme = ExtResource("1_qjqgx")
 
 [node name="WallPaperFlag" type="TextureRect" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 0
 offset_left = -120.0
 offset_top = -57.0
@@ -51,7 +67,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_q1xmp")
 
 [node name="WallPaperPostalCard" type="TextureRect" parent="CanvasLayer/Control"]
-visible = false
 layout_mode = 0
 offset_right = 1980.0
 offset_bottom = 1485.0
@@ -194,6 +209,7 @@ text = "Quit game"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
+[connection signal="finished" from="MusicPlaylistsPlayer" to="MusicPlaylistsPlayer" method="_on_finished"]
 [connection signal="button_up" from="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/PlayContainer/PlayButton" to="." method="_on_play_button_up"]
 [connection signal="button_up" from="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/TrainingContainer/TrainingButton" to="." method="_on_training_button_button_up"]
 [connection signal="button_up" from="CanvasLayer/Control/VBoxContainer/CenterContainer/ButtonsContainer/QuitContainer/QuitButton" to="." method="_on_quit_button_up"]
