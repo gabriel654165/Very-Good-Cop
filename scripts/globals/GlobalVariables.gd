@@ -40,6 +40,23 @@ var player_distance_weapon_list = [
 		points_to_use_special_power_lvl= 0,
 		auto_lock_target_lvl= -1,
 	}, {
+		name= 'colt',
+		unlocked = true,
+		special_power_unlocked = true,
+		shooting_cooldown_lvl= 0,
+		balls_by_burt_lvl= -1,
+		frequence_of_burt_lvl= -1,
+		precision_lvl= 0,
+		recoil_force_lvl= 0,
+		ammo_size_lvl= 0,
+		ammo_reloading_time_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= -1,
+		points_to_use_special_power_lvl= 0,
+		auto_lock_target_lvl= -1,
+	}, {
 		name= 'shotgun',
 		unlocked = true,
 		special_power_unlocked = true,
@@ -56,6 +73,23 @@ var player_distance_weapon_list = [
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
 		auto_lock_target_lvl= -1,
+	}, {
+		name= 'hunting_rifle',
+		unlocked = true,
+		special_power_unlocked = true,
+		shooting_cooldown_lvl= 0,
+		balls_by_burt_lvl= -1,
+		frequence_of_burt_lvl= -1,
+		precision_lvl= 0,
+		recoil_force_lvl= 0,
+		ammo_size_lvl= 0,
+		ammo_reloading_time_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= -1,
+		projectile_bouncing_lvl= -1,
+		points_to_use_special_power_lvl= 0,
+		auto_lock_target_lvl= 0,
 	}, {
 		name= 'mini_uzi',
 		unlocked = true,
@@ -74,7 +108,41 @@ var player_distance_weapon_list = [
 		points_to_use_special_power_lvl= 0,
 		auto_lock_target_lvl= -1,
 	}, {
+		name= 'smg',
+		unlocked = true,
+		special_power_unlocked = true,
+		shooting_cooldown_lvl= 0,
+		balls_by_burt_lvl= -1,
+		frequence_of_burt_lvl= -1,
+		precision_lvl= 0,
+		recoil_force_lvl= 0,
+		ammo_size_lvl= 0,
+		ammo_reloading_time_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= -1,
+		projectile_bouncing_lvl= -1,
+		points_to_use_special_power_lvl= 0,
+		auto_lock_target_lvl= -1,
+	}, {
 		name= 'riffle',
+		unlocked = true,
+		special_power_unlocked = true,
+		shooting_cooldown_lvl= 0,
+		balls_by_burt_lvl= 0,
+		frequence_of_burt_lvl= 0,
+		precision_lvl= 0,
+		recoil_force_lvl= 0,
+		ammo_size_lvl= 0,
+		ammo_reloading_time_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= -1,
+		points_to_use_special_power_lvl= 0,
+		auto_lock_target_lvl= -1,
+	}, {
+		name= 'ak47',
 		unlocked = true,
 		special_power_unlocked = true,
 		shooting_cooldown_lvl= 0,
@@ -178,7 +246,7 @@ var all_distance_weapon_list = [
 	{
 		name="glock",
 		animation="glock_animation",
-		weapon_position=Vector2(25, -2),
+		weapon_position=Vector2(27, 3),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -187,7 +255,7 @@ var all_distance_weapon_list = [
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "This power will locate nearby enemies, place a sight on each of them, and fire directly at them one by one rather quickly.",
 		stats= [{
-			shooting_cooldown= level_stat(0.75, 0.1, 10),
+			shooting_cooldown= level_stat(0.75, 0.2, 10),
 			type= "property",
 		}, {
 			balls_by_burt= level_stat(1, 1, 1),#default value
@@ -215,6 +283,57 @@ var all_distance_weapon_list = [
 			type= "projectile",
 		}, {
 			projectile_impact_force= level_stat(0.1, 2, 4),
+			type= "projectile",
+		}, {
+			projectile_bouncing= level_stat(false, false, 1),# default value
+			type= "projectile",
+		}, {
+			points_to_use_special_power= level_stat(500, 200, 2),
+			type= "power",
+		}, {
+			auto_lock_target= level_stat(false, false, 1),# default value
+			type= "power",
+		}]
+	},{
+		name="colt",
+		animation="colt_animation",
+		weapon_position=Vector2(33, 1),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
+		gui_texture=load("res://assets/UI/icons/weapons/spr_colt.png"),
+		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
+		special_power_name= "aim_bot",
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/AimBot.tscn"),
+		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_description= "This power will locate nearby enemies, place a sight on each of them, and fire directly at them one by one rather quickly.",
+		stats= [{
+			shooting_cooldown= level_stat(1, 0.3, 10),
+			type= "property",
+		}, {
+			balls_by_burt= level_stat(1, 1, 1),#default value
+			type= "property",
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1),#default value
+			type= "property",
+		}, {
+			precision= level_stat(0.45, 0, 6),
+			type= "property",
+		}, {
+			recoil_force= level_stat(2.5, 0.5, 3),
+			type= "property",
+		}, {
+			ammo_size= level_stat(6, 9, 3),
+			type= "ammo",
+		}, {
+			ammo_reloading_time= level_stat(3, 0.3, 10),
+			type= "ammo",
+		}, {
+			projectile_speed= level_stat(13, 20, 6),
+			type= "projectile",
+		}, {
+			projectile_damages= level_stat(9, 500, 100),#~infinit
+			type= "projectile",
+		}, {
+			projectile_impact_force= level_stat(0.3, 4, 4),
 			type= "projectile",
 		}, {
 			projectile_bouncing= level_stat(false, false, 1),# default value
@@ -278,9 +397,60 @@ var all_distance_weapon_list = [
 			type= "power",
 		}]
 	},{
+		name="hunting_rifle",
+		animation="hunting_rifle_animation",
+		weapon_position=Vector2(21, 1),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
+		gui_texture=load("res://assets/UI/icons/weapons/spr_Shotgun.png"),
+		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_2.png"),
+		special_power_name= "fast_reloading",
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FastReloading.tscn"),
+		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_description= "This power will reload your shotgun in just 0.5 seconds after each shot.",
+		stats= [{
+			shooting_cooldown= level_stat(0.75, 0.1, 6),
+			type= "property",
+		}, {
+			balls_by_burt= level_stat(1, 1, 1),# default value
+			type= "property",
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1),# default value
+			type= "property",
+		}, {
+			precision= level_stat(1, 0, 4),
+			type= "property",
+		}, {
+			recoil_force= level_stat(3, 1, 4),
+			type= "property",
+		}, {
+			ammo_size= level_stat(1, 12, 8),
+			type= "ammo",
+		}, {
+			ammo_reloading_time= level_stat(1.75, 0.25, 6),
+			type= "ammo",
+		}, {
+			projectile_speed= level_stat(13, 25, 6),
+			type= "projectile",
+		}, {
+			projectile_damages= level_stat(12, 500, 100),#infinit
+			type= "projectile",
+		}, {
+			projectile_impact_force= level_stat(4, 4, 1),# default value
+			type= "projectile",
+		}, {
+			projectile_bouncing= level_stat(false, false, 1),# default value
+			type= "projectile",
+		}, {
+			points_to_use_special_power= level_stat(500, 200, 2),
+			type= "power",
+		}, {
+			auto_lock_target= level_stat(false, true, 1),
+			type= "power",
+		}]
+	},{
 		name="mini_uzi",
 		animation="mini_uzi_animation",
-		weapon_position=Vector2(29, -4),
+		weapon_position=Vector2(31, 4),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Uzi.png"),
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
@@ -313,10 +483,61 @@ var all_distance_weapon_list = [
 			projectile_speed= level_stat(10, 17, 6),
 			type= "projectile",
 		}, {
-			projectile_damages= level_stat(2, 500, 100),#infinit
+			projectile_damages= level_stat(4, 500, 100),#infinit
 			type= "projectile",
 		}, {
 			projectile_impact_force= level_stat(1, 1, 1),# default value
+			type= "projectile",
+		}, {
+			projectile_bouncing= level_stat(false, false, 1),# default value
+			type= "projectile",
+		}, {
+			points_to_use_special_power= level_stat(500, 200, 2),
+			type= "power",
+		}, {
+			auto_lock_target= level_stat(false, false, 1),# default value
+			type= "power",
+		}]
+	},{
+		name="smg",
+		animation="smg_animation",
+		weapon_position=Vector2(31, 3),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
+		gui_texture=load("res://assets/UI/icons/weapons/Gun_Smg.png"),
+		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
+		special_power_name= "bouncing_bullets",
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/BouncingBullets.tscn"),
+		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_description= "This power will fire bullets that will bounce off the walls.",
+		stats= [{
+			shooting_cooldown= level_stat(0.15, 0.03, 5),
+			type= "property",
+		}, {
+			balls_by_burt= level_stat(1, 1, 1),# default value
+			type= "property",
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1),# default value
+			type= "property",
+		}, {
+			precision= level_stat(1.2, 0.2, 6),
+			type= "property",
+		}, {
+			recoil_force= level_stat(0.25, 0, 3),
+			type= "property",
+		}, {
+			ammo_size= level_stat(6, 42, 10),
+			type= "ammo",
+		}, {
+			ammo_reloading_time= level_stat(1.5, 0.2, 5),
+			type= "ammo",
+		}, {
+			projectile_speed= level_stat(12, 20, 6),
+			type= "projectile",
+		}, {
+			projectile_damages= level_stat(3, 500, 100),#infinit
+			type= "projectile",
+		}, {
+			projectile_impact_force= level_stat(0, 0, 1),# default value
 			type= "projectile",
 		}, {
 			projectile_bouncing= level_stat(false, false, 1),# default value
@@ -340,31 +561,82 @@ var all_distance_weapon_list = [
 		special_power_preview="res://assets/previews/preview-resized.ogv",
 		special_power_description= "This power will fire bullets that pass through and fragment into 5 parts when they hit an enemy or any other object.",
 		stats= [{
-			shooting_cooldown= level_stat(1.5, 0.5, 6),
+			shooting_cooldown= level_stat(0.3, 0.05, 6),
 			type= "property",
 		}, {
-			balls_by_burt= level_stat(3, 9, 4),
+			balls_by_burt= level_stat(1, 1, 1),# default value
 			type= "property",
 		}, {
-			frequence_of_burt= level_stat(0.2, 0.05, 4),
+			frequence_of_burt= level_stat(0, 0, 1),# default value
 			type= "property",
 		}, {
 			precision= level_stat(1, 0.1, 6),
 			type= "property",
 		}, {
-			recoil_force= level_stat(0.5, 0.2, 3),
+			recoil_force= level_stat(1, 0.2, 4),
 			type= "property",
 		}, {
-			ammo_size= level_stat(9, 36, 6),
+			ammo_size= level_stat(7, 42, 15),
 			type= "ammo",
 		}, {
-			ammo_reloading_time= level_stat(2, 0.5, 5),
+			ammo_reloading_time= level_stat(3.5, 0.2, 5),
 			type= "ammo",
 		}, {
 			projectile_speed= level_stat(10, 20, 6),
 			type= "projectile",
 		}, {
 			projectile_damages= level_stat(10, 500, 100),#infinit
+			type= "projectile",
+		}, {
+			projectile_impact_force= level_stat(0.5, 2, 5),
+			type= "projectile",
+		}, {
+			projectile_bouncing= level_stat(false, false, 1),# default value
+			type= "projectile",
+		}, {
+			points_to_use_special_power= level_stat(500, 200, 2),
+			type= "power",
+		}, {
+			auto_lock_target= level_stat(false, false, 1),# default value
+			type= "power",
+		}]
+	},{
+		name="ak47",
+		animation="ak47_animation",
+		weapon_position=Vector2(26, 1),
+		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
+		gui_texture=load("res://assets/UI/icons/weapons/spr_aka.png"),
+		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
+		special_power_name= "fragmentation_bullets",
+		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FragmentationBullets.tscn"),
+		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_description= "This power will fire bullets that pass through and fragment into 5 parts when they hit an enemy or any other object.",
+		stats= [{
+			shooting_cooldown= level_stat(0.2, 0.05, 6),
+			type= "property",
+		}, {
+			balls_by_burt= level_stat(1, 1, 1),# default value
+			type= "property",
+		}, {
+			frequence_of_burt= level_stat(0, 0, 1),# default value
+			type= "property",
+		}, {
+			precision= level_stat(1, 0.2, 6),
+			type= "property",
+		}, {
+			recoil_force= level_stat(1.5, 0.5, 6),
+			type= "property",
+		}, {
+			ammo_size= level_stat(14, 52, 15),
+			type= "ammo",
+		}, {
+			ammo_reloading_time= level_stat(4, 0.5, 4),
+			type= "ammo",
+		}, {
+			projectile_speed= level_stat(10, 20, 6),
+			type= "projectile",
+		}, {
+			projectile_damages= level_stat(13, 500, 100),#infinit
 			type= "projectile",
 		}, {
 			projectile_impact_force= level_stat(0.5, 2, 5),
