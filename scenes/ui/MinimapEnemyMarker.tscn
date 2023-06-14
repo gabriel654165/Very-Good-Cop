@@ -1,15 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://45sw7cn3b37b"]
 
 [ext_resource type="Shader" path="res://scripts/shaders/ColorCanvasItemShader.gdshader" id="1_mj3qb"]
-[ext_resource type="Texture2D" uid="uid://b4jmkicvhyi3d" path="res://assets/UI/Minimap/Sombrero.png" id="2_qiu0b"]
+[ext_resource type="Texture2D" uid="uid://dby730erw3vq8" path="res://assets/UI/Minimap/circle-marker.png" id="2_dbex4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dwmqb"]
 shader = ExtResource("1_mj3qb")
-shader_parameter/color = Color(0, 0, 0, 0.690196)
+shader_parameter/color = Color(1, 0, 0, 0.690196)
 
 [node name="MinimapEnemyMarker" type="Sprite2D"]
 z_index = 1
 material = SubResource("ShaderMaterial_dwmqb")
 position = Vector2(117, 114)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_qiu0b")
+texture = ExtResource("2_dbex4")

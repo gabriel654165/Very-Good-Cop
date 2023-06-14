@@ -119,7 +119,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 0.498039)]
+"values": [Color(0.0666667, 0, 1, 0.623529), Color(0.14902, 0, 1, 0.34902)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -131,7 +131,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 0, 0.00392157), Color(1, 1, 0, 0.498039)]
+"values": [Color(1, 1, 0, 0.623529), Color(1, 1, 0, 0.34902)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -143,7 +143,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0.00392157), Color(0, 0, 0, 0.498039)]
+"values": [Color(1, 0, 0, 0.623529), Color(1, 0, 0, 0.34902)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -543,14 +543,13 @@ panel_container = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HB
 rooms_grid_container = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/GridContainer")
 background_material_color = Color(0.145098, 0.145098, 0.145098, 0.470588)
 room_material_color = Color(0.117647, 0.117647, 0.117647, 0.627451)
-player_material_color = Color(0, 0, 0, 0.00392157)
-enemy_material_color = Color(0, 0, 0, 0.00392157)
-powerup_material_color = Color(1, 1, 0, 0.00392157)
+player_material_color = Color(0.0666667, 0, 1, 0.623529)
+enemy_material_color = Color(1, 0, 0, 0.623529)
+powerup_material_color = Color(1, 1, 0, 0.623529)
 animation_player = NodePath("../GuiControl/MinimapControl/AnimationPlayer")
 player_marker_scene = ExtResource("20_jcqsb")
 enemy_marker_scene = ExtResource("21_w74aj")
 powerup_marker_scene = ExtResource("20_7gmvy")
-markers_minimum_scale = 0.025
 left_items_container = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer")
 left_enemies_label = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/EnemiesLeftPanel/VBoxContainer/LabelValue")
 left_powerups_label = NodePath("../GuiControl/MinimapControl/AspectRatioContainer/HBoxContainer/VBoxContainer/LeftItemsContainer/PowerupsLeftPanel/VBoxContainer/LabelValue")
@@ -657,7 +656,7 @@ custom_minimum_size = Vector2(378, 378)
 layout_mode = 1
 offset_left = 1542.0
 offset_right = 1920.0
-offset_bottom = 378.0
+offset_bottom = 409.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/MinimapControl/AspectRatioContainer"]
 layout_mode = 2

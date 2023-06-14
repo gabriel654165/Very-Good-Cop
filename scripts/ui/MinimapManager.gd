@@ -73,7 +73,7 @@ func world_to_grid_position(world_position: Vector2) -> Vector2:
 	return grid_position
 
 func get_marker_scale() -> Vector2:
-	var scale_factor : Vector2 = (rooms_grid_container.size / 10000)
+	var scale_factor : Vector2 = (rooms_grid_container.size / 5000)
 	if scale_factor < Vector2(markers_minimum_scale, markers_minimum_scale):
 		scale_factor = Vector2(markers_minimum_scale, markers_minimum_scale)
 	return scale_factor

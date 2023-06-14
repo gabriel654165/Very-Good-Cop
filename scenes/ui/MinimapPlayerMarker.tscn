@@ -1,15 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc2pg066tc1b8"]
 
 [ext_resource type="Shader" path="res://scripts/shaders/ColorCanvasItemShader.gdshader" id="1_knok6"]
-[ext_resource type="Texture2D" uid="uid://t0fsw6bmbs45" path="res://assets/UI/Minimap/PoliceCap.png" id="2_1b275"]
+[ext_resource type="Texture2D" uid="uid://dby730erw3vq8" path="res://assets/UI/Minimap/circle-marker.png" id="2_4teq4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dwmqb"]
 shader = ExtResource("1_knok6")
-shader_parameter/color = Color(0, 0, 0, 0.00392157)
+shader_parameter/color = Color(0, 0, 1, 1)
 
 [node name="MinimapPlayerMarker" type="Sprite2D"]
 z_index = 2
 material = SubResource("ShaderMaterial_dwmqb")
 position = Vector2(117, 114)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_1b275")
+texture = ExtResource("2_4teq4")
