@@ -11,6 +11,7 @@ func _ready():
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
 	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)
 	GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_grappling_cable_drag)
+	GlobalSignals.catching_cable_spawned.connect(projectile_manager.handle_catching_cable_spawned)
 	
 	GlobalSignals.play_sound.connect(_do_play_sound)
 	
