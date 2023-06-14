@@ -50,19 +50,17 @@ var jobs : Array[Callable] = []
 var _counter_jobs: int = 0
 var _total_jobs: int = 5
 
+var finished_counting_sound : AudioStreamMP3
 
 signal display_completed()
-
-
-func job_completed():
-	_counter_jobs += 1
-	if _counter_jobs >= _total_jobs:
-		display_completed.emit()
 
 
 func _ready():
 	gui_manager = get_parent() as GuiManager
 	display_completed.connect(self.display_finished_labels)
+	
+	finished_counting_sound = AudioStreamMP3.new()
+	(finished_counting_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/ui/recap_points/cash_register.mp3")
 	
 	var job_1 = func():
 		change_visibility_prompts(label_prompt_time_spent)
@@ -90,6 +88,12 @@ func _ready():
 	
 	jobs.append_array([job_1, job_2, job_3, job_4, job_5])
 	_total_jobs = jobs.size()
+
+
+func job_completed():
+	_counter_jobs += 1
+	if _counter_jobs >= _total_jobs:
+		display_completed.emit()
 
 
 func set_active(state: bool):
@@ -141,6 +145,7 @@ func change_visibility_prompts(visible_label: Label = null):
 func display_finished_labels():
 	if jobs_finished:
 		return
+	GlobalSignals.play_sound.emit(finished_counting_sound, 2, 1, global_position)
 	jobs_finished = true
 	skip_button.visible = false
 	continue_button.visible = true

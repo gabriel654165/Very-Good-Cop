@@ -2243,6 +2243,7 @@ layout_mode = 2
 [node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TimeContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.25098)
 theme_override_font_sizes/font_size = 50
 text = "_________________________________________________________________________________________________"
 horizontal_alignment = 1
@@ -2290,6 +2291,7 @@ layout_mode = 2
 [node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/RoomsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.25098)
 theme_override_font_sizes/font_size = 50
 text = "_________________________________________________________________________________________________"
 horizontal_alignment = 1
@@ -2337,6 +2339,7 @@ layout_mode = 2
 [node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/KillsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.25098)
 theme_override_font_sizes/font_size = 50
 text = "_________________________________________________________________________________________________"
 horizontal_alignment = 1
@@ -2385,6 +2388,7 @@ layout_mode = 2
 [node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/CombosContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.25098)
 theme_override_font_sizes/font_size = 50
 text = "_________________________________________________________________________________________________"
 horizontal_alignment = 1
@@ -2433,6 +2437,7 @@ layout_mode = 2
 [node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/GangPackagesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.25098)
 theme_override_font_sizes/font_size = 50
 text = "_________________________________________________________________________________________________"
 horizontal_alignment = 1
@@ -2474,6 +2479,7 @@ layout_mode = 2
 [node name="BetweenLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.25098)
 theme_override_font_sizes/font_size = 75
 text = "_________________________________________________________________________________________________"
 horizontal_alignment = 1
@@ -2487,11 +2493,13 @@ layout_mode = 2
 
 [node name="MoneyValueDescriptionLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 75
 text = "$ "
 
 [node name="MoneyValueLabel" type="Label" parent="GuiControl/RecapPointsControl/HBoxContainer/VBoxContainer/TotalMoneyContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 75
 text = "0"
 
