@@ -4,9 +4,6 @@ class_name Weapon
 @export var shot_shell_particle_scene : PackedScene
 
 var shooter_actor : Node
-var shooting_sound : AudioStream
-var reloading_sound : AudioStream
-
 
 var weapon_name : String = ''
 
@@ -47,6 +44,9 @@ var auto_lock_target : bool = false
 
 var special_power : SpecialPower
 
+@export var shooting_sound : AudioStream
+@export var reloading_sound : AudioStream
+
 @onready var fire_position = $FirePosition
 @onready var fire_direction = $FireDirection
 @onready var shooting_cooldown = $AttackCoolDown
@@ -60,13 +60,7 @@ func _ready():
 	if get_parent() != null:
 		shooter_actor = get_parent().get_parent().get_parent()
 	randomize()
-	
-	# TODO: To remove @gabriel
-	shooting_sound = AudioStreamMP3.new()
-	(shooting_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/5.56.mp3")
 
-	reloading_sound = AudioStreamMP3.new()
-	(reloading_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/reload.mp3")
 
 func shoot():
 	if !enable:
@@ -145,14 +139,14 @@ func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vec
 		GlobalSignals.sound_emitted.emit(actor, actor.global_position, sound_intensity)
 	
 	if projectile_instance is CatchingCable:
-		GlobalSignals.catching_cable_spawned.emit(null, projectile_instance, fire_position.global_position, direction, 2)
+		GlobalSignals.catching_cable_spawned.emit(shooter_actor, projectile_instance, fire_position.global_position, direction, 2)
 	elif projectile_instance is Grenade:
 		var landing_position : Vector2 = get_global_mouse_position()
-		GlobalSignals.projectile_launched_spawn.emit(null, projectile_instance, fire_position.global_position, direction, landing_position)
+		GlobalSignals.projectile_launched_spawn.emit(shooter_actor, projectile_instance, fire_position.global_position, direction, landing_position)
 	elif projectile_instance is Bullet:
-		GlobalSignals.projectile_fired_spawn.emit(null, projectile_instance, fire_position.global_position, direction)
+		GlobalSignals.projectile_fired_spawn.emit(shooter_actor, projectile_instance, fire_position.global_position, direction)
 	elif projectile_instance is Projectile:
-		GlobalSignals.projectile_fired_spawn.emit(null, projectile_instance, fire_position.global_position, direction)
+		GlobalSignals.projectile_fired_spawn.emit(shooter_actor, projectile_instance, fire_position.global_position, direction)
 
 func set_projectile_variables(projectile: Projectile):
 	projectile.speed = projectile_speed

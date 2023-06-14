@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://c477b1thhwo0i"]
+[gd_scene load_steps=14 format=3 uid="uid://c477b1thhwo0i"]
 
 [ext_resource type="Script" path="res://scripts/Editor/WeaponEditor.gd" id="1_x1vvy"]
 [ext_resource type="PackedScene" uid="uid://cactlkcpude5w" path="res://scenes/projectiles/Bullet.tscn" id="2_j2en7"]
 [ext_resource type="Script" path="res://scripts/weapons/Weapon.gd" id="3_djx0w"]
 [ext_resource type="Texture2D" uid="uid://8rem7ot0im5f" path="res://assets/PNG/weapon_machine.png" id="4_oyirm"]
 [ext_resource type="Texture2D" uid="uid://d3231ln0exvk" path="res://assets/UI/icons/weapons/spr_Pistol.png" id="5_sv8ut"]
+[ext_resource type="AudioStream" uid="uid://r5ya6oxaslhj" path="res://assets/Sounds/distance_weapon/shooting.mp3" id="5_x5eph"]
 [ext_resource type="Texture2D" uid="uid://dj47mnktkpau5" path="res://assets/Spritesheet/onlyObjects_default.png" id="6_8js0n"]
+[ext_resource type="AudioStream" uid="uid://drr5yr4fwu7ow" path="res://assets/Sounds/distance_weapon/reload.mp3" id="6_slty1"]
 [ext_resource type="PackedScene" uid="uid://c8blxsvtsphcf" path="res://scenes/particles/ShotShellParticle.tscn" id="7_1qqsf"]
 
 [sub_resource type="Animation" id="Animation_56nst"]
@@ -116,6 +118,8 @@ weapon/auto_lock_target = false
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("3_djx0w")
 shot_shell_particle_scene = ExtResource("7_1qqsf")
+shooting_sound = ExtResource("5_x5eph")
+reloading_sound = ExtResource("6_slty1")
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 visible = false

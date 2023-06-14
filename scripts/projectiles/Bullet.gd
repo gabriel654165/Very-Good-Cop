@@ -9,6 +9,13 @@ func _ready():
 	life_cycle_timer.start()
 	scale = scale * size
 	current_piercing_force = piercing_force
+	
+	impact_wall_sound = AudioStreamMP3.new()
+	(impact_wall_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/impacts/bullet_impact_wall.mp3")
+	impact_barrel_sound = AudioStreamMP3.new()
+	(impact_barrel_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/impacts/bullet_impact_metal.mp3")
+	hit_marker_sound = AudioStreamMP3.new()
+	(hit_marker_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/impacts/hitmarker.mp3")
 
 
 func init_frag_bullet():
@@ -39,9 +46,16 @@ func spawn_impact_wall_particles(emit_direction: float):
 	impact_particules.rotate(90)
 	impact_particules.emitting = true
 
+
 func handle_specific_collision(object: Object):
 	if object.get_name() == "Walls":
 		spawn_impact_wall_particles(self.rotation)
+		GlobalSignals.play_sound.emit(impact_wall_sound, 0, 1, global_position)
+	if object.get_name().contains("ExplosiveBarrel"):
+		spawn_impact_wall_particles(self.rotation)
+		GlobalSignals.play_sound.emit(impact_barrel_sound, 0, 1, global_position)
+	if object is Enemy and projectile_owner is Player:
+		GlobalSignals.play_sound.emit(hit_marker_sound, 0, 1, global_position)
 
 # Signals
 func _on_life_cycle_timer_timeout():

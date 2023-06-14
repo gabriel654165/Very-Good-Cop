@@ -17,10 +17,15 @@ var frag_projectile_precision_angle : Vector2 = Vector2(-1, 1)#coordonées de tr
 var frag_projectile_precision : float = 1
 var number_of_frag_projectile : int = 3
 
-var projectile_owner : Node2D = null
+var projectile_owner : Node2D
 var sprite : Sprite2D
 var direction := Vector2.ZERO
 var current_piercing_force : int = 0
+
+var impact_wall_sound : AudioStreamMP3
+var impact_barrel_sound : AudioStreamMP3
+var hit_marker_sound : AudioStreamMP3
+
 
 func _init():
 	scale = scale * size
@@ -64,10 +69,6 @@ func set_sprite(sprite: Sprite2D):
 func set_direction(direction: Vector2):
 	self.direction = direction
 	rotation += direction.angle()
-
-
-func set_projectile_owner(projectile_owner: Node2D):
-	self.projectile_owner = projectile_owner
 
 
 func set_projectile_type(weapon_type: ProjectileTypes.Type):

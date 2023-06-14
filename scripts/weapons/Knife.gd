@@ -15,6 +15,8 @@ var power_activated : bool = false
 @onready var attack_cooldown_timer = $AttackCoolDown
 @onready var collision_shape = $CollisionShape2D
 
+var woosh_sound : AudioStream
+
 var stab_actor : Node = null
 var close_fight_bodies = []
 var enable : bool = true
@@ -33,6 +35,7 @@ func stab():
 		attack_cooldown_timer.start()
 		
 		GlobalSignals.weapon_stab.emit(stab_actor)
+		GlobalSignals.play_sound.emit(woosh_sound, 0, 1, global_position)
 		
 		if close_fight_bodies.size() <= 0:
 			return

@@ -198,12 +198,20 @@ _data = {
 z_index = 2
 collision_layer = 0
 script = ExtResource("1_b6dp5")
+radius_pixels_impact_area = null
+max_launch_distance = null
+landing_precision = null
 shader_animation = NodePath("ShockWaveControl/AnimationPlayer")
 particle_animation = NodePath("ExplosionControl/SubViewportContainer/PixelizedSubViewport/ExplosionParticles/AnimationPlayer")
+projectile_type = null
 speed = 7
 damages = 10
 size = 0.7
 impact_force = 0.2
+piercing_force = null
+should_bounce = null
+should_pierce_walls = null
+should_frag = null
 animation_player = NodePath("AnimationPlayer")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]

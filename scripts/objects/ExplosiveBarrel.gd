@@ -8,6 +8,14 @@ extends StaticBody2D
 @onready var health := $Health as Health
 @onready var explosion_area := $ExplosionArea as Area2D
 
+var explosition_sound : AudioStreamMP3
+
+
+func _ready():
+	explosition_sound = AudioStreamMP3.new()
+	(explosition_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/explosion/barrel_explosion.mp3")
+
+
 func handle_hit(damager: Node2D, damage):
 	if health.is_dead():
 		return
@@ -22,6 +30,7 @@ func destroy_instance():
 	queue_free()
 
 func explode():
+	GlobalSignals.play_sound.emit(explosition_sound, 0, 1, global_position)
 	particle_animation.play("barrel_explosion_particles")
 	shader_animation.play("shockwave_shader_animation")
 

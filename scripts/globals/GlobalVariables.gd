@@ -246,6 +246,8 @@ var all_distance_weapon_list = [
 	{
 		name="glock",
 		animation="glock_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(27, 3),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Pistol.png"),
@@ -297,6 +299,8 @@ var all_distance_weapon_list = [
 	},{
 		name="colt",
 		animation="colt_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/revolver_reload.mp3",
 		weapon_position=Vector2(33, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_colt.png"),
@@ -348,6 +352,8 @@ var all_distance_weapon_list = [
 	},{
 		name="shotgun",
 		animation="shotgun_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shotgun_fire.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(18, 0),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_shotgun.png"),
@@ -399,6 +405,8 @@ var all_distance_weapon_list = [
 	},{
 		name="hunting_rifle",
 		animation="hunting_rifle_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(21, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Shotgun.png"),
@@ -450,6 +458,8 @@ var all_distance_weapon_list = [
 	},{
 		name="mini_uzi",
 		animation="mini_uzi_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(31, 4),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Uzi.png"),
@@ -501,6 +511,8 @@ var all_distance_weapon_list = [
 	},{
 		name="smg",
 		animation="smg_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(31, 3),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/Gun_Smg.png"),
@@ -552,6 +564,8 @@ var all_distance_weapon_list = [
 	},{
 		name="riffle",
 		animation="riffle_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(26, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr__Aka.png"),
@@ -603,6 +617,8 @@ var all_distance_weapon_list = [
 	},{
 		name="ak47",
 		animation="ak47_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(26, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_aka.png"),
@@ -654,6 +670,8 @@ var all_distance_weapon_list = [
 	},{
 		name="machine_gun",
 		animation="machine_gun_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(27, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_Mg.png"),
@@ -705,6 +723,8 @@ var all_distance_weapon_list = [
 	},{
 		name="grenade_launcher",
 		animation="grenade_launcher_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/shooting.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(22, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_grenade_launcher.png"),
@@ -756,6 +776,8 @@ var all_distance_weapon_list = [
 	},{
 		name="sniper",
 		animation="sniper_animation",
+		shooting_sound="res://assets/Sounds/distance_weapon/sniper_fire.mp3",
+		reloading_sound="res://assets/Sounds/distance_weapon/reload.mp3",
 		weapon_position=Vector2(31, 1),
 		projectile_packed_scene=preload("res://scenes/projectiles/Bullet.tscn"),
 		gui_texture=load("res://assets/UI/icons/weapons/spr_sniper.png"),
@@ -970,6 +992,7 @@ var all_melee_weapon_list = [
 	{
 		name= 'police_baton',
 		animation="police_baton_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/police_baton.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -993,6 +1016,7 @@ var all_melee_weapon_list = [
 	},{
 		name="knife",
 		animation="knife_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/blade_woosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/spr_Knife.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1016,6 +1040,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'brass_knuckles',
 		animation="brass_knuckles_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/spr_brass_knuckles.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1039,6 +1064,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'baseball_bat',
 		animation="baseball_bat_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/spr_Baseball_Bat.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1062,6 +1088,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'golf_club',
 		animation="golf_club_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/golf_club.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1085,6 +1112,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'pocket_chain_saw',
 		animation="pocket_chain_saw_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/pocket_chain_saw.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1108,6 +1136,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'pan',
 		animation="pan_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/pan.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1131,6 +1160,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'tequilla',
 		animation="tequilla_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/tequilla.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1154,6 +1184,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'heineken',
 		animation="heineken_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/henekein.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1177,6 +1208,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'machete',
 		animation="machete_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/blade_woosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/spr_machete.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1200,6 +1232,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'skate',
 		animation="skate_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/skate.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1223,6 +1256,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'axe',
 		animation="axe_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/blade_woosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/axe.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1246,6 +1280,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'shovel',
 		animation="shovel_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/spr_shovel.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1269,6 +1304,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'katana',
 		animation="katana_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/blade_woosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/katana.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1292,6 +1328,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'sword',
 		animation="sword_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/blade_woosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/spr_sword.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1315,6 +1352,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'blue_lightsaber_toy',
 		animation="blue_lightsaber_toy_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/lightsaber_woosh.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/spr_blue_lightsaber_toy.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",
@@ -1338,6 +1376,7 @@ var all_melee_weapon_list = [
 	},{
 		name= 'red_lightsaber_toy',
 		animation="red_lightsaber_toy_animation",
+		woosh_sound="res://assets/Sounds/melee_weapon/lightsaber_woosh_2.mp3",
 		gui_texture=load("res://assets/weapons/sprites/weapons/spr_red_lightsaber_toy.png"),
 		special_power_name= "special_power_name",
 		special_power_preview="res://assets/previews/preview-resized.ogv",

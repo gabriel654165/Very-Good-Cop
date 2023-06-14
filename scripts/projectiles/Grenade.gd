@@ -16,10 +16,17 @@ var distance : float = 0
 var lauching_position := Vector2.ZERO
 var landing_position := Vector2.ZERO
 
+var explosition_sound : AudioStreamMP3
+
+
 func _ready():
 	randomize()
 	scale = scale * size
 	explosion_area_shape.get_shape().set_radius(radius_pixels_impact_area)
+	explosition_sound = AudioStreamMP3.new()
+	(explosition_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/explosion/barrel_explosion.mp3")
+	hit_marker_sound = AudioStreamMP3.new()
+	(hit_marker_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/impacts/hitmarker.mp3")
 
 func _specific_process(delta):
 	if speed == 0 or direction == Vector2.ZERO:
@@ -30,6 +37,8 @@ func _specific_process(delta):
 		stop()
 
 func handle_specific_collision(object: Object):
+	if object is Enemy and projectile_owner is Player:
+		GlobalSignals.play_sound.emit(hit_marker_sound, 0, 1, global_position)
 	if object is Character:
 		stop()
 		explode()
@@ -58,6 +67,9 @@ func calulate_distance():
 	distance += range
 
 func explode():
+	var pitch_scale:float =  explosition_sound.get_length() / 0.75
+	
+	GlobalSignals.play_sound.emit(explosition_sound, 0, pitch_scale, global_position)
 	shader_animation.play("shockwave_shader_animation")
 	particle_animation.play("grenade_explosion_particles")
 	bodies = explosion_area.get_overlapping_bodies()
