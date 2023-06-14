@@ -1091,35 +1091,75 @@ navigation_polygon = SubResource("NavigationPolygon_smpy3")
 position = Vector2(31, -62)
 
 [node name="1" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-213, 103)
+position = Vector2(-207, 44)
 
 [node name="2" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-149, 184)
+position = Vector2(-207, 101)
 
 [node name="3" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-77, 277)
+position = Vector2(10, 164)
 
 [node name="4" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-38, 192)
+position = Vector2(102, 131)
+
+[node name="5" type="Node2D" parent="RoomConfig/Patrols/A"]
+position = Vector2(8, 52)
 
 [node name="B" type="Node2D" parent="RoomConfig/Patrols"]
-position = Vector2(69, 95)
-rotation = 2.62104
+position = Vector2(31, -62)
 
 [node name="1" type="Node2D" parent="RoomConfig/Patrols/B"]
-position = Vector2(-213, 103)
+position = Vector2(-252, 279)
 
 [node name="2" type="Node2D" parent="RoomConfig/Patrols/B"]
-position = Vector2(-149, 184)
+position = Vector2(-256, 189)
 
 [node name="3" type="Node2D" parent="RoomConfig/Patrols/B"]
-position = Vector2(-77, 277)
+position = Vector2(-220, 237)
 
 [node name="4" type="Node2D" parent="RoomConfig/Patrols/B"]
-position = Vector2(-38, 192)
+position = Vector2(-122, 272)
+
+[node name="C" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(31, -62)
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(24, 296)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-64, 276)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(55, 198)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(168, 158)
+
+[node name="D" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(31, -62)
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/D"]
+position = Vector2(-133, 188)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/D"]
+position = Vector2(-62, 160)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/D"]
+position = Vector2(-79, 121)
 
 [node name="PowerUpPoints" type="Node2D" parent="RoomConfig"]
-position = Vector2(158, -13)
 
 [node name="A" type="Node2D" parent="RoomConfig/PowerUpPoints"]
-position = Vector2(-210, -161)
+position = Vector2(132, 42)
+
+[node name="A2" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(73, 58)
+
+[node name="A3" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(92, 87)
+
+[node name="A4" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(152, 124)
+
+[node name="A5" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(130, 146)

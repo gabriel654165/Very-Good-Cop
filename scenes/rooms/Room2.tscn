@@ -1093,41 +1093,43 @@ navigation_polygon = SubResource("NavigationPolygon_mt155")
 [node name="A" type="Node2D" parent="RoomConfig/Patrols"]
 
 [node name="1" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-213, 103)
+position = Vector2(-46, -221)
 
 [node name="2" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-149, 184)
-
-[node name="3" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-76, 222)
-
-[node name="4" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-38, 192)
+position = Vector2(53, -220)
 
 [node name="A2" type="Node2D" parent="RoomConfig/Patrols"]
-position = Vector2(248, -176)
 
 [node name="1" type="Node2D" parent="RoomConfig/Patrols/A2"]
-position = Vector2(-213, 103)
+position = Vector2(-49, 224)
 
 [node name="2" type="Node2D" parent="RoomConfig/Patrols/A2"]
-position = Vector2(-149, 184)
+position = Vector2(50, 225)
 
-[node name="3" type="Node2D" parent="RoomConfig/Patrols/A2"]
-position = Vector2(-77, 277)
+[node name="A3" type="Node2D" parent="RoomConfig/Patrols"]
 
-[node name="4" type="Node2D" parent="RoomConfig/Patrols/A2"]
-position = Vector2(-38, 192)
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/A3"]
+position = Vector2(56, 86)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/A3"]
+position = Vector2(118, 113)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/A3"]
+position = Vector2(58, 129)
 
 [node name="PowerUpPoints" type="Node2D" parent="RoomConfig"]
 position = Vector2(-100, -98)
 
 [node name="A" type="Node2D" parent="RoomConfig/PowerUpPoints"]
-position = Vector2(-30, -96)
+position = Vector2(40, 16)
 
-[node name="A2" type="Node2D" parent="RoomConfig/PowerUpPoints/A"]
-position = Vector2(258, -27)
+[node name="B" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(261, 209)
 
 [node name="ExplosiveBarrel" parent="." instance=ExtResource("4_1asmk")]
-position = Vector2(-188, 159)
+position = Vector2(-59, 186)
+scale = Vector2(0.5, 0.5)
+
+[node name="ExplosiveBarrel2" parent="." instance=ExtResource("4_1asmk")]
+position = Vector2(60, -176)
 scale = Vector2(0.5, 0.5)

@@ -1093,22 +1093,180 @@ position = Vector2(-201, 66)
 rotation = 3.08732
 
 [node name="1" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-213, 103)
+position = Vector2(21.0896, 54.2239)
 
 [node name="2" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-149, 184)
+position = Vector2(21.5537, -64.9264)
 
 [node name="3" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-77, 277)
+position = Vector2(-62.628, -137.6)
 
 [node name="4" type="Node2D" parent="RoomConfig/Patrols/A"]
-position = Vector2(-38, 192)
+position = Vector2(-89.771, -61.961)
+
+[node name="B" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(-201, 66)
+rotation = 3.08732
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/B"]
+position = Vector2(-229.456, -71.5524)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/B"]
+position = Vector2(-252.218, -131.876)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/B"]
+position = Vector2(-196.507, -161.898)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/B"]
+position = Vector2(-86.3314, -106.84)
+
+[node name="C" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(-201, 66)
+rotation = 3.08732
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-14.1059, 167.481)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-150.872, 141.023)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-245.841, 137.867)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-201.528, 41.1285)
+
+[node name="5" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-314.144, 31.0046)
+
+[node name="6" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-401.028, -28.7966)
+
+[node name="7" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-303.237, 14.5721)
+
+[node name="8" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-225.145, 51.8632)
+
+[node name="9" type="Node2D" parent="RoomConfig/Patrols/C"]
+position = Vector2(-171.353, 130.898)
+
+[node name="D" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(-201, 66)
+rotation = 3.08732
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/D"]
+position = Vector2(-17.198, 224.397)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/D"]
+position = Vector2(-63.1945, 259.955)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/D"]
+position = Vector2(-215.535, 243.667)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/D"]
+position = Vector2(-244.611, 281.145)
+
+[node name="5" type="Node2D" parent="RoomConfig/Patrols/D"]
+position = Vector2(-192.633, 282.967)
+
+[node name="E" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(-201, 66)
+rotation = 3.08732
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/E"]
+position = Vector2(-60.0643, -37.3132)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/E"]
+position = Vector2(-103.349, -51.6823)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/E"]
+position = Vector2(-54.4429, -67.052)
+
+[node name="F" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(-201, 66)
+rotation = 3.08732
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/F"]
+position = Vector2(-410.445, 162.975)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/F"]
+position = Vector2(-371.165, 214.181)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/F"]
+position = Vector2(-361.485, 146.607)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/F"]
+position = Vector2(-378.82, 78.5663)
+
+[node name="G" type="Node2D" parent="RoomConfig/Patrols"]
+position = Vector2(-201, 66)
+rotation = 3.08732
+
+[node name="1" type="Node2D" parent="RoomConfig/Patrols/G"]
+position = Vector2(-407.63, -165.356)
+
+[node name="2" type="Node2D" parent="RoomConfig/Patrols/G"]
+position = Vector2(-399.793, -106.844)
+
+[node name="3" type="Node2D" parent="RoomConfig/Patrols/G"]
+position = Vector2(-328.16, -135)
+
+[node name="4" type="Node2D" parent="RoomConfig/Patrols/G"]
+position = Vector2(-329.496, -184.145)
+
+[node name="5" type="Node2D" parent="RoomConfig/Patrols/G"]
+position = Vector2(-375.157, -191.633)
 
 [node name="PowerUpPoints" type="Node2D" parent="RoomConfig"]
-position = Vector2(167, 150)
 
 [node name="A" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(-139, 35)
+
+[node name="A2" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(-94, 3)
+
+[node name="A3" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(-127, 241)
+
+[node name="A4" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(-82, 241)
+
+[node name="A5" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(-26, 42)
+
+[node name="A6" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(-225, -220)
+
+[node name="A7" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(-236, -149)
+
+[node name="A8" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(116, -213)
+
+[node name="A9" type="Node2D" parent="RoomConfig/PowerUpPoints"]
+position = Vector2(141, -233)
 
 [node name="ExplosiveBarrel" parent="." instance=ExtResource("4_hm6xj")]
-position = Vector2(154, -66)
+position = Vector2(232, -142)
+scale = Vector2(0.4, 0.4)
+
+[node name="ExplosiveBarrel2" parent="." instance=ExtResource("4_hm6xj")]
+position = Vector2(204, -159)
+scale = Vector2(0.4, 0.4)
+
+[node name="ExplosiveBarrel3" parent="." instance=ExtResource("4_hm6xj")]
+position = Vector2(-79, 53)
+scale = Vector2(0.4, 0.4)
+
+[node name="ExplosiveBarrel4" parent="." instance=ExtResource("4_hm6xj")]
+position = Vector2(-79, 95)
+scale = Vector2(0.4, 0.4)
+
+[node name="ExplosiveBarrel5" parent="." instance=ExtResource("4_hm6xj")]
+position = Vector2(167, 210)
+scale = Vector2(0.4, 0.4)
+
+[node name="ExplosiveBarrel6" parent="." instance=ExtResource("4_hm6xj")]
+position = Vector2(182, 184)
 scale = Vector2(0.4, 0.4)
