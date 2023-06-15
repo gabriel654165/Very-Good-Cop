@@ -39,7 +39,8 @@ radius = 28.2312
 
 [node name="ThrowedWeapon" type="CharacterBody2D" node_paths=PackedStringArray("recover_weapon_interaction", "animation_player")]
 rotation = -1.5708
-collision_layer = 2
+collision_layer = 16
+collision_mask = 129
 script = ExtResource("1_nv3td")
 recover_weapon_interaction = NodePath("GrabWeapon/AddWeaponInteraction")
 speed = 7

@@ -20,16 +20,17 @@ func _ready():
 
 func init_frag_bullet():
 	var frag_bullet = self.duplicate()
-	var direction = self.direction
+	var new_direction = self.direction
 	
-	direction += Vector2(_random_range(frag_projectile_precision_angle), 0)
-	frag_bullet.direction = direction
+	new_direction += Vector2(_random_range(frag_projectile_precision_angle), 0)
+	frag_bullet.rotation = 1.5 # reset the initial rotatiton
 	frag_bullet.should_frag = false
 	frag_bullet.get_node("LifeCycleTimer").wait_time = 0.2
-	GlobalSignals.projectile_fired_spawn.emit(null, frag_bullet, global_position, direction)
+	GlobalSignals.projectile_fired_spawn.emit(projectile_owner, frag_bullet, global_position, new_direction)
 
 
 func _random_range(angle: Vector2) -> float:
+	randomize()
 	var range : float = 0
 	if randf()>0.5: #1 out of 2 chances
 		range = randf()*angle.x

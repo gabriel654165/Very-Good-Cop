@@ -25,7 +25,7 @@ var player_distance_weapon_list = [
 	{
 		name= 'glock',
 		unlocked = true,
-		special_power_unlocked = true,
+		special_power_unlocked = false,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
@@ -35,6 +35,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -52,6 +53,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= 0,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -69,6 +71,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -86,6 +89,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= 0,
 		projectile_impact_force_lvl= -1,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -103,6 +107,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= -1,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -120,6 +125,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= -1,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -137,6 +143,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= 0,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -148,12 +155,13 @@ var player_distance_weapon_list = [
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= 0,
 		frequence_of_burt_lvl= 0,
-		precision_lvl= 0,
+		precision_lvl= 6,
 		recoil_force_lvl= 0,
 		ammo_size_lvl= 0,
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= 5,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -171,6 +179,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= 0,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -188,6 +197,7 @@ var player_distance_weapon_list = [
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
 		projectile_damages_lvl= 0,
+		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= 0,
 		points_to_use_special_power_lvl= 0,
@@ -204,7 +214,8 @@ var player_distance_weapon_list = [
 		ammo_size_lvl= 0,
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
-		projectile_damages_lvl= 0,
+		projectile_damages_lvl= 100,
+		projectile_piercing_force_lvl= 2,
 		projectile_impact_force_lvl= -1,
 		projectile_bouncing_lvl= -1,
 		points_to_use_special_power_lvl= 0,
@@ -254,7 +265,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
 		special_power_name= "aim_bot",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/AimBot.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/glock-sp.ogv",
 		special_power_description= "This power will locate nearby enemies, place a sight on each of them, and fire directly at them one by one rather quickly.",
 		stats= [{
 			shooting_cooldown= level_stat(0.75, 0.2, 10),
@@ -284,6 +295,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(5, 500, 100),#~infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 1, 1),#default value
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(0.1, 2, 4),
 			type= "projectile",
 		}, {
@@ -307,7 +321,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
 		special_power_name= "aim_bot",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/AimBot.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/colt-sp.ogv",
 		special_power_description= "This power will locate nearby enemies, place a sight on each of them, and fire directly at them one by one rather quickly.",
 		stats= [{
 			shooting_cooldown= level_stat(1, 0.3, 10),
@@ -337,6 +351,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(9, 500, 100),#~infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 2, 2),
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(0.3, 4, 4),
 			type= "projectile",
 		}, {
@@ -360,7 +377,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_2.png"),
 		special_power_name= "fast_reloading",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FastReloading.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/shotgun-sp.ogv",
 		special_power_description= "This power will reload your shotgun in just 0.5 seconds after each shot.",
 		stats= [{
 			shooting_cooldown= level_stat(2, 0.25, 7),
@@ -390,6 +407,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(2, 500, 100),#infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 1, 1),#default value
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(0.1, 1.5, 5),
 			type= "projectile",
 		}, {
@@ -413,7 +433,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_2.png"),
 		special_power_name= "fast_reloading",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FastReloading.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/hunting_rifle-sp.ogv",
 		special_power_description= "This power will reload your shotgun in just 0.5 seconds after each shot.",
 		stats= [{
 			shooting_cooldown= level_stat(0.75, 0.1, 6),
@@ -443,6 +463,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(12, 500, 100),#infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 5, 5),
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(4, 4, 1),# default value
 			type= "projectile",
 		}, {
@@ -466,7 +489,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
 		special_power_name= "bouncing_bullets",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/BouncingBullets.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/mini_uzi-sp.ogv",
 		special_power_description= "This power will fire bullets that will bounce off the walls.",
 		stats= [{
 			shooting_cooldown= level_stat(0.2, 0.1, 5),
@@ -496,6 +519,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(4, 500, 100),#infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 1, 1),#default value
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(1, 1, 1),# default value
 			type= "projectile",
 		}, {
@@ -519,7 +545,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
 		special_power_name= "bouncing_bullets",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/BouncingBullets.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/smg-sp.ogv",
 		special_power_description= "This power will fire bullets that will bounce off the walls.",
 		stats= [{
 			shooting_cooldown= level_stat(0.15, 0.03, 5),
@@ -549,6 +575,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(3, 500, 100),#infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 1, 1),#default value
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(0, 0, 1),# default value
 			type= "projectile",
 		}, {
@@ -572,7 +601,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
 		special_power_name= "fragmentation_bullets",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FragmentationBullets.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/riffle-sp.ogv",
 		special_power_description= "This power will fire bullets that pass through and fragment into 5 parts when they hit an enemy or any other object.",
 		stats= [{
 			shooting_cooldown= level_stat(0.3, 0.05, 6),
@@ -602,6 +631,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(10, 500, 100),#infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 10, 10),
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(0.5, 2, 5),
 			type= "projectile",
 		}, {
@@ -625,7 +657,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
 		special_power_name= "fragmentation_bullets",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/FragmentationBullets.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/ak47-sp.ogv",
 		special_power_description= "This power will fire bullets that pass through and fragment into 5 parts when they hit an enemy or any other object.",
 		stats= [{
 			shooting_cooldown= level_stat(0.2, 0.05, 6),
@@ -655,6 +687,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(13, 500, 100),#infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 10, 10),
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(0.5, 2, 5),
 			type= "projectile",
 		}, {
@@ -678,7 +713,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
 		special_power_name= "shooting_360",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/Shooting360.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/machine_gun-sp.ogv",
 		special_power_description= "This power will fire a flurry of bullets as you spin 360 degrees for 4 turns.",
 		stats= [{
 			shooting_cooldown= level_stat(0.15, 0.05, 3),
@@ -708,6 +743,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(5, 500, 100),#infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 5, 5),
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(0.5, 1.5, 3),
 			type= "projectile",
 		}, {
@@ -731,7 +769,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=null,
 		special_power_name= "catching_cable",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/CatchingCable.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/grenade_launcher-sp.ogv",
 		special_power_description= "This power will launch a cable that will bring all enemies in its path to a single point.",
 		stats= [{
 			shooting_cooldown= level_stat(1, 0.1, 10),
@@ -761,6 +799,9 @@ var all_distance_weapon_list = [
 			projectile_damages= level_stat(10, 500, 100),#infinit
 			type= "projectile",
 		}, {
+			projectile_piercing_force= level_stat(1, 1, 1),# default value
+			type= "projectile",
+		}, {
 			projectile_impact_force= level_stat(0.5, 3, 6),
 			type= "projectile",
 		}, {
@@ -784,7 +825,7 @@ var all_distance_weapon_list = [
 		shot_shells_texture=load("res://assets/weapons/sprites/projectiles/bullet_1.png"),
 		special_power_name= "throught_wall_bullets",
 		special_power_packed_scene=preload("res://scenes/weapons/special_powers/ThroughWallsBullets.tscn"),
-		special_power_preview="res://assets/previews/preview-resized.ogv",
+		special_power_preview="res://assets/previews/sniper-sp.ogv",
 		special_power_description= "This power will allow you to fire bullets through walls (the greater the piercing force, the more likely it is to pass through different walls).",
 		stats= [{
 			shooting_cooldown= level_stat(1.5, 0.25, 6),
@@ -812,6 +853,9 @@ var all_distance_weapon_list = [
 			type= "projectile",
 		}, {
 			projectile_damages= level_stat(15, 500, 100),#infinit
+			type= "projectile",
+		}, {
+			projectile_piercing_force= level_stat(1, 10, 10),
 			type= "projectile",
 		}, {
 			projectile_impact_force= level_stat(1, 1, 1),# default value

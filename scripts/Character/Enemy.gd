@@ -48,6 +48,7 @@ func _ready():
 
 
 func _physics_process(delta):
+	#move_and_collide(Vector2(0, 0), false, 0, true)
 	if action_disabled:
 		return
 	manage_animation(global_transform.x.normalized())

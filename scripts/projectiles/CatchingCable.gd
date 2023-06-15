@@ -16,6 +16,7 @@ var is_retracting : bool = false
 var objects_catched_array : Array[Node2D] = []
 var saved_enemy_speed : Array[float] = []
 
+
 func _specific_process(delta):
 	if ball_left == null or ball_right == null:
 		queue_free()
@@ -27,11 +28,13 @@ func _specific_process(delta):
 		stop()
 		drag_objects_catched_to_center()
 
+
 func stop_catched_objects():
 	for object in objects_catched_array:
 		if object is Enemy and object != null:
 			saved_enemy_speed.append(object.speed)
 			object.set_speed(0)
+
 
 func find_points_center() -> Vector2:
 	var base_point : Vector2 = cable.points[0]
@@ -51,6 +54,7 @@ func find_points_center() -> Vector2:
 		index += 1
 	
 	return (farest_point + ball_left.global_position) / 2
+
 
 func drag_objects_catched_to_center():
 	stop_catched_objects()
@@ -76,6 +80,7 @@ func drag_objects_catched_to_center():
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property(object, "global_position", center, duration)
 
+
 func set_cable_points():
 	if ball_left == null or ball_right == null:
 		return
@@ -92,6 +97,7 @@ func set_cable_points():
 			objects_catched_array.remove_at(index)
 	points_array.append(ball_right.position)
 	cable.points = PackedVector2Array(points_array)
+
 
 func process_retract():
 	if is_retracting:
@@ -111,11 +117,13 @@ func process_retract():
 	ball_left.set_direction(left_direction.normalized())
 	ball_right.set_direction(right_direction.normalized())
 
+
 func set_cable_collision_shapes():
 	if ball_left == null or ball_right == null:
 		return
 	cable_collider.shape.a = cable_collider.to_local(ball_right.global_position)
 	cable_collider.shape.b = cable_collider.to_local(ball_left.global_position)
+
 
 func stop_expand():
 	is_expanding = false
@@ -124,6 +132,7 @@ func stop_expand():
 	ball_left.direction = shooting_direction.normalized()
 	ball_right.direction = shooting_direction.normalized()
 
+
 func stop():
 	speed = 0
 	direction = Vector2.ZERO
@@ -131,6 +140,7 @@ func stop():
 	ball_right.direction = Vector2.ZERO
 	ball_left.speed = 0
 	ball_left.direction = Vector2.ZERO
+
 
 func is_cable_closed() -> bool:
 	var ball_right_pos = ball_right.global_position
@@ -149,10 +159,12 @@ func is_cable_closed() -> bool:
 	
 	return rl or td
 
+
 # signals
 func _on_timer_stop_expend_timeout():
 	if !is_retracting:
 		stop_expand()
+
 
 func _on_timer_cable_retention_timeout():
 	var index : int = 0
@@ -165,6 +177,7 @@ func _on_timer_cable_retention_timeout():
 	saved_enemy_speed.clear()
 	objects_catched_array.clear()
 	queue_free()
+
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Walls":

@@ -17,8 +17,8 @@
 [ext_resource type="Script" path="res://scripts/AI/Sensors/HearingSensor.gd" id="10_mwn3l"]
 [ext_resource type="PackedScene" uid="uid://cxsu4atm07u3i" path="res://scenes/weapons/Knife.tscn" id="15_4ikyy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfd5l"]
-size = Vector2(30, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_sqt3e"]
+radius = 13.0
 
 [sub_resource type="Animation" id="Animation_hsyrc"]
 resource_name = "running_animation_enemy"
@@ -706,6 +706,8 @@ _data = {
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 z_index = 3
+collision_layer = 3
+collision_mask = 251
 script = ExtResource("1_ef1gd")
 hearing_range = 300.0
 speed = 10.0
@@ -730,7 +732,7 @@ region_enabled = true
 region_rect = Rect2(483, 793, 35, 13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_dfd5l")
+shape = SubResource("CircleShape2D_sqt3e")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 100.0

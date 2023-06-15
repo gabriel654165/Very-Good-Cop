@@ -4,7 +4,7 @@ extends SpecialPower
 @onready var canvas = $CanvasLayer
 
 @export var cursor_scene : PackedScene
-@export var scale_cursor := Vector2(2, 2)
+@export var scale_cursor := Vector2(3, 3)
 @export var canvas_enemy_offset := Vector2(20, 15)
 @export var speed_aim_cursor : float = 500
 @export var wait_time_between_shoots : float = 0.2

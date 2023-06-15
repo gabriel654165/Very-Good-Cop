@@ -45,7 +45,7 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_constants/line_spacing = 10
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 35
 text = "Glock"
 horizontal_alignment = 1
 

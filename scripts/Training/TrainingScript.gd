@@ -6,6 +6,8 @@ class_name TrainingScript
 @onready var choose_weapon_manager = $CanvasLayer/ChooseWeaponManager
 @onready var cursor_manager = $CanvasLayer/CursorManager
 
+var enemy_array : Array
+
 
 func _ready():
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
@@ -21,6 +23,12 @@ func _ready():
 	choose_weapon_manager.color_rect.get_material().set_shader_parameter("intensity", choose_weapon_manager.aim_blur_intensity)
 	choose_weapon_manager.current_blur_intensity = choose_weapon_manager.aim_blur_intensity
 	cursor_manager.cursor.active_mode_ui()
+	
+	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return (elem is Enemy), enemy_array, get_tree().root)
+	for enemy in enemy_array:
+		for child in enemy.state_machine.get_children():
+			GlobalFunctions.disable_all_process(child, true)
+		GlobalFunctions.disable_all_process(enemy.state_machine, true)
 
 
 func _unhandled_input(event):

@@ -2451,6 +2451,8 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["character", "player"]]
 z_index = 3
 position = Vector2(233, 190)
+collision_layer = 3
+collision_mask = 227
 script = ExtResource("1_vctbk")
 speed = 3.5
 grappling_hook_scene = ExtResource("2_d13uj")

@@ -17,6 +17,8 @@ b = Vector2(10, 0)
 [node name="CatchingCable" type="CharacterBody2D"]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
+collision_layer = 3
+collision_mask = 64
 script = ExtResource("1_l0vmu")
 damages = 0
 impact_force = 0.0

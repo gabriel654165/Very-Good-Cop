@@ -31,6 +31,7 @@ var number_of_frag_projectile : int = 3
 var ammo_size : int = 6
 var _current_loader_bullets_number : int = 0
 var ammo_reloading_time : float = 1
+var infinite_ammo : bool = false
 var shot_shell_texture : Texture2D
 
 var enable : bool = true
@@ -71,11 +72,12 @@ func shoot():
 		shooting_cooldown.start()
 		for n in balls_by_burt:
 			
-			_current_loader_bullets_number -= 1
-			if _current_loader_bullets_number == 0:
-				reload_magazine()
-			if _current_loader_bullets_number < 0:
-				return
+			if !infinite_ammo:
+				_current_loader_bullets_number -= 1
+				if _current_loader_bullets_number == 0:
+					reload_magazine()
+				if _current_loader_bullets_number < 0:
+					return
 			
 			if n != 0:
 				await get_tree().create_timer(frequence_of_burt).timeout

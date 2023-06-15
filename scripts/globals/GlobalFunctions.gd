@@ -200,6 +200,7 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 			weapon_editor.ammo_reloading_time = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.ammo_reloading_time_lvl, "ammo_reloading_time", weapon_editor.ammo_reloading_time)
 			weapon_editor.projectile_speed = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_speed_lvl, "projectile_speed", weapon_editor.projectile_speed)
 			weapon_editor.projectile_damages = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_damages_lvl, "projectile_damages", weapon_editor.projectile_damages)
+			weapon_editor.projectile_piercing_force = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_piercing_force_lvl, "projectile_piercing_force", weapon_editor.projectile_piercing_force)
 			weapon_editor.projectile_impact_force = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_impact_force_lvl, "projectile_impact_force", weapon_editor.projectile_impact_force)
 			weapon_editor.projectile_should_bounce = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.projectile_bouncing_lvl, "projectile_bouncing", weapon_editor.projectile_should_bounce)
 			weapon_editor.points_to_use_special_power = get_property_by_level(GlobalVariables.all_distance_weapon_list[current_index], weapon_properties_levels.points_to_use_special_power_lvl, "points_to_use_special_power", weapon_editor.points_to_use_special_power)
@@ -251,6 +252,7 @@ func reset_distance_weapon_levels():
 		weapon.ammo_reloading_time_lvl= 0 if weapon.ammo_reloading_time_lvl != -1 else -1
 		weapon.projectile_speed_lvl= 0 if weapon.projectile_speed_lvl != -1 else -1
 		weapon.projectile_damages_lvl= 0 if weapon.projectile_damages_lvl != -1 else -1
+		weapon.projectile_piercing_force_lvl= 0 if weapon.projectile_piercing_force_lvl != -1 else -1
 		weapon.projectile_impact_force_lvl= 0 if weapon.projectile_impact_force_lvl != -1 else -1
 		weapon.projectile_bouncing_lvl= 0 if weapon.projectile_bouncing_lvl != -1 else -1
 		weapon.points_to_use_special_power_lvl= 0 if weapon.points_to_use_special_power_lvl != -1 else -1

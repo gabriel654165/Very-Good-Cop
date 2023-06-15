@@ -28,17 +28,11 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 0.686138, 0.641023, 1, 1, 0.537255, 
 z_index = 1
 rotation = 1.5708
 scale = Vector2(0.359327, 0.360007)
-collision_layer = 2
+collision_layer = 4
+collision_mask = 131
 script = ExtResource("1_h2y4q")
-projectile_type = null
 speed = 10
 damages = 2
-size = null
-impact_force = null
-piercing_force = null
-should_bounce = null
-should_pierce_walls = null
-should_frag = null
 bullet_impact_fragments_scene = ExtResource("2_o5550")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -6,6 +6,7 @@ extends SpecialPower
 @export var full_rotation_by_second : float = 2
 
 var save_recoil_force : float = 0
+var save_infinite_ammo : bool = false
 var save_player_speed : float = 0
 
 var is_shooting : bool = false
@@ -25,9 +26,12 @@ func use_special_power_child():
 	is_shooting = true
 	disable_look_at = true
 	save_recoil_force = weapon.recoil_force
+	save_infinite_ammo = weapon.infinite_ammo
+	
 	save_player_speed = player.speed
 	player.speed = 0
 	weapon.recoil_force = 0
+	weapon.infinite_ammo = true
 
 	target.global_position = get_viewport_transform().affine_inverse() * GlobalVariables.cursor_position
 	rotation_angle = target.global_rotation_degrees
@@ -37,4 +41,5 @@ func end_power_child():
 	is_shooting = false
 	disable_look_at = false
 	weapon.recoil_force = save_recoil_force
+	weapon.infinite_ammo = save_infinite_ammo
 	player.speed = save_player_speed

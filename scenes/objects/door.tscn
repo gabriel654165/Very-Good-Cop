@@ -11,6 +11,7 @@ size = Vector2(64, 5)
 [node name="Door" type="Area2D"]
 modulate = Color(0.54902, 0.219608, 0.12549, 1)
 z_index = 1
+collision_mask = 126
 script = ExtResource("1_8ert4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
