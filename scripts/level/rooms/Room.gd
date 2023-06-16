@@ -33,7 +33,7 @@ func _ready():
 			true,
 			nb_of_enemies
 		)
-		spawn_with_room_config("PowerUpPoints", get_children_positions_array, spawn_powerups)
+		spawn_with_room_config("PowerUpPoints", get_children_positions_array, spawn_powerups, true, true , nb_of_enemies)
 
 
 func spawn_with_room_config(
@@ -48,13 +48,11 @@ func spawn_with_room_config(
 	var processed_node_as_array:Array = process_node.call(node)
 
 	var nb_to_spawn:int = random_nb_func.call(processed_node_as_array) if random_nb_to_spawn else processed_node_as_array.size()
-
 	if shuffle:
 		processed_node_as_array.shuffle()
 
 	for element in processed_node_as_array.slice(0, nb_to_spawn):
 		spawn_function.call(element)
-
 
 func get_children_positions_array(node:Node):
 	return node.get_children().map(func(n:Node2D): return n.global_position)

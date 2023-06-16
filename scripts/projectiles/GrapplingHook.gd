@@ -18,6 +18,7 @@ func _specific_process(delta):
 	if projectile_owner != null:
 		line_cable.set_point_position(0, to_local(global_position))
 		line_cable.set_point_position(1, to_local(projectile_owner.global_position))
+	#crash when player is dead an the graplinng hook do his job
 	if (global_position - projectile_owner.global_position).length() > max_distance:
 		stop()
 		queue_free()

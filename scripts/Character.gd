@@ -12,7 +12,8 @@ class_name Character
 @onready var body_sprite := $Sprite2D
 
 @export var action_disabled : bool = false
-@export var speed : float = 6
+@export var speed : float = 2.5
+@export var base_speed : float = 2.5
 var force : Vector2 = Vector2.ZERO
 
 @export var grappling_hook_scene : PackedScene

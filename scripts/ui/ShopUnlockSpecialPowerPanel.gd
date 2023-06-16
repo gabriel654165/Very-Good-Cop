@@ -70,26 +70,29 @@ func buy_special_power():
 
 
 # Signals
-
 func _on_buy_button_pressed():
 	buy_special_power()
 	if weapon_manager != null:
 		weapon_manager.unload_hover()
 		weapon_manager.load_hover(item_name, _power_name)
 
+
 func _on_mouse_entered():
 	if weapon_manager != null:
 		weapon_manager.unload_hover()
 		weapon_manager.load_hover(item_name, _power_name)
 
+
 func _on_mouse_exited():
 	if weapon_manager != null:
 		weapon_manager.unload_hover()
+
 
 func _on_buy_button_mouse_entered():
 	if weapon_manager != null:
 		weapon_manager.unload_hover()
 		weapon_manager.load_hover(item_name, _power_name)
+
 
 func _on_buy_button_mouse_exited():
 	if weapon_manager != null:

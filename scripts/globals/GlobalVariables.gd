@@ -14,7 +14,7 @@ var rooms_repository: Array = []
 
 # VAR TO SAVE
 var level : int = 1
-var money : int = 0
+var money : int = 500
 
 var grappling_hook_level : int = 1
 
@@ -25,7 +25,7 @@ var player_distance_weapon_list = [
 	{
 		name= 'glock',
 		unlocked = true,
-		special_power_unlocked = false,
+		special_power_unlocked = true,
 		shooting_cooldown_lvl= 0,
 		balls_by_burt_lvl= -1,
 		frequence_of_burt_lvl= -1,
@@ -38,7 +38,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'colt',
@@ -56,7 +56,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= 0,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'shotgun',
@@ -74,7 +74,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'hunting_rifle',
@@ -92,7 +92,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= 0,
 		projectile_impact_force_lvl= -1,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= 0,
 	}, {
 		name= 'mini_uzi',
@@ -110,7 +110,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= -1,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'smg',
@@ -128,7 +128,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= -1,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'riffle',
@@ -146,7 +146,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= 0,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'ak47',
@@ -164,7 +164,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= 5,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name= 'machine_gun',
@@ -182,7 +182,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= 0,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name='grenade_launcher',
@@ -200,7 +200,7 @@ var player_distance_weapon_list = [
 		projectile_piercing_force_lvl= -1,
 		projectile_impact_force_lvl= 0,
 		projectile_bouncing_lvl= 0,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= -1,
 	}, {
 		name='sniper',
@@ -214,11 +214,11 @@ var player_distance_weapon_list = [
 		ammo_size_lvl= 0,
 		ammo_reloading_time_lvl= 0,
 		projectile_speed_lvl= 0,
-		projectile_damages_lvl= 100,
+		projectile_damages_lvl= 0,
 		projectile_piercing_force_lvl= 2,
 		projectile_impact_force_lvl= -1,
 		projectile_bouncing_lvl= -1,
-		points_to_use_special_power_lvl= 0,
+		points_to_use_special_power_lvl= 2,
 		auto_lock_target_lvl= 0,
 	}
 ]
@@ -1498,7 +1498,7 @@ var all_equipment_list = [
 			health_bonus= level_stat(0, 0, 1),# default value
 			type= "property"
 		}, {
-			speed_bonus= level_stat(1, 4, 20),
+			speed_bonus= level_stat(1, 4, 10),
 			type= "property"
 		}]
 	}, {

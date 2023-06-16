@@ -711,6 +711,7 @@ collision_mask = 251
 script = ExtResource("1_ef1gd")
 hearing_range = 300.0
 speed = 10.0
+base_speed = 10.0
 grappling_hook_scene = ExtResource("2_dcfht")
 projectile_weapon_scene = ExtResource("3_4uakv")
 blood_effect_scene = ExtResource("2_5lu21")

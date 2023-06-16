@@ -84,6 +84,7 @@ func generate_item_list_by_save(all_item_infos_list, player_item_list, equiped_i
 		index += 1
 	return item_ui_list
 
+
 func load_stat_hover(item_name: String, stat_name: String):
 	stats_panel = stats_panel_scene.instantiate()
 	hover_panel_parent.add_child(stats_panel)
@@ -91,7 +92,10 @@ func load_stat_hover(item_name: String, stat_name: String):
 	stats_panel.stat_upgrade_name = stat_name
 	stats_panel.generate_ui()
 
+
 func load_preview_hover(item_name: String, preview_path: String):
+	print("load hover of : ", item_name)
+	print("load file : ", preview_path, "\n")
 	preview_panel = preview_panel_scene.instantiate()
 	hover_panel_parent.add_child(preview_panel)
 	for item in GlobalVariables.all_distance_weapon_list:
@@ -102,6 +106,7 @@ func load_preview_hover(item_name: String, preview_path: String):
 		if item.name == item_name:
 			preview_panel.set_preview(item.special_power_preview)
 			return
+
 
 func load_description_hover(item_name: String, preview_path: String):
 	description_panel = description_panel_scene.instantiate()
@@ -115,11 +120,12 @@ func load_description_hover(item_name: String, preview_path: String):
 			description_panel.set_description(item.special_power_description)
 			return
 
+
 func load_hover(item_name: String, property_name: String = ""):
 	for item in GlobalVariables.all_distance_weapon_list:
 		if item.name == item_name:
 			load_stat_hover(item_name, property_name)
-		if item.special_power_name == property_name:
+		if item.special_power_name == property_name and item.name == item_name:
 			if stats_panel != null:
 				stats_panel.queue_free()
 			load_description_hover(item_name, item.special_power_description)
@@ -128,12 +134,13 @@ func load_hover(item_name: String, property_name: String = ""):
 	for item in GlobalVariables.all_melee_weapon_list:
 		if item.name == item_name:
 			load_stat_hover(item_name, property_name)
-		if item.special_power_name == property_name:
+		if item.special_power_name == property_name and item.name == item_name:
 			if stats_panel != null:
 				stats_panel.queue_free()
 			load_description_hover(item_name, item.special_power_description)
 			load_preview_hover(item_name, item.special_power_preview)
 			return
+
 
 func unload_hover():
 	if stats_panel != null:
@@ -147,7 +154,6 @@ func unload_hover():
 func load_item_panels():
 	shop_item_distance_weapon_list = generate_item_list_by_save(GlobalVariables.all_distance_weapon_list, GlobalVariables.player_distance_weapon_list, GlobalVariables.index_distance_weapon_selected, distance_weapon_list_parent)
 	shop_item_melee_weapon_list = generate_item_list_by_save(GlobalVariables.all_melee_weapon_list, GlobalVariables.player_melee_weapon_list, GlobalVariables.index_melee_weapon_selected, melee_weapon_list_parent)
-	
 	shop_item_equipment_list = generate_item_list_by_save(GlobalVariables.all_equipment_list, GlobalVariables.player_equipment_list, -1, equipment_list_parent)
 
 func load_account_panel():

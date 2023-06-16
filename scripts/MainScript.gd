@@ -16,6 +16,7 @@ extends Node2D
 @onready var minimap : Minimap = Minimap.new()
 @onready var level_difficulty : LevelDifficulty = LevelDifficulty.new()
 
+
 func _ready():
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
 	

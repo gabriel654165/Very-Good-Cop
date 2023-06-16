@@ -55,8 +55,9 @@ func handle_specific_collision(object: Object):
 	if object.get_name().contains("ExplosiveBarrel"):
 		spawn_impact_wall_particles(self.rotation)
 		GlobalSignals.play_sound.emit(impact_barrel_sound, 0, 1, global_position)
-	if object is Enemy and projectile_owner is Player:
-		GlobalSignals.play_sound.emit(hit_marker_sound, 0, 1, global_position)
+	if projectile_owner != null:
+		if object is Enemy and projectile_owner is Player:
+			GlobalSignals.play_sound.emit(hit_marker_sound, 0, 1, global_position)
 
 # Signals
 func _on_life_cycle_timer_timeout():

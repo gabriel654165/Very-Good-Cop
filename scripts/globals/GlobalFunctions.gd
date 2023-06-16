@@ -228,6 +228,23 @@ func set_melee_weapon_properties(melee_weapon: Knife, weapon_index: int):
 	melee_weapon.update_properties()
 
 
+func set_equipment_properties(character: Character):
+	var bonus_health : float = 0
+	var bonus_speed : float = 0
+	var current_index : int = 0
+	
+	for equipment_properties_levels in GlobalVariables.player_equipment_list:
+		bonus_health += get_property_by_level(GlobalVariables.all_equipment_list[current_index], equipment_properties_levels.health_bonus_lvl, "health_bonus", character.health.health_base_value)
+		bonus_speed += get_property_by_level(GlobalVariables.all_equipment_list[current_index], equipment_properties_levels.speed_bonus_lvl, "speed_bonus", character.base_speed)
+		current_index += 1
+	
+	#prendre la base
+	character.health.max_health = character.health.health_base_value + bonus_health
+	character.health.health = character.health.max_health
+	character.speed = character.base_speed + bonus_speed
+	
+
+
 func reset_player_levels():
 	GlobalVariables.level = 1
 	GlobalVariables.money = 0
