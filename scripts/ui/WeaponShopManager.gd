@@ -94,8 +94,6 @@ func load_stat_hover(item_name: String, stat_name: String):
 
 
 func load_preview_hover(item_name: String, preview_path: String):
-	print("load hover of : ", item_name)
-	print("load file : ", preview_path, "\n")
 	preview_panel = preview_panel_scene.instantiate()
 	hover_panel_parent.add_child(preview_panel)
 	for item in GlobalVariables.all_distance_weapon_list:

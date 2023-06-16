@@ -8,10 +8,9 @@ func _ready():
 	GlobalSignals.weapon_shoot.connect(self.handle_shoot)
 	GlobalSignals.weapon_stab.connect(self.handle_stab)
 	GlobalSignals.throwed_distance_weapon.connect(self.handle_throwed_distance_weapon)
+	assign_equipment()
 	# Test : skipping the choose weapons panel and take the global
 	assign_weapons()
-	assign_equipment()
-	print("player.speed = ", speed)
 
 
 func assign_equipment():

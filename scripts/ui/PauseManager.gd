@@ -32,8 +32,17 @@ var current_music_index : int = 0
 var pop_up_timer : Timer = null
 var disable_pause : bool = false
 
+
 func _ready():
 	gui_manager = get_parent() as GuiManager
+	
+	if GlobalVariables.playlists.keys().is_empty():
+		return
+	for playlist_name in GlobalVariables.playlists.keys():
+		if GlobalVariables.current_playlist == playlist_name:
+			break
+		current_playlist_index += 1
+
 
 func set_active(state: bool):
 	if pause_gui == null:
@@ -45,9 +54,11 @@ func set_active(state: bool):
 	else:
 		unload_ui()
 
+
 func _process(delta):
 	if (active and current_blur_intensity < aim_blur_intensity) or (!active and current_blur_intensity > 0):
 		color_rect.get_material().set_shader_parameter("intensity", current_blur_intensity)
+
 
 func resume():
 	base_panel.visible = false
@@ -60,6 +71,7 @@ func resume():
 		GlobalFunctions.disable_all_game_objects(false)
 		gui_manager.panel_timer_manager.resume_timer()
 		set_active(false)
+
 
 func generate_ui():
 	display_base_panel()
@@ -171,6 +183,7 @@ func _on_option_button_pressed():
 
 
 func _on_quit_button_pressed():
+	GlobalFunctions.save()
 	get_tree().quit()
 
 

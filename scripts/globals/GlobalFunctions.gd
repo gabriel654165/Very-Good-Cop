@@ -309,6 +309,8 @@ func save():
 		
 		"index_distance_weapon_selected": GlobalVariables.index_distance_weapon_selected,
 		"index_melee_weapon_selected": GlobalVariables.index_melee_weapon_selected,
+		
+		"current_playlist": GlobalVariables.current_playlist,
 	}
 	
 	save_file.store_string(JSON.stringify(json_save))
@@ -335,6 +337,8 @@ func load_save():
 	
 	GlobalVariables.index_distance_weapon_selected = save_file_object["index_distance_weapon_selected"]
 	GlobalVariables.index_melee_weapon_selected = save_file_object["index_melee_weapon_selected"]
+	
+	GlobalVariables.current_playlist = save_file_object["current_playlist"]
 
 	save_file.close()
 

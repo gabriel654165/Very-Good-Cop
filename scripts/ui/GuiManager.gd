@@ -28,23 +28,14 @@ var player_ref : Player
 func generate_ui():
 	cursor_manager.player = player_ref
 	
-	#health_ui_manager.set_active(true)
-	#cursor_manager.set_active(true)
-	#game_over_manager.set_active(false)
-	#minimap_manager.set_active(true)
-	#pause_manager.set_active(false)
-	#recap_level_manager.set_active(false)
-	#weapon_shop_manager.set_active(false)
-	#choose_weapon_manager.set_active(true)
-	
-	health_ui_manager.set_active(false)
+	health_ui_manager.set_active(true)
 	cursor_manager.set_active(true)
 	game_over_manager.set_active(false)
-	minimap_manager.set_active(false)
+	minimap_manager.set_active(true)
 	pause_manager.set_active(false)
 	recap_level_manager.set_active(false)
-	choose_weapon_manager.set_active(false)
-	weapon_shop_manager.set_active(true)
+	weapon_shop_manager.set_active(false)
+	choose_weapon_manager.set_active(true)
 
 
 func set_active_gui_panels(state: bool):

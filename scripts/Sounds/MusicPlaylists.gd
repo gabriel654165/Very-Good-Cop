@@ -13,8 +13,12 @@ var audio_stream_factory := {
 
 
 func _ready():
+	GlobalFunctions.load_save()
+	
+	if GlobalVariables.current_playlist == "":
+		GlobalVariables.current_playlist = GlobalVariables.playlists.keys()[2]
 	if !GlobalVariables.playlists.keys().is_empty():
-		change_playlist(GlobalVariables.playlists.keys()[2], true, 2)
+		change_playlist(GlobalVariables.current_playlist, true, 2)
 	play()
 
 
@@ -39,6 +43,7 @@ func change_playlist(playlist:String, play_it:=false, random:=false):
 	assert(GlobalVariables.playlists.has(playlist), "Unknown playlist " + playlist)
 
 	current_playlist = playlist
+	GlobalVariables.current_playlist = current_playlist
 	var first_track : int =  0 if not random else randi() % GlobalVariables.playlists[current_playlist].size()
 	put_track(first_track, play_it)
 

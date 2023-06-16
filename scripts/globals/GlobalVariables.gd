@@ -6,6 +6,7 @@ var encryption_key := "https://youtu.be/OSkfONBg_QU?!?!".to_ascii_buffer();
 
 var playlists : Dictionary
 var playlists_track_names : Dictionary
+var current_playlist : String
 
 # Arrays of doors stored at their door bitflag index
 # Every door which only has a bottom door will be stored at index [0b0001] so index [1]
@@ -14,7 +15,7 @@ var rooms_repository: Array = []
 
 # VAR TO SAVE
 var level : int = 1
-var money : int = 500
+var money : int = 0
 
 var grappling_hook_level : int = 1
 
