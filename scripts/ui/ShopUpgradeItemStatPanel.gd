@@ -45,6 +45,7 @@ func update_buy_info():
 		price_label.visible = false
 		max_level_container.visible = true
 
+
 func upgrade_property():
 	if GlobalVariables.money < _price:
 		return

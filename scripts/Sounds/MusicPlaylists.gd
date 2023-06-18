@@ -12,9 +12,7 @@ var audio_stream_factory := {
 }
 
 
-func _ready():
-	GlobalFunctions.load_save()
-	
+func init():
 	if GlobalVariables.current_playlist == "":
 		GlobalVariables.current_playlist = GlobalVariables.playlists.keys()[2]
 	if !GlobalVariables.playlists.keys().is_empty():

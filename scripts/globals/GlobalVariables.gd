@@ -15,7 +15,7 @@ var rooms_repository: Array = []
 
 # VAR TO SAVE
 var level : int = 1
-var money : int = 0
+var money : int = 10000
 
 var grappling_hook_level : int = 1
 

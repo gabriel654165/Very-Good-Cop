@@ -25,6 +25,11 @@ class_name GuiManager
 
 var player_ref : Player
 
+
+func init(player: Player):
+	player_ref = player
+
+
 func generate_ui():
 	cursor_manager.player = player_ref
 	

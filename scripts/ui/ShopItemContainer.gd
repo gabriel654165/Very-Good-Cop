@@ -72,10 +72,17 @@ func generate_property_list_by_save(ref_item_stats_list, player_item_stats_list,
 			continue
 		if value != -1:
 			var upgrade_item_stat_panel_ui = upgrade_item_stat_panel_scene.instantiate()
+			var ref_item_stat : Dictionary
+
 			item_property_list.push_front(upgrade_item_stat_panel_ui)
 			parent.add_child(upgrade_item_stat_panel_ui)
-			var ref_list_key = ref_item_stats_list[index].keys()[0]
-			var stat_max_lvl = ref_item_stats_list[index][ref_list_key].number_of_levels
+			
+			for ref_item in ref_item_stats_list:
+				if ref_item.keys()[0] == key.trim_suffix("_lvl"):
+					ref_item_stat = ref_item
+			
+			var ref_list_key = ref_item_stat.keys()[0]
+			var stat_max_lvl = ref_item_stat[ref_list_key].number_of_levels
 			upgrade_item_stat_panel_ui.set_name_label(ref_list_key)
 			upgrade_item_stat_panel_ui.item_name = item_name
 			upgrade_item_stat_panel_ui.weapon_manager = weapon_manager
@@ -137,7 +144,8 @@ func generate_special_power_panel():
 	shop_item_special_power.weapon_manager = weapon_manager
 	shop_item_special_power.set_price(100)
 	shop_item_special_power.update()
-			
+
+
 func unload_special_power_panel():
 	if shop_item_special_power != null:
 		shop_item_special_power.queue_free()

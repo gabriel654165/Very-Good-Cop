@@ -300,6 +300,7 @@ func save():
 	
 	var json_save := {
 		"level": GlobalVariables.level,
+		"money": GlobalVariables.money,
 		
 		"player_distance_weapon_list": GlobalVariables.player_distance_weapon_list,
 		"player_melee_weapon_list": GlobalVariables.player_melee_weapon_list,
@@ -328,6 +329,7 @@ func load_save():
 	var save_file_object = JSON.parse_string(save_file_content)
 
 	GlobalVariables.level = save_file_object["level"]
+	GlobalVariables.money = save_file_object["money"]
 
 	GlobalVariables.player_distance_weapon_list = save_file_object["player_distance_weapon_list"]
 	GlobalVariables.player_melee_weapon_list = save_file_object["player_melee_weapon_list"]

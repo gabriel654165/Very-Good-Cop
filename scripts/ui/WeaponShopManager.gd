@@ -173,6 +173,7 @@ func generate_ui():
 	load_item_panels()
 	load_account_panel()
 
+
 func unload_ui():
 	weapon_shop_gui.visible = false
 	weapon_tab_container.visible = false
@@ -188,16 +189,21 @@ func unload_ui():
 	free_item_panel_list(shop_item_melee_weapon_list)
 	free_item_panel_list(shop_item_equipment_list)
 
+
 func free_item_panel_list(item_panel_list: Array):
 	for item in item_panel_list:
 		if item != null:
 			item.queue_free()
 
+
 # Signals
 func _on_quit_button_pressed():
+	GlobalFunctions.save()
 	get_tree().quit()
+
 
 #TODO : SAVE HERE
 func _on_continue_button_pressed():
 	GlobalVariables.level += 1
+	GlobalFunctions.save()
 	get_tree().reload_current_scene()

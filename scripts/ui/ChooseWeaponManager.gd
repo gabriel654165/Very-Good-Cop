@@ -26,11 +26,12 @@ var pop_up_timer : Timer = null
 var array_player_distance_weapon : Array[ChooseWeaponItemPanel] = []
 var array_player_melee_weapon : Array[ChooseWeaponItemPanel] = []
 
-func _ready():
+func init():
 	gui_manager = get_parent() as GuiManager
 	array_player_distance_weapon = generate_item_list_by_save(GlobalVariables.all_distance_weapon_list, GlobalVariables.player_distance_weapon_list, distance_weapon_grid)
 	array_player_melee_weapon = generate_item_list_by_save(GlobalVariables.all_melee_weapon_list, GlobalVariables.player_melee_weapon_list, melee_weapon_grid)
 	update_selected_weapon()
+
 
 func _process(delta):
 	if (active and current_blur_intensity < aim_blur_intensity) or (!active and current_blur_intensity > 0):

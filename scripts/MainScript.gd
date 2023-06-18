@@ -18,6 +18,8 @@ extends Node2D
 
 
 func _ready():
+	GlobalFunctions.load_save()
+	
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
 	
 	GlobalSignals.player_fired.connect(gui_manager.cursor_manager.hit_marker_action)
@@ -58,6 +60,9 @@ func _ready():
 	GlobalSignals.map_updated.connect(level_difficulty.update_difficulty)
 	GlobalSignals.game_over.connect(gui_manager.game_over_manager.generate_ui)
 
+	if music_playlists_player != null:
+		gui_manager.pause_manager.init(music_playlists_player)
+
 	if level_generator != null:
 		await level_generator.generate()
 
@@ -70,16 +75,16 @@ func _ready():
 		
 		gui_manager.minimap_manager.minimap_inst = minimap
 		gui_manager.recap_level_manager.level_difficulty_inst = level_difficulty
-
+	
+	gui_manager.choose_weapon_manager.init()
+	
 	spawn_player()
 	init_camera()
 	
+	# Call after load_save()
 	if gui_manager != null:
-		gui_manager.player_ref = player
+		gui_manager.init(player)
 		gui_manager.generate_ui()
-	
-	if music_playlists_player != null:
-		gui_manager.pause_manager.music_playlists_player = music_playlists_player
 	
 
 
@@ -111,12 +116,14 @@ func add_manager(packed_manager:PackedScene, parent: Node, init_func:Callable=fu
 		return
 	var manager = packed_manager.instantiate()
 	parent.add_child(manager)
-	
 	init_func.call(manager)
-
 	return manager
 
 # Debug
 func _input(event):
 	if event.is_action_pressed("reload_level") and OS.is_debug_build():
+		get_tree().reload_current_scene()
+	if event.is_action_pressed("reset_player_stats") and OS.is_debug_build():
+		GlobalFunctions.reset_player_levels()
+		GlobalFunctions.save()
 		get_tree().reload_current_scene()

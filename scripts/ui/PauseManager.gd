@@ -33,8 +33,10 @@ var pop_up_timer : Timer = null
 var disable_pause : bool = false
 
 
-func _ready():
-	gui_manager = get_parent() as GuiManager
+func init(music_playlists_player: MusicPlaylistsPlayer):
+	self.music_playlists_player = music_playlists_player
+	
+	music_playlists_player.init()
 	
 	if GlobalVariables.playlists.keys().is_empty():
 		return
@@ -42,6 +44,10 @@ func _ready():
 		if GlobalVariables.current_playlist == playlist_name:
 			break
 		current_playlist_index += 1
+
+
+func _ready():
+	gui_manager = get_parent() as GuiManager
 
 
 func set_active(state: bool):
