@@ -123,7 +123,3 @@ func add_manager(packed_manager:PackedScene, parent: Node, init_func:Callable=fu
 func _input(event):
 	if event.is_action_pressed("reload_level") and OS.is_debug_build():
 		get_tree().reload_current_scene()
-	if event.is_action_pressed("reset_player_stats") and OS.is_debug_build():
-		GlobalFunctions.reset_player_levels()
-		GlobalFunctions.save()
-		get_tree().reload_current_scene()
