@@ -1450,23 +1450,23 @@ var all_melee_weapon_list = [
 # VAR TO SAVE
 var player_equipment_list = [
 	{
-		name= 'diaper',
-		unlocked= false,
-		health_bonus_lvl= 0,
-		speed_bonus_lvl= -1,
-	}, {
 		name= 'bullet_proof_vest',
-		unlocked= false,
+		unlocked= true,
 		health_bonus_lvl= 0,
 		speed_bonus_lvl= -1,
 	}, {
 		name= 'air_max',
-		unlocked= false,
+		unlocked= true,
 		health_bonus_lvl= -1,
 		speed_bonus_lvl= 0,
 	}, {
+		name= 'diaper',
+		unlocked= true,
+		health_bonus_lvl= 0,
+		speed_bonus_lvl= -1,
+	}, {
 		name= 'gas_mask',
-		unlocked= false,
+		unlocked= true,
 		health_bonus_lvl= -1,
 		speed_bonus_lvl= -1,
 	}
@@ -1475,16 +1475,6 @@ var player_equipment_list = [
 
 var all_equipment_list = [
 	{
-		name= 'diaper',
-		gui_texture=load("res://assets/UI/icons/equipment/diaper.png"),
-		stats= [{
-			health_bonus= level_stat(0.5, 10, 10),
-			type= "property"
-		}, {
-			speed_bonus= level_stat(0, 0, 1),# default value
-			type= "property"
-		}]
-	}, {
 		name= 'bullet_proof_vest',
 		gui_texture=load("res://assets/UI/icons/equipment/bulletproof_vest.png"),
 		stats= [{
@@ -1502,6 +1492,16 @@ var all_equipment_list = [
 			type= "property"
 		}, {
 			speed_bonus= level_stat(1, 4, 10),
+			type= "property"
+		}]
+	}, {
+		name= 'diaper',
+		gui_texture=load("res://assets/UI/icons/equipment/diaper.png"),
+		stats= [{
+			health_bonus= level_stat(0.5, 10, 10),
+			type= "property"
+		}, {
+			speed_bonus= level_stat(0, 0, 1),# default value
 			type= "property"
 		}]
 	}, {
@@ -1621,7 +1621,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(0.5, 3, 6),
 			type= "projectile",
 		}, {
-			projectile_should_bounce= level_stat(false, true, 1),
+			projectile_bouncing= level_stat(false, true, 1),
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),
@@ -1653,7 +1653,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(0, 0, 1),#default value
 			type= "projectile",
 		}, {
-			projectile_should_bounce= level_stat(false, true, 1),
+			projectile_bouncing= level_stat(false, true, 1),
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),
@@ -1685,7 +1685,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(0, 0, 1),#default value
 			type= "projectile",
 		}, {
-			projectile_should_bounce= level_stat(false, false, 1),#default value
+			projectile_bouncing= level_stat(false, false, 1),#default value
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),
@@ -1717,7 +1717,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(0, 1, 2),
 			type= "projectile",
 		}, {
-			projectile_should_bounce= level_stat(false, false, 1),#default value
+			projectile_bouncing= level_stat(false, false, 1),#default value
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),
@@ -1749,7 +1749,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(0, 0, 1),#default value
 			type= "projectile",
 		}, {
-			projectile_should_bounce= level_stat(false, true, 1),#default value
+			projectile_bouncing= level_stat(false, true, 1),#default value
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),
@@ -1781,7 +1781,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(1, 2, 3),
 			type= "projectile",
 		}, {
-			projectile_should_bounce= level_stat(false, true, 1),
+			projectile_bouncing= level_stat(false, true, 1),
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(50, 500, 10),

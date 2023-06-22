@@ -16,6 +16,7 @@ class_name WeaponShopManager
 @export var color_rect : Node = null
 @export var distance_weapon_list_parent : Node = null
 @export var melee_weapon_list_parent : Node = null
+@export var projectile_weapon_list_parent : Node = null
 @export var equipment_list_parent : Node = null
 
 @export var item_container_scene : PackedScene
@@ -24,14 +25,15 @@ class_name WeaponShopManager
 @export var preview_panel_scene : PackedScene
 @export var description_panel_scene : PackedScene
 
-var gui_manager : GuiManager = null
-var player_bank_account_panel : PlayerBankAccountPanel = null
-var stats_panel : ItemStatsPanel = null
-var preview_panel : ItemPreviewPanel = null
-var description_panel : ItemDescriptionPanel = null
+var gui_manager : GuiManager
+var player_bank_account_panel : PlayerBankAccountPanel
+var stats_panel : ItemStatsPanel
+var preview_panel : ItemPreviewPanel
+var description_panel : ItemDescriptionPanel
 var current_blur_intensity : float = 0
 var shop_item_distance_weapon_list : Array[ShopItemContainer] = []
 var shop_item_melee_weapon_list : Array[ShopItemContainer] = []
+var shop_item_projectile_weapon_list : Array[ShopItemContainer] = []
 var shop_item_equipment_list : Array[ShopItemContainer] = []
 
 
@@ -60,6 +62,8 @@ func update():
 		distance_weapon_item.update()
 	for melee_weapon_item in shop_item_melee_weapon_list:
 		melee_weapon_item.update()
+	for projectile_weapon_item in shop_item_projectile_weapon_list:
+		projectile_weapon_item.update()
 	for equipment_item in shop_item_equipment_list:
 		equipment_item.update()
 	player_bank_account_panel.update()
@@ -138,6 +142,11 @@ func load_hover(item_name: String, property_name: String = ""):
 			load_description_hover(item_name, item.special_power_description)
 			load_preview_hover(item_name, item.special_power_preview)
 			return
+	for item in GlobalVariables.all_throwable_object_list:
+		if item.name == item_name:
+			load_stat_hover(item_name, property_name)
+			return
+
 
 
 func unload_hover():
@@ -152,6 +161,7 @@ func unload_hover():
 func load_item_panels():
 	shop_item_distance_weapon_list = generate_item_list_by_save(GlobalVariables.all_distance_weapon_list, GlobalVariables.player_distance_weapon_list, GlobalVariables.index_distance_weapon_selected, distance_weapon_list_parent)
 	shop_item_melee_weapon_list = generate_item_list_by_save(GlobalVariables.all_melee_weapon_list, GlobalVariables.player_melee_weapon_list, GlobalVariables.index_melee_weapon_selected, melee_weapon_list_parent)
+	shop_item_projectile_weapon_list = generate_item_list_by_save(GlobalVariables.all_throwable_object_list, GlobalVariables.player_throwable_object_list, GlobalVariables.index_throwable_object_selected, projectile_weapon_list_parent)
 	shop_item_equipment_list = generate_item_list_by_save(GlobalVariables.all_equipment_list, GlobalVariables.player_equipment_list, -1, equipment_list_parent)
 
 func load_account_panel():
@@ -187,6 +197,7 @@ func unload_ui():
 		player_bank_account_panel.queue_free()
 	free_item_panel_list(shop_item_distance_weapon_list)
 	free_item_panel_list(shop_item_melee_weapon_list)
+	free_item_panel_list(shop_item_projectile_weapon_list)
 	free_item_panel_list(shop_item_equipment_list)
 
 

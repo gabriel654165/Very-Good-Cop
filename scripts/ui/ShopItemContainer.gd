@@ -112,6 +112,14 @@ func generate_upgrade_properties_panel():
 	index = 0
 	
 	#repetition
+	for item_ref in GlobalVariables.all_throwable_object_list:
+		if item_ref.name == item_name:
+			shop_item_property_list = generate_property_list_by_save(item_ref.stats, GlobalVariables.player_throwable_object_list[index], property_list_parent)
+			return
+		index += 1
+	index = 0
+	
+	#repetition
 	for item_ref in GlobalVariables.all_equipment_list:
 		if item_ref.name == item_name:
 			shop_item_property_list = generate_property_list_by_save(item_ref.stats, GlobalVariables.player_equipment_list[index], property_list_parent)
@@ -127,9 +135,11 @@ func unload_upgrade_properties_panel():
 func generate_special_power_panel():
 	var special_power_name
 	
+	#repetition
 	for item in GlobalVariables.all_distance_weapon_list:
 		if item.name == item_name:
 			special_power_name = item.special_power_name
+	#repetition
 	for item in GlobalVariables.all_melee_weapon_list:
 		if item.name == item_name:
 			special_power_name = item.special_power_name
@@ -154,12 +164,19 @@ func buy_item():
 	if GlobalVariables.money < _price:
 		return
 	GlobalVariables.money -= _price
+	#repetition
 	for player_item in GlobalVariables.player_distance_weapon_list:
 		if player_item.name == item_name:
 			player_item.unlocked = true
+	#repetition
 	for player_item in GlobalVariables.player_melee_weapon_list:
 		if player_item.name == item_name:
 			player_item.unlocked = true
+	#repetition
+	for player_item in GlobalVariables.player_throwable_object_list:
+		if player_item.name == item_name:
+			player_item.unlocked = true
+	#repetition
 	for player_item in GlobalVariables.player_equipment_list:
 		if player_item.name == item_name:
 			player_item.unlocked = true

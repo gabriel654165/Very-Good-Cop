@@ -15,6 +15,7 @@ class_name ItemStatsPanel
 
 var distance_weapon_stats_list : Array[PropertyStatContainer] = []
 var melee_weapon_stats_list : Array[PropertyStatContainer] = []
+var throwable_projectile_stats_list : Array[PropertyStatContainer] = []
 var equipment_stats_list : Array[PropertyStatContainer] = []
 
 var item_name : String = ''
@@ -23,6 +24,7 @@ var stat_upgrade_name : String = ''
 func generate_ui():
 	distance_weapon_stats_list = generate_stat_list(GlobalVariables.player_distance_weapon_list, GlobalVariables.all_distance_weapon_list, GlobalVariables.index_distance_weapon_selected)
 	melee_weapon_stats_list = generate_stat_list(GlobalVariables.player_melee_weapon_list, GlobalVariables.all_melee_weapon_list, GlobalVariables.index_melee_weapon_selected)
+	throwable_projectile_stats_list = generate_stat_list(GlobalVariables.player_throwable_object_list, GlobalVariables.all_throwable_object_list, GlobalVariables.index_throwable_object_selected)
 	#equipment_stats_list = generate_stat_list(GlobalVariables.player_equipment_list, GlobalVariables.all_equipment_list)
 
 func load_stat_item(ref_stat) -> PropertyStatContainer:

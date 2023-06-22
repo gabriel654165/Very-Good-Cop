@@ -51,14 +51,22 @@ func upgrade_property():
 		return
 	GlobalVariables.money -= _price
 	
+	#repetition
 	for player_item in GlobalVariables.player_distance_weapon_list:
 		if player_item.name == item_name:
 			player_item[_property_name + '_lvl'] += 1
 			break
+	#repetition
 	for player_item in GlobalVariables.player_melee_weapon_list:
 		if player_item.name == item_name:
 			player_item[_property_name + '_lvl'] += 1
 			break
+	#repetition
+	for player_item in GlobalVariables.player_throwable_object_list:
+		if player_item.name == item_name:
+			player_item[_property_name + '_lvl'] += 1
+			break
+	#repetition
 	for player_item in GlobalVariables.player_equipment_list:
 		if player_item.name == item_name:
 			player_item[_property_name + '_lvl'] += 1
