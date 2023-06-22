@@ -21,6 +21,8 @@ var grappling_hook_level : int = 1
 
 var index_distance_weapon_selected : int = 0
 var index_melee_weapon_selected : int = 0
+var index_throwable_object_selected : int = 0
+
 
 var player_distance_weapon_list = [
 	{
@@ -1513,4 +1515,277 @@ var all_equipment_list = [
 			type= "property"
 		}]
 	}
+]
+
+# VAR TO SAVE
+var player_throwable_object_list = [
+	{
+		name= 'grenade',
+		unlocked= true,
+		ammo_size_lvl= 1,
+		throwing_cooldown_lvl= 0,
+		precision_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= 0,
+		projectile_max_distance_lvl= 0,
+	},
+	{
+		name= 'smoke',
+		unlocked= true,
+		ammo_size_lvl= 0,
+		throwing_cooldown_lvl= 0,
+		precision_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= 0,
+		projectile_max_distance_lvl= 0,
+	},
+	{
+		name= 'catching_cable',
+		unlocked= true,
+		ammo_size_lvl= 0,
+		throwing_cooldown_lvl= 0,
+		precision_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= 0,
+		projectile_max_distance_lvl= 0,
+	},
+	{
+		name= 'molotov',
+		unlocked= true,
+		ammo_size_lvl= 0,
+		throwing_cooldown_lvl= 0,
+		precision_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= -1,
+		projectile_max_distance_lvl= 0,
+	},
+	{
+		name= 'flash',
+		unlocked= true,
+		ammo_size_lvl= 0,
+		throwing_cooldown_lvl= 0,
+		precision_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= 0,
+		projectile_max_distance_lvl= 0,
+	},
+	{
+		name= 'banana',
+		unlocked= true,
+		ammo_size_lvl= 0,
+		throwing_cooldown_lvl= 0,
+		precision_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= 0,
+		projectile_max_distance_lvl= 0,
+	}
+]
+# !VAR TO SAVE
+
+var all_throwable_object_list = [
+	{
+		name="grenade",
+		animation="grenade_animation",
+		throw_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
+		throw_position=Vector2(27, 3),#useless
+		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),
+		gui_texture=load("res://assets/UI/icons/projectiles/spr_grenade.png"),
+		stats= [{
+			ammo_size= level_stat(1, 10, 10),
+			type= "property",
+		}, {
+			throwing_cooldown= level_stat(1, 0.2, 3),
+			type= "property",
+		}, {
+			precision= level_stat(1, 0, 5),
+			type= "property",
+		}, {
+			projectile_speed= level_stat(4, 7, 4),
+			type= "property",
+		}, {
+			projectile_damages= level_stat(20, 500, 100),
+			type= "property",
+		}, {
+			projectile_impact_force= level_stat(0.5, 3, 6),
+			type= "projectile",
+		}, {
+			projectile_should_bounce= level_stat(false, true, 1),
+			type= "projectile",
+		}, {
+			projectile_max_distance= level_stat(100, 500, 10),
+			type= "projectile",
+		}]
+	}, {
+		name="smoke",
+		animation="smoke_animation",
+		throw_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
+		throw_position=Vector2(27, 3),#useless
+		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),#switch
+		gui_texture=load("res://assets/UI/icons/projectiles/spr_smoke.png"),
+		stats= [{
+			ammo_size= level_stat(1, 10, 10),
+			type= "property",
+		}, {
+			throwing_cooldown= level_stat(1, 0.2, 3),
+			type= "property",
+		}, {
+			precision= level_stat(1, 0, 5),
+			type= "property",
+		}, {
+			projectile_speed= level_stat(4, 7, 4),
+			type= "property",
+		}, {
+			projectile_damages= level_stat(0, 100, 20),
+			type= "property",
+		}, {
+			projectile_impact_force= level_stat(0, 0, 1),#default value
+			type= "projectile",
+		}, {
+			projectile_should_bounce= level_stat(false, true, 1),
+			type= "projectile",
+		}, {
+			projectile_max_distance= level_stat(100, 500, 10),
+			type= "projectile",
+		}]
+	}, {
+		name="catching_cable",
+		animation="catching_cable_animation",
+		throw_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
+		throw_position=Vector2(27, 3),#useless
+		projectile_packed_scene=preload("res://scenes/projectiles/CatchingCable.tscn"),
+		gui_texture=load("res://assets/UI/icons/projectiles/catching_cable.png"),
+		stats= [{
+			ammo_size= level_stat(1, 10, 10),
+			type= "property",
+		}, {
+			throwing_cooldown= level_stat(1, 0.2, 3),
+			type= "property",
+		}, {
+			precision= level_stat(0, 0, 1),#default value
+			type= "property",
+		}, {
+			projectile_speed= level_stat(4, 7, 4),
+			type= "property",
+		}, {
+			projectile_damages= level_stat(0, 100, 20),
+			type= "property",
+		}, {
+			projectile_impact_force= level_stat(0, 0, 1),#default value
+			type= "projectile",
+		}, {
+			projectile_should_bounce= level_stat(false, false, 1),#default value
+			type= "projectile",
+		}, {
+			projectile_max_distance= level_stat(100, 500, 10),
+			type= "projectile",
+		}]
+	}, {
+		name="molotov",
+		animation="molotov_animation",
+		throw_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
+		throw_position=Vector2(27, 3),#useless
+		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),#switch
+		gui_texture=load("res://assets/UI/icons/projectiles/spr_molotov_cocktail.png"),
+		stats= [{
+			ammo_size= level_stat(1, 10, 10),
+			type= "property",
+		}, {
+			throwing_cooldown= level_stat(1, 0.2, 3),
+			type= "property",
+		}, {
+			precision= level_stat(1, 0, 5),
+			type= "property",
+		}, {
+			projectile_speed= level_stat(4, 7, 4),
+			type= "property",
+		}, {
+			projectile_damages= level_stat(100, 1000, 100),
+			type= "property",
+		}, {
+			projectile_impact_force= level_stat(0, 1, 2),
+			type= "projectile",
+		}, {
+			projectile_should_bounce= level_stat(false, false, 1),#default value
+			type= "projectile",
+		}, {
+			projectile_max_distance= level_stat(100, 500, 10),
+			type= "projectile",
+		}]
+	}, {
+		name="flash",
+		animation="flash_animation",
+		throw_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
+		throw_position=Vector2(27, 3),#useless
+		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),#switch
+		gui_texture=load("res://assets/UI/icons/projectiles/spr_flash.png"),
+		stats= [{
+			ammo_size= level_stat(1, 10, 10),
+			type= "property",
+		}, {
+			throwing_cooldown= level_stat(1, 0.2, 3),
+			type= "property",
+		}, {
+			precision= level_stat(1, 0, 5),
+			type= "property",
+		}, {
+			projectile_speed= level_stat(4, 7, 4),
+			type= "property",
+		}, {
+			projectile_damages= level_stat(0, 100, 20),
+			type= "property",
+		}, {
+			projectile_impact_force= level_stat(0, 0, 1),#default value
+			type= "projectile",
+		}, {
+			projectile_should_bounce= level_stat(false, true, 1),#default value
+			type= "projectile",
+		}, {
+			projectile_max_distance= level_stat(100, 500, 10),
+			type= "projectile",
+		}]
+	}, {
+		name="banana",
+		animation="banana_animation",
+		throw_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
+		throw_position=Vector2(27, 3),#useless
+		projectile_packed_scene=preload("res://scenes/projectiles/Grenade.tscn"),#switch
+		gui_texture=load("res://assets/UI/icons/projectiles/spr_banana.png"),
+		stats= [{
+			ammo_size= level_stat(1, 100, 10),
+			type= "property",
+		}, {
+			throwing_cooldown= level_stat(1, 0.1, 3),
+			type= "property",
+		}, {
+			precision= level_stat(0.6, 0, 3),
+			type= "property",
+		}, {
+			projectile_speed= level_stat(4, 7, 4),
+			type= "property",
+		}, {
+			projectile_damages= level_stat(10, 100, 100),
+			type= "property",
+		}, {
+			projectile_impact_force= level_stat(1, 2, 3),
+			type= "projectile",
+		}, {
+			projectile_should_bounce= level_stat(false, true, 1),
+			type= "projectile",
+		}, {
+			projectile_max_distance= level_stat(50, 500, 10),
+			type= "projectile",
+		}]
+	},
 ]

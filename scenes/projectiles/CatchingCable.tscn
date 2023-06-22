@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/projectiles/CatchingCable.gd" id="1_l0vmu"]
 [ext_resource type="Script" path="res://scripts/projectiles/Projectile.gd" id="2_4ymas"]
-[ext_resource type="Texture2D" uid="uid://cnmbxvpng45ys" path="res://assets/PNG/Retina/bulletDark3_outline.png" id="2_183pd"]
+[ext_resource type="Texture2D" uid="uid://crptp77wohygr" path="res://assets/weapons/sprites/projectiles/cable_tip.png" id="3_nwpti"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cehvc"]
 radius = 2.848
@@ -32,7 +32,8 @@ size = 0.7
 impact_force = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="BallRight"]
-texture = ExtResource("2_183pd")
+scale = Vector2(8, 8)
+texture = ExtResource("3_nwpti")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallRight"]
 shape = SubResource("CircleShape2D_cehvc")
@@ -47,7 +48,8 @@ size = 0.7
 impact_force = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="BallLeft"]
-texture = ExtResource("2_183pd")
+scale = Vector2(8, 8)
+texture = ExtResource("3_nwpti")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallLeft"]
 shape = SubResource("CircleShape2D_so110")

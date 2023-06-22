@@ -6,6 +6,7 @@ class_name Character
 @onready var weapon_position = $WeaponPosition
 @onready var knife : Knife = $Knife
 @onready var throw_object_position = $ThrowObjectPosition
+@onready var throwable_object_manager : ThrowableObjectManager = $ThrowObjectPosition/ThrowableObjectManager
 @onready var body_animation = $BodyAnimation
 @onready var legs_animation = $LegsAnimation
 @onready var legs_sprite := $LegsSprite2D
@@ -14,7 +15,9 @@ class_name Character
 @export var action_disabled : bool = false
 @export var speed : float = 2.5
 @export var base_speed : float = 2.5
-var force : Vector2 = Vector2.ZERO
+
+@export var blood_effect_scene : PackedScene
+@export var corpse_scene : PackedScene
 
 @export var grappling_hook_scene : PackedScene
 @export var projectile_weapon_scene : PackedScene
@@ -23,9 +26,7 @@ var distance_weapon_throwed : bool = false
 var melee_weapon_throwed : bool = false
 var hook_deployed : bool = false
 
-@export var blood_effect_scene : PackedScene
-@export var corpse_scene : PackedScene
-
+var force : Vector2 = Vector2.ZERO
 var is_dead : bool = false
 
 
@@ -40,12 +41,14 @@ func throw_melee_weapon():
 		knife.enable = false
 		melee_weapon_throwed = true
 
+
 func throw_distance_weapon():
 	if weapon_manager.weapon != null:
 		throwProjectile(projectile_weapon_scene, throw_object_position.global_position, ProjectileTypes.Type.DISTANCE_WEAPON, weapon_manager.weapon.side_sprite)
 		weapon_manager.enable = false
 		weapon_manager.weapon.enable = false
 		distance_weapon_throwed = true
+
 
 func recover_weapon(weapon_type: ProjectileTypes.Type):
 	if weapon_type == ProjectileTypes.Type.DISTANCE_WEAPON:

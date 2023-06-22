@@ -22,6 +22,7 @@ func assign_weapons():
 	set_weapon_position()
 	set_body_animation()
 	GlobalFunctions.set_melee_weapon_properties(knife, GlobalVariables.index_melee_weapon_selected)
+	GlobalFunctions.set_throwable_object_properties(throwable_object_manager, GlobalVariables.index_throwable_object_selected)
 
 
 func _physics_process(delta):
@@ -77,6 +78,8 @@ func _unhandled_input(event):
 		return
 	if event.is_action_pressed("reload_weapon") and !distance_weapon_throwed and weapon_manager.weapon != null and weapon_manager.weapon._current_loader_bullets_number < weapon_manager.weapon.ammo_size:
 		weapon_manager.weapon.reload_magazine()
+	if event.is_action_pressed("throw_throwable_object") and throwable_object_manager != null:
+		throwable_object_manager.throw()
 	if event.is_action_pressed("throw_distance_weapon") and !distance_weapon_throwed and weapon_manager.weapon != null:
 		throw_distance_weapon()
 		GlobalSignals.throwed_distance_weapon.emit(self)

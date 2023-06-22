@@ -28,5 +28,8 @@ func _on_check_box_toggled(button_pressed: bool):
 		for item in GlobalVariables.player_melee_weapon_list:
 			if item.name == item_name:
 				GlobalVariables.index_melee_weapon_selected = item_global_index
+		for item in GlobalVariables.player_throwable_object_list:
+			if item.name == item_name:
+				GlobalVariables.index_throwable_object_selected = item_global_index
 		
 		weapon_manager.update_selected_weapon()

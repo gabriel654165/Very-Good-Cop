@@ -18,7 +18,7 @@ extends Node2D
 
 
 func _ready():
-	GlobalFunctions.load_save()
+	#GlobalFunctions.load_save()
 	
 	GlobalSignals.assign_player_weapons.connect(player.assign_weapons)
 	
@@ -27,8 +27,10 @@ func _ready():
 	GlobalSignals.player_reloading.connect(gui_manager.weapon_panel_manager.handle_player_reload)
 	GlobalSignals.player_use_special_power.connect(gui_manager.weapon_panel_manager.handle_use_special_power)
 	
+	GlobalSignals.player_throwed_object.connect(gui_manager.weapon_panel_manager.handle_throwed_object)
+	
 	GlobalSignals.play_sound.connect(_do_play_sound)
-
+	
 	GlobalSignals.projectile_fired_spawn.connect(projectile_manager.handle_fired_projectile_spawned)
 	GlobalSignals.projectile_launched_spawn.connect(projectile_manager.handle_launched_projectile_spawned)
 	GlobalSignals.grappling_cable_drag.connect(projectile_manager.handle_grappling_cable_drag)

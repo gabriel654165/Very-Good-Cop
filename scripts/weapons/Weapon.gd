@@ -95,8 +95,9 @@ func instantiate_projectile(direction: Vector2) -> bool:
 	var projectile_instance = projectile_scene.instantiate()
 	set_projectile_variables(projectile_instance)
 	direction += Vector2(_random_range(precision_angle), 0)#random direction (x), same distance (y)
-	emit_signals(shooter_actor, projectile_instance, direction)
+	emit_signals(projectile_instance, direction)
 	return true
+
 
 func instantiate_shot_shell():
 	if shot_shell_texture == null:
@@ -116,11 +117,13 @@ func should_disable_cooldown() -> bool:
 		return special_power.is_shooting
 	return false;
 
+
 func recoil_shooter(direction: Vector2):
 	if shooter_actor == null:
 		return
 	if shooter_actor is Character:
 		shooter_actor.apply_force(shooter_actor, -direction, recoil_force)
+
 
 #return a random float between x and y
 func _random_range(angle: Vector2) -> float:
@@ -132,13 +135,15 @@ func _random_range(angle: Vector2) -> float:
 	range *= precision
 	return range
 
-func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vector2):
+
+func emit_signals(projectile_instance: Projectile, direction: Vector2):
 	
 	GlobalSignals.weapon_shoot.emit(shooter_actor)
 	
-	if actor is Player:
+	if shooter_actor is Player:
 		GlobalSignals.player_fired.emit()
-		GlobalSignals.sound_emitted.emit(actor, actor.global_position, sound_intensity)
+		# For enemies detection
+		GlobalSignals.sound_emitted.emit(shooter_actor, shooter_actor.global_position, sound_intensity)
 	
 	if projectile_instance is CatchingCable:
 		GlobalSignals.catching_cable_spawned.emit(shooter_actor, projectile_instance, fire_position.global_position, direction, 2)
@@ -149,6 +154,7 @@ func emit_signals(actor: Node2D, projectile_instance: Projectile, direction: Vec
 		GlobalSignals.projectile_fired_spawn.emit(shooter_actor, projectile_instance, fire_position.global_position, direction)
 	elif projectile_instance is Projectile:
 		GlobalSignals.projectile_fired_spawn.emit(shooter_actor, projectile_instance, fire_position.global_position, direction)
+
 
 func set_projectile_variables(projectile: Projectile):
 	projectile.speed = projectile_speed

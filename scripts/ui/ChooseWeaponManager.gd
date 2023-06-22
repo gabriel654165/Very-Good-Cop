@@ -11,12 +11,14 @@ class_name ChooseWeaponManager
 @export var resume_pop_up_scale := Vector2(5, 5)
 @export var resume_pop_up_velocity_scale := Vector2(3, 3)
 
-@export var choose_weapon_gui : Node = null
-@export var base_panel : Node = null
-@export var color_rect : Node = null
+@export var choose_weapon_gui : Node
+@export var base_panel : Node
+@export var color_rect : Node
+@export var title_label : Label
 
 @export var distance_weapon_grid : Node = null
 @export var melee_weapon_grid : Node = null
+@export var throwable_object_grid : Node = null
 
 @export var choose_weapon_item_panel_scene : PackedScene
 
@@ -25,11 +27,13 @@ var current_blur_intensity : float = 0
 var pop_up_timer : Timer = null
 var array_player_distance_weapon : Array[ChooseWeaponItemPanel] = []
 var array_player_melee_weapon : Array[ChooseWeaponItemPanel] = []
+var array_player_throwable_object : Array[ChooseWeaponItemPanel] = []
 
 func init():
 	gui_manager = get_parent() as GuiManager
 	array_player_distance_weapon = generate_item_list_by_save(GlobalVariables.all_distance_weapon_list, GlobalVariables.player_distance_weapon_list, distance_weapon_grid)
 	array_player_melee_weapon = generate_item_list_by_save(GlobalVariables.all_melee_weapon_list, GlobalVariables.player_melee_weapon_list, melee_weapon_grid)
+	array_player_throwable_object = generate_item_list_by_save(GlobalVariables.all_throwable_object_list, GlobalVariables.player_throwable_object_list, throwable_object_grid)
 	update_selected_weapon()
 
 
@@ -51,6 +55,7 @@ func generate_ui():
 	GlobalFunctions.disable_all_game_objects(true)
 	choose_weapon_gui.visible = true
 	base_panel.visible = true
+	title_label.visible = true
 	gui_manager.cursor_manager.cursor.active_mode_ui()
 	gui_manager.set_active_gui_panels(false)
 	gui_manager.pause_manager.disable_pause = true
@@ -60,10 +65,12 @@ func generate_ui():
 func unload_ui():
 	choose_weapon_gui.visible = false
 	base_panel.visible = true
+	title_label.visible = true
 	color_rect.get_material().set_shader_parameter("intensity", 0)
 
 func start_game():
 	base_panel.visible = false
+	title_label.visible = false
 	gui_manager.cursor_manager.cursor.active_mode_idle_gui()
 	gui_manager.set_active_gui_panels(true)
 	gui_manager.pause_manager.disable_pause = false
@@ -133,11 +140,20 @@ func update_selected_weapon():
 		else:
 			item.selected = true
 			item.item_check_box.button_pressed = true
+	for item in array_player_throwable_object:
+		if GlobalVariables.index_throwable_object_selected != item.item_global_index:
+			item.selected = false
+			item.item_check_box.button_pressed = false
+		else:
+			item.selected = true
+			item.item_check_box.button_pressed = true
+
 
 # Signals
 func _on_start_button_pressed():
 	GlobalSignals.assign_player_weapons.emit()
 	start_game()
+
 
 func _on_quit_button_pressed():
 	get_tree().quit()

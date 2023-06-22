@@ -238,11 +238,33 @@ func set_equipment_properties(character: Character):
 		bonus_speed += get_property_by_level(GlobalVariables.all_equipment_list[current_index], equipment_properties_levels.speed_bonus_lvl, "speed_bonus", character.base_speed)
 		current_index += 1
 	
-	#prendre la base
+	# base value + bonus equipment
 	character.health.max_health = character.health.health_base_value + bonus_health
 	character.health.health = character.health.max_health
 	character.speed = character.base_speed + bonus_speed
+
+
+func set_throwable_object_properties(throwable_object_manager: ThrowableObjectManager, object_index: int):
+	var current_index : int = 0
 	
+	for object_properties_levels in GlobalVariables.player_throwable_object_list:
+		if current_index == object_index:
+			throwable_object_manager.object_name = object_properties_levels.name
+			throwable_object_manager.projectile_scene = GlobalVariables.all_throwable_object_list[current_index].projectile_packed_scene
+			throwable_object_manager.side_sprite.texture = GlobalVariables.all_throwable_object_list[current_index].gui_texture
+			throwable_object_manager.throwing_sound = AudioStreamMP3.new()
+			(throwable_object_manager.throwing_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes(GlobalVariables.all_throwable_object_list[current_index].throw_sound)
+			throwable_object_manager.throwing_cooldown.wait_time = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.throwing_cooldown_lvl, "throwing_cooldown", throwable_object_manager.throwing_cooldown.wait_time)
+			throwable_object_manager.ammo_size = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.ammo_size_lvl, "ammo_size", throwable_object_manager.ammo_size)
+			throwable_object_manager._current_nb_projectiles = throwable_object_manager.ammo_size
+			throwable_object_manager.precision = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.precision_lvl, "precision", throwable_object_manager.precision)
+			throwable_object_manager.projectile_speed = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.projectile_speed_lvl, "projectile_speed", throwable_object_manager.projectile_speed)
+			throwable_object_manager.projectile_damages = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.projectile_damages_lvl, "projectile_damages", throwable_object_manager.projectile_damages)
+			throwable_object_manager.projectile_impact_force = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.projectile_impact_force_lvl, "projectile_impact_force", throwable_object_manager.projectile_impact_force)
+			throwable_object_manager.projectile_should_bounce = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.projectile_bouncing_lvl, "projectile_bouncing", throwable_object_manager.projectile_should_bounce)
+			throwable_object_manager.projectile_max_distance = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.projectile_max_distance_lvl, "projectile_max_distance", throwable_object_manager.projectile_max_distance)
+			break
+		current_index += 1
 
 
 func reset_player_levels():
@@ -250,9 +272,11 @@ func reset_player_levels():
 	GlobalVariables.money = 0
 	GlobalVariables.index_distance_weapon_selected = 0
 	GlobalVariables.index_melee_weapon_selected = 0
+	GlobalVariables.index_throwable_object_selected = 0
 	GlobalFunctions.reset_distance_weapon_levels()
 	GlobalFunctions.reset_melee_weapon_levels()
 	GlobalFunctions.reset_equipment_levels()
+	GlobalFunctions.reset_throwable_object_levels()
 
 
 func reset_distance_weapon_levels():
@@ -295,6 +319,12 @@ func reset_equipment_levels():
 		equipment.speed_bonus_lvl= 0 if equipment.speed_bonus_lvl != -1 else -1
 
 
+func reset_throwable_object_levels():
+	for object in GlobalVariables.player_throwable_object_list:
+		object.unlocked = false
+		object.ammo_size_lvl= 0 if object.ammo_size_lvl != -1 else -1
+
+
 func save():
 	var save_file := FileAccess.open_encrypted("user://game.save", FileAccess.WRITE, GlobalVariables.encryption_key)
 	
@@ -305,11 +335,13 @@ func save():
 		"player_distance_weapon_list": GlobalVariables.player_distance_weapon_list,
 		"player_melee_weapon_list": GlobalVariables.player_melee_weapon_list,
 		"player_equipment_list": GlobalVariables.player_equipment_list,
+		"player_throwable_object_list": GlobalVariables.player_throwable_object_list,
 		
 		"grappling_hook_level": GlobalVariables.grappling_hook_level,
 		
 		"index_distance_weapon_selected": GlobalVariables.index_distance_weapon_selected,
 		"index_melee_weapon_selected": GlobalVariables.index_melee_weapon_selected,
+		"index_throwable_object_selected": GlobalVariables.index_throwable_object_selected,
 		
 		"current_playlist": GlobalVariables.current_playlist,
 	}
@@ -334,11 +366,13 @@ func load_save():
 	GlobalVariables.player_distance_weapon_list = save_file_object["player_distance_weapon_list"]
 	GlobalVariables.player_melee_weapon_list = save_file_object["player_melee_weapon_list"]
 	GlobalVariables.player_equipment_list = save_file_object["player_equipment_list"]
+	GlobalVariables.player_throwable_object_list = save_file_object["player_throwable_object_list"]
 	
 	GlobalVariables.grappling_hook_level = save_file_object["grappling_hook_level"]
 	
 	GlobalVariables.index_distance_weapon_selected = save_file_object["index_distance_weapon_selected"]
 	GlobalVariables.index_melee_weapon_selected = save_file_object["index_melee_weapon_selected"]
+	GlobalVariables.index_throwable_object_selected = save_file_object["index_throwable_object_selected"]
 	
 	GlobalVariables.current_playlist = save_file_object["current_playlist"]
 

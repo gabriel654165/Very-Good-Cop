@@ -577,15 +577,17 @@ stats_panel_scene = ExtResource("24_hkhpj")
 preview_panel_scene = ExtResource("20_2od0h")
 description_panel_scene = ExtResource("21_3i6ap")
 
-[node name="ChooseWeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("choose_weapon_gui", "base_panel", "color_rect", "distance_weapon_grid", "melee_weapon_grid")]
+[node name="ChooseWeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("choose_weapon_gui", "base_panel", "color_rect", "title_label", "distance_weapon_grid", "melee_weapon_grid", "throwable_object_grid")]
 script = ExtResource("17_r1vvb")
 aim_blur_intensity = 3.0
 pop_up_text_scene = ExtResource("7_bnyiq")
 choose_weapon_gui = NodePath("../GuiControl/ChooseWeaponControl")
 base_panel = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer")
 color_rect = NodePath("../GuiControl/ChooseWeaponControl/ColorRect")
+title_label = NodePath("../GuiControl/ChooseWeaponControl/TitleLabel")
 distance_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/DistanceWeaponGridContainer")
 melee_weapon_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer/MeleeWeaponGridContainer")
+throwable_object_grid = NodePath("../GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer/VBoxContainer/ThrowableObjectGridContainer")
 choose_weapon_item_panel_scene = ExtResource("23_8p1eu")
 
 [node name="RecapLevelManager" type="Node2D" parent="." node_paths=PackedStringArray("recap_level_gui", "color_rect", "level_value_label", "label_time_spent", "label_prompt_time_spent", "label_rooms_cleared", "label_prompt_rooms_cleared", "label_kills_done", "label_prompt_kills_done", "label_power_up_taken", "label_prompt_power_up_taken", "label_money_to_earn", "skip_button", "continue_button")]
@@ -2009,7 +2011,6 @@ theme_override_font_sizes/font_size = 35
 text = "Continue to next mission"
 
 [node name="ChooseWeaponControl" type="Control" parent="GuiControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2026,6 +2027,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="GuiControl/ChooseWeaponControl"]
+layout_mode = 2
+offset_left = 653.0
+offset_top = 157.5
+offset_right = 1267.0
+offset_bottom = 216.5
+theme_override_font_sizes/font_size = 70
+text = "Mission's weapons selection"
+horizontal_alignment = 1
 
 [node name="BaseContainer" type="VBoxContainer" parent="GuiControl/ChooseWeaponControl"]
 layout_mode = 1
@@ -2056,6 +2067,8 @@ horizontal_scroll_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
 [node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
@@ -2069,13 +2082,23 @@ alignment = 1
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
+[node name="Label" type="Label" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Distance"
+horizontal_alignment = 1
+
+[node name="MarginTop2" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="DistanceWeaponGridContainer" type="GridContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 15
-columns = 3
+columns = 2
 
 [node name="MarginBottom" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/DistanceWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
@@ -2096,6 +2119,8 @@ horizontal_scroll_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
 [node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
@@ -2109,19 +2134,82 @@ alignment = 1
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
+[node name="Label" type="Label" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Melee"
+horizontal_alignment = 1
+
+[node name="MarginTop2" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="MeleeWeaponGridContainer" type="GridContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 15
-columns = 3
+columns = 2
 
 [node name="MarginBottom" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="MarginRight" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/MeleeWeaponPanel/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="ThrowableObjectPanel" type="PanelContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel"]
+custom_minimum_size = Vector2(190, 380)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MarginLeft" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginTop" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Projectiles"
+horizontal_alignment = 1
+
+[node name="MarginTop2" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ThrowableObjectGridContainer" type="GridContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="MarginBottom" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MarginRight" type="AspectRatioContainer" parent="GuiControl/ChooseWeaponControl/BaseContainer/HBoxContainer/ThrowableObjectPanel/ScrollContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 

@@ -6,6 +6,8 @@ signal player_fired()
 signal player_reloading(ammo_reloading_time: float)
 signal player_use_special_power()
 
+signal player_throwed_object()
+
 signal weapon_stab(actor: Node)
 signal weapon_shoot(actor: Node)
 signal throwed_distance_weapon(actor: Node)
