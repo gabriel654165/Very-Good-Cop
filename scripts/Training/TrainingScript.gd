@@ -20,10 +20,12 @@ func _ready():
 	cursor_manager.set_active(true)
 	
 	player.action_disabled = true
+	choose_weapon_manager.init()
 	choose_weapon_manager.color_rect.get_material().set_shader_parameter("intensity", choose_weapon_manager.aim_blur_intensity)
 	choose_weapon_manager.current_blur_intensity = choose_weapon_manager.aim_blur_intensity
 	cursor_manager.cursor.active_mode_ui()
 	
+	# Disable enemy to make them static
 	GlobalFunctions.append_in_array_on_condition(func(elem: Node): return (elem is Enemy), enemy_array, get_tree().root)
 	for enemy in enemy_array:
 		for child in enemy.state_machine.get_children():
@@ -54,6 +56,7 @@ func _on_start_button_pressed():
 	player.assign_weapons()
 	
 	choose_weapon_manager.base_panel.visible = false
+	choose_weapon_manager.title_label.visible = false
 	cursor_manager.cursor.active_mode_idle_gui()
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(choose_weapon_manager, "current_blur_intensity", 0, choose_weapon_manager.time_to_blur)

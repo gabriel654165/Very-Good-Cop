@@ -275,14 +275,13 @@ func reset_player_levels():
 	GlobalVariables.index_throwable_object_selected = 0
 	GlobalFunctions.reset_distance_weapon_levels()
 	GlobalFunctions.reset_melee_weapon_levels()
-	GlobalFunctions.reset_equipment_levels()
 	GlobalFunctions.reset_throwable_object_levels()
+	GlobalFunctions.reset_equipment_levels()
 
 
 func reset_distance_weapon_levels():
 	for weapon in GlobalVariables.player_distance_weapon_list:
-		if weapon.name != "glock":
-			weapon.unlocked = false
+		weapon.unlocked = true if weapon.name == "glock" else false
 		weapon.special_power_unlocked = false
 		weapon.shooting_cooldown_lvl= 0 if weapon.shooting_cooldown_lvl != -1 else -1
 		weapon.balls_by_burt_lvl= 0 if weapon.balls_by_burt_lvl != -1 else -1
@@ -302,8 +301,7 @@ func reset_distance_weapon_levels():
 
 func reset_melee_weapon_levels():
 	for weapon in GlobalVariables.player_melee_weapon_list:
-		if weapon.name != "police_baton":
-			weapon.unlocked = false
+		weapon.unlocked = true if weapon.name == "police_baton" else false
 		weapon.special_power_unlocked = false
 		weapon.attack_cooldown_lvl= 0 if weapon.attack_cooldown_lvl != -1 else -1
 		weapon.attack_distance_lvl= 0 if weapon.attack_distance_lvl != -1 else -1
@@ -321,7 +319,7 @@ func reset_equipment_levels():
 
 func reset_throwable_object_levels():
 	for object in GlobalVariables.player_throwable_object_list:
-		object.unlocked = false
+		object.unlocked = true if object.name == "grenade" else false
 		object.ammo_size_lvl= 0 if object.ammo_size_lvl != -1 else -1
 
 

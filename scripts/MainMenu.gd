@@ -1,14 +1,16 @@
 extends Node2D
 class_name MainMenu
 
-
 @onready var cursor_manager = $CanvasLayer/CursorManager
+@onready var music_playlist_player : MusicPlaylistsPlayer = $MusicPlaylistsPlayer
 
 @export var animator : AnimationPlayer
+
 
 func _ready():
 	cursor_manager.set_active(true)
 	cursor_manager.cursor.active_mode_ui()
+	music_playlist_player.init()
 	animator.play("unzoom_and_fade_out")
 
 

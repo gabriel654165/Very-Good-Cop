@@ -15,9 +15,11 @@ class_name PropertyStatContainer
 var stat_name : String
 var stat_value
 
+
 func set_stat_name(name: String):
 	stat_name = name
 	name_label.text = name.replace('_', ' ') + " :"
+
 
 func set_stat_value(value):
 	if value is bool:
@@ -28,6 +30,7 @@ func set_stat_value(value):
 		stat_value = value
 		value_label.text = str(snapped(value, 0.01))
 		value_label.visible = true
+
 
 func set_compare_value(to_compare_value):
 	if to_compare_value == stat_value:

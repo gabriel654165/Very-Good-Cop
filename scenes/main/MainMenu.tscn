@@ -524,6 +524,18 @@ tracks/22/keys = {
 "update": 0,
 "values": [Vector2(0, -208), Vector2(0, 104)]
 }
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("SecurePanelRect:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_fri5p"]
 resource_name = "zoom_and_fade"
@@ -817,6 +829,18 @@ tracks/23/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 104), Vector2(0, -208)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("SecurePanelRect:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_7vpbd"]
@@ -1112,6 +1136,18 @@ tracks/23/keys = {
 "update": 0,
 "values": [Vector2(0, 104), Vector2(0, -208)]
 }
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("SecurePanelRect:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g8xxw"]
 _data = {
@@ -1354,6 +1390,15 @@ layout_mode = 2
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/Control/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(1200, 0)
 layout_mode = 2
+
+[node name="SecurePanelRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
 [connection signal="finished" from="MusicPlaylistsPlayer" to="MusicPlaylistsPlayer" method="_on_finished"]
 [connection signal="button_up" from="CanvasLayer/Control/VBoxContainer/CenterContainer/HBoxContainer/ButtonsContainer/PlayContainer/PlayButton" to="." method="_on_play_button_up"]

@@ -1525,6 +1525,7 @@ text = " > "
 flat = true
 
 [node name="WeaponShopControl" type="Control" parent="GuiControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -27,6 +27,7 @@ func generate_ui():
 	throwable_projectile_stats_list = generate_stat_list(GlobalVariables.player_throwable_object_list, GlobalVariables.all_throwable_object_list, GlobalVariables.index_throwable_object_selected)
 	#equipment_stats_list = generate_stat_list(GlobalVariables.player_equipment_list, GlobalVariables.all_equipment_list)
 
+
 func load_stat_item(ref_stat) -> PropertyStatContainer:
 	var stat_item = property_stat_container_scene.instantiate()
 	

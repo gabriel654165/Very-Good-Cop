@@ -1448,76 +1448,6 @@ var all_melee_weapon_list = [
 ]
 
 # VAR TO SAVE
-var player_equipment_list = [
-	{
-		name= 'bullet_proof_vest',
-		unlocked= true,
-		health_bonus_lvl= 0,
-		speed_bonus_lvl= -1,
-	}, {
-		name= 'air_max',
-		unlocked= true,
-		health_bonus_lvl= -1,
-		speed_bonus_lvl= 0,
-	}, {
-		name= 'diaper',
-		unlocked= true,
-		health_bonus_lvl= 0,
-		speed_bonus_lvl= -1,
-	}, {
-		name= 'gas_mask',
-		unlocked= true,
-		health_bonus_lvl= -1,
-		speed_bonus_lvl= -1,
-	}
-]
-# !VAR TO SAVE
-
-var all_equipment_list = [
-	{
-		name= 'bullet_proof_vest',
-		gui_texture=load("res://assets/UI/icons/equipment/bulletproof_vest.png"),
-		stats= [{
-			health_bonus= level_stat(10, 100, 20),
-			type= "property"
-		}, {
-			speed_bonus= level_stat(0, 0, 1),# default value
-			type= "property"
-		}]
-	}, {
-		name= 'air_max',
-		gui_texture=load("res://assets/UI/icons/equipment/air_max.png"),
-		stats= [{
-			health_bonus= level_stat(0, 0, 1),# default value
-			type= "property"
-		}, {
-			speed_bonus= level_stat(1, 4, 10),
-			type= "property"
-		}]
-	}, {
-		name= 'diaper',
-		gui_texture=load("res://assets/UI/icons/equipment/diaper.png"),
-		stats= [{
-			health_bonus= level_stat(0.5, 10, 10),
-			type= "property"
-		}, {
-			speed_bonus= level_stat(0, 0, 1),# default value
-			type= "property"
-		}]
-	}, {
-		name= 'gas_mask',
-		gui_texture=load("res://assets/UI/icons/equipment/gas_mask.png"),
-		stats= [{
-			health_bonus= level_stat(0, 0, 1),# default value
-			type= "property"
-		}, {
-			speed_bonus= level_stat(0, 0, 1),# default value
-			type= "property"
-		}]
-	}
-]
-
-# VAR TO SAVE
 var player_throwable_object_list = [
 	{
 		name= 'grenade',
@@ -1788,4 +1718,74 @@ var all_throwable_object_list = [
 			type= "projectile",
 		}]
 	},
+]
+
+# VAR TO SAVE
+var player_equipment_list = [
+	{
+		name= 'bullet_proof_vest',
+		unlocked= true,
+		health_bonus_lvl= 0,
+		speed_bonus_lvl= -1,
+	}, {
+		name= 'air_max',
+		unlocked= true,
+		health_bonus_lvl= -1,
+		speed_bonus_lvl= 0,
+	}, {
+		name= 'diaper',
+		unlocked= true,
+		health_bonus_lvl= 0,
+		speed_bonus_lvl= -1,
+	}, {
+		name= 'gas_mask',
+		unlocked= true,
+		health_bonus_lvl= -1,
+		speed_bonus_lvl= -1,
+	}
+]
+# !VAR TO SAVE
+
+var all_equipment_list = [
+	{
+		name= 'bullet_proof_vest',
+		gui_texture=load("res://assets/UI/icons/equipment/bulletproof_vest.png"),
+		stats= [{
+			health_bonus= level_stat(10, 100, 20),
+			type= "property"
+		}, {
+			speed_bonus= level_stat(0, 0, 1),# default value
+			type= "property"
+		}]
+	}, {
+		name= 'air_max',
+		gui_texture=load("res://assets/UI/icons/equipment/air_max.png"),
+		stats= [{
+			health_bonus= level_stat(0, 0, 1),# default value
+			type= "property"
+		}, {
+			speed_bonus= level_stat(1, 4, 10),
+			type= "property"
+		}]
+	}, {
+		name= 'diaper',
+		gui_texture=load("res://assets/UI/icons/equipment/diaper.png"),
+		stats= [{
+			health_bonus= level_stat(0.5, 10, 10),
+			type= "property"
+		}, {
+			speed_bonus= level_stat(0, 0, 1),# default value
+			type= "property"
+		}]
+	}, {
+		name= 'gas_mask',
+		gui_texture=load("res://assets/UI/icons/equipment/gas_mask.png"),
+		stats= [{
+			health_bonus= level_stat(0, 0, 1),# default value
+			type= "property"
+		}, {
+			speed_bonus= level_stat(0, 0, 1),# default value
+			type= "property"
+		}]
+	}
 ]
