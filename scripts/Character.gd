@@ -19,7 +19,6 @@ class_name Character
 @export var blood_effect_scene : PackedScene
 @export var corpse_scene : PackedScene
 
-@export var grappling_hook_scene : PackedScene
 @export var projectile_weapon_scene : PackedScene
 
 var distance_weapon_throwed : bool = false
@@ -28,11 +27,6 @@ var hook_deployed : bool = false
 
 var force : Vector2 = Vector2.ZERO
 var is_dead : bool = false
-
-
-func throw_grappling():
-	hook_deployed = true
-	throwProjectile(grappling_hook_scene, throw_object_position.global_position)
 
 
 func throw_melee_weapon():

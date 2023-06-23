@@ -85,8 +85,6 @@ func _unhandled_input(event):
 		GlobalSignals.throwed_distance_weapon.emit(self)
 	if event.is_action_pressed("throw_melee_weapon") and !melee_weapon_throwed and knife != null and knife.can_throw:
 		throw_melee_weapon()
-	if event.is_action_pressed("throw_grappling") and !hook_deployed and GlobalVariables.grappling_hook_level != 0:
-		throw_grappling()
 	if event.is_action_pressed("use_special_power") and weapon_manager.weapon.can_use_power and !weapon_manager.weapon.special_power.activated:
 		weapon_manager.weapon.special_power.use_special_power()
 

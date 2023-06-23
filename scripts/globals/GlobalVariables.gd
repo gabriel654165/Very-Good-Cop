@@ -1474,6 +1474,18 @@ var player_throwable_object_list = [
 		projectile_max_distance_lvl= 0,
 	},
 	{
+		name= 'grappling_hook',
+		unlocked= true,
+		ammo_size_lvl= 0,
+		throwing_cooldown_lvl= 0,
+		precision_lvl= 0,
+		projectile_speed_lvl= 0,
+		projectile_damages_lvl= 0,
+		projectile_impact_force_lvl= 0,
+		projectile_bouncing_lvl= 0,
+		projectile_max_distance_lvl= 0,
+	},
+	{
 		name= 'catching_cable',
 		unlocked= true,
 		ammo_size_lvl= 0,
@@ -1584,6 +1596,38 @@ var all_throwable_object_list = [
 			type= "projectile",
 		}, {
 			projectile_bouncing= level_stat(false, true, 1),
+			type= "projectile",
+		}, {
+			projectile_max_distance= level_stat(100, 500, 10),
+			type= "projectile",
+		}]
+	}, {
+		name="grappling_hook",
+		animation="grappling_hook_animation",
+		throw_sound="res://assets/Sounds/melee_weapon/stick_whoosh.mp3",
+		throw_position=Vector2(27, 3),#useless
+		projectile_packed_scene=preload("res://scenes/weapons/GrapplingHook.tscn"),
+		gui_texture=load("res://assets/UI/icons/projectiles/suction_cup.png"),
+		stats= [{
+			ammo_size= level_stat(3, 30, 27),
+			type= "property",
+		}, {
+			throwing_cooldown= level_stat(1, 0.2, 3),
+			type= "property",
+		}, {
+			precision= level_stat(2, 0, 3),
+			type= "property",
+		}, {
+			projectile_speed= level_stat(12, 20, 6),
+			type= "property",
+		}, {
+			projectile_damages= level_stat(0, 100, 10),
+			type= "property",
+		}, {
+			projectile_impact_force= level_stat(0, 0, 1),#default value
+			type= "projectile",
+		}, {
+			projectile_bouncing= level_stat(false, false, 1),#default value
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),

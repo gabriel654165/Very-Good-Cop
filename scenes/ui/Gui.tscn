@@ -1096,7 +1096,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ShootingContainer"]
-custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="MiddleMargin" type="AspectRatioContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
@@ -1126,7 +1125,7 @@ text = " (melee weapon attack)"
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/StabContainer"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(165, 100)
 layout_mode = 2
 texture = ExtResource("37_80gqr")
 expand_mode = 1
@@ -1266,29 +1265,29 @@ stretch_mode = 5
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="GraplingHookContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+[node name="ThrowObjectsContainer" type="HBoxContainer" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+[node name="Label" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowObjectsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 40
-text = "Throw Grappling Hook"
+text = "Throw Projectile Weapon"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+[node name="DescriptionLabel" type="Label" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowObjectsContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_colors/font_color = Color(0.509804, 0.509804, 0.509804, 1)
 theme_override_font_sizes/font_size = 35
-text = " (when bought on the shop)"
+text = " (grenade, smoke, hook...)"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/GraplingHookContainer"]
+[node name="TextureRect" type="TextureRect" parent="GuiControl/PauseControl/PauseContainer/OptionTabContainer/Controls/VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/ThrowObjectsContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 texture = ExtResource("41_b7cqv")
