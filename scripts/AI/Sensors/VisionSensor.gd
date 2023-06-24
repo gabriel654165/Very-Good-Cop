@@ -2,8 +2,6 @@
 extends Node2D
 class_name VisionSensor
 
-@export_flags_2d_physics var layers_2d_physics
-
 signal can_see_target(target: DetectableTarget)
 signal lost_target(target: DetectableTarget)
 
@@ -42,7 +40,7 @@ func _process(delta):
 				continue
 				
 			# raycast to target passes?
-			var param = PhysicsRayQueryParameters2D.create(eye_location, candidate_target.global_position, 1, [self, get_parent()])
+			var param = PhysicsRayQueryParameters2D.create(eye_location, candidate_target.global_position, _enemy.vision_layers, [self, get_parent()])
 			var hit_info = space.intersect_ray(param)
 			if !hit_info.is_empty():
 				if hit_info.collider.name == candidate_target.get_parent().name:

@@ -128,7 +128,7 @@ throw_throwable_object={
 
 [navigation]
 
-2d/default_edge_connection_margin=10
+2d/default_edge_connection_margin=8
 
 [physics]
 

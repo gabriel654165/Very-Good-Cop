@@ -17,7 +17,7 @@ func _ready():
 func get_target():
 	if state_machine._enemy.patrol_points.size() == 0:
 		return
-		
+
 	if state_machine._enemy.patrol_type == Enemy.PatrolType.Sequence:
 		current_point_index = (current_point_index + 1) % state_machine._enemy.patrol_points.size()
 		current_point = state_machine._enemy.patrol_points[current_point_index]
@@ -29,8 +29,6 @@ func get_target():
 	set_movement_target(current_point)
 
 func enter(_msg := {}) -> void:
-	if !vision_sensor.can_see_target.is_connected(_on_see_target):
-		vision_sensor.can_see_target.connect(_on_see_target)
 	if !state_machine.navigation_agent.target_reached.is_connected(_on_target_reached):
 		state_machine.navigation_agent.target_reached.connect(_on_target_reached)
 	if !hearing_sensor.sound_heard.is_connected(_on_sound_heard):
@@ -38,14 +36,14 @@ func enter(_msg := {}) -> void:
 	get_target()
 
 func exit() -> void:
-	vision_sensor.can_see_target.disconnect(_on_see_target)
 	hearing_sensor.sound_heard.disconnect(_on_sound_heard)
 	state_machine.navigation_agent.target_reached.disconnect(_on_target_reached)
 
-#signals 
-func _on_see_target(target: DetectableTarget):
-	state_machine.transition_to(state_machine.FOLLOW_TARGET, { target = target.get_parent() })
+func update(_delta: float) -> void:
+	if vision_sensor.current_target != null:
+		state_machine.transition_to(state_machine.FOLLOW_TARGET, { target = vision_sensor.current_target.get_parent() })
 
+#signals 
 func _on_wait_point_timeout():
 	get_target()
 
