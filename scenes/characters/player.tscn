@@ -1,7 +1,6 @@
-[gd_scene load_steps=62 format=3 uid="uid://rvl465nagvgf"]
+[gd_scene load_steps=61 format=3 uid="uid://rvl465nagvgf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_vctbk"]
-[ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="2_d13uj"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="3_orjl3"]
 [ext_resource type="Texture2D" uid="uid://c8ueprhg8f87n" path="res://assets/character/Police-Remade-HM-2.png" id="4_fhji1"]
 [ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="4_j66v4"]
@@ -2461,7 +2460,6 @@ speed = null
 base_speed = null
 blood_effect_scene = ExtResource("4_j66v4")
 corpse_scene = ExtResource("5_jws7k")
-grappling_hook_scene = ExtResource("2_d13uj")
 projectile_weapon_scene = ExtResource("3_orjl3")
 
 [node name="LegsSprite2D" type="Sprite2D" parent="."]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://bsg7wbhktsf6b"]
+[gd_scene load_steps=33 format=3 uid="uid://bsg7wbhktsf6b"]
 
 [ext_resource type="Script" path="res://scripts/Character/Enemy.gd" id="1_ef1gd"]
 [ext_resource type="PackedScene" uid="uid://cm0fqcrxuvdy0" path="res://scenes/effects/BloodPixelised.tscn" id="2_5lu21"]
-[ext_resource type="PackedScene" uid="uid://wjj4h3l7feef" path="res://scenes/weapons/GrapplingHook.tscn" id="2_dcfht"]
 [ext_resource type="Texture2D" uid="uid://cromrwfgimir6" path="res://assets/character/Cartel-Enemy-HM-2.png" id="2_kdey6"]
 [ext_resource type="PackedScene" uid="uid://dorctgk4vqfuy" path="res://scenes/projectiles/throwed_weapon.tscn" id="3_4uakv"]
 [ext_resource type="PackedScene" uid="uid://bcs1erw2idhma" path="res://scenes/effects/corpse.tscn" id="3_j3lui"]
@@ -712,10 +711,9 @@ script = ExtResource("1_ef1gd")
 hearing_range = 300.0
 speed = 10.0
 base_speed = 10.0
-grappling_hook_scene = ExtResource("2_dcfht")
-projectile_weapon_scene = ExtResource("3_4uakv")
 blood_effect_scene = ExtResource("2_5lu21")
 corpse_scene = ExtResource("3_j3lui")
+projectile_weapon_scene = ExtResource("3_4uakv")
 
 [node name="LegsSprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -727,10 +725,8 @@ region_rect = Rect2(666, 737, 19, 15)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture = ExtResource("2_kdey6")
-offset = Vector2(8, 0)
-flip_v = true
 region_enabled = true
-region_rect = Rect2(483, 793, 35, 13)
+region_rect = Rect2(439, 424, 13, 24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sqt3e")

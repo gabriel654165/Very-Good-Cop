@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://tn5nmegwhdvc"]
+[gd_scene load_steps=30 format=3 uid="uid://tn5nmegwhdvc"]
 
 [ext_resource type="Script" path="res://scripts/Training/TrainingScript.gd" id="1_82joo"]
 [ext_resource type="PackedScene" uid="uid://rvl465nagvgf" path="res://scenes/characters/player.tscn" id="1_ksn2w"]
@@ -17,6 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://bllghwhulun0m" path="res://scenes/ui/cursor.tscn" id="10_rp6jh"]
 [ext_resource type="Texture2D" uid="uid://b00u5s6j1e6s" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/L.png" id="13_ikg6y"]
 [ext_resource type="PackedScene" uid="uid://bsg7wbhktsf6b" path="res://scenes/characters/enemies/pistolero.tscn" id="16_ah6ek"]
+[ext_resource type="Texture2D" uid="uid://ksmuq6xbu8d8" path="res://assets/UI/keyboards/mouse-click.png" id="18_0oind"]
+[ext_resource type="Texture2D" uid="uid://qsq4d5ttnxyb" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/F.png" id="19_qsedm"]
+[ext_resource type="Texture2D" uid="uid://bn83a3ilq0dci" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/X.png" id="20_30yaq"]
+[ext_resource type="Texture2D" uid="uid://bfto3fwjsx4ua" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/C.png" id="21_l2qtc"]
+[ext_resource type="Texture2D" uid="uid://8jemv0qa8mvg" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/SHIFTALTERNATIVE.png" id="22_ew5bu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtx8k"]
 texture = ExtResource("2_3lnu0")
@@ -2278,7 +2283,7 @@ shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x35qh"]
 shader = ExtResource("7_2hg0b")
-shader_parameter/color = Color(0.145098, 0.145098, 0.145098, 0.470588)
+shader_parameter/color = Color(0.145098, 0.145098, 0.145098, 0.317647)
 
 [node name="TrainingScene" type="Node2D"]
 script = ExtResource("1_82joo")
@@ -2289,18 +2294,30 @@ zoom = Vector2(2.5, 2.5)
 [node name="Player" parent="." instance=ExtResource("1_ksn2w")]
 position = Vector2(0, 127)
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="EnemyContainer" type="Node2D" parent="."]
 
-[node name="Enemy" parent="Enemies" instance=ExtResource("16_ah6ek")]
+[node name="Enemy" parent="EnemyContainer" instance=ExtResource("16_ah6ek")]
 position = Vector2(-216, -163)
 rotation = 1.5708
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource("16_ah6ek")]
+[node name="Enemy2" parent="EnemyContainer" instance=ExtResource("16_ah6ek")]
 position = Vector2(-120, -163)
 rotation = 1.5708
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource("16_ah6ek")]
+[node name="Enemy3" parent="EnemyContainer" instance=ExtResource("16_ah6ek")]
 position = Vector2(-21, -163)
+rotation = 1.5708
+
+[node name="Enemy4" parent="EnemyContainer" instance=ExtResource("16_ah6ek")]
+position = Vector2(148, -155)
+rotation = 1.5708
+
+[node name="Enemy5" parent="EnemyContainer" instance=ExtResource("16_ah6ek")]
+position = Vector2(209, -84)
+rotation = 1.5708
+
+[node name="Enemy6" parent="EnemyContainer" instance=ExtResource("16_ah6ek")]
+position = Vector2(81, -83)
 rotation = 1.5708
 
 [node name="Room" type="Node2D" parent="."]
@@ -2668,6 +2685,244 @@ text = "Choose weapons"
 
 [node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/InstructionsContainer/ChangeWeaponPanel/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ControlsContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -182.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="ShootPanel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
+material = SubResource("ShaderMaterial_x35qh")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ControlsContainer/ShootPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ControlsContainer/ShootPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ShootPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ControlsContainer/ShootPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("18_0oind")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ShootPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ControlsContainer/ShootPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Shoot"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ShootPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="AttackPanel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
+material = SubResource("ShaderMaterial_x35qh")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ControlsContainer/AttackPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ControlsContainer/AttackPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/AttackPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ControlsContainer/AttackPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("18_0oind")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/AttackPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ControlsContainer/AttackPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Attack"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/AttackPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="SpecialPowerPanel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
+material = SubResource("ShaderMaterial_x35qh")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ControlsContainer/SpecialPowerPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ControlsContainer/SpecialPowerPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/SpecialPowerPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ControlsContainer/SpecialPowerPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 50)
+layout_mode = 2
+texture = ExtResource("22_ew5bu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/SpecialPowerPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ControlsContainer/SpecialPowerPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Special
+Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/SpecialPowerPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ProjectilePanel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
+material = SubResource("ShaderMaterial_x35qh")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ControlsContainer/ProjectilePanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ControlsContainer/ProjectilePanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ProjectilePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ControlsContainer/ProjectilePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("19_qsedm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ProjectilePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ControlsContainer/ProjectilePanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Projectile"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ProjectilePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ThrowWeapon1Panel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
+material = SubResource("ShaderMaterial_x35qh")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon1Panel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon1Panel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon1Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon1Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("20_30yaq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon1Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon1Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Throw 
+weapon 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon1Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ThrowWeapon2Panel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
+material = SubResource("ShaderMaterial_x35qh")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon2Panel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon2Panel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon2Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon2Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("21_l2qtc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon2Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon2Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Throw 
+weapon 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ThrowWeapon2Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [connection signal="pressed" from="CanvasLayer/Control/ChooseWeaponControl/BaseContainer/Button-Container/StartButton" to="." method="_on_start_button_pressed"]
