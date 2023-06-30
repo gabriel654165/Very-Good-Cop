@@ -197,7 +197,7 @@ _data = {
 [node name="Grenade" type="CharacterBody2D" node_paths=PackedStringArray("shader_animation", "particle_animation", "animation_player")]
 z_index = 2
 collision_layer = 8
-collision_mask = 11
+collision_mask = 3
 script = ExtResource("1_b6dp5")
 radius_pixels_impact_area = null
 max_launch_distance = null

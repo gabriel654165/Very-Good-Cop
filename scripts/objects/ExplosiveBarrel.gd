@@ -1,4 +1,5 @@
 extends StaticBody2D
+class_name ExplosiveBarrel
 
 @export var particle_animation : AnimationPlayer
 @export var shader_animation : AnimationPlayer
@@ -18,6 +19,8 @@ func _ready():
 
 func handle_hit(damager: Node2D, damage):
 	if health.is_dead():
+		return
+	if damager is ThrowedWeapon:
 		return
 
 	if damager is Bullet:

@@ -179,7 +179,7 @@ func calculate_money(static_time_spent: float, static_rooms_cleared: int, static
 
 func generate_ui():
 	set_level_variables()
-	level_value_label.text = str(GlobalVariables.level)
+	level_value_label.text = str(GlobalVariables.level + 1)
 	gui_manager.panel_timer_manager.stop_timer()
 	recap_level_gui.visible = true
 	GlobalFunctions.disable_all_game_objects(true)

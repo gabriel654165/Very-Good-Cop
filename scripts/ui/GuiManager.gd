@@ -12,6 +12,7 @@ class_name GuiManager
 @onready var pop_up_points_manager = $PopUpPointsManager
 @onready var pop_up_interaction_manager = $PopUpInteractionManager
 @onready var pop_up_power_up_manager = $PopUpPowerUpManager
+@onready var marker_interaction_manager = $MarkerInteractionManager
 
 @onready var panel_points_manager = $PanelPointsManager
 @onready var panel_power_ups_manager = $PanelPowerUpsManager
@@ -34,6 +35,7 @@ func generate_ui():
 	cursor_manager.player = player_ref
 	
 	health_ui_manager.set_active(true)
+	marker_interaction_manager.set_active(true)
 	cursor_manager.set_active(true)
 	game_over_manager.set_active(false)
 	minimap_manager.set_active(true)
@@ -44,9 +46,14 @@ func generate_ui():
 
 
 func set_active_gui_panels(state: bool):
+	# remove this panel
 	panel_points_manager.panel.visible = false
+	# !remove this panel
+	
 	panel_kills_manager.panel.visible = state
 	panel_timer_manager.panel.visible = state
 	panel_power_ups_manager.panel.visible = state
 	weapon_panel_manager.set_active_panels(state)
 	minimap_manager.set_active(state)
+	#marker_interaction_manager.set_active(state)
+	#health_ui_manager.set_active(state)

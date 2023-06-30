@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Very Good Cop"
-run/main_scene="res://scenes/main/MainMenu.tscn"
+run/main_scene="res://scenes/main/MainScene.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -27,7 +27,6 @@ ProjectileTypes="*res://scripts/globals/ProjectileTypes.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="canvas_items"

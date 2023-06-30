@@ -17,6 +17,7 @@ radius = 28.2312
 
 [node name="MinimapExtendPowerUp" type="Node2D"]
 script = ExtResource("1_kh4lq")
+interaction_name = "pills"
 effect_name = "minimapextend"
 type = 4
 value_effect = 10.0

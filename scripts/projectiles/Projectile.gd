@@ -35,6 +35,7 @@ func _physics_process(delta):
 	_move_and_collide(delta)
 	_specific_process(delta)
 
+
 func _move_and_collide(delta: float):
 	if direction != Vector2.ZERO:
 		velocity = direction * GlobalFunctions.get_speed(speed, delta)
@@ -47,6 +48,7 @@ func handle_collision(collision: KinematicCollision2D):
 	if !collision:
 		return
 	var object = collision.get_collider()
+	
 	if object.get_name() == "Walls":
 		if should_bounce:
 			direction = velocity.normalized().bounce(collision.get_normal())
@@ -54,6 +56,7 @@ func handle_collision(collision: KinematicCollision2D):
 			handle_specific_collision(object)
 			queue_free()
 	handle_specific_collision(object)
+
 
 func destroy_instance():
 	queue_free()
@@ -85,4 +88,3 @@ func _specific_process(delta: float):
 
 func handle_specific_collision(object: Object):
 	pass
-

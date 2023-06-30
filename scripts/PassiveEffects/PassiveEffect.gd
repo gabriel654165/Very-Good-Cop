@@ -71,3 +71,5 @@ func remove_passive_effect(character: Character):
 		GlobalSignals.active_slowmotion_power_up.emit(false)
 	if type == TYPE.MINIMAP_EXTEND:
 		GlobalSignals.active_minimap_power_up.emit(false)
+	
+	self.get_owner().queue_free()

@@ -8,9 +8,8 @@ var should_display_canvas : bool = false
 
 func set_active(state:bool):
 	super.set_active(state)
-	if !state:
-		GlobalSignals.interaction_computed.emit(self.get_parent(), state, interaction_gui_scene)
-	
+	GlobalSignals.interaction_computed.emit(self.get_owner(), state, interaction_gui_scene)
+	GlobalSignals.change_interaction_marker_state.emit(self.get_owner(), state, self.get_owner().interaction_gui_texture, self.get_owner().interaction_name)
 
 func _process(delta):
 	if !is_active:
@@ -25,4 +24,5 @@ func _process(delta):
 	is_triggered = true
 	
 	if last_state_canvas != should_display_canvas:
-		GlobalSignals.interaction_computed.emit(self.get_parent(), should_display_canvas, interaction_gui_scene)
+		GlobalSignals.interaction_computed.emit(self.get_owner(), should_display_canvas, interaction_gui_scene)
+		GlobalSignals.change_interaction_marker_state.emit(self.get_owner(), !should_display_canvas, self.get_owner().interaction_gui_texture, self.get_owner().interaction_name)

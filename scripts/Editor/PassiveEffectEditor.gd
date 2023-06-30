@@ -1,7 +1,13 @@
 @tool
 extends Node2D
+class_name PassiveEffectEditor
 
 var passive_effect : PassiveEffect
+
+# Interaction variables
+@export var interaction_gui_texture : Texture
+@export var interaction_name : String = ""
+# ! Interaction variables
 
 var effect_name : String
 var type : PassiveEffect.TYPE

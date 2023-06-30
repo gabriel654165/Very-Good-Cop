@@ -157,6 +157,8 @@ func boolean_ratio(min_val, max_val, total_lvl, current_lvl, error_value_case):
 		return min_val
 	elif current_lvl == 1:
 		return max_val
+	elif current_lvl == -1:
+		return max_val
 	return error_value_case
 	
 func get_property_by_level(weapon_stats, weapon_property_level, propriety_name, weapon_default_value):

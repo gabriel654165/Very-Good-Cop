@@ -17,6 +17,7 @@ radius = 28.2312
 
 [node name="DamagePowerUp" type="Node2D"]
 script = ExtResource("1_wfer1")
+interaction_name = "pepers"
 effect_name = "damages"
 type = 3
 value_effect = 120.0
@@ -46,7 +47,6 @@ shape = SubResource("CircleShape2D_tdnqi")
 [node name="AddPassiveEffectInteraction" type="Node2D" parent="."]
 rotation = -0.375185
 script = ExtResource("4_lkd46")
-for_who = 1
 
 [node name="PressKeyAndCollide" type="Node2D" parent="." node_paths=PackedStringArray("collision_interaction", "next_interaction")]
 rotation = -0.375185

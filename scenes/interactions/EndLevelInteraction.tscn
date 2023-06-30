@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck3ud2aox6ojh"]
+[gd_scene load_steps=11 format=3 uid="uid://ck3ud2aox6ojh"]
 
 [ext_resource type="Texture2D" uid="uid://dwairrcc6nq45" path="res://assets/Interactions/computers/computer_14.png" id="1_g3v0o"]
+[ext_resource type="Script" path="res://scripts/level/EndLevelInteractionEditor.gd" id="1_h56t7"]
 [ext_resource type="Script" path="res://scripts/Interactions/CollisionInteraction.gd" id="2_ndrnv"]
 [ext_resource type="Script" path="res://scripts/Interactions/EndLevelInteraction.gd" id="3_r7fmc"]
 [ext_resource type="PackedScene" uid="uid://dnrwg6uymyr1g" path="res://scenes/ui/InteractionPressKey.tscn" id="6_14c3l"]
@@ -15,6 +16,8 @@ size = Vector2(74, 33)
 size = Vector2(62, 40)
 
 [node name="EndLevelInteraction" type="Node2D"]
+script = ExtResource("1_h56t7")
+interaction_name = "QG"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

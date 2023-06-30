@@ -33,6 +33,7 @@ func _ready():
 	for enemy in enemy_array:
 		for child in enemy.state_machine.get_children():
 			GlobalFunctions.disable_all_process(child, true)
+		#ERROR on debug : enemy = null
 		#for child in enemy:
 		#	GlobalFunctions.disable_all_process(child, true)
 		GlobalFunctions.disable_all_process(enemy.state_machine, true)

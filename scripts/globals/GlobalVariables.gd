@@ -808,7 +808,7 @@ var all_distance_weapon_list = [
 			projectile_impact_force= level_stat(0.5, 3, 6),
 			type= "projectile",
 		}, {
-			projectile_bouncing= level_stat(false, true, 1),
+			projectile_bouncing= level_stat(true, true, 1),# default value
 			type= "projectile",
 		}, {
 			points_to_use_special_power= level_stat(500, 200, 2),
@@ -1563,7 +1563,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(0.5, 3, 6),
 			type= "projectile",
 		}, {
-			projectile_bouncing= level_stat(false, true, 1),
+			projectile_bouncing= level_stat(true, true, 1),# default value
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),
@@ -1595,7 +1595,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(0, 0, 1),#default value
 			type= "projectile",
 		}, {
-			projectile_bouncing= level_stat(false, true, 1),
+			projectile_bouncing= level_stat(true, true, 1),# default value
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),
@@ -1723,7 +1723,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(0, 0, 1),#default value
 			type= "projectile",
 		}, {
-			projectile_bouncing= level_stat(false, true, 1),#default value
+			projectile_bouncing= level_stat(true, true, 1),#default value
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(100, 500, 10),
@@ -1755,7 +1755,7 @@ var all_throwable_object_list = [
 			projectile_impact_force= level_stat(1, 2, 3),
 			type= "projectile",
 		}, {
-			projectile_bouncing= level_stat(false, true, 1),
+			projectile_bouncing= level_stat(true, true, 1),# default value
 			type= "projectile",
 		}, {
 			projectile_max_distance= level_stat(50, 500, 10),

@@ -50,6 +50,7 @@ func _ready():
 	GlobalSignals.power_up_taken.connect(gui_manager.pop_up_power_up_manager.handle_power_up_taken)
 	
 	GlobalSignals.interaction_computed.connect(gui_manager.pop_up_interaction_manager.handle_interaction_computed)
+	GlobalSignals.change_interaction_marker_state.connect(gui_manager.marker_interaction_manager.change_interaction_marker_state)
 	
 	GlobalSignals.active_minimap_power_up.connect(screen_effects_manager.set_minimap_power_up)
 	GlobalSignals.active_minimap_power_up.connect(gui_manager.minimap_manager.handle_minimap_power_up)
