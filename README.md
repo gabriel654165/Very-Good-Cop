@@ -1,5 +1,8 @@
 # Very Good Cop
 
+![Screenshot from 2023-07-12 15-13-30](https://github.com/gabriel654165/Very-Good-Cop/assets/62654705/c006236f-11e8-4f50-8f90-e6bc49fb3fc1)
+
+
 ![Screenshot from 2023-07-12 15-14-35](https://github.com/gabriel654165/Very-Good-Cop/assets/62654705/93f6b2b6-4125-4554-b04f-a79bc9a51a16)
 
 
