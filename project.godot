@@ -13,7 +13,11 @@ config_version=5
 config/name="Very Good Cop"
 run/main_scene="res://scenes/main/MainMenu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
+boot_splash/show_image=false
+config/icon="res://assets/UI/icons/skull_icon.png"
+config/macos_native_icon="res://assets/UI/icons/skull_icon_2.icns"
+config/windows_native_icon="res://assets/UI/icons/vgc_icon.ico"
 
 [autoload]
 
@@ -27,6 +31,7 @@ ProjectileTypes="*res://scripts/globals/ProjectileTypes.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="canvas_items"
