@@ -14,7 +14,7 @@ var explosition_sound : AudioStreamMP3
 
 func _ready():
 	explosition_sound = AudioStreamMP3.new()
-	(explosition_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/explosion/barrel_explosion.mp3")
+	explosition_sound = load("res://assets/Sounds/explosion/barrel_explosion.mp3")
 
 
 func handle_hit(damager: Node2D, damage):

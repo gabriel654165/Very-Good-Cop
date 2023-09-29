@@ -2677,6 +2677,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-10, 249, -10, 258, -10, 264, 8, 264, 8, 258, 8, 249, 73, 249.24, 73, 120, 82, 120, 93, 120, 105, 120, 105, 169, 217, 169, 217, 54, 105, 54, 105, 104, 93, 104, 82, 104, 73, 104, 73, -249.912, 10, -250, 10, -258, 10, -264, -10, -264, -10, -258, -10, -250, -71, -250, -71, 249)])
 
 [node name="TestRoom" type="Node2D"]
+position = Vector2(443, 169)
 script = ExtResource("1_ox6p6")
 metadata/_edit_horizontal_guides_ = []
 metadata/_edit_vertical_guides_ = [-32.0, 32.0]

@@ -2676,6 +2676,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), Pa
 outlines = Array[PackedVector2Array]([PackedVector2Array(-9, 249, -9, 258, -9, 264, 9, 264, 9, 258, 9, 249, 249, 249, 249, 10, 258, 10, 264, 10, 264, -4, 258, -4, 249, -4, 249, -249.25, 8, -249, 8, -258, 8, -264, -12, -264, -12, -258, -12, -249, -55.6016, -248.749, -56, -58, -246.557, -58.255, -247, -5, -259, -5, -264, -5, -264, 10, -259, 10, -247, 10, -246.774, 56.8339, -56, 57, -56, 249.04)])
 
 [node name="TestRoom" type="Node2D"]
+position = Vector2(411, 166)
 script = ExtResource("1_xfwnq")
 
 [node name="Doors" type="Node2D" parent="."]

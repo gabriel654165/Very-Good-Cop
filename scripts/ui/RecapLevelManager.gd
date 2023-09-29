@@ -60,7 +60,7 @@ func _ready():
 	display_completed.connect(self.display_finished_labels)
 	
 	finished_counting_sound = AudioStreamMP3.new()
-	(finished_counting_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/ui/recap_points/cash_register.mp3")
+	finished_counting_sound = load("res://assets/Sounds/ui/recap_points/cash_register.mp3")
 	
 	var job_1 = func():
 		change_visibility_prompts(label_prompt_time_spent)

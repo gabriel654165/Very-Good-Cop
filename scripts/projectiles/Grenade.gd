@@ -24,9 +24,9 @@ func _ready():
 	scale = scale * size
 	explosion_area_shape.get_shape().set_radius(radius_pixels_impact_area)
 	explosition_sound = AudioStreamMP3.new()
-	(explosition_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/explosion/barrel_explosion.mp3")
+	explosition_sound = load("res://assets/Sounds/explosion/barrel_explosion.mp3")
 	hit_marker_sound = AudioStreamMP3.new()
-	(hit_marker_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/impacts/hitmarker.mp3")
+	hit_marker_sound = load("res://assets/Sounds/impacts/hitmarker.mp3")
 
 func _specific_process(delta):
 	if speed == 0 or direction == Vector2.ZERO:

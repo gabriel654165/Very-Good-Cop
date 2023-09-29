@@ -181,9 +181,9 @@ func set_distance_weapon_properties(weapon_editor: WeaponEditor, weapon_index: i
 			weapon_editor.projectile_scene = GlobalVariables.all_distance_weapon_list[current_index].projectile_packed_scene
 			
 			weapon_editor.weapon.shooting_sound = AudioStreamMP3.new()
-			(weapon_editor.weapon.shooting_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes(GlobalVariables.all_distance_weapon_list[current_index].shooting_sound)
+			weapon_editor.weapon.shooting_sound = load(GlobalVariables.all_distance_weapon_list[current_index].shooting_sound)
 			weapon_editor.weapon.reloading_sound = AudioStreamMP3.new()
-			(weapon_editor.weapon.reloading_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes(GlobalVariables.all_distance_weapon_list[current_index].reloading_sound)
+			weapon_editor.weapon.reloading_sound = load(GlobalVariables.all_distance_weapon_list[current_index].reloading_sound)
 			
 			var special_power_scene = GlobalVariables.all_distance_weapon_list[current_index].special_power_packed_scene
 			var special_power_instance = special_power_scene.instantiate()
@@ -219,7 +219,7 @@ func set_melee_weapon_properties(melee_weapon: Knife, weapon_index: int):
 			melee_weapon.weapon_name = weapon_properties_levels.name
 			melee_weapon.side_sprite.texture = GlobalVariables.all_melee_weapon_list[current_index].gui_texture
 			melee_weapon.woosh_sound = AudioStreamMP3.new()
-			(melee_weapon.woosh_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes(GlobalVariables.all_melee_weapon_list[current_index].woosh_sound)
+			melee_weapon.woosh_sound = load(GlobalVariables.all_melee_weapon_list[current_index].woosh_sound)
 			melee_weapon.attack_cooldown = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.attack_cooldown_lvl, "attack_cooldown", melee_weapon.attack_cooldown)
 			melee_weapon.attack_distance = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.attack_distance_lvl, "attack_distance", melee_weapon.attack_distance)
 			melee_weapon.damages = get_property_by_level(GlobalVariables.all_melee_weapon_list[current_index], weapon_properties_levels.damages_lvl, "damages", melee_weapon.damages)
@@ -255,7 +255,7 @@ func set_throwable_object_properties(throwable_object_manager: ThrowableObjectMa
 			throwable_object_manager.projectile_scene = GlobalVariables.all_throwable_object_list[current_index].projectile_packed_scene
 			throwable_object_manager.side_sprite.texture = GlobalVariables.all_throwable_object_list[current_index].gui_texture
 			throwable_object_manager.throwing_sound = AudioStreamMP3.new()
-			(throwable_object_manager.throwing_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes(GlobalVariables.all_throwable_object_list[current_index].throw_sound)
+			throwable_object_manager.throwing_sound = load(GlobalVariables.all_throwable_object_list[current_index].throw_sound)
 			throwable_object_manager.throwing_cooldown.wait_time = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.throwing_cooldown_lvl, "throwing_cooldown", throwable_object_manager.throwing_cooldown.wait_time)
 			throwable_object_manager.ammo_size = get_property_by_level(GlobalVariables.all_throwable_object_list[current_index], object_properties_levels.ammo_size_lvl, "ammo_size", throwable_object_manager.ammo_size)
 			throwable_object_manager._current_nb_projectiles = throwable_object_manager.ammo_size

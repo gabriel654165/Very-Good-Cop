@@ -42,7 +42,7 @@ func change_playlist(playlist:String, play_it:=false, random:=false):
 
 	current_playlist = playlist
 	GlobalVariables.current_playlist = current_playlist
-	var first_track : int =  0 if not random else randi() % GlobalVariables.playlists[current_playlist].size()
+	var first_track : int = 0 if not random else randi() % GlobalVariables.playlists[current_playlist].size()
 	put_track(first_track, play_it)
 
 
@@ -57,11 +57,13 @@ static func get_musics_from_folder(path:String, playlist_track_names: Array) -> 
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
 	while file_name != "":
-		var full_path = path + file_name
 		
 		if file_name.ends_with(".remap"):
-			file_name.trim_suffix(".remap")
+			file_name = file_name.trim_suffix(".remap")
+		if file_name.ends_with(".import"):
+			file_name = file_name.trim_suffix(".import")
 		
+		var full_path = path + file_name
 		var new_stream : AudioStream
 		# I don't like it but dunno how to make it better
 		if file_name.ends_with("mp3"):
@@ -74,8 +76,7 @@ static func get_musics_from_folder(path:String, playlist_track_names: Array) -> 
 			file_name = dir.get_next()
 			continue
 		
-		var file_bytes := FileAccess.get_file_as_bytes(full_path)
-		new_stream.data = file_bytes
+		new_stream = load(full_path)
 		res.append(new_stream)
 		playlist_track_names.append(file_name.rsplit(".", true, 1)[0])
 		file_name = dir.get_next()

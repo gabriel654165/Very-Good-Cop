@@ -2662,6 +2662,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-247, -249, 41, -250, 41, 73, -40, 73, -40, 82, -40, 94, -40, 103, 119, 103, 119, 94, 119, 82, 119, 73, 73, 73, 73, -106, 249, -106, 249, 73, 136, 73, 136, 82, 136, 94, 136, 103, 249, 103, 249, 249, -247, 249, -247.401, 102.578, -57, 103, -57, 94, -57, 82, -57, 73, -247, 73, -247, 9, -258, 9, -264, 9, -264, -11, -258, -11, -247, -11)])
 
 [node name="TestRoom" type="Node2D"]
+position = Vector2(486, 203)
 script = ExtResource("1_ni74x")
 
 [node name="Doors" type="Node2D" parent="."]

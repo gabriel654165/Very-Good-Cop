@@ -11,11 +11,11 @@ func _ready():
 	current_piercing_force = piercing_force
 	
 	impact_wall_sound = AudioStreamMP3.new()
-	(impact_wall_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/impacts/bullet_impact_wall.mp3")
+	impact_wall_sound = load("res://assets/Sounds/impacts/bullet_impact_wall.mp3")
 	impact_barrel_sound = AudioStreamMP3.new()
-	(impact_barrel_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/impacts/bullet_impact_metal.mp3")
+	impact_barrel_sound = load("res://assets/Sounds/impacts/bullet_impact_metal.mp3")
 	hit_marker_sound = AudioStreamMP3.new()
-	(hit_marker_sound as AudioStreamMP3).data = FileAccess.get_file_as_bytes("res://assets/Sounds/impacts/hitmarker.mp3")
+	hit_marker_sound = load("res://assets/Sounds/impacts/hitmarker.mp3")
 
 
 func init_frag_bullet():

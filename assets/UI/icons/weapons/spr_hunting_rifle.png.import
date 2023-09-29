@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr7aktjoyaf4"
-path="res://.godot/imported/Background.png-fea9cd3530fbf45562ab986ea18413a6.ctex"
+uid="uid://df0e01ihtouoy"
+path="res://.godot/imported/spr_hunting_rifle.png-e8780ad73af52ca927102c9e87c1f8a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Utils/Background.png"
-dest_files=["res://.godot/imported/Background.png-fea9cd3530fbf45562ab986ea18413a6.ctex"]
+source_file="res://assets/UI/icons/weapons/spr_hunting_rifle.png"
+dest_files=["res://.godot/imported/spr_hunting_rifle.png-e8780ad73af52ca927102c9e87c1f8a6.ctex"]
 
 [params]
 

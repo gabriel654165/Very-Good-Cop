@@ -290,7 +290,9 @@ static func load_all_rooms_from(path :String):
 			load_all_rooms_from(full_path)
 
 		if file_name.ends_with(".remap"):
-			file_name.trim_suffix(".remap")
+			file_name = file_name.trim_suffix(".remap")
+		if file_name.ends_with(".import"):
+			file_name = file_name.trim_suffix(".import")
 
 		if file_name.ends_with(".tscn"):
 			var room:PackedScene = load(path + file_name)

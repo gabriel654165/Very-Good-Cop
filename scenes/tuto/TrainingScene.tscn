@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://tn5nmegwhdvc"]
+[gd_scene load_steps=32 format=3 uid="uid://tn5nmegwhdvc"]
 
 [ext_resource type="Script" path="res://scripts/Training/TrainingScript.gd" id="1_82joo"]
 [ext_resource type="PackedScene" uid="uid://rvl465nagvgf" path="res://scenes/characters/player.tscn" id="1_ksn2w"]
@@ -18,7 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://b00u5s6j1e6s" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/L.png" id="13_ikg6y"]
 [ext_resource type="PackedScene" uid="uid://bsg7wbhktsf6b" path="res://scenes/characters/enemies/pistolero.tscn" id="16_ah6ek"]
 [ext_resource type="Texture2D" uid="uid://ksmuq6xbu8d8" path="res://assets/UI/keyboards/mouse-click.png" id="18_0oind"]
+[ext_resource type="Texture2D" uid="uid://duvlwcpfka8fg" path="res://assets/UI/keyboards/Jumbo/Dark/ZQSD.png" id="18_c77i7"]
 [ext_resource type="Texture2D" uid="uid://qsq4d5ttnxyb" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/F.png" id="19_qsedm"]
+[ext_resource type="Texture2D" uid="uid://dd6gk0k83oy2c" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/R.png" id="20_7b1qr"]
 [ext_resource type="Texture2D" uid="uid://bn83a3ilq0dci" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/X.png" id="20_30yaq"]
 [ext_resource type="Texture2D" uid="uid://bfto3fwjsx4ua" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/C.png" id="21_l2qtc"]
 [ext_resource type="Texture2D" uid="uid://8jemv0qa8mvg" path="res://assets/UI/keyboards/Jumbo/Dark/Single PNGs/SHIFTALTERNATIVE.png" id="22_ew5bu"]
@@ -2700,6 +2702,42 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
+[node name="MovePanel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
+material = SubResource("ShaderMaterial_x35qh")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ControlsContainer/MovePanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ControlsContainer/MovePanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/MovePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ControlsContainer/MovePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+texture = ExtResource("18_c77i7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/MovePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ControlsContainer/MovePanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Move"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/MovePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
 [node name="ShootPanel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
 material = SubResource("ShaderMaterial_x35qh")
 layout_mode = 2
@@ -2733,6 +2771,42 @@ theme_override_font_sizes/font_size = 50
 text = "Shoot"
 
 [node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ShootPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ReloadPanel" type="PanelContainer" parent="CanvasLayer/Control/ControlsContainer"]
+material = SubResource("ShaderMaterial_x35qh")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ControlsContainer/ReloadPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ControlsContainer/ReloadPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="LeftMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ReloadPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/ControlsContainer/ReloadPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("20_7b1qr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiddleMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ReloadPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ControlsContainer/ReloadPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Reload"
+
+[node name="RightMargin" type="AspectRatioContainer" parent="CanvasLayer/Control/ControlsContainer/ReloadPanel/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
